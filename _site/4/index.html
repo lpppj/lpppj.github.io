@@ -109,7 +109,7 @@ Powered by Hydejack v9.1.6 <https://hydejack.com/>
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2025-02-26T13:41:07+09:00',
+    INDEX_KEY: 'index--2025-03-11T15:59:35+09:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -384,6 +384,116 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
 
 
   
+
+  
+
+
+
+
+
+<article id="post-stat-minimax" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      <a href="/stat/2024-06-27-minimax/" class="flip-title">
+        Minimax Estimator and Stein’s Paradox
+      </a>
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2024-06-27T00:00:00+09:00">27 Jun 2024</time> in <span>Stat</span> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <h2 id="1-minimax-estimator">1. Minimax Estimator</h2>
+
+
+    
+    
+    <footer>
+      <p class="read-more">
+        Continue reading <a class="heading flip-title" href="/stat/2024-06-27-minimax/">Minimax Estimator and Stein’s Paradox</a>
+
+      </p>
+    </footer>
+  
+</article>
+
+
+  
+
+
+
+
+
+<article id="post-stat-kernel_reg" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      <a href="/stat/2024-05-26-kernel_reg/" class="flip-title">
+        Analysis of non-parametric kernel regression
+      </a>
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2024-05-26T00:00:00+09:00">26 May 2024</time> in <span>Stat</span> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <ul>
+  <li>일반적인 regression은 response variable Y와 covariate X의 관계를 이해하는 방법 중 하나로 일종의 conditional expectation이다. <br />
+\(r(x)=\mathbb{E}[Y \mid X=x]=\int y f(y \mid x) dy\)</li>
+  <li>non-parametric regession을 하는 기본적인 방법 중 하나는 kernel regression이다. <br />
+estimator는 \(\widehat{r}(x)=\sum_{i=1}^n w_i(x) Y_i\) where \(w_i(x)=\frac{K\left(\frac{x-X_i}{h}\right)}{\sum_{j=1}^n K\left(\frac{x-X_j}{h}\right)}\)
+    <ul>
+      <li>weights는 x 주변에 높은 가중치를 두고, h는 smoothing을 결정하는 bandwidth이다.</li>
+      <li>간단한 kernel의 예시로 Gaussian kernel을 사용한다. \(K(x)=\frac{1}{\sqrt{2 \pi}} \exp \left(-x^2 / 2\right)\)</li>
+    </ul>
+  </li>
+</ul>
+
+
+    
+    
+    <footer>
+      <p class="read-more">
+        Continue reading <a class="heading flip-title" href="/stat/2024-05-26-kernel_reg/">Analysis of non-parametric kernel regression</a>
+
+      </p>
+    </footer>
+  
+</article>
+
 
   
 
@@ -840,118 +950,6 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
     <footer>
       <p class="read-more">
         Continue reading <a class="heading flip-title" href="/pytorch/2024-04-29-corrformer0/">(Corrformer, NMI 2023) Code Review 0 - Code Structure</a>
-
-      </p>
-    </footer>
-  
-</article>
-
-
-  
-
-
-
-
-
-<article id="post-stat-converge" class="page post mb6" role="article">
-  <header>
-    <h1 class="post-title flip-project-title">
-      <a href="/stat/2024-04-19-converge/" class="flip-title">
-        Convergence of Random Variables
-      </a>
-    </h1>
-
-    <div class="post-date">
-      
-      <span class="ellipsis mr1">
-        <time datetime="2024-04-19T00:00:00+09:00">19 Apr 2024</time> in <span>Stat</span> 
-      </span>
-      
-    </div>
-
-    
-    
-
-    
-
-
-
-  <div class="hr pb0"></div>
-
-
-  </header>
-
-  
-    <h2 id="1-almost-sure-convergence">1. Almost sure Convergence</h2>
-
-
-    
-    
-    <footer>
-      <p class="read-more">
-        Continue reading <a class="heading flip-title" href="/stat/2024-04-19-converge/">Convergence of Random Variables</a>
-
-      </p>
-    </footer>
-  
-</article>
-
-
-  
-
-
-
-
-
-<article id="post-stat-MoM" class="page post mb6" role="article">
-  <header>
-    <h1 class="post-title flip-project-title">
-      <a href="/stat/2024-04-19-MoM/" class="flip-title">
-        Median of Means Estimator (MoM)
-      </a>
-    </h1>
-
-    <div class="post-date">
-      
-      <span class="ellipsis mr1">
-        <time datetime="2024-04-19T00:00:00+09:00">19 Apr 2024</time> in <span>Stat</span> 
-      </span>
-      
-    </div>
-
-    
-    
-
-    
-
-
-
-  <div class="hr pb0"></div>
-
-
-  </header>
-
-  
-    <ul>
-  <li>우리는 sample을 n개 뽑아서 만든 estimator가 true parameter의 근처에서 자주 등장하기를 원한다.</li>
-  <li>Estimator와 true parameter의 거리는 \(\left\vert \hat \mu - \mu \right\vert\)이다.</li>
-  <li>\(\left\vert \hat \mu - \mu \right\vert \ge t\)는 estimator의 error가 우리의 정한 기준(\(t\)라고 하자) 보다 높은 경우로 볼 수 있으므로,
-    <ul>
-      <li>\(P(\left\vert \hat \mu - \mu \right\vert \ge t) \le \delta\)는, 주어진 \(t\)에 대해 \(\delta\)가 얼마나 작은지가 중요하다.</li>
-      <li>또는 \(t\)가 커짐에 따라 \(\delta\)가 얼마나 빠르게 줄어드는지</li>
-    </ul>
-  </li>
-  <li>Ex. Chebyshev’s inequality \(P\left\{\left\vert \frac{1}{n} \sum_{i=1}^n X_i-\mu \right\vert \geq \sigma \sqrt{\frac{1}{n \delta}}\right\} \leq \delta\)는 polynomial upper bound를 제공한다.</li>
-  <li>하지만 <a href="https://lpppj.github.io/stat/2024-04-18-ineq2">Inequalities for Probabilities</a>에서 exponential upper bound를 제공하는 다양한 부등식을 소개하였다.</li>
-  <li>이를 활용하여 mean에 대한 <u>exponential upper bound를 제공하는 부등식 Median of Means Estimator (MoM)</u>을 소개한다.</li>
-</ul>
-
-
-    
-    
-    <footer>
-      <p class="read-more">
-        Continue reading <a class="heading flip-title" href="/stat/2024-04-19-MoM/">Median of Means Estimator (MoM)</a>
 
       </p>
     </footer>

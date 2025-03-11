@@ -109,7 +109,7 @@ Powered by Hydejack v9.1.6 <https://hydejack.com/>
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2025-02-26T13:41:07+09:00',
+    INDEX_KEY: 'index--2025-03-11T15:59:35+09:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -384,6 +384,118 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
 
 
   
+
+  
+
+
+
+
+
+<article id="post-stat-converge" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      <a href="/stat/2024-04-19-converge/" class="flip-title">
+        Convergence of Random Variables
+      </a>
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2024-04-19T00:00:00+09:00">19 Apr 2024</time> in <span>Stat</span> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <h2 id="1-almost-sure-convergence">1. Almost sure Convergence</h2>
+
+
+    
+    
+    <footer>
+      <p class="read-more">
+        Continue reading <a class="heading flip-title" href="/stat/2024-04-19-converge/">Convergence of Random Variables</a>
+
+      </p>
+    </footer>
+  
+</article>
+
+
+  
+
+
+
+
+
+<article id="post-stat-MoM" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      <a href="/stat/2024-04-19-MoM/" class="flip-title">
+        Median of Means Estimator (MoM)
+      </a>
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2024-04-19T00:00:00+09:00">19 Apr 2024</time> in <span>Stat</span> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <ul>
+  <li>우리는 sample을 n개 뽑아서 만든 estimator가 true parameter의 근처에서 자주 등장하기를 원한다.</li>
+  <li>Estimator와 true parameter의 거리는 \(\left\vert \hat \mu - \mu \right\vert\)이다.</li>
+  <li>\(\left\vert \hat \mu - \mu \right\vert \ge t\)는 estimator의 error가 우리의 정한 기준(\(t\)라고 하자) 보다 높은 경우로 볼 수 있으므로,
+    <ul>
+      <li>\(P(\left\vert \hat \mu - \mu \right\vert \ge t) \le \delta\)는, 주어진 \(t\)에 대해 \(\delta\)가 얼마나 작은지가 중요하다.</li>
+      <li>또는 \(t\)가 커짐에 따라 \(\delta\)가 얼마나 빠르게 줄어드는지</li>
+    </ul>
+  </li>
+  <li>Ex. Chebyshev’s inequality \(P\left\{\left\vert \frac{1}{n} \sum_{i=1}^n X_i-\mu \right\vert \geq \sigma \sqrt{\frac{1}{n \delta}}\right\} \leq \delta\)는 polynomial upper bound를 제공한다.</li>
+  <li>하지만 <a href="https://lpppj.github.io/stat/2024-04-18-ineq2">Inequalities for Probabilities</a>에서 exponential upper bound를 제공하는 다양한 부등식을 소개하였다.</li>
+  <li>이를 활용하여 mean에 대한 <u>exponential upper bound를 제공하는 부등식 Median of Means Estimator (MoM)</u>을 소개한다.</li>
+</ul>
+
+
+    
+    
+    <footer>
+      <p class="read-more">
+        Continue reading <a class="heading flip-title" href="/stat/2024-04-19-MoM/">Median of Means Estimator (MoM)</a>
+
+      </p>
+    </footer>
+  
+</article>
+
 
   
 
@@ -815,116 +927,6 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
     <footer>
       <p class="read-more">
         Continue reading <a class="heading flip-title" href="/timeseries/2024-04-04-RTSF/">Revisiting Long-term Time Series Forecasting: An Investigation on Linear Mapping (Arxiv 2023)</a>
-
-      </p>
-    </footer>
-  
-</article>
-
-
-  
-
-
-
-
-
-<article id="post-timeseries-TimeLLM" class="page post mb6" role="article">
-  <header>
-    <h1 class="post-title flip-project-title">
-      <a href="/timeseries/2024-04-01-TimeLLM/" class="flip-title">
-        Time-LLM: Time Series Forecasting by Reprogramming Large Language Models
-      </a>
-    </h1>
-
-    <div class="post-date">
-      
-      <span class="ellipsis mr1">
-        <time datetime="2024-04-01T00:00:00+09:00">01 Apr 2024</time> in <span>Timeseries</span> 
-      </span>
-      
-    </div>
-
-    
-    
-
-    
-
-
-
-  
-    <p class="note-sm" >
-      <a href="https://arxiv.org/pdf/2310.01728.pdf">ICLR 2024</a>
-
-    </p>
-  
-
-
-  </header>
-
-  
-    <h2 id="abstract">Abstract</h2>
-
-
-    
-    
-    <footer>
-      <p class="read-more">
-        Continue reading <a class="heading flip-title" href="/timeseries/2024-04-01-TimeLLM/">Time-LLM: Time Series Forecasting by Reprogramming Large Language Models</a>
-
-      </p>
-    </footer>
-  
-</article>
-
-
-  
-
-
-
-
-
-<article id="post-timeseries-SSL4TS" class="page post mb6" role="article">
-  <header>
-    <h1 class="post-title flip-project-title">
-      <a href="/timeseries/2024-03-25-SSL4TS/" class="flip-title">
-        (Survey paper) Self-Supervised Learning for Time Series Analysis: Taxonomy, Progress, and Prospects (Arxiv 2023)
-      </a>
-    </h1>
-
-    <div class="post-date">
-      
-      <span class="ellipsis mr1">
-        <time datetime="2024-03-25T00:00:00+09:00">25 Mar 2024</time> in <span>Timeseries</span> 
-      </span>
-      
-    </div>
-
-    
-    
-
-    
-
-
-
-  
-    <p class="note-sm" >
-      <a href="https://arxiv.org/pdf/2306.10125.pdf">Arxiv 2023</a>
-
-    </p>
-  
-
-
-  </header>
-
-  
-    <h2 id="abstract">Abstract</h2>
-
-
-    
-    
-    <footer>
-      <p class="read-more">
-        Continue reading <a class="heading flip-title" href="/timeseries/2024-03-25-SSL4TS/">(Survey paper) Self-Supervised Learning for Time Series Analysis: Taxonomy, Progress, and Prospects (Arxiv 2023)</a>
 
       </p>
     </footer>

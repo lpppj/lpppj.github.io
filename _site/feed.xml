@@ -1,5 +1,253 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-02-26T13:41:07+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LpppJ</title><subtitle>This is blog about machine learning, deep learning, artificial intelligence.
-</subtitle><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><entry><title type="html">BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation (PMLR 2022)</title><link href="http://localhost:4000/llm/2025-02-26-BLIP/" rel="alternate" type="text/html" title="BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation (PMLR 2022)" /><published>2025-02-26T00:00:00+09:00</published><updated>2025-02-26T13:41:07+09:00</updated><id>http://localhost:4000/llm/BLIP</id><content type="html" xml:base="http://localhost:4000/llm/2025-02-26-BLIP/"><![CDATA[<h2 id="abstract">Abstract</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-03-11T15:59:35+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LpppJ</title><subtitle>This is blog about machine learning, deep learning, artificial intelligence.
+</subtitle><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><entry><title type="html">Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025)</title><link href="http://localhost:4000/timeseries/2025-03-11-TimeMoE/" rel="alternate" type="text/html" title="Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025)" /><published>2025-03-11T00:00:00+09:00</published><updated>2025-03-11T15:59:35+09:00</updated><id>http://localhost:4000/timeseries/TimeMoE</id><content type="html" xml:base="http://localhost:4000/timeseries/2025-03-11-TimeMoE/"><![CDATA[<h2 id="abstract">Abstract</h2>
+
+<ul>
+  <li>large-scale <strong>pre-training</strong> in <strong>language and vision</strong> domains,
+    <ul>
+      <li><strong>pre-trained time series</strong> models remain <strong>limited</strong> in scale and operate at a high cost</li>
+    </ul>
+  </li>
+  <li>TIME-MOE:
+    <ul>
+      <li>scalable and unified architecture designed to pre-train</li>
+      <li>sparse mixture-of-experts (MoE) design
+        <ul>
+          <li>computational efficiency by activating <strong>only a subset of networks for each prediction</strong></li>
+        </ul>
+      </li>
+      <li>family of decoder-only transformer (auto-regressive manner)
+        <ul>
+          <li>supports <strong>flexible forecasting horizons</strong> with <strong>varying input context lengths</strong></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Time-MoE 요약:
+    <ul>
+      <li>scalable and unified architecture for time series foundation models that leverages a sparse design with mixture-of-experts to enhance computational efficiency without compromising model capacity</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<ul>
+  <li>TS: inherent complexity and distribution shifts
+    <ul>
+      <li>balancing forecasting precision against computational budget.</li>
+    </ul>
+  </li>
+  <li>Scaling Laws:
+    <ul>
+      <li>Increasing model size and training tokens typically leads to performance improvements</li>
+    </ul>
+  </li>
+  <li><strong>Dense versus sparse training</strong>
+    <ul>
+      <li>Dense: each input time series tokens requires computations with all model parameters</li>
+      <li>sparse training allows for scaling up model size with a fixed inference budget</li>
+    </ul>
+  </li>
+  <li><strong>Stability and convergency</strong>
+    <ul>
+      <li>trade-off between performance and computational efficiency</li>
+    </ul>
+  </li>
+  <li>**How to scale time series foundation models to achieve universal forecasting while balancing model capabilityand computational overhead, mirroring the success of foundation models in other domains? **
+    <ul>
+      <li>Time-MoE !</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-related-work">2. Related Work</h2>
+
+<ul>
+  <li>Time Series Forecasting
+    <ul>
+      <li>Univariate models
+        <ul>
+          <li><em>DeepState</em>, <em>DeepAR</em>, <em>N-BEATS</em>: modeling individual time series</li>
+        </ul>
+      </li>
+      <li>Multivariate models
+        <ul>
+          <li><em>transformer-based approaches</em>, TimeMixer, …</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Large Time Series Models
+    <ul>
+      <li>Self-supervised learning for TS:
+        <ul>
+          <li>masked reconstruction, contrastive learning 둘 다 limited in both <strong>data and model scale</strong></li>
+        </ul>
+      </li>
+      <li>TIME-MOE는 scalable and unified architecture for pre-training larger forecasting foundation models</li>
+    </ul>
+  </li>
+  <li>Sparse Deep Learning for Time Series
+    <ul>
+      <li>DL models sometimes <strong>dense</strong> and over-parameterized
+        <ul>
+          <li>increased memory and computational demands</li>
+        </ul>
+      </li>
+      <li><strong>Sparse</strong> networks, such as MoE
+        <ul>
+          <li>dynamically route inputs to specialized expert networks</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="3-methodology">3. Methodology</h2>
+
+<p><img src="/assets/img/timeseries/TimeMoE/fig2.png" alt="그림1" /></p>
+
+<p>(1) input token embedding (2) MoEtransformer block (3) multi-resolution forecasting</p>
+
+<h3 id="31-time-moe-overeview">3.1. Time-MoE Overeview</h3>
+
+<ul>
+  <li><strong>Input Token Embedding</strong>: point-wise tokenization
+    <ul>
+      <li>\(\mathbf{h}_t^0=\operatorname{SwiGLU}\left(x_t\right)=\operatorname{Swish}\left(W x_t\right) \otimes\left(V x_t\right)\).
+        <ul>
+          <li>where \(W \in R^{D \times 1}\) and \(V \in R^{D \times 1}\) are learnable parameters</li>
+          <li>\(D\): the hidden dimension.</li>
+        </ul>
+      </li>
+      <li>to ensure the <strong>completeness</strong> of temporal information, model’s <strong>flexibility</strong></li>
+    </ul>
+  </li>
+  <li><strong>MoE Transformer Block</strong>: decoder-only transformer
+    <ul>
+      <li>RMSNorm, Rotary positional embeddings 사용
+        <ul>
+          <li>greater flexibility in sequence length and improved extrapolation capabilities</li>
+        </ul>
+      </li>
+      <li>Sparsity를 위해 replace a feed-forward network (FFN) with a mixture-of-experts layer
+        <ul>
+          <li>\(\begin{aligned} \mathbf{u}_t^l &amp; =\mathrm{SA}\left(\operatorname{RMSNorm}\left(\mathbf{h}_t^{l-1}\right)\right)+\mathbf{h}_t^{l-1}, \\ \overline{\mathbf{u}}_t^l &amp; =\operatorname{RMSNorm}\left(\mathbf{u}_t^l\right), \\ \mathbf{h}_t^l &amp; =\operatorname{Mixture}\left(\overline{\mathbf{u}}_t^l\right)+\mathbf{u}_t^l .\end{aligned}\).</li>
+          <li>One expert is designated as a shared expert tocapture and consolidate common knowledge across different contexts.</li>
+          <li>\(\begin{aligned} \text { Mixture }\left(\overline{\mathbf{u}}_t^l\right) &amp; =g_{N+1, t} \operatorname{FFN}_{N+1}\left(\overline{\mathbf{u}}_t^l\right)+\sum_{i=1}^N\left(g_{i, t} \operatorname{FFN}_i\left(\overline{\mathbf{u}}_t^l\right)\right), \\ g_{i, t} &amp; = \begin{cases}s_{i, t}, &amp; s_{i, t} \in \operatorname{Topk}\left(\left\{s_{j, t} \mid 1 \leq j \leq N\right\}, K\right), \\ 0, &amp; \text { otherwise },\end{cases} \\ g_{N+1, t} &amp; ={\operatorname{Sigmoid}\left(\mathbf{W}_{N+1}^l \overline{\mathbf{u}}_t^l\right),}_{s_{i, t}}=\operatorname{Softmax}_i\left(\mathbf{W}_i^l \mathbf{u}_t^l\right),\end{aligned}\).</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Multi-resolution Forecasting</strong>
+    <ul>
+      <li>Multiple output projections from single-layer FFNs
+        <ul>
+          <li>each designed for different prediction horizons</li>
+        </ul>
+      </li>
+      <li>Time-MoE aggregates forecasting errors from <strong>different</strong> horizons to compute a composite loss
+        <ul>
+          <li>improving the model generalization</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="32-model-training">3.2. Model Training</h3>
+
+<p><img src="/assets/img/timeseries/TimeMoE/table1.png" alt="그림1" /></p>
+
+<ul>
+  <li>3.2.1. <strong>TIME-300B Dataset</strong></li>
+  <li>Challenge: <strong>data quality</strong> (missing values and invalid observations)
+    <ul>
+      <li>본 논문에서 a <strong>streamlined data-cleaning pipeline</strong> 제안 (Appendix C)
+        <ul>
+          <li>to filter and refine raw data</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="appendix-c-processed-data-archive">Appendix C PROCESSED DATA ARCHIVE</h3>
+
+<p><img src="/assets/img/timeseries/TimeMoE/subfig1.png" alt="그림1" /></p>
+
+<p><img src="/assets/img/timeseries/TimeMoE/subfig2.png" alt="그림1" /></p>
+
+<ul>
+  <li>3.2.2. <strong>Loss function</strong>
+    <ul>
+      <li>Pre-training time series foundation models in large scale 할 때
+        <ul>
+          <li><strong>training stability</strong> due to the massive datasets</li>
+          <li>and the <strong>vast number of parameters</strong> involved</li>
+        </ul>
+      </li>
+      <li>를 완화하기 위해 Huber loss 사용 : greater robustness to <strong>outliers</strong> and improves training stability
+        <ul>
+          <li>\(\mathcal{L}_{\text {ar }}\left(x_t, \hat{x}_t\right)= \begin{cases}\frac{1}{2}\left(x_t-\hat{x}_t\right)^2, &amp; \text { if }\mid x_t-\hat{x}_t\mid \leq \delta \\ \delta \times\left(\mid x_t-\hat{x}_t\mid-\frac{1}{2} \times \delta\right), &amp; \text { otherwise }\end{cases}\).</li>
+        </ul>
+      </li>
+      <li>solely on optimizing prediction error \(\to\) imbalance issues among the experts
+        <ul>
+          <li>그래서 expert-level balancing with an <strong>auxiliary loss</strong> to reduce routing collapse
+            <ul>
+              <li>\(\mathcal{L}_{\text {aux }}=N \sum_{i=1}^N f_i r_i, \quad f_i=\frac{1}{K T} \sum_{t=1}^T \mathbb{I}(\text{Time point}\  t \text{selects Expert} \ i)\),</li>
+              <li>where \(r_i=\frac{1}{T} \sum_{t=1}^T s_{i, t}\)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>최종적으로 the auto-regressive losses across all multi-resolution projections with the auxiliary balance loss:
+        <ul>
+          <li>\(\mathcal{L}=\frac{1}{P} \sum_{j=1}^P \mathcal{L}_{\mathrm{ar}}\left(\mathbf{X}_{t+1: t+p_j}, \hat{\mathbf{X}}_{t+1: t+p_j}\right)+\alpha \mathcal{L}_{\mathrm{aux}}\).</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="4-main-results">4. Main Results</h2>
+
+<p><img src="/assets/img/timeseries/TimeMoE/table2.png" alt="그림1" /></p>
+
+<h3 id="41-zero-shot-forecasting">4.1. Zero-shot Forecasting</h3>
+
+<p><img src="/assets/img/timeseries/TimeMoE/table3.png" alt="그림1" /></p>
+
+<h3 id="42-in-distribution-forecasting">4.2. In-Distribution Forecasting</h3>
+
+<p><img src="/assets/img/timeseries/TimeMoE/table4.png" alt="그림1" /></p>
+
+<h3 id="43-ablation-study">4.3. Ablation Study</h3>
+
+<p><img src="/assets/img/timeseries/TimeMoE/table5.png" alt="그림1" /></p>
+
+<h3 id="44-scalability-analysis">4.4. Scalability Analysis</h3>
+
+<p><img src="/assets/img/timeseries/TimeMoE/fig3.png" alt="그림1" /></p>
+
+<p><img src="/assets/img/timeseries/TimeMoE/table6.png" alt="그림1" /></p>
+
+<h3 id="45-sparsification-analysis">4.5. Sparsification Analysis</h3>
+
+<p><img src="/assets/img/timeseries/TimeMoE/fig4.png" alt="그림1" /></p>
+
+<p><img src="/assets/img/timeseries/TimeMoE/table7.png" alt="그림1" /></p>
+
+<h2 id="5-conclusion">5. Conclusion</h2>
+
+<ul>
+  <li>Time-MoE 한 줄 요약:
+    <ul>
+      <li>scalable and unified architecture for time series foundation models that leverages a sparse design with mixture-of-experts to enhance computational efficiency without compromising model capacity</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[ICLR 2025 Spotlight](https://arxiv.org/pdf/2409.16040)]]></summary></entry><entry><title type="html">BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation (PMLR 2022)</title><link href="http://localhost:4000/llm/2025-02-26-BLIP/" rel="alternate" type="text/html" title="BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation (PMLR 2022)" /><published>2025-02-26T00:00:00+09:00</published><updated>2025-02-26T13:41:17+09:00</updated><id>http://localhost:4000/llm/BLIP</id><content type="html" xml:base="http://localhost:4000/llm/2025-02-26-BLIP/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
   <li>대부분의 Vision-Language Pre-training (VLP)는
@@ -359,7 +607,63 @@
       <li>Model ensemble by training multiple different captioners and filter and combining their forces in CapFilt</li>
     </ul>
   </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[Arxiv 2024]()]]></summary></entry><entry><title type="html">Byte Latent Transformer: Patches Scale Better Than Tokens (Arxiv 2024)</title><link href="http://localhost:4000/llm/2025-02-22-BLT/" rel="alternate" type="text/html" title="Byte Latent Transformer: Patches Scale Better Than Tokens (Arxiv 2024)" /><published>2025-02-22T00:00:00+09:00</published><updated>2025-02-24T02:08:15+09:00</updated><id>http://localhost:4000/llm/BLT</id><content type="html" xml:base="http://localhost:4000/llm/2025-02-22-BLT/"><![CDATA[<h2 id="abstract">Abstract</h2>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[Arxiv 2024]()]]></summary></entry><entry><title type="html">(Pytorch Issue) .sh file와 Data loader가 상관이 있을까</title><link href="http://localhost:4000/pytorch/2025-02-26-sh_batch/" rel="alternate" type="text/html" title="(Pytorch Issue) .sh file와 Data loader가 상관이 있을까" /><published>2025-02-26T00:00:00+09:00</published><updated>2025-02-26T23:45:58+09:00</updated><id>http://localhost:4000/pytorch/sh_batch</id><content type="html" xml:base="http://localhost:4000/pytorch/2025-02-26-sh_batch/"><![CDATA[<p><img src="/assets/img/pytorch/sh_batch/fig1.png" alt="그림1" /></p>
+
+<ul>
+  <li>상황은 다음과 같다.
+    <ul>
+      <li>terminal에서 .sh 파일을 실행: .sh 파일에 있는 model hyperparameters가 run.py로 전달</li>
+      <li>run.py에서 취합된 paramters가 exp_main.py으로 전달: exp_main.py에서는 model과 data loader를 불러옴</li>
+      <li>exp_main.py에서는 data loader에서 불러온 데이터가 모델에 들어감</li>
+      <li>Pathformer.py에 정의된 모델이 input 데이터를 처리하기 시작 (여기서 model hyperparameters 사용됨)</li>
+      <li>Pathformer.py에서는 input 데이터가 AMS.py에 정의된 layer를 반복적으로 통과</li>
+    </ul>
+  </li>
+  <li>문제는 다음과 같다.
+    <ul>
+      <li>Model hyperparamters는 patch size 와 같이 <strong>이미 불러온 데이터</strong>를 모델이 다루는 방법을 정의하는데</li>
+      <li>.sh 파일에서 model hyperparamters를 바꾸었더니 data loader가 불러오는 batch의 순서가 바뀌어버림</li>
+      <li>아래 두 사진은 모두 <strong>첫 번째 배치</strong>를 시각화한 것인데, patch size를 다르게 설정한 것이 유일한 차이</li>
+      <li>patch size는 <strong>이미 불러온 데이터</strong>를 patching하는 방법을 결정하는 곳에만 쓰이는데 애초에 불러온 첫번째 배치가 다름</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/pytorch/sh_batch/fig2.png" alt="그림1" />
+<img src="/assets/img/pytorch/sh_batch/fig3.png" alt="그림1" /></p>
+
+<ul>
+  <li>
+    <p>.sh 파일에 정의된 model hyperparameters가 data loader에서 쓰이지 않음에도 위와 같은 현상 발생</p>
+  </li>
+  <li>
+    <p>연구실 선배와 Chat GPT의 도움을 통해 유추한 원인은 다음과 같음</p>
+  </li>
+</ul>
+
+<p><img src="/assets/img/pytorch/sh_batch/fig4.png" alt="그림1" /></p>
+
+<ul>
+  <li>첫째, __init__을 제외한 모든 함수의 실행보다 __init__함수가 먼저 실행됨
+    <ul>
+      <li>즉 exp_main.py안 에서 Pathformer.py를 실행하고, 그 안에서 AMS.py가 실행된다고 하더라도</li>
+      <li>exp_main.py와 Pathformer.py의 다른 함수들보다도 AMS.py의 __init__함수가 먼저 실행됨</li>
+    </ul>
+  </li>
+  <li>둘째, __init__함수에서 메모리를 사용한다면(ex. nn.Linear) 메모리 전체의 모양이 달라질 수 있음
+    <ul>
+      <li>즉 __init__함수에서 layer를 정의한다고 하면 layer를 저장하기 위한 메모리만 바뀌는 것이 아니라</li>
+      <li>이외의 메모리들도 다르게 할당될 수 있음 (Out of Memory를 회피하기 위해)</li>
+    </ul>
+  </li>
+  <li>그러므로 만약 모델의 마지막 부분이라 하더라도 __init__함수에서 다양한 patch size를 처리하기 위해,
+    <ul>
+      <li>patch size를 hyperparamter로 사용하는 layer를 정의했다면</li>
+      <li>그 __init__함수까지 다 실행되면서 메모리가 바뀐 채로 data loader 함수가 실행되기 때문에</li>
+      <li>GPU 텐서 배치 역시 영향을 받으면서 불러오는 첫 번째 batch가 달라질 수 있음</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="pytorch" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Byte Latent Transformer: Patches Scale Better Than Tokens (Arxiv 2024)</title><link href="http://localhost:4000/llm/2025-02-22-BLT/" rel="alternate" type="text/html" title="Byte Latent Transformer: Patches Scale Better Than Tokens (Arxiv 2024)" /><published>2025-02-22T00:00:00+09:00</published><updated>2025-02-24T02:08:15+09:00</updated><id>http://localhost:4000/llm/BLT</id><content type="html" xml:base="http://localhost:4000/llm/2025-02-22-BLT/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
   <li>Byte Latent Transformer (BLT)
@@ -2290,655 +2594,4 @@ f_B\left(\Delta_t, A, B_t\right)=\left(\Delta_t A\right)^{-1}\left(\exp \left(\D
       </li>
     </ul>
   </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="mamba" /><summary type="html"><![CDATA[[Arxiv 2024](https://arxiv.org/pdf/2408.15997)]]></summary></entry><entry><title type="html">SEQUENTIAL ORDER-ROBUST MAMBA FOR TIME SERIES FORECASTING (Arxiv 2024)</title><link href="http://localhost:4000/mamba/2024-11-14-SOR-Mamba/" rel="alternate" type="text/html" title="SEQUENTIAL ORDER-ROBUST MAMBA FOR TIME SERIES FORECASTING (Arxiv 2024)" /><published>2024-11-14T00:00:00+09:00</published><updated>2025-01-08T22:03:01+09:00</updated><id>http://localhost:4000/mamba/SOR-Mamba</id><content type="html" xml:base="http://localhost:4000/mamba/2024-11-14-SOR-Mamba/"><![CDATA[<h2 id="abstract">Abstract</h2>
-
-<ul>
-  <li>Mamba : near-linear complexity in processing sequential data
-    <ul>
-      <li><strong>하지만 일반적으로 Time series에서 변수의 순서는 존재하지 않기 때문에</strong></li>
-      <li><strong>Mamba에서 channel dependencies (CD)를 잡다보면 sequential order bias가 발생</strong></li>
-    </ul>
-  </li>
-  <li>그러므로 본 논문에서는 <strong>SOR-Mamba</strong>를 제안
-    <ul>
-      <li><strong>Regularization strategy</strong>
-        <ul>
-          <li>to minimize the discrepancy btw two embedding vectors (reversed channel orders)</li>
-          <li>\(\to\)  robustness to channel order</li>
-        </ul>
-      </li>
-      <li><strong>Eliminates the 1D-convolution</strong>
-        <ul>
-          <li>(originally designed to capture local information in sequential data)</li>
-        </ul>
-      </li>
-      <li><strong>Channel correlation modeling (CCM)</strong>
-        <ul>
-          <li>pretraining task aimed at preserving <strong>correlations between channels</strong>
-            <ul>
-              <li>from the data space to the latent space</li>
-              <li>in order to enhance the ability to capture CD</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="1-introduction">1. Introduction</h2>
-
-<ul>
-  <li>Transformer
-    <ul>
-      <li>ability to capture long-term dependencies but, quadratic computational complexity</li>
-      <li>reduce the complexity 하려다보니 performance degradations</li>
-    </ul>
-  </li>
-  <li><strong>SSM</strong>
-    <ul>
-      <li>employing <strong>convolutional</strong> operations to process sequences with linear complexity</li>
-    </ul>
-  </li>
-  <li><strong>Mamba</strong>
-    <ul>
-      <li>incorporating a <strong>selective</strong> mechanism to prioritize important information</li>
-      <li>balance btw performance and computational efficiency</li>
-    </ul>
-  </li>
-  <li>Temporal dependencies (TD), channel dependencies (CD) 둘 다 잡아야 하는데,
-    <ul>
-      <li>iTransformer에서는 CD는 complex attention mechanisms으로,</li>
-      <li>TD는 simple multi-layer perceptrons (MLPs)으로 했었음</li>
-    </ul>
-  </li>
-  <li>Mamba는 <strong>sequential order bias</strong>가 있다보니 <strong>Bidirectional Mamba로는 충분하지 않음</strong></li>
-  <li>그렇다고 MambaTS처럼 channel을 섞자니 추가적인 작업이 소요됨</li>
-</ul>
-
-<p><img src="/assets/img/Mamba/SOR-Mamba/fig1.png" alt="그림1" /></p>
-
-<ul>
-  <li>그래서 <strong>Sequential Order-Robust Mamba for TS forecasting (SOR-Mamba)</strong>를 제안
-    <ul>
-      <li>(간단한 설명은 abstract에 잘 정리되어 있으므로 pass)</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="2-related-works">2. Related Works</h2>
-
-<ul>
-  <li><strong>CD-Mamba Block</strong>
-    <ul>
-      <li>1D Conv 제거</li>
-      <li>Time series의 channels는 애초에 inherent sequential order가 존재하지 않기 때문</li>
-    </ul>
-  </li>
-  <li><strong>Regulararization with CD-Mamba Block</strong>
-    <ul>
-      <li>Reversed channel order로 발생하는 두 embedding vectors의 차이를 줄이도록 학습</li>
-      <li>\(\to\) Enhancing robustness to channel order !</li>
-    </ul>
-  </li>
-  <li><strong>Channel correlation modeling</strong>
-    <ul>
-      <li>Data space에서의 correlation (btw channels)과</li>
-      <li>Embedding space에서의 correlation (btw channels)의 차이를 줄이도록 학습</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="3-preliminaries">3. Preliminaries</h2>
-
-<p>pass</p>
-
-<h2 id="4-methodology">4. Methodology</h2>
-
-<p><img src="/assets/img/Mamba/SOR-Mamba/fig2.png" alt="그림1" /></p>
-
-<h3 id="41-architecture-of-sor-mamba">4.1. Architecture of SOR-Mamba</h3>
-
-<ul>
-  <li>Embedding layer: \(\mathbf{x} \in \mathbb{R}^{L \times C}\) into \(\mathbf{Z} \in \mathbb{R}^{C \times D}\) using a single linear layer.</li>
-  <li>Mamba for CD: CD-Mamba block (<em>1D-conv</em> 제거)</li>
-  <li>MLP for TD: (with layer normalization (LN))</li>
-  <li>Prediction head: linear prediction head, resulting in \(\hat{\mathbf{y}} \in \mathbb{R}^{H \times C}\)</li>
-</ul>
-
-<h3 id="42-regularization-with-cd-mamba-block">4.2. Regularization with CD-Mamba Block</h3>
-
-<ul>
-  <li>\(L_{\mathrm{reg}}(\mathbf{z})=d\left(\mathbf{z}_1, \mathbf{z}_2\right)\), 여기서는 \(d\)를 MSE 사용</li>
-  <li>최종적으로 \(L(\mathbf{x}, \mathbf{y})=L_{\mathrm{fcst}}(\mathbf{x}, \mathbf{y})+\lambda \cdot \sum_{i=1}^m L_{\mathrm{reg}}\left(\mathbf{z}^{(i)}\right)\)</li>
-</ul>
-
-<h3 id="43-channel-correlation-modeling">4.3. Channel Correlation modeling</h3>
-
-<ul>
-  <li>Temporal Dependencies보다는 Channel Dependencies를 강조하는 pre-training task</li>
-  <li>CCM: preserve the (Pearson) correlation between channels from the data space to the latent space</li>
-</ul>
-
-<p><img src="/assets/img/Mamba/SOR-Mamba/fig3.png" alt="그림1" /></p>
-
-<ul>
-  <li>input token on the data space에서의 correlation matrices가 있고
-    <ul>
-      <li>output token on the latent space에의 correlation matrices가 있으면</li>
-      <li>loss function for CCM은 distance between these two matrices:
-        <ul>
-          <li>\(L_{\mathrm{CCM}}(\mathbf{x})=d\left(\mathbf{R}_{\mathbf{x}}, \mathbf{R}_{\mathbf{z}}\right)\).</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="5-experiments">5. Experiments</h2>
-
-<h3 id="51-experimental-settings">5.1. Experimental settings</h3>
-
-<p>pass</p>
-
-<h3 id="52-time-series-forecasting">5.2. Time series Forecasting</h3>
-
-<p><img src="/assets/img/Mamba/SOR-Mamba/table2.png" alt="그림1" /></p>
-
-<h3 id="53-transfer-learning">5.3. Transfer Learning</h3>
-
-<p><img src="/assets/img/Mamba/SOR-Mamba/table4.png" alt="그림1" /></p>
-
-<ul>
-  <li>SimMTM에 transfer learning 한 걸 S-Mamba와 비교</li>
-</ul>
-
-<h3 id="54-ablation-study">5.4. Ablation Study</h3>
-
-<p><img src="/assets/img/Mamba/SOR-Mamba/table5.png" alt="그림1" /></p>
-
-<h2 id="6-analysis">6. Analysis</h2>
-
-<h3 id="61-sequential-order-bias">6.1. Sequential order bias</h3>
-
-<p><img src="/assets/img/Mamba/SOR-Mamba/fig4.png" alt="그림1" /></p>
-
-<ul>
-  <li>Channels가 많을수록, correlated 되어있을수록, Sequential order bias 큼</li>
-</ul>
-
-<h3 id="62-effect-of-regularization">6.2. Effect of regularization</h3>
-
-<p><img src="/assets/img/Mamba/SOR-Mamba/table6.png" alt="그림1" /></p>
-
-<h3 id="63-effect-of-1d-conv">6.3. Effect of 1D-conv</h3>
-
-<p><img src="/assets/img/Mamba/SOR-Mamba/table7.png" alt="그림1" /></p>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="mamba" /><summary type="html"><![CDATA[[Arxiv 2024](https://arxiv.org/pdf/2410.23356)]]></summary></entry><entry><title type="html">Bi-Mamba+: Bidirectional Mamba for Time Series Forecasting (Arxiv 2024)</title><link href="http://localhost:4000/mamba/2024-11-12-BiMamba+/" rel="alternate" type="text/html" title="Bi-Mamba+: Bidirectional Mamba for Time Series Forecasting (Arxiv 2024)" /><published>2024-11-12T00:00:00+09:00</published><updated>2025-01-08T22:02:59+09:00</updated><id>http://localhost:4000/mamba/BiMamba+</id><content type="html" xml:base="http://localhost:4000/mamba/2024-11-12-BiMamba+/"><![CDATA[<h2 id="abstract">Abstract</h2>
-
-<ul>
-  <li>LTSF :  long-term dependencies capturing and <strong>sparse semantic characteristics</strong></li>
-  <li>Mamba
-    <ul>
-      <li>the selective capability on input data</li>
-      <li>the hardware-aware parallel computing algorithm</li>
-    </ul>
-  </li>
-  <li><strong>Mamba+ block</strong>
-    <ul>
-      <li>by adding a forget gate inside Mamba,</li>
-      <li>to selectively combine the new features with the historical features in a complementary manner</li>
-    </ul>
-  </li>
-  <li><strong>Bi-Mamba+</strong>
-    <ul>
-      <li>apply Mamba+ both forward and backward</li>
-    </ul>
-  </li>
-  <li>MTS는 시나리오마다 dependency가 다름
-    <ul>
-      <li>(varying emphasis on intra- or inter-series dependencies)</li>
-      <li>\(\to\) series-relation-aware decider
-        <ul>
-          <li>: controls the utilization of channel-independent or channel-mixing tokenization strategy</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="1-introduction">1. Introduction</h2>
-
-<ul>
-  <li>Transformer-based models
-    <ul>
-      <li>implicitly models the <strong>inter-series dependencies</strong> through channel-mixing embeddings</li>
-      <li>However the <strong>quadratic complexity</strong> of the self-attention mechanism</li>
-      <li>Informer, Autoformer : sparse attention
-        <ul>
-          <li>But balancing computational efficiency and predicting performance는 본질적 해결 X</li>
-          <li>게다가 not explicitly capture the inter-series dependencies</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>state-space models (SSM) : design of selective scanning</li>
-  <li><strong>Long-term time series modeling</strong> : patching manner (patch-wise tokens)으로 하겠다</li>
-  <li><strong>Emphasis on intra- or inter-series dependencies</strong> : 데이터셋마다 intra- or inter-sequence dependencies 둘 중 뭐가 중요한지가 다름</li>
-  <li>그래서 <strong>Mamba+</strong>를 디자인함
-    <ul>
-      <li>adding a forget gate in Mamba,</li>
-      <li>to selectively combine the new features with the historical features in a complementary manner</li>
-      <li>therefore preserving historical information in a longer range</li>
-    </ul>
-  </li>
-  <li><strong>Mamba+</strong>에 기반한 <strong>Bidirectional Mamba+ (BiMamba+)</strong>를 제안
-    <ul>
-      <li>to model the MTS data from both forward and backward,
-        <ul>
-          <li>enhancing the model’s robustness and ability to capture interactions between time series elements</li>
-        </ul>
-      </li>
-      <li>Series-Relation-Aware (SRA) decider
-        <ul>
-          <li>measures the proportion of highly correlated series pairs in the MTS data</li>
-          <li>to automatically choose channel-independent or channelmixing tokenization strategies</li>
-        </ul>
-      </li>
-      <li>patch-wise tokens
-        <ul>
-          <li>contain richer semantic information</li>
-          <li>and encourage the model to learn the long-term dependencies</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="2-related-work">2. Related Work</h2>
-
-<h3 id="time-series-forecasting">Time Series Forecasting</h3>
-
-<ul>
-  <li>Transformer-based models : quadratic complexity to the length of the sequence
-    <ul>
-      <li>Informer(Zhou et al. 2021) : ProbSparse mechanism</li>
-      <li>Autoformer(Wu et al. 2021) : time series decomposition</li>
-      <li>Pyraformer(Liu et al. 2021) : pyramidal attention module</li>
-      <li>FEDformer(Zhou et al. 2022) : frequency enhanced Transformer through frequency domain mapping</li>
-      <li>PatchTST(Nie et al. 2023) : divides each univariate sequence into patches
-        <ul>
-          <li>and uses patch-wise self-attention to model temporal dependencies</li>
-        </ul>
-      </li>
-      <li>Crossformer(Zhang and Yan 2023) : Cross-Dimension attention</li>
-      <li>iTransformer(Liu et al. 2023) : inverts the attention layers
-        <ul>
-          <li>to straightly model inter-series dependencies</li>
-          <li>But, the tokenization approach is simply passing the whole sequence through a Multilayer Perceptron (MLP),
-            <ul>
-              <li>which overlooks the complex evolutionary patterns inside the time series</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="ssm-based-models">SSM-based models</h3>
-
-<ul>
-  <li>RNN-based models :
-    <ul>
-      <li>maintain a hidden state which is updated with each input element</li>
-      <li>limits the training speed and leads to forgetting long-term information</li>
-    </ul>
-  </li>
-  <li>CNN-based models :
-    <ul>
-      <li>parallel computing and have faster training speed</li>
-      <li>limits the inference speed and overlook the long-term global information</li>
-    </ul>
-  </li>
-  <li>State Space Models (SSM) :
-    <ul>
-      <li>trained in parallel like CNN and inferences fastly like RNN</li>
-    </ul>
-  </li>
-  <li>Mamba
-    <ul>
-      <li>parameterized matrices and a hardware-aware parallel computing algorithm to SSM</li>
-      <li><strong>S-Mamba</strong>(Wang et al. 2024)</li>
-      <li>embeds each univariate time series like iTransformer</li>
-      <li>and feeds the embeddings into Mamba blocks
-        <ul>
-          <li>to model the relationships of different time series</li>
-        </ul>
-      </li>
-      <li>However, the tokenization approach may overlook the complex evolutionary patterns</li>
-      <li><strong>MambaMixer</strong>(Behrouz et al. 2024)
-        <ul>
-          <li>adjusts the Mamba block to bidirectional</li>
-          <li>and uses two improved blocks to capture inter/intra-series dependencies simultaneously</li>
-          <li>However, the gating branch is used to filter new features
-            <ul>
-              <li>(of both forward and backward directions)</li>
-              <li>which may cause challenges for extracting new features</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li><strong>TimeMachine</strong>(Ahamed and Cheng 2024)
-        <ul>
-          <li>a multi-scale quadruple-Mamba architecture
-            <ul>
-              <li>to unify the handling of channel-mixing and channelindependence situations</li>
-            </ul>
-          </li>
-          <li>However, simply based on the length of historical observations and variable number of different datasets
-            <ul>
-              <li>the characteristics of the MTS data are not fully considered.</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="3-methodology">3. Methodology</h2>
-
-<h3 id="31-preliminaries">3.1. Preliminaries</h3>
-
-<ul>
-  <li>Long-term multivariate time series forecasting
-    <ul>
-      <li>\(\mathbf{X}_{i n}=\left[x_1, x_2, \ldots, x_L\right] \in \mathbb{R}^{L \times M}\), we predict the future values \(\mathbf{X}_{\text {out }}=\left[x_{L+1}, x_{L+2}, \ldots, x_{L+H}\right] \in \mathbb{R}^{H \times M}\)</li>
-    </ul>
-  </li>
-  <li>State Space Models
-    <ul>
-      <li>using first-order differential equations, \(h^{\prime}(t)=\mathbf{A} h(t)+\mathbf{B} x(t), \quad y(t)=\mathbf{C} h(t)\)
-        <ul>
-          <li>where \(\mathbf{A} \in \mathbb{R}^{N \times N}, \mathbf{B} \in \mathbb{R}^{D \times N} \text { and } \mathbf{C} \in \mathbb{R}^{N \times D}\)</li>
-        </ul>
-      </li>
-      <li>can be discretized :
-        <ul>
-          <li>\(\begin{aligned}
-&amp; \overline{\mathbf{A}}=\exp (\Delta \mathbf{A}), \\
-&amp; \overline{\mathbf{B}}=(\Delta \mathbf{A})^{-1}(\exp (\Delta \mathbf{A})-\mathbf{I}) \cdot \Delta \mathbf{B}
-\end{aligned}\),</li>
-          <li>\(h_k=\overline{\mathbf{A}} h_{k-1}+\overline{\mathbf{B}} x_k, \quad y_k=\mathbf{C} h_k\),</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><strong>S4</strong>(Gu et al. 2021b) :
-    <ul>
-      <li>HIPPO Matrix(Gu et al. 2020) to the initialization of matrix A</li>
-    </ul>
-  </li>
-  <li><strong>Mamba</strong>(Gu and Dao 2023) :
-    <ul>
-      <li>parameterizes the matrices \(\mathbf{B}, \mathbf{C}\) and \(\Delta\) in a data-driven manner,</li>
-      <li>introducing a selection mechanism into S4 model</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="32-overview">3.2. Overview</h3>
-
-<p><img src="/assets/img/Mamba/BiMamba+/fig1.png" alt="그림1" /></p>
-
-<ul>
-  <li>step 1) calculate the tokenization strategy indicator through the SRA decider</li>
-  <li>step 2) divide the input series into patches and generate patch-wise tokens
-    <ul>
-      <li>based on the tokenization strategy indicator</li>
-    </ul>
-  </li>
-  <li>step 3) obtained tokens are fed into multiple Bi-Mamba+ encoders</li>
-  <li>step 4) a flatten head and a linear projector to get the final output</li>
-</ul>
-
-<h3 id="33-instance-normalization">3.3. Instance Normalization</h3>
-
-<ul>
-  <li>the input sequence의 non-stationary statistics를 제거하기 위해 RevIN (Kim et al. 2022) 사용</li>
-</ul>
-
-<h3 id="34-token-generalization">3.4. Token Generalization</h3>
-
-<ul>
-  <li>SRA Decider
-    <ul>
-      <li>Channel-independence / dependence는 데이터셋마다 다름</li>
-      <li>\(\to\) automatic tokenization process
-        <ul>
-          <li>데이터셋마다 \(T=\left\{t^1, t^2, \ldots, t^M\right\}\)에 대해
-            <ul>
-              <li>Spearman correlation coefficients of different series \(t^i \text { and } t^j\) 계산 \(\rho_{i, j}\)</li>
-              <li>\(\rho_{i, j}=1-\frac{6 \sum_{k=0}^n\left(\operatorname{Rank}\left(t_k^i\right)-\operatorname{Rank}\left(t_k^j\right)\right)^2}{n\left(n^2-1\right)}\),
-                <ul>
-                  <li>where \(n\) : the number of observations</li>
-                  <li>\(\operatorname{Rank}\left(t_k^i\right)\) : the rank level of the \(k\)-th element in the specific time series \(t^i\)</li>
-                </ul>
-              </li>
-              <li>threshold \(\lambda\)를 정하고 relevant series \(\rho_{\max }^\lambda\) and \(\rho_{\max }^0\)를 센 다음
-                <ul>
-                  <li>relation ratio \(r=\rho_{\max }^\lambda / \rho_{\max }^0 \geq 1-\lambda\)이면 channel-mixing</li>
-                  <li>그렇지 않으면 channelindependent strategy</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<p><img src="/assets/img/Mamba/BiMamba+/alg1.png" alt="그림1" /></p>
-
-<h3 id="35-tokenization-process">3.5. Tokenization Process</h3>
-
-<ul>
-  <li>PatchTST처럼 \(x_{1: L}^i\)를 \(J = \left\lceil\frac{L-P}{S}+1\right\rceil\)개의 patch로 나누고
-    <ul>
-      <li>(S는 stride, P는 patch에 들어가는 시점의 개수)</li>
-      <li>channel-independent strategy에서는 각 patch를 D차원으로 embedding
-        <ul>
-          <li>\(\to\) \(\mathbb{E}_{\text {ind }} \in \mathbb{R}^{M \times J \times D}\)</li>
-        </ul>
-      </li>
-      <li>channel-mixing strategy에서는 같은 시점의 다른 변수들도 group으로 만들고 각 group을 tokenization
-        <ul>
-          <li>\(\to \mathbb{E}_{\operatorname{mix}} \in\mathbb{R}^{J \times M \times D}\).</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="36-mamba-block">3.6. Mamba+ Block</h3>
-
-<p><img src="/assets/img/Mamba/BiMamba+/mamba.png" alt="그림1" /></p>
-
-<ul>
-  <li><strong>기존 Mamba</strong>는 2개의 branches를 사용
-    <ul>
-      <li>\(b_1\)에서는 1d-conv와 SSM을 통과, 다른 하나 \(b_2\)에서는 그냥 SiLU activation 통과</li>
-      <li>\(b_1\)의 SSM 안에 HIPPO가 있긴 해도 \(b_2\) 때문에 최근 정보가 더 우선시되는 문제</li>
-    </ul>
-  </li>
-  <li>그래서 <strong>Mamba+ block</strong>에서는
-    <ul>
-      <li>forget gate \(\text{gate}_f=1-\text{gate}_{b_2}\)를 추가</li>
-      <li>\(\text{gate}_f\)와 \(\text{gate}_{b_2}\)는 new features와 forgotten historical features를 선택적 결합
-        <ul>
-          <li>\(\to\) preserving historical information !</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<p><img src="/assets/img/Mamba/BiMamba+/fig2.png" alt="그림1" /></p>
-
-<p><img src="/assets/img/Mamba/BiMamba+/alg2.png" alt="그림1" /></p>
-
-<h3 id="37-bidirectional-mamba-encoder">3.7. Bidirectional Mamba+ Encoder</h3>
-
-<ul>
-  <li>Channel-mixing이면 \(\mathbb{E}_x^{(l)} \in \mathbb{R}^{J \times M \times D}\) and \(\mathbb{E}_x^{(0)}=\mathbb{E}_{m i x}\)
-    <ul>
-      <li>otherwise \(\mathbb{E}_x^{(l)} \in \mathbb{R}^{M \times J \times D}\) and \(\mathbb{E}_x^{(0)}=\mathbb{E}_{\text {ind }}\)</li>
-    </ul>
-  </li>
-  <li>2개의 Bi-Mamba+ block, 각각 forward and backward
-    <ul>
-      <li>각각의 input을 \(\mathbb{E}_{x, d i r}^{(l)}\) where \(\operatorname{dir} \in\{\text{forward,backward}\}\)이라 하면</li>
-      <li>\(\mathbb{E}_x^{(l+1)}=\sum_{\text {dir }}^{\{\text {forward,backward }\}} \mathcal{F}\left(\mathbb{E}_{y, \text { dir }}^{(l)}, \mathbb{E}_{x, d i r}^{(l)}\right)\)가 다음 layer의 input이 됨</li>
-    </ul>
-  </li>
-</ul>
-
-<p><img src="/assets/img/Mamba/BiMamba+/alg3.png" alt="그림1" /></p>
-
-<h3 id="38-loss-function">3.8. Loss Function</h3>
-
-<ul>
-  <li>MSE : \(\mathcal{L}(Y, \hat{Y})=\frac{1}{\mid Y \mid} \sum_{i=1}^{\mid Y \mid}\left(y_{(i)}-\hat{y}_{(i)}\right)^2\)</li>
-</ul>
-
-<h2 id="4-experiments">4. Experiments</h2>
-
-<h3 id="41-datasets">4.1. Datasets</h3>
-
-<p><img src="/assets/img/Mamba/BiMamba+/table1.png" alt="그림1" /></p>
-
-<h3 id="42-baseline-models">4.2. Baseline Models</h3>
-
-<ul>
-  <li>Autoformer (Wu et al. 2021)
-    <ul>
-      <li>series decomposition technique with Auto-Correlation mechanism</li>
-    </ul>
-  </li>
-  <li>PatchTST (Nie et al. 2023)
-    <ul>
-      <li>patching and channel independent techniques</li>
-    </ul>
-  </li>
-  <li>Crossformer (Zhang and Yan 2023)
-    <ul>
-      <li>PatchTST + Attention layer (for capture inter-series dependencies)</li>
-    </ul>
-  </li>
-  <li>iTransformer (Liu et al. 2023)
-    <ul>
-      <li>inverts the modeling method of Transformer</li>
-    </ul>
-  </li>
-  <li>DLinear (Zeng et al. 2023)
-    <ul>
-      <li>decomposes time series into two different components</li>
-    </ul>
-  </li>
-  <li>TimesNet (Wu et al. 2022)
-    <ul>
-      <li>transforming the 1-D time series into a set of 2-D tensors</li>
-    </ul>
-  </li>
-  <li>WITRAN (Jia et al. 2024)
-    <ul>
-      <li>RNN structure that process the univariate input sequence
-        <ul>
-          <li>in the 2-D space with a fixed scale</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>CrossGNN (Huang et al. 2024)
-    <ul>
-      <li>time series in a multi-scale way</li>
-      <li>GNN to capture both cross-scale and cross-series dependencies</li>
-    </ul>
-  </li>
-  <li>S-Mamba (Wang et al. 2024)
-    <ul>
-      <li>generates embeddings for each time series through a simple MLP layer</li>
-      <li>and uses Mamba to extract inter-series dependencies</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="43-experimental-settings">4.3. Experimental Settings</h3>
-
-<ul>
-  <li>\(L=96\) for all models on all datasets, \(H \in\{96,192,336,720\}\)</li>
-  <li>\(S=\frac{1}{2} P\) and use patch length \(P=\frac{1}{4} L\)</li>
-  <li>SRA decider, we set \(\lambda=0.6\)</li>
-  <li>for <strong>Bi-Mamba+, PatchTST and Crossformer</strong> that use patching technique, we set \(D=128\) for Weather, Traffic, Electricity, Solar and \(D=64\) for ETT datasets,
-    <ul>
-      <li>while for <strong>S-Mamba and iTransformer</strong> that map the whole sequence to tokens, we set \(D=512\) for Weather, Traffic, Electricity, Solar and \(D=256\) for ETT datasets.</li>
-    </ul>
-  </li>
-  <li>As for parameters within Mamba+ block은 Ahamed and Cheng 2024; Wang et al. 2024처럼</li>
-  <li><strong>convolutional kernel size</strong> d_conv =2 and <strong>hidden state expansion</strong> expand =1 on all datasets.</li>
-  <li><strong>hidden dimension</strong> d_state =16 for Weather, Electricity and Traffic and d_state =8 for ETT datasets.</li>
-  <li><strong>encoder layer</strong> \(l \in\{1,2,3\}\),</li>
-  <li><strong>learning rate</strong>는 \([5 \mathrm{e}-5,1 \mathrm{e}-4,2 \mathrm{e}-4,5 \mathrm{e}-4,1 \mathrm{e}-3, 2 \mathrm{e}-3,5 \mathrm{e}-3]\)</li>
-</ul>
-
-<h3 id="44-main-results">4.4. Main Results</h3>
-
-<p><img src="/assets/img/Mamba/BiMamba+/table3.png" alt="그림1" /></p>
-
-<h3 id="45-ablation-study">4.5. Ablation Study</h3>
-
-<p><img src="/assets/img/Mamba/BiMamba+/table4.png" alt="그림1" /></p>
-
-<ul>
-  <li>(a) w/o SRA-I which use channel-independent strategy only</li>
-  <li>(b) w/o SRA-M which use channelmixing strategy only</li>
-  <li>(c) w/o Bi which use forward direction Mamba block only</li>
-  <li>(d) w/o Residual that removes the residual connection</li>
-  <li>(e) S-Mamba</li>
-  <li>
-    <p>(f) PatchTST used for the benchmark models</p>
-  </li>
-  <li><strong>filter threshold</strong> \(\lambda\)에 따른 tokenization strategy indicator</li>
-</ul>
-
-<p><img src="/assets/img/Mamba/BiMamba+/fig3.png" alt="그림1" /></p>
-
-<ul>
-  <li>length of patches \(P\)에 따른 MSE</li>
-</ul>
-
-<p><img src="/assets/img/Mamba/BiMamba+/fig4.png" alt="그림1" /></p>
-
-<h3 id="46-model-efficiency">4.6. Model efficiency</h3>
-
-<p><img src="/assets/img/Mamba/BiMamba+/fig7-1.png" alt="그림1" /></p>
-
-<p><img src="/assets/img/Mamba/BiMamba+/fig7-2.png" alt="그림1" /></p>
-
-<h2 id="5-conclusion">5. Conclusion</h2>
-
-<ul>
-  <li><strong>Bi-Mamba+</strong></li>
-  <li>adding forget gate in Mamba
-    <ul>
-      <li>to selectively combine the added new features with the forgotten historical features in a complementary manner,</li>
-      <li>therefore preserving historical information in a longer range</li>
-    </ul>
-  </li>
-  <li>dividing the time series into patches
-    <ul>
-      <li>for inter-series dependencies at a finer granularity</li>
-    </ul>
-  </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="mamba" /><summary type="html"><![CDATA[[Arxiv 2024](https://arxiv.org/pdf/2404.15772)]]></summary></entry></feed>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="mamba" /><summary type="html"><![CDATA[[Arxiv 2024](https://arxiv.org/pdf/2408.15997)]]></summary></entry></feed>

@@ -109,7 +109,7 @@ Powered by Hydejack v9.1.6 <https://hydejack.com/>
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2025-02-26T13:41:07+09:00',
+    INDEX_KEY: 'index--2025-03-11T15:59:35+09:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -384,6 +384,119 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
 
 
   
+
+  
+
+
+
+
+
+<article id="post-stat-vi" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      <a href="/stat/2024-03-02-vi/" class="flip-title">
+        Advanced Variational Inference(VI), Variational Autoencoder(VAE)
+      </a>
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2024-03-02T00:00:00+09:00">02 Mar 2024</time> in <span>Stat</span> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <ul>
+  <li>Paper : <a href="https://arxiv.org/abs/1601.00670">Variational Inference : A Review for Statisticians</a></li>
+  <li>Paper : <a href="https://arxiv.org/pdf/1711.05597.pdf">Advances in Variational Inference</a></li>
+  <li>Paper : <a href="https://arxiv.org/abs/1312.6114">Auto-Encoding Variational Bayes</a></li>
+</ul>
+
+
+    
+    
+    <footer>
+      <p class="read-more">
+        Continue reading <a class="heading flip-title" href="/stat/2024-03-02-vi/">Advanced Variational Inference(VI), Variational Autoencoder(VAE)</a>
+
+      </p>
+    </footer>
+  
+</article>
+
+
+  
+
+
+
+
+
+<article id="post-timeseries-GAFormer" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      <a href="/timeseries/2024-03-01-GAFormer/" class="flip-title">
+        GAFormer: Enhancing Timeseries Transformers Through Group-Aware Embeddings (ICLR 2024)
+      </a>
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2024-03-01T00:00:00+09:00">01 Mar 2024</time> in <span>Timeseries</span> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  
+    <p class="note-sm" >
+      <a href="https://openreview.net/forum?id=c56TWtYp0W">ICLR 2024</a>
+
+    </p>
+  
+
+
+  </header>
+
+  
+    <h2 id="abstract">Abstract</h2>
+<ul>
+  <li>Multivariate TS의 복잡한 inter-channel relationship과 dynamic shifts로 인해 Robust and generalizable representation을 학습하기 어렵다.</li>
+  <li>본 논문에서 제시하는 GAFormer는 set of group tokens를 학습하고 instance-specific group embedding layer를 만든다.</li>
+</ul>
+
+
+    
+    
+    <footer>
+      <p class="read-more">
+        Continue reading <a class="heading flip-title" href="/timeseries/2024-03-01-GAFormer/">GAFormer: Enhancing Timeseries Transformers Through Group-Aware Embeddings (ICLR 2024)</a>
+
+      </p>
+    </footer>
+  
+</article>
+
 
   
 
@@ -877,119 +990,6 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
     <footer>
       <p class="read-more">
         Continue reading <a class="heading flip-title" href="/timeseries/2024-02-14-ModernTCN/">ModernTCN: A Modern Pure Convolution Structure for General Time Series Analysis (ICLR 2024)</a>
-
-      </p>
-    </footer>
-  
-</article>
-
-
-  
-
-
-
-
-
-<article id="post-timeseries-FTS-Diffusion" class="page post mb6" role="article">
-  <header>
-    <h1 class="post-title flip-project-title">
-      <a href="/timeseries/2024-02-13-FTS-Diffusion/" class="flip-title">
-        FTS-Diffusion: Generative Learning for Financial Time Series with Irregular and Scale-invariant Patterns (ICLR 2024)
-      </a>
-    </h1>
-
-    <div class="post-date">
-      
-      <span class="ellipsis mr1">
-        <time datetime="2024-02-13T00:00:00+09:00">13 Feb 2024</time> in <span>Timeseries</span> 
-      </span>
-      
-    </div>
-
-    
-    
-
-    
-
-
-
-  
-    <p class="note-sm" >
-      <a href="https://openreview.net/pdf?id=CdjnzWsQax">ICLR 2024</a>
-
-    </p>
-  
-
-
-  </header>
-
-  
-    <h2 id="abstract">Abstract</h2>
-<ul>
-  <li>Financial deep learning 모델을 훈련시키기 위한 데이터가 부족한데, 그렇다고 synthetic data를 만들어내려 하니 irregular and scale-invariant patterns 때문에 어려움이 있음</li>
-  <li>패턴이 irregular하다는 말은 패턴이 발생하는 간격이 일정하지 않아서 예측하기 어렵다는 것</li>
-  <li>패턴이 scale-invariant하다는 말은 scale을 변화시켜도 형태가 유지된다는 말인데, 특정 패턴이 다양한 너비(폭)나 높이(진폭)로 나타날 수 있다는 말이다. 또한 프랙탈 구조처럼 축소해도 비슷한 패턴이 보이게 된다.</li>
-  <li>본 논문에서는 irregular and scale-invariant patterns을 학습하고 생성하는 모델 FTS-Diffusion을 제시한다.</li>
-</ul>
-
-
-    
-    
-    <footer>
-      <p class="read-more">
-        Continue reading <a class="heading flip-title" href="/timeseries/2024-02-13-FTS-Diffusion/">FTS-Diffusion: Generative Learning for Financial Time Series with Irregular and Scale-invariant Patterns (ICLR 2024)</a>
-
-      </p>
-    </footer>
-  
-</article>
-
-
-  
-
-
-
-
-
-<article id="post-project-gitblog5" class="page post mb6" role="article">
-  <header>
-    <h1 class="post-title flip-project-title">
-      <a href="/project/2024-02-12-gitblog5/" class="flip-title">
-        깃블로그 만들기 5 : 블로그 테마 색 변경하기
-      </a>
-    </h1>
-
-    <div class="post-date">
-      
-      <span class="ellipsis mr1">
-        <time datetime="2024-02-12T00:00:00+09:00">12 Feb 2024</time> in <span>Project</span> 
-      </span>
-      
-    </div>
-
-    
-    
-
-    
-
-
-
-  <div class="hr pb0"></div>
-
-
-  </header>
-
-  
-    <ul>
-  <li>이번에는 블로그 테마는 그대로 두고 로고, 사이드바 이미지를 비롯해 전체적인 색감을 내가 원하는 디자인으로 변경한다.</li>
-</ul>
-
-
-    
-    
-    <footer>
-      <p class="read-more">
-        Continue reading <a class="heading flip-title" href="/project/2024-02-12-gitblog5/">깃블로그 만들기 5 : 블로그 테마 색 변경하기</a>
 
       </p>
     </footer>
