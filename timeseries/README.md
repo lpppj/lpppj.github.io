@@ -76,7 +76,9 @@ permalink: /timeseries/
 \
 [ComRes: Semi-Supervised Time Series Forecasting Utilizing Consensus Promotion of Multi-Resolution (ICLR 2025)]{:.heading.flip-title}\
 \
-[Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025)]{:.heading.flip-title}
+[Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025)]{:.heading.flip-title}\
+\
+[TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)]{:.heading.flip-title}
 
 
 
@@ -115,3 +117,4 @@ permalink: /timeseries/
 [T-PATCHGNN: Irregular Multivariate Time Series Forecasting: A Transformable Patching Graph Neural Networks Approach (ICML 2024)]: /timeseries/2024-10-27-T-PATCHGNN
 [ComRes: Semi-Supervised Time Series Forecasting Utilizing Consensus Promotion of Multi-Resolution (ICLR 2025)]: /timeseries/2025-02-17-ComRes
 [Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025)]: /timeseries/2025-02-28-TimeMoE
+[TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)]: /timeseries/2025-03-15-TimeMixer++
