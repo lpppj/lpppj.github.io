@@ -109,7 +109,7 @@ Powered by Hydejack v9.1.6 <https://hydejack.com/>
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2025-03-15T16:49:07+09:00',
+    INDEX_KEY: 'index--2025-03-15T18:19:25+09:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -384,6 +384,56 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
 
 
   
+
+  
+
+
+
+
+
+<article id="post-stat-MGF" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      <a href="/stat/2024-04-12-MGF/" class="flip-title">
+        MGF(Moment Generating Function) and Characteristic Function에 대해서
+      </a>
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2024-04-12T00:00:00+09:00">12 Apr 2024</time> in <span>Stat</span> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <h2 id="moments">Moments</h2>
+
+
+    
+    
+    <footer>
+      <p class="read-more">
+        Continue reading <a class="heading flip-title" href="/stat/2024-04-12-MGF/">MGF(Moment Generating Function) and Characteristic Function에 대해서</a>
+
+      </p>
+    </footer>
+  
+</article>
+
 
   
 
@@ -919,86 +969,6 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
     <footer>
       <p class="read-more">
         Continue reading <a class="heading flip-title" href="/timeseries/2024-03-06-SimMTM/">SimMTM: A Simple Pre-Training Framework for Masked Time-Series Modeling (NeurIPS 2023)</a>
-
-      </p>
-    </footer>
-  
-</article>
-
-
-  
-
-
-
-
-
-<article id="post-stat-gibbs" class="page post mb6" role="article">
-  <header>
-    <h1 class="post-title flip-project-title">
-      <a href="/stat/2024-03-06-gibbs/" class="flip-title">
-        MCMC with Implementation (2) : Gibbs Sampling
-      </a>
-    </h1>
-
-    <div class="post-date">
-      
-      <span class="ellipsis mr1">
-        <time datetime="2024-03-06T00:00:00+09:00">06 Mar 2024</time> in <span>Stat</span> 
-      </span>
-      
-    </div>
-
-    
-    
-
-    
-
-
-
-  <div class="hr pb0"></div>
-
-
-  </header>
-
-  
-    <h2 id="1-introduction">1. Introduction</h2>
-<ul>
-  <li>만약 sampling하고자 하는 parameter의 full conditional distribution을 알 수 있다면 Gibbs sampler를 사용할 수 있다.</li>
-  <li>Gibbs sampler는 MH-algorithm의 special case라고 할 수 있다.
-    <ul>
-      <li>Acceptance rate = 1이 되어 accept/reject 과정이 없다.</li>
-    </ul>
-  </li>
-  <li><strong>Full conditional distribution</strong> : 만약 model parameters가 \(\mathbf{\theta}=\left(\theta_1, \cdots, \theta_k\right)\)이라면, full conditional distribution은 \(\pi\left(\theta_i \mid \theta_1, \cdots, \theta_{i-1}, \theta_{i+1}, \cdots, \theta_k, \mathbf{X}\right)\)이다. 즉 다른 parameters는 모두 given일 때 관심있는 parameter의 분포를 의미한다.</li>
-  <li>정확히는 full conditional distribution이 모두 closed-form이어야 한다. 즉 k개의 conditional distributions가 standard한 분포(Normal, Gamma, …)를 따른다.</li>
-  <li>그러므로 Gibss sampling 방식은 k개의 parameters로 이루어지는 확률변수 \(\mathbf{\theta}\)를 sampling을 할 때 k개 parameters를 한 번에 sampling하는 것이 아니라, 하나씩 sampling한 다음 k개를 모아서 하나의 sample로 만든다.
-    <ul>
-      <li>
-        <ol>
-          <li>Choose starting values \(\mathbf{\theta}=\left(\theta_1^{(1)}, \cdots, \theta_k^{(1)}\right)\)</li>
-        </ol>
-      </li>
-      <li>
-        <ol>
-          <li>For \(i=2, \cdots, T\) sample <br />
-\(\begin{aligned}
-&amp; \theta_1^{(i)} \mid \theta_2^{(i-1)}, \cdots, \theta_k^{(i-1)}, \mathbf{X} \\
-&amp; \theta_2^{(i)} \mid \theta_1^{(i)}, \theta_3^{(i-1)}, \cdots, \theta_k^{(i-1)}, \mathbf{X} \\
-&amp; \theta_k^{(i)} \mid \theta_1^{(i)}, \cdots, \theta_{k-1}^{(i)}, \mathbf{X}
-\end{aligned}\)</li>
-        </ol>
-      </li>
-    </ul>
-  </li>
-  <li>주의할 점은 \(\theta_2^{(i)}\)를 sampling할 때에는 아직 sampling하지 않은 \(\theta_3^{(i)}\)부터 \(\theta_k^{(i)}\)까지는 이전 시점의 값을 사용하지만, 이미 sampling을 한 \(\theta_1^{(i)}\)은 sampling한 값을 사용한다는 점이다.</li>
-</ul>
-
-
-    
-    
-    <footer>
-      <p class="read-more">
-        Continue reading <a class="heading flip-title" href="/stat/2024-03-06-gibbs/">MCMC with Implementation (2) : Gibbs Sampling</a>
 
       </p>
     </footer>
