@@ -30,22 +30,22 @@ Powered by Hydejack v9.1.6 <https://hydejack.com/>
   
     
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>DLinear: Are Transformer Effective for Time Series Forecasting? (AAAI 2022) | LpppJ</title>
+<title>Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025) | LpppJ</title>
 <meta name="generator" content="Jekyll v4.3.3" />
-<meta property="og:title" content="DLinear: Are Transformer Effective for Time Series Forecasting? (AAAI 2022)" />
+<meta property="og:title" content="Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025)" />
 <meta name="author" content="GW Jeong" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="AAAI 2022" />
-<meta property="og:description" content="AAAI 2022" />
-<link rel="canonical" href="http://localhost:4000/timeseries/2024-02-16-DLinear/" />
-<meta property="og:url" content="http://localhost:4000/timeseries/2024-02-16-DLinear/" />
+<meta name="description" content="ICLR 2025 Spotlight" />
+<meta property="og:description" content="ICLR 2025 Spotlight" />
+<link rel="canonical" href="http://localhost:4000/mamba/2025-03-10-TimeMoE/" />
+<meta property="og:url" content="http://localhost:4000/mamba/2025-03-10-TimeMoE/" />
 <meta property="og:site_name" content="LpppJ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-02-16T00:00:00+09:00" />
+<meta property="article:published_time" content="2025-03-10T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="DLinear: Are Transformer Effective for Time Series Forecasting? (AAAI 2022)" />
+<meta property="twitter:title" content="Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025)" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"GW Jeong"},"dateModified":"2024-07-02T22:54:50+09:00","datePublished":"2024-02-16T00:00:00+09:00","description":"AAAI 2022","headline":"DLinear: Are Transformer Effective for Time Series Forecasting? (AAAI 2022)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/timeseries/2024-02-16-DLinear/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/img/me/logo.jpg"},"name":"GW Jeong"},"url":"http://localhost:4000/timeseries/2024-02-16-DLinear/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"GW Jeong"},"dateModified":"2025-03-15T16:36:57+09:00","datePublished":"2025-03-10T00:00:00+09:00","description":"ICLR 2025 Spotlight","headline":"Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/mamba/2025-03-10-TimeMoE/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/img/me/logo.jpg"},"name":"GW Jeong"},"url":"http://localhost:4000/mamba/2025-03-10-TimeMoE/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -73,7 +73,7 @@ Powered by Hydejack v9.1.6 <https://hydejack.com/>
 <meta name="generator" content="Hydejack v9.1.6" />
 
 
-<link rel="alternate" href="http://localhost:4000/timeseries/2024-02-16-DLinear/" hreflang="en">
+<link rel="alternate" href="http://localhost:4000/mamba/2025-03-10-TimeMoE/" hreflang="en">
 
 <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LpppJ" />
 
@@ -186,14 +186,14 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
           <span>/</span>
           
           
-          <a href="/timeseries/">timeseries</a>
+          <a href="/mamba/">mamba</a>
         
       </li>
     
       <li>
         
           <span>/</span>
-          <span>2024-02-16-DLinear</span>
+          <span>2025-03-10-TimeMoE</span>
         
       </li>
     
@@ -210,18 +210,18 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
 
 
 
-<article id="post-timeseries-DLinear" class="page post mb6" role="article">
+<article id="post-mamba-TimeMoE" class="page post mb6" role="article">
   <header>
     <h1 class="post-title flip-project-title">
       
-        DLinear: Are Transformer Effective for Time Series Forecasting? (AAAI 2022)
+        Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025)
       
     </h1>
 
     <div class="post-date">
       
       <span class="ellipsis mr1">
-        <time datetime="2024-02-16T00:00:00+09:00">16 Feb 2024</time> in <span>Timeseries</span> 
+        <time datetime="2025-03-10T00:00:00+09:00">10 Mar 2025</time> in <span>Mamba</span> 
       </span>
       
     </div>
@@ -235,7 +235,7 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
 
   
     <p class="note-sm" >
-      <a href="https://arxiv.org/abs/2205.13504">AAAI 2022</a>
+      <a href="https://arxiv.org/pdf/2409.16040">ICLR 2025 Spotlight</a>
 
     </p>
   
@@ -245,95 +245,253 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
 
   
     <h2 id="abstract">Abstract</h2>
+
 <ul>
-  <li>Transformer-based solutions는 긴 시퀀스 속에 있는 semantic correlations를 잘 추출하기 때문에 long-term time series forecasting(LTSF)에 쓰인다.</li>
-  <li>하지만 이러한 permutation-invariant self-attention의 특성상 temporal information loss가 불가피하다.</li>
-  <li>그러므로 simple one-layer linear models (LTSF-Linear)를 제안한다.</li>
+  <li>large-scale <strong>pre-training</strong> in <strong>language and vision</strong> domains,
+    <ul>
+      <li><strong>pre-trained time series</strong> models remain <strong>limited</strong> in scale and operate at a high cost</li>
+    </ul>
+  </li>
+  <li>TIME-MOE:
+    <ul>
+      <li>scalable and unified architecture designed to pre-train</li>
+      <li>sparse mixture-of-experts (MoE) design
+        <ul>
+          <li>computational efficiency by activating <strong>only a subset of networks for each prediction</strong></li>
+        </ul>
+      </li>
+      <li>family of decoder-only transformer (auto-regressive manner)
+        <ul>
+          <li>supports <strong>flexible forecasting horizons</strong> with <strong>varying input context lengths</strong></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Time-MoE 요약:
+    <ul>
+      <li>scalable and unified architecture for time series foundation models that leverages a sparse design with mixture-of-experts to enhance computational efficiency without compromising model capacity</li>
+    </ul>
+  </li>
 </ul>
 
 <h2 id="1-introduction">1. Introduction</h2>
-<ul>
-  <li>Transformer의 핵심인 multi-head self-attention은 <code class="language-plaintext highlighter-rouge">permutation-invariant</code> = <code class="language-plaintext highlighter-rouge">anti-order</code>한 semantic correlations를 찾아낸다.</li>
-  <li>하지만 time series는 순서 자체가 굉장히 중요한데, NLP를 위한 transformer가 LTST에 효과적일까?</li>
-  <li>결론적으로, 실험결과 : 복잡한 transformer 구조보다 단순한 LTSF-Linear의 성능이 더 뛰어났다.</li>
-</ul>
 
-<h2 id="2-prelininaries--tsf-problem-formulation">2. Prelininaries : TSF Problem Formulation</h2>
 <ul>
-  <li>본 논문에서 사용할 notation은 간단하다. \(\cal X = \{ X_1^t, ..., X_C^t\}_{t=1}^L\)을 보고 \(\cal \hat X = \{\hat X_1^t, ..., \hat X_C^t\}_{t=L+1}^{L+T}\)를 예측하는 것이다. (\(C\)는 변수의 개수, \(L\)은 look-back window의 size, \(T\)는 예측하고자 하는 time steps)</li>
-</ul>
-
-<h2 id="3-transformer-based-ltsf-solutions">3. Transformer-based LTSF solutions</h2>
-<ul>
-  <li>Vanilla Transformer는 quadratic time/memory complexity, error accumulation by the autoregressive decoder로 인한 한계가 있고, 이걸 해결하기 위한 많은 transformer-based models가 있는데, 요약하면 아래 그림과 같다.
-<img src="/assets/img/timeseries/AreTF/fig1.jpeg" alt="사진1" /></li>
-  <li>Autoformer, LogTrans, Pyraformer, FEDformer, Informer 등 transformer를 time series에 활용하기 위한 다양한 시도들이 있었는데, 파이프라인 단계별로 간단하게만 보겠다.
+  <li>TS: inherent complexity and distribution shifts
     <ul>
-      <li>(a) Preprocessing : normalization with zero-mean, seasonal-trend decomposition, …</li>
-      <li>(b) Embedding : fixed positional encoding, channel projection embedding, learnable temporal embedding, …</li>
-      <li>(c) Encoder : Logsparse mask(LogTrans), pyramidal attention(Pyraformer), ProbSparse(Informer), Frequency enhanced block(FEDformer), series-wise auto-correlation(Autoformer), …</li>
-      <li>(d) Decoder : IMS(Iterative Multi-step forecasting, 단일 시점 예측 반복하여 여러 시점 예측) 대신 DMS(Direct Multi-step forecasting, 각 미래 시점 예측 위해 별도 모델) 사용</li>
+      <li>balancing forecasting precision against computational budget.</li>
     </ul>
   </li>
-  <li>하지만 앞서 언급한 것처럼 permutation-invariant한 semantic correlations은 temporal relation과 다르다.</li>
-</ul>
-
-<h2 id="4-an-embarrassingly-simple-baseline">4. An Embarrassingly Simple Baseline</h2>
-<ul>
-  <li>기존의 transformer-based LTSF solutions는 non-transformer에 비해 성능이 좋다는 실험 결과를 내놓았지만, 그건 IMS를 사용한 non-transformer와 달리 DMS를 사용했기 때문이다.</li>
-  <li>이걸 뒷받침하는 근거가 본 논문에서 제시하는 DMS 모델인 LTSF-Linear인데, \(\hat X_i = WX_i\) where \(W \in \mathbb R^{T\times L}\) 구조이다.</li>
-  <li>LTSF-Linear는 DLinear, NLinear 두 종류가 있다.
+  <li>Scaling Laws:
     <ul>
-      <li>DLinear : trend component와 seasonal component로 decompose하고 각각을 one-layer에 넣어 다시 sum한다.</li>
-      <li>NLinear : Input의 각 값에서 마지막 값을 빼고 linear layer를 통과한 뒤 다시 더해주는 simple normalization
-<img src="/assets/img/timeseries/AreTF/fig2.jpeg" alt="사진2" /></li>
+      <li>Increasing model size and training tokens typically leads to performance improvements</li>
+    </ul>
+  </li>
+  <li><strong>Dense versus sparse training</strong>
+    <ul>
+      <li>Dense: each input time series tokens requires computations with all model parameters</li>
+      <li>sparse training allows for scaling up model size with a fixed inference budget</li>
+    </ul>
+  </li>
+  <li><strong>Stability and convergency</strong>
+    <ul>
+      <li>trade-off between performance and computational efficiency</li>
+    </ul>
+  </li>
+  <li>**How to scale time series foundation models to achieve universal forecasting while balancing model capabilityand computational overhead, mirroring the success of foundation models in other domains? **
+    <ul>
+      <li>Time-MoE !</li>
     </ul>
   </li>
 </ul>
 
-<h2 id="5-experiments">5. Experiments</h2>
+<h2 id="2-related-work">2. Related Work</h2>
+
 <ul>
-  <li>사용한 데이터셋은 9개(ETTm1/2, ETTh1/2, ILI, Weather, Traffic, Exchange, Electrictiy)이고 비교한 모델은 5개(FEDformer, Autoformer, Informer, Pyraformer, LogTrans)이다. 아래는 quantitative and qualitative results이다.
-<img src="/assets/img/timeseries/AreTF/table12.jpeg" alt="사진3" />
-<img src="/assets/img/timeseries/AreTF/fig3.jpeg" alt="사진4" /></li>
-  <li>Q) Can existing LTSF-Transformers extract temporal relations well from longer input sequences?
+  <li>Time Series Forecasting
     <ul>
-      <li><img src="/assets/img/timeseries/AreTF/fig4.jpeg" alt="사진5" /></li>
-      <li>Look-back window size가 커짐에 따라, transformer-based models의 성능은 크게 좋아지지 않지만, LTSF-Linear의 성능은 유의미하게 좋아진다.</li>
+      <li>Univariate models
+        <ul>
+          <li><em>DeepState</em>, <em>DeepAR</em>, <em>N-BEATS</em>: modeling individual time series</li>
+        </ul>
+      </li>
+      <li>Multivariate models
+        <ul>
+          <li><em>transformer-based approaches</em>, TimeMixer, …</li>
+        </ul>
+      </li>
     </ul>
   </li>
-  <li>Q) Are the self-attention scheme effective for LTSF?
+  <li>Large Time Series Models
     <ul>
-      <li><img src="/assets/img/timeseries/AreTF/table4.jpeg" alt="사진6" /></li>
-      <li>Informer에서 one linear layer까지 구조를 점점 단순하게 할수록 성능이 좋아졌다. 즉 복잡한 모듈이 불필요하다.</li>
+      <li>Self-supervised learning for TS:
+        <ul>
+          <li>masked reconstruction, contrastive learning 둘 다 limited in both <strong>data and model scale</strong></li>
+        </ul>
+      </li>
+      <li>TIME-MOE는 scalable and unified architecture for pre-training larger forecasting foundation models</li>
     </ul>
   </li>
-  <li>Q) Can existing LTSF-Transformers preserve temporal order well?
+  <li>Sparse Deep Learning for Time Series
     <ul>
-      <li><img src="/assets/img/timeseries/AreTF/table5.jpeg" alt="사진7" /></li>
-      <li>데이터를 섞거나 반 나눠서 순서를 바꿨을 때, 다른 transformer-based models은 성능이 크게 떨어지지 않았지만, LTSF-Linear의 경우 유의미하게 떨어졌다.</li>
-      <li>그러므로 LTSF-Linear가 다른 transformer-based models보다 temporal order를 잘 보존한다.</li>
-    </ul>
-  </li>
-  <li>Q) Is training data size a limiting factor for existing LTSF- Transformers?
-    <ul>
-      <li><img src="/assets/img/timeseries/AreTF/table7.jpeg" alt="사진8" /></li>
-      <li>Full dataset(ori.)로 학습했을 때보다 1년치 데이터(short)로 학습했을 때 성능이 더 좋았다.</li>
-      <li>단순하게 긴 training data가 필요한게 아니라, whole-year data에 더 명확한 temporal features가 있다는 걸 알 수 있다.</li>
+      <li>DL models sometimes <strong>dense</strong> and over-parameterized
+        <ul>
+          <li>increased memory and computational demands</li>
+        </ul>
+      </li>
+      <li><strong>Sparse</strong> networks, such as MoE
+        <ul>
+          <li>dynamically route inputs to specialized expert networks</li>
+        </ul>
+      </li>
     </ul>
   </li>
 </ul>
 
-<h2 id="6-conclusion-and-future-work">6. Conclusion and Future Work</h2>
+<h2 id="3-methodology">3. Methodology</h2>
+
+<p><img src="/assets/img/timeseries/TimeMoE/fig2.png" alt="그림1" /></p>
+
+<p>(1) input token embedding (2) MoEtransformer block (3) multi-resolution forecasting</p>
+
+<h3 id="31-time-moe-overeview">3.1. Time-MoE Overeview</h3>
+
 <ul>
-  <li>본 논문의 contribution은 linear model을 제안한 데에 있는 것이 아니라, 비교 실험을 통해 왜 LTSF-transformers가 효율적이지 못한지에 대한 질문을 던지는 데에 있다.</li>
-  <li>본 논문의 비교 실험 결과를 통해 transformer의 구조에 대해 더 잘 이해하고 효율적으로 사용하기 위한 방법을 고민해볼 수 있다.</li>
-  <li>본 논문에서 제시하는 LTSF-Linear는 change points로 인한 temporal dynamics를 포착하기 어려운 등 한계점이 분명하기 때문에, 앞으로의 연구를 위해 단순하면서 경쟁력 있는 기준선 정도로 생각하면 되겠다.</li>
+  <li><strong>Input Token Embedding</strong>: point-wise tokenization
+    <ul>
+      <li>\(\mathbf{h}_t^0=\operatorname{SwiGLU}\left(x_t\right)=\operatorname{Swish}\left(W x_t\right) \otimes\left(V x_t\right)\).
+        <ul>
+          <li>where \(W \in R^{D \times 1}\) and \(V \in R^{D \times 1}\) are learnable parameters</li>
+          <li>\(D\): the hidden dimension.</li>
+        </ul>
+      </li>
+      <li>to ensure the <strong>completeness</strong> of temporal information, model’s <strong>flexibility</strong></li>
+    </ul>
+  </li>
+  <li><strong>MoE Transformer Block</strong>: decoder-only transformer
+    <ul>
+      <li>RMSNorm, Rotary positional embeddings 사용
+        <ul>
+          <li>greater flexibility in sequence length and improved extrapolation capabilities</li>
+        </ul>
+      </li>
+      <li>Sparsity를 위해 replace a feed-forward network (FFN) with a mixture-of-experts layer
+        <ul>
+          <li>\(\begin{aligned} \mathbf{u}_t^l &amp; =\mathrm{SA}\left(\operatorname{RMSNorm}\left(\mathbf{h}_t^{l-1}\right)\right)+\mathbf{h}_t^{l-1}, \\ \overline{\mathbf{u}}_t^l &amp; =\operatorname{RMSNorm}\left(\mathbf{u}_t^l\right), \\ \mathbf{h}_t^l &amp; =\operatorname{Mixture}\left(\overline{\mathbf{u}}_t^l\right)+\mathbf{u}_t^l .\end{aligned}\).</li>
+          <li>One expert is designated as a shared expert tocapture and consolidate common knowledge across different contexts.</li>
+          <li>\(\begin{aligned} \text { Mixture }\left(\overline{\mathbf{u}}_t^l\right) &amp; =g_{N+1, t} \operatorname{FFN}_{N+1}\left(\overline{\mathbf{u}}_t^l\right)+\sum_{i=1}^N\left(g_{i, t} \operatorname{FFN}_i\left(\overline{\mathbf{u}}_t^l\right)\right), \\ g_{i, t} &amp; = \begin{cases}s_{i, t}, &amp; s_{i, t} \in \operatorname{Topk}\left(\left\{s_{j, t} \mid 1 \leq j \leq N\right\}, K\right), \\ 0, &amp; \text { otherwise },\end{cases} \\ g_{N+1, t} &amp; ={\operatorname{Sigmoid}\left(\mathbf{W}_{N+1}^l \overline{\mathbf{u}}_t^l\right),}_{s_{i, t}}=\operatorname{Softmax}_i\left(\mathbf{W}_i^l \mathbf{u}_t^l\right),\end{aligned}\).</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Multi-resolution Forecasting</strong>
+    <ul>
+      <li>Multiple output projections from single-layer FFNs
+        <ul>
+          <li>each designed for different prediction horizons</li>
+        </ul>
+      </li>
+      <li>Time-MoE aggregates forecasting errors from <strong>different</strong> horizons to compute a composite loss
+        <ul>
+          <li>improving the model generalization</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
 </ul>
 
-<h2 id="추가">추가</h2>
+<h3 id="32-model-training">3.2. Model Training</h3>
+
+<p><img src="/assets/img/timeseries/TimeMoE/table1.png" alt="그림1" /></p>
+
 <ul>
-  <li>본 논문이 발표되기 전에 transformer-based time series models가 많이 나왔다. Informer, Autoformer, Pyraformer, Fedformer 등이다. 본 논문은 이러한 solutions을 반박하면서 conv를 제안하였다. 이제 본 논문을 반박하면서 다시 transformer를 제시하는 PatchTST를 읽어보러 가자.</li>
+  <li>3.2.1. <strong>TIME-300B Dataset</strong></li>
+  <li>Challenge: <strong>data quality</strong> (missing values and invalid observations)
+    <ul>
+      <li>본 논문에서 a <strong>streamlined data-cleaning pipeline</strong> 제안 (Appendix C)
+        <ul>
+          <li>to filter and refine raw data</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="appendix-c-processed-data-archive">Appendix C PROCESSED DATA ARCHIVE</h3>
+
+<p><img src="/assets/img/timeseries/TimeMoE/subfig1.png" alt="그림1" /></p>
+
+<p><img src="/assets/img/timeseries/TimeMoE/subfig2.png" alt="그림1" /></p>
+
+<ul>
+  <li>3.2.2. <strong>Loss function</strong>
+    <ul>
+      <li>Pre-training time series foundation models in large scale 할 때
+        <ul>
+          <li><strong>training stability</strong> due to the massive datasets</li>
+          <li>and the <strong>vast number of parameters</strong> involved</li>
+        </ul>
+      </li>
+      <li>를 완화하기 위해 Huber loss 사용 : greater robustness to <strong>outliers</strong> and improves training stability
+        <ul>
+          <li>\(\mathcal{L}_{\text {ar }}\left(x_t, \hat{x}_t\right)= \begin{cases}\frac{1}{2}\left(x_t-\hat{x}_t\right)^2, &amp; \text { if }\mid x_t-\hat{x}_t\mid \leq \delta \\ \delta \times\left(\mid x_t-\hat{x}_t\mid-\frac{1}{2} \times \delta\right), &amp; \text { otherwise }\end{cases}\).</li>
+        </ul>
+      </li>
+      <li>solely on optimizing prediction error \(\to\) imbalance issues among the experts
+        <ul>
+          <li>그래서 expert-level balancing with an <strong>auxiliary loss</strong> to reduce routing collapse
+            <ul>
+              <li>\(\mathcal{L}_{\text {aux }}=N \sum_{i=1}^N f_i r_i, \quad f_i=\frac{1}{K T} \sum_{t=1}^T \mathbb{I}(\text{Time point}\  t \text{selects Expert} \ i)\),</li>
+              <li>where \(r_i=\frac{1}{T} \sum_{t=1}^T s_{i, t}\)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>최종적으로 the auto-regressive losses across all multi-resolution projections with the auxiliary balance loss:
+        <ul>
+          <li>\(\mathcal{L}=\frac{1}{P} \sum_{j=1}^P \mathcal{L}_{\mathrm{ar}}\left(\mathbf{X}_{t+1: t+p_j}, \hat{\mathbf{X}}_{t+1: t+p_j}\right)+\alpha \mathcal{L}_{\mathrm{aux}}\).</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="4-main-results">4. Main Results</h2>
+
+<p><img src="/assets/img/timeseries/TimeMoE/table2.png" alt="그림1" /></p>
+
+<h3 id="41-zero-shot-forecasting">4.1. Zero-shot Forecasting</h3>
+
+<p><img src="/assets/img/timeseries/TimeMoE/table3.png" alt="그림1" /></p>
+
+<h3 id="42-in-distribution-forecasting">4.2. In-Distribution Forecasting</h3>
+
+<p><img src="/assets/img/timeseries/TimeMoE/table4.png" alt="그림1" /></p>
+
+<h3 id="43-ablation-study">4.3. Ablation Study</h3>
+
+<p><img src="/assets/img/timeseries/TimeMoE/table5.png" alt="그림1" /></p>
+
+<h3 id="44-scalability-analysis">4.4. Scalability Analysis</h3>
+
+<p><img src="/assets/img/timeseries/TimeMoE/fig3.png" alt="그림1" /></p>
+
+<p><img src="/assets/img/timeseries/TimeMoE/table6.png" alt="그림1" /></p>
+
+<h3 id="45-sparsification-analysis">4.5. Sparsification Analysis</h3>
+
+<p><img src="/assets/img/timeseries/TimeMoE/fig4.png" alt="그림1" /></p>
+
+<p><img src="/assets/img/timeseries/TimeMoE/table7.png" alt="그림1" /></p>
+
+<h2 id="5-conclusion">5. Conclusion</h2>
+
+<ul>
+  <li>Time-MoE 한 줄 요약:
+    <ul>
+      <li>scalable and unified architecture for time series foundation models that leverages a sparse design with mixture-of-experts to enhance computational efficiency without compromising model capacity</li>
+    </ul>
+  </li>
 </ul>
 
   

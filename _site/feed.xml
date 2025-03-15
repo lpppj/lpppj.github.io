@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-03-13T16:08:57+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LpppJ</title><subtitle>This is blog about machine learning, deep learning, artificial intelligence.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-03-15T16:49:07+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LpppJ</title><subtitle>This is blog about machine learning, deep learning, artificial intelligence.
 </subtitle><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><entry><title type="html">Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025)</title><link href="http://localhost:4000/timeseries/2025-03-10-TimeMoE/" rel="alternate" type="text/html" title="Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025)" /><published>2025-03-10T00:00:00+09:00</published><updated>2025-03-13T16:00:48+09:00</updated><id>http://localhost:4000/timeseries/TimeMoE</id><content type="html" xml:base="http://localhost:4000/timeseries/2025-03-10-TimeMoE/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
@@ -247,7 +247,311 @@
       <li>scalable and unified architecture for time series foundation models that leverages a sparse design with mixture-of-experts to enhance computational efficiency without compromising model capacity</li>
     </ul>
   </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[ICLR 2025 Spotlight](https://arxiv.org/pdf/2409.16040)]]></summary></entry><entry><title type="html">BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation (PMLR 2022)</title><link href="http://localhost:4000/llm/2025-02-26-BLIP/" rel="alternate" type="text/html" title="BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation (PMLR 2022)" /><published>2025-02-26T00:00:00+09:00</published><updated>2025-02-26T13:41:17+09:00</updated><id>http://localhost:4000/llm/BLIP</id><content type="html" xml:base="http://localhost:4000/llm/2025-02-26-BLIP/"><![CDATA[<h2 id="abstract">Abstract</h2>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[ICLR 2025 Spotlight](https://arxiv.org/pdf/2409.16040)]]></summary></entry><entry><title type="html">Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025)</title><link href="http://localhost:4000/mamba/2025-03-10-TimeMoE/" rel="alternate" type="text/html" title="Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025)" /><published>2025-03-10T00:00:00+09:00</published><updated>2025-03-15T16:36:57+09:00</updated><id>http://localhost:4000/mamba/TimeMoE</id><content type="html" xml:base="http://localhost:4000/mamba/2025-03-10-TimeMoE/"><![CDATA[<h2 id="abstract">Abstract</h2>
+
+<ul>
+  <li>large-scale <strong>pre-training</strong> in <strong>language and vision</strong> domains,
+    <ul>
+      <li><strong>pre-trained time series</strong> models remain <strong>limited</strong> in scale and operate at a high cost</li>
+    </ul>
+  </li>
+  <li>TIME-MOE:
+    <ul>
+      <li>scalable and unified architecture designed to pre-train</li>
+      <li>sparse mixture-of-experts (MoE) design
+        <ul>
+          <li>computational efficiency by activating <strong>only a subset of networks for each prediction</strong></li>
+        </ul>
+      </li>
+      <li>family of decoder-only transformer (auto-regressive manner)
+        <ul>
+          <li>supports <strong>flexible forecasting horizons</strong> with <strong>varying input context lengths</strong></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Time-MoE 요약:
+    <ul>
+      <li>scalable and unified architecture for time series foundation models that leverages a sparse design with mixture-of-experts to enhance computational efficiency without compromising model capacity</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<ul>
+  <li>TS: inherent complexity and distribution shifts
+    <ul>
+      <li>balancing forecasting precision against computational budget.</li>
+    </ul>
+  </li>
+  <li>Scaling Laws:
+    <ul>
+      <li>Increasing model size and training tokens typically leads to performance improvements</li>
+    </ul>
+  </li>
+  <li><strong>Dense versus sparse training</strong>
+    <ul>
+      <li>Dense: each input time series tokens requires computations with all model parameters</li>
+      <li>sparse training allows for scaling up model size with a fixed inference budget</li>
+    </ul>
+  </li>
+  <li><strong>Stability and convergency</strong>
+    <ul>
+      <li>trade-off between performance and computational efficiency</li>
+    </ul>
+  </li>
+  <li>**How to scale time series foundation models to achieve universal forecasting while balancing model capabilityand computational overhead, mirroring the success of foundation models in other domains? **
+    <ul>
+      <li>Time-MoE !</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-related-work">2. Related Work</h2>
+
+<ul>
+  <li>Time Series Forecasting
+    <ul>
+      <li>Univariate models
+        <ul>
+          <li><em>DeepState</em>, <em>DeepAR</em>, <em>N-BEATS</em>: modeling individual time series</li>
+        </ul>
+      </li>
+      <li>Multivariate models
+        <ul>
+          <li><em>transformer-based approaches</em>, TimeMixer, …</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Large Time Series Models
+    <ul>
+      <li>Self-supervised learning for TS:
+        <ul>
+          <li>masked reconstruction, contrastive learning 둘 다 limited in both <strong>data and model scale</strong></li>
+        </ul>
+      </li>
+      <li>TIME-MOE는 scalable and unified architecture for pre-training larger forecasting foundation models</li>
+    </ul>
+  </li>
+  <li>Sparse Deep Learning for Time Series
+    <ul>
+      <li>DL models sometimes <strong>dense</strong> and over-parameterized
+        <ul>
+          <li>increased memory and computational demands</li>
+        </ul>
+      </li>
+      <li><strong>Sparse</strong> networks, such as MoE
+        <ul>
+          <li>dynamically route inputs to specialized expert networks</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="3-methodology">3. Methodology</h2>
+
+<p><img src="/assets/img/timeseries/TimeMoE/fig2.png" alt="그림1" /></p>
+
+<p>(1) input token embedding (2) MoEtransformer block (3) multi-resolution forecasting</p>
+
+<h3 id="31-time-moe-overeview">3.1. Time-MoE Overeview</h3>
+
+<ul>
+  <li><strong>Input Token Embedding</strong>: point-wise tokenization
+    <ul>
+      <li>\(\mathbf{h}_t^0=\operatorname{SwiGLU}\left(x_t\right)=\operatorname{Swish}\left(W x_t\right) \otimes\left(V x_t\right)\).
+        <ul>
+          <li>where \(W \in R^{D \times 1}\) and \(V \in R^{D \times 1}\) are learnable parameters</li>
+          <li>\(D\): the hidden dimension.</li>
+        </ul>
+      </li>
+      <li>to ensure the <strong>completeness</strong> of temporal information, model’s <strong>flexibility</strong></li>
+    </ul>
+  </li>
+  <li><strong>MoE Transformer Block</strong>: decoder-only transformer
+    <ul>
+      <li>RMSNorm, Rotary positional embeddings 사용
+        <ul>
+          <li>greater flexibility in sequence length and improved extrapolation capabilities</li>
+        </ul>
+      </li>
+      <li>Sparsity를 위해 replace a feed-forward network (FFN) with a mixture-of-experts layer
+        <ul>
+          <li>\(\begin{aligned} \mathbf{u}_t^l &amp; =\mathrm{SA}\left(\operatorname{RMSNorm}\left(\mathbf{h}_t^{l-1}\right)\right)+\mathbf{h}_t^{l-1}, \\ \overline{\mathbf{u}}_t^l &amp; =\operatorname{RMSNorm}\left(\mathbf{u}_t^l\right), \\ \mathbf{h}_t^l &amp; =\operatorname{Mixture}\left(\overline{\mathbf{u}}_t^l\right)+\mathbf{u}_t^l .\end{aligned}\).</li>
+          <li>One expert is designated as a shared expert tocapture and consolidate common knowledge across different contexts.</li>
+          <li>\(\begin{aligned} \text { Mixture }\left(\overline{\mathbf{u}}_t^l\right) &amp; =g_{N+1, t} \operatorname{FFN}_{N+1}\left(\overline{\mathbf{u}}_t^l\right)+\sum_{i=1}^N\left(g_{i, t} \operatorname{FFN}_i\left(\overline{\mathbf{u}}_t^l\right)\right), \\ g_{i, t} &amp; = \begin{cases}s_{i, t}, &amp; s_{i, t} \in \operatorname{Topk}\left(\left\{s_{j, t} \mid 1 \leq j \leq N\right\}, K\right), \\ 0, &amp; \text { otherwise },\end{cases} \\ g_{N+1, t} &amp; ={\operatorname{Sigmoid}\left(\mathbf{W}_{N+1}^l \overline{\mathbf{u}}_t^l\right),}_{s_{i, t}}=\operatorname{Softmax}_i\left(\mathbf{W}_i^l \mathbf{u}_t^l\right),\end{aligned}\).</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Multi-resolution Forecasting</strong>
+    <ul>
+      <li>Multiple output projections from single-layer FFNs
+        <ul>
+          <li>each designed for different prediction horizons</li>
+        </ul>
+      </li>
+      <li>Time-MoE aggregates forecasting errors from <strong>different</strong> horizons to compute a composite loss
+        <ul>
+          <li>improving the model generalization</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="32-model-training">3.2. Model Training</h3>
+
+<p><img src="/assets/img/timeseries/TimeMoE/table1.png" alt="그림1" /></p>
+
+<ul>
+  <li>3.2.1. <strong>TIME-300B Dataset</strong></li>
+  <li>Challenge: <strong>data quality</strong> (missing values and invalid observations)
+    <ul>
+      <li>본 논문에서 a <strong>streamlined data-cleaning pipeline</strong> 제안 (Appendix C)
+        <ul>
+          <li>to filter and refine raw data</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="appendix-c-processed-data-archive">Appendix C PROCESSED DATA ARCHIVE</h3>
+
+<p><img src="/assets/img/timeseries/TimeMoE/subfig1.png" alt="그림1" /></p>
+
+<p><img src="/assets/img/timeseries/TimeMoE/subfig2.png" alt="그림1" /></p>
+
+<ul>
+  <li>3.2.2. <strong>Loss function</strong>
+    <ul>
+      <li>Pre-training time series foundation models in large scale 할 때
+        <ul>
+          <li><strong>training stability</strong> due to the massive datasets</li>
+          <li>and the <strong>vast number of parameters</strong> involved</li>
+        </ul>
+      </li>
+      <li>를 완화하기 위해 Huber loss 사용 : greater robustness to <strong>outliers</strong> and improves training stability
+        <ul>
+          <li>\(\mathcal{L}_{\text {ar }}\left(x_t, \hat{x}_t\right)= \begin{cases}\frac{1}{2}\left(x_t-\hat{x}_t\right)^2, &amp; \text { if }\mid x_t-\hat{x}_t\mid \leq \delta \\ \delta \times\left(\mid x_t-\hat{x}_t\mid-\frac{1}{2} \times \delta\right), &amp; \text { otherwise }\end{cases}\).</li>
+        </ul>
+      </li>
+      <li>solely on optimizing prediction error \(\to\) imbalance issues among the experts
+        <ul>
+          <li>그래서 expert-level balancing with an <strong>auxiliary loss</strong> to reduce routing collapse
+            <ul>
+              <li>\(\mathcal{L}_{\text {aux }}=N \sum_{i=1}^N f_i r_i, \quad f_i=\frac{1}{K T} \sum_{t=1}^T \mathbb{I}(\text{Time point}\  t \text{selects Expert} \ i)\),</li>
+              <li>where \(r_i=\frac{1}{T} \sum_{t=1}^T s_{i, t}\)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>최종적으로 the auto-regressive losses across all multi-resolution projections with the auxiliary balance loss:
+        <ul>
+          <li>\(\mathcal{L}=\frac{1}{P} \sum_{j=1}^P \mathcal{L}_{\mathrm{ar}}\left(\mathbf{X}_{t+1: t+p_j}, \hat{\mathbf{X}}_{t+1: t+p_j}\right)+\alpha \mathcal{L}_{\mathrm{aux}}\).</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="4-main-results">4. Main Results</h2>
+
+<p><img src="/assets/img/timeseries/TimeMoE/table2.png" alt="그림1" /></p>
+
+<h3 id="41-zero-shot-forecasting">4.1. Zero-shot Forecasting</h3>
+
+<p><img src="/assets/img/timeseries/TimeMoE/table3.png" alt="그림1" /></p>
+
+<h3 id="42-in-distribution-forecasting">4.2. In-Distribution Forecasting</h3>
+
+<p><img src="/assets/img/timeseries/TimeMoE/table4.png" alt="그림1" /></p>
+
+<h3 id="43-ablation-study">4.3. Ablation Study</h3>
+
+<p><img src="/assets/img/timeseries/TimeMoE/table5.png" alt="그림1" /></p>
+
+<h3 id="44-scalability-analysis">4.4. Scalability Analysis</h3>
+
+<p><img src="/assets/img/timeseries/TimeMoE/fig3.png" alt="그림1" /></p>
+
+<p><img src="/assets/img/timeseries/TimeMoE/table6.png" alt="그림1" /></p>
+
+<h3 id="45-sparsification-analysis">4.5. Sparsification Analysis</h3>
+
+<p><img src="/assets/img/timeseries/TimeMoE/fig4.png" alt="그림1" /></p>
+
+<p><img src="/assets/img/timeseries/TimeMoE/table7.png" alt="그림1" /></p>
+
+<h2 id="5-conclusion">5. Conclusion</h2>
+
+<ul>
+  <li>Time-MoE 한 줄 요약:
+    <ul>
+      <li>scalable and unified architecture for time series foundation models that leverages a sparse design with mixture-of-experts to enhance computational efficiency without compromising model capacity</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="mamba" /><summary type="html"><![CDATA[[ICLR 2025 Spotlight](https://arxiv.org/pdf/2409.16040)]]></summary></entry><entry><title type="html">(Pytorch Issue) .sh file와 Data loader가 상관이 있을까</title><link href="http://localhost:4000/pytorch/2025-02-26-sh_batch/" rel="alternate" type="text/html" title="(Pytorch Issue) .sh file와 Data loader가 상관이 있을까" /><published>2025-02-26T00:00:00+09:00</published><updated>2025-02-26T23:45:58+09:00</updated><id>http://localhost:4000/pytorch/sh_batch</id><content type="html" xml:base="http://localhost:4000/pytorch/2025-02-26-sh_batch/"><![CDATA[<p><img src="/assets/img/pytorch/sh_batch/fig1.png" alt="그림1" /></p>
+
+<ul>
+  <li>상황은 다음과 같다.
+    <ul>
+      <li>terminal에서 .sh 파일을 실행: .sh 파일에 있는 model hyperparameters가 run.py로 전달</li>
+      <li>run.py에서 취합된 paramters가 exp_main.py으로 전달: exp_main.py에서는 model과 data loader를 불러옴</li>
+      <li>exp_main.py에서는 data loader에서 불러온 데이터가 모델에 들어감</li>
+      <li>Pathformer.py에 정의된 모델이 input 데이터를 처리하기 시작 (여기서 model hyperparameters 사용됨)</li>
+      <li>Pathformer.py에서는 input 데이터가 AMS.py에 정의된 layer를 반복적으로 통과</li>
+    </ul>
+  </li>
+  <li>문제는 다음과 같다.
+    <ul>
+      <li>Model hyperparamters는 patch size 와 같이 <strong>이미 불러온 데이터</strong>를 모델이 다루는 방법을 정의하는데</li>
+      <li>.sh 파일에서 model hyperparamters를 바꾸었더니 data loader가 불러오는 batch의 순서가 바뀌어버림</li>
+      <li>아래 두 사진은 모두 <strong>첫 번째 배치</strong>를 시각화한 것인데, patch size를 다르게 설정한 것이 유일한 차이</li>
+      <li>patch size는 <strong>이미 불러온 데이터</strong>를 patching하는 방법을 결정하는 곳에만 쓰이는데 애초에 불러온 첫번째 배치가 다름</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/pytorch/sh_batch/fig2.png" alt="그림1" />
+<img src="/assets/img/pytorch/sh_batch/fig3.png" alt="그림1" /></p>
+
+<ul>
+  <li>
+    <p>.sh 파일에 정의된 model hyperparameters가 data loader에서 쓰이지 않음에도 위와 같은 현상 발생</p>
+  </li>
+  <li>
+    <p>연구실 선배와 Chat GPT의 도움을 통해 유추한 원인은 다음과 같음</p>
+  </li>
+</ul>
+
+<p><img src="/assets/img/pytorch/sh_batch/fig4.png" alt="그림1" /></p>
+
+<ul>
+  <li>첫째, __init__을 제외한 모든 함수의 실행보다 __init__함수가 먼저 실행됨
+    <ul>
+      <li>즉 exp_main.py안 에서 Pathformer.py를 실행하고, 그 안에서 AMS.py가 실행된다고 하더라도</li>
+      <li>exp_main.py와 Pathformer.py의 다른 함수들보다도 AMS.py의 __init__함수가 먼저 실행됨</li>
+    </ul>
+  </li>
+  <li>둘째, __init__함수에서 메모리를 사용한다면(ex. nn.Linear) 메모리 전체의 모양이 달라질 수 있음
+    <ul>
+      <li>즉 __init__함수에서 layer를 정의한다고 하면 layer를 저장하기 위한 메모리만 바뀌는 것이 아니라</li>
+      <li>이외의 메모리들도 다르게 할당될 수 있음 (Out of Memory를 회피하기 위해)</li>
+    </ul>
+  </li>
+  <li>그러므로 만약 모델의 마지막 부분이라 하더라도 __init__함수에서 다양한 patch size를 처리하기 위해,
+    <ul>
+      <li>patch size를 hyperparamter로 사용하는 layer를 정의했다면</li>
+      <li>그 __init__함수까지 다 실행되면서 메모리가 바뀐 채로 data loader 함수가 실행되기 때문에</li>
+      <li>GPU 텐서 배치 역시 영향을 받으면서 불러오는 첫 번째 batch가 달라질 수 있음</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="pytorch" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation (PMLR 2022)</title><link href="http://localhost:4000/llm/2025-02-26-BLIP/" rel="alternate" type="text/html" title="BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation (PMLR 2022)" /><published>2025-02-26T00:00:00+09:00</published><updated>2025-02-26T13:41:17+09:00</updated><id>http://localhost:4000/llm/BLIP</id><content type="html" xml:base="http://localhost:4000/llm/2025-02-26-BLIP/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
   <li>대부분의 Vision-Language Pre-training (VLP)는
@@ -607,63 +911,7 @@
       <li>Model ensemble by training multiple different captioners and filter and combining their forces in CapFilt</li>
     </ul>
   </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[Arxiv 2024]()]]></summary></entry><entry><title type="html">(Pytorch Issue) .sh file와 Data loader가 상관이 있을까</title><link href="http://localhost:4000/pytorch/2025-02-26-sh_batch/" rel="alternate" type="text/html" title="(Pytorch Issue) .sh file와 Data loader가 상관이 있을까" /><published>2025-02-26T00:00:00+09:00</published><updated>2025-02-26T23:45:58+09:00</updated><id>http://localhost:4000/pytorch/sh_batch</id><content type="html" xml:base="http://localhost:4000/pytorch/2025-02-26-sh_batch/"><![CDATA[<p><img src="/assets/img/pytorch/sh_batch/fig1.png" alt="그림1" /></p>
-
-<ul>
-  <li>상황은 다음과 같다.
-    <ul>
-      <li>terminal에서 .sh 파일을 실행: .sh 파일에 있는 model hyperparameters가 run.py로 전달</li>
-      <li>run.py에서 취합된 paramters가 exp_main.py으로 전달: exp_main.py에서는 model과 data loader를 불러옴</li>
-      <li>exp_main.py에서는 data loader에서 불러온 데이터가 모델에 들어감</li>
-      <li>Pathformer.py에 정의된 모델이 input 데이터를 처리하기 시작 (여기서 model hyperparameters 사용됨)</li>
-      <li>Pathformer.py에서는 input 데이터가 AMS.py에 정의된 layer를 반복적으로 통과</li>
-    </ul>
-  </li>
-  <li>문제는 다음과 같다.
-    <ul>
-      <li>Model hyperparamters는 patch size 와 같이 <strong>이미 불러온 데이터</strong>를 모델이 다루는 방법을 정의하는데</li>
-      <li>.sh 파일에서 model hyperparamters를 바꾸었더니 data loader가 불러오는 batch의 순서가 바뀌어버림</li>
-      <li>아래 두 사진은 모두 <strong>첫 번째 배치</strong>를 시각화한 것인데, patch size를 다르게 설정한 것이 유일한 차이</li>
-      <li>patch size는 <strong>이미 불러온 데이터</strong>를 patching하는 방법을 결정하는 곳에만 쓰이는데 애초에 불러온 첫번째 배치가 다름</li>
-    </ul>
-  </li>
-</ul>
-
-<p><img src="/assets/img/pytorch/sh_batch/fig2.png" alt="그림1" />
-<img src="/assets/img/pytorch/sh_batch/fig3.png" alt="그림1" /></p>
-
-<ul>
-  <li>
-    <p>.sh 파일에 정의된 model hyperparameters가 data loader에서 쓰이지 않음에도 위와 같은 현상 발생</p>
-  </li>
-  <li>
-    <p>연구실 선배와 Chat GPT의 도움을 통해 유추한 원인은 다음과 같음</p>
-  </li>
-</ul>
-
-<p><img src="/assets/img/pytorch/sh_batch/fig4.png" alt="그림1" /></p>
-
-<ul>
-  <li>첫째, __init__을 제외한 모든 함수의 실행보다 __init__함수가 먼저 실행됨
-    <ul>
-      <li>즉 exp_main.py안 에서 Pathformer.py를 실행하고, 그 안에서 AMS.py가 실행된다고 하더라도</li>
-      <li>exp_main.py와 Pathformer.py의 다른 함수들보다도 AMS.py의 __init__함수가 먼저 실행됨</li>
-    </ul>
-  </li>
-  <li>둘째, __init__함수에서 메모리를 사용한다면(ex. nn.Linear) 메모리 전체의 모양이 달라질 수 있음
-    <ul>
-      <li>즉 __init__함수에서 layer를 정의한다고 하면 layer를 저장하기 위한 메모리만 바뀌는 것이 아니라</li>
-      <li>이외의 메모리들도 다르게 할당될 수 있음 (Out of Memory를 회피하기 위해)</li>
-    </ul>
-  </li>
-  <li>그러므로 만약 모델의 마지막 부분이라 하더라도 __init__함수에서 다양한 patch size를 처리하기 위해,
-    <ul>
-      <li>patch size를 hyperparamter로 사용하는 layer를 정의했다면</li>
-      <li>그 __init__함수까지 다 실행되면서 메모리가 바뀐 채로 data loader 함수가 실행되기 때문에</li>
-      <li>GPU 텐서 배치 역시 영향을 받으면서 불러오는 첫 번째 batch가 달라질 수 있음</li>
-    </ul>
-  </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="pytorch" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Byte Latent Transformer: Patches Scale Better Than Tokens (Arxiv 2024)</title><link href="http://localhost:4000/llm/2025-02-22-BLT/" rel="alternate" type="text/html" title="Byte Latent Transformer: Patches Scale Better Than Tokens (Arxiv 2024)" /><published>2025-02-22T00:00:00+09:00</published><updated>2025-02-24T02:08:15+09:00</updated><id>http://localhost:4000/llm/BLT</id><content type="html" xml:base="http://localhost:4000/llm/2025-02-22-BLT/"><![CDATA[<h2 id="abstract">Abstract</h2>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[Arxiv 2024]()]]></summary></entry><entry><title type="html">Byte Latent Transformer: Patches Scale Better Than Tokens (Arxiv 2024)</title><link href="http://localhost:4000/llm/2025-02-22-BLT/" rel="alternate" type="text/html" title="Byte Latent Transformer: Patches Scale Better Than Tokens (Arxiv 2024)" /><published>2025-02-22T00:00:00+09:00</published><updated>2025-02-24T02:08:15+09:00</updated><id>http://localhost:4000/llm/BLT</id><content type="html" xml:base="http://localhost:4000/llm/2025-02-22-BLT/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
   <li>Byte Latent Transformer (BLT)
@@ -2263,335 +2511,4 @@
       <li>ATSP solver로 the optimal variable scann order 결정</li>
     </ul>
   </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="mamba" /><summary type="html"><![CDATA[[ICLR 2025](https://arxiv.org/pdf/2405.16440)]]></summary></entry><entry><title type="html">Mamba or Transformer for Time Series Forecasting? Mixture of Universals (MoU) Is All You Need (Arxiv 2024)</title><link href="http://localhost:4000/mamba/2024-11-25-MoU/" rel="alternate" type="text/html" title="Mamba or Transformer for Time Series Forecasting? Mixture of Universals (MoU) Is All You Need (Arxiv 2024)" /><published>2024-11-25T00:00:00+09:00</published><updated>2025-01-08T22:03:02+09:00</updated><id>http://localhost:4000/mamba/MoU</id><content type="html" xml:base="http://localhost:4000/mamba/2024-11-25-MoU/"><![CDATA[<h2 id="abstract">Abstract</h2>
-
-<ul>
-  <li>Transformer는 높은 계산 비용(quadratic computational cost)이 문제,</li>
-  <li>Mamba는 longterm forecasting에서 성능이 effective하지 않음 (potential information loss 때문)</li>
-  <li>본 논문에서 제시하는 <strong>Mixture of Universals (MoU)</strong>의 components:
-    <ul>
-      <li><strong>Mixture of Feature Extractors (MoF)</strong>: adaptive patch representations
-        <ul>
-          <li>(for <strong>short</strong>-term dependency)</li>
-        </ul>
-      </li>
-      <li><strong>Mixture of Architectures (MoA)</strong>:  Mamba, FeedForward, Convolution, and Self-Attention 연결한 것
-        <ul>
-          <li>(for  <strong>long</strong>-term dependency )</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="1-introduction">1. Introduction</h2>
-
-<ul>
-  <li><strong>PatchTST</strong>:  patch embedding에서 uniform linear transformations 사용 \(\to\) varying semantic contexts 손실
-    <ul>
-      <li>Vision에서 Dynamic Convolution, Conditional Convolution (for informative representations)등장했지만</li>
-      <li>Time series에서는 poor performances</li>
-    </ul>
-  </li>
-  <li><strong>Transformer</strong>: 장기 의존성은 잘 처리하지만 계산 비용이 큼</li>
-  <li><strong>Mamba</strong>: 효율적이지만 정보 손실로 인해 장기 예측에서 성능이 떨어질 수 있음</li>
-</ul>
-
-<p><img src="/assets/img/Mamba/MoU/fig2.png" alt="그림1" /></p>
-
-<ul>
-  <li><strong>MoF(Mixture of Feature Extractors)</strong>:
-    <ul>
-      <li>multiple sub-extractors로 구성되어 있고</li>
-      <li>sparse activation을 사용해서 input patch에 적합한 sub-extractor만 활성화</li>
-      <li>learning of diverse contexts and <strong>minimal parameter increase</strong> !</li>
-    </ul>
-  </li>
-  <li><strong>MoA(Mixture of Architectures)</strong> Mamba에서 시작해 국소적인 관점에서 전역적인 Self-Attention 계층으로 확장하며 장기 의존성을 효율적으로 캡처하는 계층적 구조.
-    <ul>
-      <li>hierarchical structure를 가진 encoder</li>
-      <li><strong>Mamba layer</strong> that selects and learns key dependencies using a Selective State-Space Model (SSM).</li>
-      <li><strong>FeedForward transition layer</strong> and a <strong>Convolution-layer</strong> that broadens the receptive field to capture longer dependencies.</li>
-      <li><strong>Self-Attention layer</strong> integrates information globally to fully capture long-term dependencies</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="2-approach">2. Approach</h2>
-
-<h3 id="21-problem-setting-and-model-structure">2.1 Problem Setting and Model Structure</h3>
-
-<ul>
-  <li>\(\mathbf{X}_{\text {input }}=\left[\mathbf{X}^1, \mathbf{X}^2, \ldots, \mathbf{X}^M\right] \in \mathbb{R}^{M \times L}\) where \(\mathbf{X}^i=\left[\boldsymbol{x}_1, \boldsymbol{x}_2, \ldots, \boldsymbol{x}_L\right] \in \mathbb{R}^L\)</li>
-  <li>\(\hat{\mathbf{X}}_{\text {output }}=\left[\hat{\mathbf{X}}^1, \hat{\mathbf{X}}^2, \ldots, \hat{\mathbf{X}}^M\right] \in \mathbb{R}^{M \times T}\).</li>
-  <li>
-    <p>Goal : learning a function \(\mathcal{F}: \mathbf{X} \rightarrow \hat{\mathbf{X}}\)</p>
-  </li>
-  <li>Overall process는 아래와 같음.
-    <ul>
-      <li>처음에는 raw time series \(\mathbf{X} \in \mathbb{R}^L\)에서 시작 (variate independence setting이라서 channel =1)</li>
-      <li>\(N\)개의 patch tokens를 만듬 :
-        <ul>
-          <li>\(\mathbf{X}_p=\operatorname{Patch}(\mathbf{X}) \in \mathbb{R}^{N \times P}\) with fixed size \(P\), stride \(S\)</li>
-        </ul>
-      </li>
-      <li><strong>MoF</strong> module에 넣어서 adaptive representations를 얻음 :
-        <ul>
-          <li>\(\mathbf{X}_{\mathrm{rep}}=\operatorname{MoF}\left(\mathbf{X}_p\right)\in \mathbb{R}^{\mathbf{N} \times \mathbf{D}}\).</li>
-          <li>MoF는 parameters를 조절하면서 계산 비용 최적화 (<strong>2.2</strong>에서 자세히 설명)</li>
-        </ul>
-      </li>
-      <li>이제 <strong>MoA</strong>에 넣어서 long-term dependencies (among tokens) 잡음
-        <ul>
-          <li>\(\mathbf{X}_{\mathrm{rep}}=\operatorname{MoA}\left(\mathbf{X}_{\mathrm{rep}}\right)\in \mathbb{R}^{N \times D}\).</li>
-          <li>MoA는 long-term encoder based on the Mixture of Architectures (<strong>2.3</strong>에서 자세히 설명)</li>
-        </ul>
-      </li>
-      <li>마지막으로 linear projector에 넣어서 final prediction 얻음
-        <ul>
-          <li>\(\hat{\mathbf{X}}=\mathbf{P}\left(\operatorname{Flatten}\left(\mathbf{X}_{\mathrm{rep}^{\prime}}\right)\right)\in \mathbb{R}^{M \times T}\).</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="22-mixture-of-feature-extractors">2.2 Mixture of Feature Extractors</h3>
-
-<ul>
-  <li>MoF의 목적은 <strong>patch의 representative embedding</strong>을 만드는 것</li>
-</ul>
-
-<p><img src="/assets/img/Mamba/MoU/fig3.png" alt="그림1" /></p>
-
-<ul>
-  <li>Sub-extractors \(\left\{F_1, F_2, \ldots, F_c\right\}\)가 있고 각각은 independent linear mapping</li>
-  <li>MoF를 통과하면 \(\mathbf{X}_{\mathrm{rep}}=\operatorname{MoF}\left(\mathbf{X}_p\right)=\sum_{i=1}^n R_i\left(\mathbf{X}_p\right) F_i\left(\mathbf{X}_p\right)\in \mathbb{R}^{\mathbf{N} \times \mathbf{D}}\)를 얻음
-    <ul>
-      <li>where \(R_i(\cdot)\)는  input-relevant router (sub-extractor를 sparse하게 활성화)
-        <ul>
-          <li>즉 \(R\left(\mathbf{X}_p\right)_i=\operatorname{Softmax}\left(\operatorname{Top}_{\mathrm{k}}\left(H\left(\mathbf{X}_p\right)_i, k\right)\right)\)
-            <ul>
-              <li>\(\operatorname{Softmax}(\cdot)\)는  \(\operatorname{Topk}(\cdot, k)\)에 의해 선택된 상위 \(k\)개의 점수를 정규화</li>
-              <li>\(H\left(X_p\right)=\left[H\left(\mathbf{X}_p\right)_1, H\left(\mathbf{X}_p\right)_2, \ldots H\left(\mathbf{X}_p\right)_c\right]\) 는 sub-extractors의 score vector</li>
-              <li>여기서 \(H\left(\mathbf{X}_p\right)_i=\left(\mathbf{X}_p \cdot W_g\right)_i+\text { SN } \cdot \text { Softplus }\left(\left(\mathbf{X}_p \cdot W_{\text {noise }}\right)_i\right)\)
-                <ul>
-                  <li>where \(W_g\)는 linear layer이고 두번째 항은 load balancin을 위한 tunable noise를 넣는 것</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>이렇게 하면 patch token를 \(c\)개의 서로 다른 patterns들의 조합으로 분할할 수 있음
-    <ul>
-      <li>each pattern은 최적의 sub-extractors에 의해 뽑힌 것이니</li>
-      <li>most representative embedding (for patches with divergent context)라고 할 수 있음</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="23-mixture-of-architectures">2.3. Mixture of Architectures</h3>
-
-<ul>
-  <li>MoA의 목적은 <strong>comprehensive long-term dependencies</strong>를 모델링하는 것</li>
-</ul>
-
-<p><img src="/assets/img/Mamba/MoU/fig4.png" alt="그림1" /></p>
-
-<ul>
-  <li><strong>Mamba, FeedForward, Convolution</strong>, and <strong>Self-Attention layer</strong>로 구성되어
-    <ul>
-      <li>각각이 다른 관점에서 long-term dependencie를 학습</li>
-      <li><strong>gradually expanding perspective</strong>를 통해 effectiveness and efficiency 둘 다 챙김</li>
-    </ul>
-  </li>
-  <li><strong>Mamba-layer in Time Series</strong> : <strong>relevant data를 선택하고 time-variant dependencies를 학습하는 곳</strong>
-    <ul>
-      <li>input은 MoF의 output \(\mathbf{X}_{\mathrm{rep}}=\operatorname{MoF}\left(\mathbf{X}_p\right)=\sum_{i=1}^n R_i\left(\mathbf{X}_p\right) F_i\left(\mathbf{X}_p\right)\in \mathbb{R}^{\mathbf{N} \times \mathbf{D}}\)인데 \(x\)로 denote</li>
-      <li>\(\begin{gathered}
-\boldsymbol{x}^{\prime}=\sigma(\text { Conv1D }(\text { Linear }(\boldsymbol{x}))) \\
-\boldsymbol{z}=\sigma(\text { Linear }(\boldsymbol{x}))
-\end{gathered}\), where \(\sigma\)는 \(SiLU\) activation</li>
-      <li>다음으로 \(\begin{gathered}
-\boldsymbol{y}^{\prime}=\operatorname{Linear}\left(\operatorname{SelectiveSSM}\left(\boldsymbol{x}^{\prime}\right) \otimes \boldsymbol{z}\right) \\
-\boldsymbol{y}=\operatorname{LayerNorm}\left(\boldsymbol{y}^{\prime}+\boldsymbol{x}\right)
-\end{gathered}\), where \(\begin{gathered}
-\text { SelectiveSSM }\left(\boldsymbol{x}_t^{\prime}\right)=\boldsymbol{y}_t \\
-\boldsymbol{y}_t=C \boldsymbol{h}_t, \quad \boldsymbol{h}_t=\bar{A} \boldsymbol{h}_{t-1}+\bar{B} \boldsymbol{x}_t^{\prime}
-\end{gathered}\)
-        <ul>
-          <li>\(h_t\)는 latent state, \(y_t\)는 output representation</li>
-          <li>The discrete matrices는 \(\begin{gathered}
-B_t=S_B\left(\boldsymbol{x}_t^{\prime}\right), \quad C_t=S_C\left(\boldsymbol{x}_t^{\prime}\right) \\
-\Delta_t=\operatorname{softplus}\left(S_{\Delta}\left(\boldsymbol{x}_t^{\prime}\right)\right)
-\end{gathered}\)
-            <ul>
-              <li>\(S\)들은 linear layers이고, \(\begin{gathered}
-f_A\left(\Delta_t, A\right)=\exp \left(\Delta_t A\right) \\
-f_B\left(\Delta_t, A, B_t\right)=\left(\Delta_t A\right)^{-1}\left(\exp \left(\Delta_t A\right)-I\right) \cdot \Delta B_t \\
-\bar{A}_t=f_A\left(\Delta_t, A\right), \quad \bar{B}_t=f_B\left(\Delta_t, A, B_t\right)
-\end{gathered}\)</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li>좀 복잡한데 위에 있는 fig4 보는 것이 낫겠다.</li>
-    </ul>
-  </li>
-  <li><strong>FeedForward-layer</strong> : <strong>non-linearity를 강화하는 곳</strong>
-    <ul>
-      <li>\(\boldsymbol{x}_{\mathrm{ffn}}=\text { FeedForward }\left(\boldsymbol{y}_t ; w_1, \sigma, w_2\right)\), where
-        <ul>
-          <li>\(w_1\) and \(w_2\) are parameters, \(\sigma\) is activation function</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><strong>Convolution-layer</strong> : <strong>MoA의 receptive field를 넓히는 곳</strong>
-    <ul>
-      <li>partial long-term dependencies를 담고 있는 tokens끼리의 정보 교환을 촉진</li>
-      <li>\(\boldsymbol{x}_{\mathrm{conv}}= \operatorname{Conv}\left(\boldsymbol{x}_{\mathrm{ffn}} ; \mathbf{k}, s, p, c_{\mathrm{out}}\right)\),
-        <ul>
-          <li>where \(\mathbf{k}\) is the kernel size, \(s\) is the stride, \(p\) is the padding,</li>
-          <li>and \(c_{\text {out }}\) is the number of output channels</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><strong>Self-Attention-layer</strong> : <strong>global perspective에서 포괄적인 long-term dependencies를 파악하는 곳</strong>
-    <ul>
-      <li>: \(\begin{aligned} &amp; x_{\mathrm{att}}=\operatorname{FeedForward}(\operatorname{Attention}(Q, K, V)) \\ &amp; \operatorname{Attention}(Q, K, V)=\operatorname{Softmax}\left(\frac{Q K^T}{\sqrt{d_k}}\right) V \\ &amp; Q=x_{\text {conv }} W_Q, K=x_{\text {conv }} W_K, V=x_{\text {conv }} W_V\end{aligned}\)</li>
-    </ul>
-  </li>
-  <li><strong>Partial-to-global Design for Time Series</strong>
-    <ul>
-      <li><strong>gradually expanding perspective</strong>라는 말의 의미는
-        <ul>
-          <li>Mamba layer : Selective SSM을 사용하여 시간적으로 변화하는 의존성을 처리</li>
-          <li>FeedForward layer : 이러한 부분 의존성을 더 복잡한 표현으로 전환</li>
-          <li>Convolution layer : 수용 영역을 확장하여 보다 넓은 시간적 관계를 학습</li>
-          <li>Self-Attention layer : 로컬화된 정보를 통합하여 장기 의존성에 대한 포괄적인 이해</li>
-        </ul>
-      </li>
-      <li>를 거치면서 선택적으로 일부 의존성에 초점을 맞춘 후, 이를 점차 확장하여 전체적(global) 관점으로 발전시킨다는 뜻</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="24-computational-complexity-and-model-parameter">2.4. Computational Complexity and Model Parameter</h3>
-
-<ul>
-  <li>Tokens \(T\)개가 주어졌을 때 top-\(k\) experts를 선택한다고 하면
-    <ul>
-      <li>\(C_{\mathrm{MOU}}=\underbrace{k T \times d^2}_{\text {MoF }}+\underbrace{T \times d^2}_{\text {Mamba }}+\underbrace{T \times d^2}_{\text {FFN }}+\underbrace{k T d^2}_{\text {Conv }}+\underbrace{T^2 \times d+T \times d^2}_{\text {Transformer }}\),
-        <ul>
-          <li>where \(\mathbf{k}\) is the kernel size in the convolutional layer,</li>
-          <li>\(d\) is the dimension of the vector representations</li>
-        </ul>
-      </li>
-      <li>Transformer 블록을 제외하면 선형적인 복잡도</li>
-    </ul>
-  </li>
-</ul>
-
-<p><img src="/assets/img/Mamba/MoU/fig1.png" alt="그림1" /></p>
-
-<h2 id="3-experiments">3. Experiments</h2>
-
-<h3 id="31-dataset">3.1. Dataset</h3>
-
-<ul>
-  <li>7 commonly used datasets</li>
-  <li>Pass</li>
-</ul>
-
-<h3 id="32-baselines-and-setup">3.2. Baselines and Setup</h3>
-
-<ul>
-  <li>Mamba-based Models (S-Mamba)</li>
-  <li>Linear-based Models (D-Linear)</li>
-  <li>Convolution-based Models (ModernTCN)</li>
-  <li>Transformer-based Models (PatchTST)</li>
-</ul>
-
-<h3 id="33-main-results">3.3. Main Results</h3>
-
-<p><img src="/assets/img/Mamba/MoU/table1.png" alt="그림1" /></p>
-
-<h3 id="34-ablation-study">3.4. Ablation Study</h3>
-
-<p><img src="/assets/img/Mamba/MoU/table2.png" alt="그림1" /></p>
-
-<ul>
-  <li>3개의 adaptive feature extractors를 비교했을 때 MoF(in MoU)가 가장 좋았으며
-    <ul>
-      <li>Dyconv가 parameters 수를 크게 증가시키기 때문에 time series patch와 같은 작은 데이터셋에는 적합하지 않음</li>
-      <li>SE-M의  calibration strategy는 representation을 normalized gating vector에 곱하는 방식이라서 다양한 컨텍스트 정보를 처리하는 데에는 한계</li>
-    </ul>
-  </li>
-  <li>특히 MoF가 uniform transformation method (Linear)보다 좋다는 점이 주목할만함</li>
-</ul>
-
-<p><img src="/assets/img/Mamba/MoU/table3.png" alt="그림1" /></p>
-
-<ul>
-  <li>
-    <p>AA, MM, MFA, AAA, MMA, AMM, MAM, AMA, AFM, AFCM</p>
-
-    <ul>
-      <li>여기서 A, M, F, C는 각각 Self-Attention, Mamba, FeedForward, Convolution</li>
-      <li>글자의 순서는 레이어의 배치 순서</li>
-    </ul>
-  </li>
-  <li>
-    <p>M-A 순서(MAM, AMA, MMA) &gt; M-A 순서를 가지지 않은 모델(AMM)</p>
-
-    <ul>
-      <li>
-        <p>Mamba를 Self-Attention 이전에 배치하는 것이 장기 의존성을 캡처하는 데 더 효과적</p>
-      </li>
-      <li>
-        <p>A-M 순서보다 M-A 순서가 장기 의존성 학습에서 더 중요한 역할</p>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <p>F-C 순서 &gt; F</p>
-
-    <ul>
-      <li>Convolution 레이어가 Mamba 레이어의 수용 영역을 확장하여</li>
-      <li>Mamba 레이어의 부분적 관점과 Self-Attention 레이어의 글로벌 관점을 연결하는 중간 관점을 제공한다고 해석됨</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="35-model-analysis">3.5. Model Analysis</h3>
-
-<ul>
-  <li>Does MoF actually learn contexts within patches?</li>
-  <li>What is learned by the layers of MoA?</li>
-</ul>
-
-<p><img src="/assets/img/Mamba/MoU/fig56.png" alt="그림1" /></p>
-
-<h2 id="5-conclusion">5 Conclusion</h2>
-
-<ul>
-  <li>Mixture of Universals (MoU)
-    <ul>
-      <li>Mixture of Feature Extractors (MoF)
-        <ul>
-          <li>an adaptive method specifically designed to enhance time series patch representations for capturing short-term dependencies</li>
-        </ul>
-      </li>
-      <li>Mixture of Architectures (MoA)
-        <ul>
-          <li>hierarchically integrates multiple architectures in a structured sequence to model long-term dependencies from a hybrid perspective</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="mamba" /><summary type="html"><![CDATA[[Arxiv 2024](https://arxiv.org/pdf/2408.15997)]]></summary></entry></feed>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="mamba" /><summary type="html"><![CDATA[[ICLR 2025](https://arxiv.org/pdf/2405.16440)]]></summary></entry></feed>

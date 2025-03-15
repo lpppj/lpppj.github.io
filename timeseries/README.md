@@ -114,4 +114,4 @@ permalink: /timeseries/
 [Pacer and Runner: Cooperative Learning Framework between Single- and Cross-Domain Sequential Recommendation (SIGIR'24 Best Paper)]: /timeseries/2024-09-03-SyNCRec
 [T-PATCHGNN: Irregular Multivariate Time Series Forecasting: A Transformable Patching Graph Neural Networks Approach (ICML 2024)]: /timeseries/2024-10-27-T-PATCHGNN
 [ComRes: Semi-Supervised Time Series Forecasting Utilizing Consensus Promotion of Multi-Resolution (ICLR 2025)]: /timeseries/2025-02-17-ComRes
-[Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025)]: /timeseries/2025-03-10-TimeMoE
+[Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025)]: /timeseries/2025-02-28-TimeMoE

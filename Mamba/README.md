@@ -45,4 +45,3 @@ permalink: /mamba/
 [DTMamba : Dual Twin Mamba for Time Series Forecasting (Arxiv 2024)]:\mamba/2025-01-06-DTMamba
 [MAT: Integration of Mamba and Transformer for Long-Short Range TSF (Arxiv 2024)]:\mamba/2025-01-08-MAT
 [SST: Multi-Scale Hybrid Mamba-Transformer Experts for Long-Short Range Time Series Forecasting (Arxiv 2024)]:\mamba/2025-01-13-SST
-[Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025)]: /timeseries/2025-03-10-TimeMoE
