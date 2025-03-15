@@ -26,7 +26,7 @@ permalink: /project/
 [깃블로그 만들기 4 : 새로운 게시글 작성하기]{:.heading.flip-title} \
 [깃블로그 만들기 5 : 블로그 테마 색 변경하기]{:.heading.flip-title} \
 [깃블로그 만들기 6 : 흔히 발생할 수 있는 에러]{:.heading.flip-title}\
-[깃블로그 만들기 6 : 흔히 발생할 수 있는 에러 (2)]{:.heading.flip-title}
+[깃블로그 만들기 7 : 흔히 발생할 수 있는 에러 (2)]{:.heading.flip-title}
 
 
 
@@ -36,4 +36,4 @@ permalink: /project/
 [깃블로그 만들기 4 : 새로운 게시글 작성하기]: /project/2024-02-12-gitblog4
 [깃블로그 만들기 5 : 블로그 테마 색 변경하기]: /project/2024-02-12-gitblog5
 [깃블로그 만들기 6 : 흔히 발생할 수 있는 에러]: /project/2024-02-15-gitblog6
-[깃블로그 만들기 6 : 흔히 발생할 수 있는 에러 (2)]: /project/2025-03-15-gitblog7
+[깃블로그 만들기 7 : 흔히 발생할 수 있는 에러 (2)]: /project/2025-03-15-gitblog7
