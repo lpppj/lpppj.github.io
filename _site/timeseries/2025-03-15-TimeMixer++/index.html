@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v9.1.6 <https://hydejack.com/>
+-->
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025) | LpppJ</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)" />
+<meta name="author" content="GW Jeong" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="ICLR 2025 Oral" />
+<meta property="og:description" content="ICLR 2025 Oral" />
+<link rel="canonical" href="http://localhost:4000/timeseries/2025-03-15-TimeMixer++/" />
+<meta property="og:url" content="http://localhost:4000/timeseries/2025-03-15-TimeMixer++/" />
+<meta property="og:site_name" content="LpppJ" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-03-15T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"GW Jeong"},"dateModified":"2025-03-15T18:54:55+09:00","datePublished":"2025-03-15T00:00:00+09:00","description":"ICLR 2025 Oral","headline":"TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/timeseries/2025-03-15-TimeMixer++/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/img/me/logo.jpg"},"name":"GW Jeong"},"url":"http://localhost:4000/timeseries/2025-03-15-TimeMixer++/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+
+
+  <meta name="theme-color" content="rgb(230, 217, 195)">
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="LpppJ">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="LpppJ">
+
+<meta name="generator" content="Hydejack v9.1.6" />
+
+
+<link rel="alternate" href="http://localhost:4000/timeseries/2025-03-15-TimeMixer++/" hreflang="en">
+
+<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LpppJ" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+
+
+
+
+
+<script>!function(r,c){"use strict";function a(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=c.createElement("script"),e=(n.src=e,t&&a(n,"load",t,{once:!0}),c.scripts[0]);return e.parentNode.insertBefore(n,e),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=c.createElement("script");function o(){r._loaded=!0,t&&a(n,"load",t,{once:!0});var e=c.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():a(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){a(c.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}}(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = false;
+  w._noDrawer = false;
+  w._noNavbar = false;
+  w._noToc = false;
+  w._noSearch = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2025-03-15T20:22:18+09:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+<script async src="/assets/bower_components/MathJax/es5/tex-mml-chtml.js" id="_MathJax"></script>
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.1.6.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5);--accent-color-highlight: rgba(94, 97, 94, 0.1);--accent-color-darkened: #4b4e4b;--theme-color: rgb(230, 217, 195)}
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+</head>
+
+<body class="no-break-layout">
+  
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/timeseries/">timeseries</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          <span>2025-03-15-TimeMixer  </span>
+        
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-timeseries-TimeMixer++" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-03-15T00:00:00+09:00">15 Mar 2025</time> in <span>Timeseries</span> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  
+    <p class="note-sm" >
+      <a href="https://openreview.net/pdf?id=1CLzLXSFNn">ICLR 2025 Oral</a>
+
+    </p>
+  
+
+
+  </header>
+
+  
+    <h2 id="abstract">Abstract</h2>
+
+<ul>
+  <li>TIMEMIXER++: general-purpose time series pattern machine (TSPM)
+    <ul>
+      <li>(1) multi-resolution time imaging(MRTI)
+        <ul>
+          <li>MRTI transforms multi-scale time series into multi-resolution time images, capturing patterns across both temporal and frequency domains.</li>
+        </ul>
+      </li>
+      <li>(2) time image decomposition (TID)
+        <ul>
+          <li>TID leverages dual-axis attention to extract seasonal and trend patterns,</li>
+        </ul>
+      </li>
+      <li>(3) multi-scale mixing (MCM)
+        <ul>
+          <li>MCM hierarchically aggregates these patterns across scales.</li>
+        </ul>
+      </li>
+      <li>(4) multi-resolution mixing (MRM)
+        <ul>
+          <li>MRM adaptively integrates all representationsacross resolutions</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<ul>
+  <li>The core of TSPMs is their ability <strong>to recognize and generalize</strong> time series patterns inherent in time series data
+    <ul>
+      <li>RNN: limitations like Markovian assumptions and inefficiencies…</li>
+      <li>TCN: fixed receptive field…</li>
+    </ul>
+  </li>
+  <li><strong>Unlike language</strong> tasks where tokens usually belong to distinct contexts,
+    <ul>
+      <li>time series data often involve overlapping contexts at a single time point</li>
+      <li>ex. daily, weekly, and seasonal patterns occurring <strong>simultaneously</strong> !</li>
+    </ul>
+  </li>
+  <li>What capabilities must a model possess, and what challenges must it overcome, to function as a TSPM?
+    <ul>
+      <li><strong>Lower CKA similarity</strong> indicates more <strong>diverse</strong> representations across layers
+        <ul>
+          <li>imputation and anomaly detection에 적합</li>
+        </ul>
+      </li>
+      <li><strong>Higher CKA similarity</strong>: consistent representations across layers
+        <ul>
+          <li>forecastingand classification tasks에 적합</li>
+        </ul>
+      </li>
+      <li>\(\to\) universal model flexible enough to adapt to <strong>multi-scale and multi-periodicity</strong> patterns across various analytical tasks, which may favor either diverse or consistent representations.</li>
+    </ul>
+  </li>
+  <li>TimeMixer++: to simultaneously capture intricate time series patterns across multiple scales in the <strong>time</strong> domain and various resolutions in the <strong>frequency</strong> domain</li>
+</ul>
+
+<p><img src="/assets/img/timeseries/TimeMixer++/fig1.png" alt="그림1" /></p>
+
+<h2 id="2-related-work">2. Related Work</h2>
+
+<ul>
+  <li>Hierarchical Time Series Modeling
+    <ul>
+      <li>기존에는 moving averages to discern seasonal and trend components</li>
+      <li>TimeMixer++는 disentangles seasonality and trend directly within the latent space via dual-axis attention
+        <ul>
+          <li>enhancing adaptability to a diverse range of timeseries patterns and task scenarios</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="3-timemixer">3. TimeMixer++</h2>
+
+<p><img src="/assets/img/timeseries/TimeMixer++/fig2.png" alt="그림1" /></p>
+
+<ul>
+  <li>(1) input projection, (2) a stack of Mixerblocks, and (3) output projection</li>
+  <li>Multi-scale Time Series:
+    <ul>
+      <li>\(\mathbf{x}_0 \in \mathbb{R}^{T \times C}\)를 TimeMixer처럼 Conv로 downsampling해서 multi-scale representation
+        <ul>
+          <li>\(\mathbf{x}_m=\operatorname{Conv}\left(\mathbf{x}_{m-1}\right., \text{stride} \left.=2\right), \quad m \in\{1, \cdots, M\}\).</li>
+          <li>\(X_{\text {init }}=\left\{\mathbf{x}_0, \cdots, \mathbf{x}_M\right\}\), where \(\mathbf{x}_m \in \mathbb{R}^{\left\lfloor\frac{T}{2^m}\right\rfloor \times C}\).</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="31-structure-overview">3.1. Structure Overview</h3>
+
+<ul>
+  <li>(1 ) <strong>Input Projection</strong>
+    <ul>
+      <li>기존 TimeMixer에서는 channel-independence strategy</li>
+      <li>TimeMixer++에서는 Channel mixing \(\to\) Embedding
+        <ul>
+          <li><strong>Channel mixing</strong> to capture cross-variable interactions
+            <ul>
+              <li><strong>self-attention</strong> to the variate dimensions at the <strong>coarsest</strong> scale \(\mathbf{x}_M \in \mathbb{R}^{\left\lfloor\frac{T}{2^M}\right\rfloor \times C}\)
+                <ul>
+                  <li>왜 coarsest냐면 가장 global한 context를 가지고 있을테니까</li>
+                </ul>
+              </li>
+              <li>\(\to\) integration of information across variables
+                <ul>
+                  <li>\(\mathbf{x}_M=\text{Channel- Attn}\left(\mathbf{Q}_M, \mathbf{K}_M, \mathbf{V}_M\right)\).</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>그 다음에 <strong>embed</strong> all multi-scale time series into a deep pattern set
+            <ul>
+              <li>\(X^0=\left\{\mathrm{x}_0^0, \cdots, \mathrm{x}_M^0\right\}=\operatorname{Embed}\left(X_{\text {init }}\right)\).</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>(2) <strong>MixerBlocks</strong>
+    <ul>
+      <li>patterns across “scales in the time domain” and “resolutions in the frequency domain”.</li>
+      <li><em>MixerBlocks</em>에서는 <strong>convert multi-scale time series into multi-resolution time images</strong>
+        <ul>
+          <li>disentangle seasonal and trend patterns through time image decomposition</li>
+          <li>그 다음aggregate these patterns across differentscales and resolutions</li>
+          <li>\(X^{l+1}=\operatorname{MixerBlock}\left(X^l\right)\). 자세한건 3.2.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>(3) <strong>Output Projection</strong>
+    <ul>
+      <li>\(L \times \text{MixerBlocks}\) 통해서 the multi-scale representation set \(X^{L}\)를 얻음</li>
+      <li>각 scale의 정보를 처리하기 위한 multiple prediction heads 사용 (task-adaptive)
+        <ul>
+          <li>그 다음 ensemble :\(\text { output }=\operatorname{Ensemble}\left(\left\{\operatorname{Head}_m\left(\mathbf{x}_m^L\right)\right\}_{m=0}^M\right)\)
+            <ul>
+              <li>\(\text{Emsemble}\): Averaging or weighted sum</li>
+              <li>\(\text{Head}\): Linear layer</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="32-mixerblock">3.2. MixerBlock</h3>
+
+<ul>
+  <li>일단 residyal way.
+    <ul>
+      <li>\((l+1)\)th block에서 the input is the multi-scale representation set \(\mathcal{X}^l\)
+        <ul>
+          <li>the forward propagation : \(x^{l+1}=\operatorname{LayerNorm}\left(X^l+\operatorname{MixerBlock}\left(X^l\right)\right)\)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>이제 앞서 소개한
+    <ul>
+      <li>(1) multi-resolution time imaging (MRTI)</li>
+      <li>(2) time image decomposition (TID)</li>
+      <li>(3) multi-scale mixing (MCM)</li>
+      <li>and (4) multi-resolution mixing (MRM)</li>
+      <li>에 대해서 자세히 알아보자</li>
+    </ul>
+  </li>
+  <li><strong>Multi-resolution Time Imaging</strong> (MRTI)
+    <ul>
+      <li>step 1: 먼저 global interaction을 가지고 있는 the coarsest scale \(\mathbf{x}_M^l\)을 <strong>FFT</strong>
+        <ul>
+          <li>top-K frequencies with the highest amplitudes 얻음</li>
+          <li>\(\mathbf{A},\left\{f_1, \cdots, f_K\right\},\left\{p_1, \cdots, p_K\right\}=\operatorname{FFT}\left(\mathbf{x}_M^l\right)\).
+            <ul>
+              <li>\(\mathbf{A}=\left\{A_{f_1}, \cdots, A_{f_K}\right\}\) represents the unnormalized amplitudes</li>
+              <li>\(\left\{f_1, \cdots, f_K\right\}\) are the top-K frequencies</li>
+              <li>\(p_k=\left[\frac{T}{f_k}\right], k \in\{1, \ldots, K\}\) denotes the corresponding period lengths</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>step 2: 그 다음 padding 후 1D \(\to\) 2D <strong>Reshaping</strong>
+        <ul>
+          <li>\(\begin{aligned}
+\operatorname{MRTI}\left(\mathcal{X}^l\right) &amp; =\left\{\mathscr{L}_m^l\right\}_{m=0}^M=\left\{\mathbf{z}_m^{(l, k)} \mid m=0, \ldots, M ; k=1, \ldots, K\right\} \\
+&amp; =\left\{\begin{array}{c}
+\left.\operatorname{Reshape}_{m, k}\left(\operatorname{Padding}_{m, k}\left(\mathbf{x}_m^l\right)\right) \mid m=0, \ldots, M ; k=1, \ldots, K\right\},
+\end{array}\right.
+\end{aligned}\).</li>
+          <li>길이 \(p_k \cdot\left\lceil\frac{\left\lfloor\frac{T}{2^m}\right\rfloor}{p_k}\right\rceil\) 인 <strong>time series</strong> \(\to\) 사이즈 \(p_k \times\left\lceil\frac{\left\lfloor\frac{T}{2^m}\right\rfloor}{p_k}\right\rceil\)인 <strong>image</strong> \(\mathbf{z}_m^{(l, k)}\)
+            <ul>
+              <li>\(f_{\mathrm{m}, \mathrm{k}}=\left\lceil\frac{\left\lfloor\frac{T}{2^m}\right\rfloor}{p_k}\right\rceil\)로 표기하겠음</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Time Image Decomposition</strong> (TID)
+    <ul>
+      <li>Time series patterns are inherently nested, with <strong>overlapping scales and periods</strong> \(\to\) multi-resolution approach</li>
+      <li>특정 scale and period에서의 image \(\mathbf{z}_m^{(l, k)} \in \mathbb{R}^{p_k \times f_{\mathrm{m} . \mathrm{k}} \times d_{\mathrm{model}}}\)
+        <ul>
+          <li><strong>Columns</strong> in each image correspond to time series segments <strong>within a period</strong></li>
+          <li><strong>Rows</strong> represent consistent time points <strong>across periods</strong></li>
+        </ul>
+      </li>
+      <li>Dual-axis attention !
+        <ul>
+          <li><strong>Column-axis attention</strong> (\(\text{Attention}_\text{col}\)) captures <strong>seasonality within periods,</strong></li>
+          <li><strong>Row-axis attention</strong> (\(\text{Attention}_\text{row}\))  extracts <strong>trend across periods</strong></li>
+        </ul>
+      </li>
+      <li>즉 seasonal, trend image는 각각
+        <ul>
+          <li>
+\[\begin{aligned}\mathbf{s}_m^{(l, k)}&amp;=\text {Attention}_{\text{col }}\left(\mathbf{Q}_{\mathrm{col}}, \mathbf{K}_{\mathrm{col}}, \mathbf{V}_{\mathrm{col}}\right),\\\mathbf{t}_m^{(l, k)}&amp;=\operatorname{Attention}_{\text {row }}\left(\mathbf{Q}_{\text {row }}, \mathbf{K}_{\text {row }}, \mathbf{V}_{\text {row }}\right)\end{aligned}\]
+            <ul>
+              <li>where \(\mathbf{s}_m^{(l, k)}, \mathbf{t}_m^{(l, k)} \in \mathbb{R}^{p_k \times f_{\mathrm{m}, \mathrm{k}} \times d_{\text {model }}}\)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Multi-scale Mixing</strong> (MCM)
+    <ul>
+      <li>Each period \(p_k\)에서 seasonal, trend image \(M+1\)개씩 얻음
+        <ul>
+          <li>\(\left\{\mathbf{s}_m^{(l, k)}\right\}_{m=0}^M \text { and }\left\{\mathbf{t}_m^{(l, k)}\right\}_{m=0}^M\).</li>
+        </ul>
+      </li>
+      <li><strong>Seasonal에서는 Longer patterns는 compositions of shorter ones</strong>이므로 !
+        <ul>
+          <li>2D conv in residual manner로</li>
+          <li>mix the <strong>seasonal</strong> patterns from <strong>fine</strong>-scale to <strong>coarse</strong>-scale (bottem-up)
+            <ul>
+              <li>\(\text { for } m: 1 \rightarrow M \text { do: } \quad \mathbf{s}_m^{(l, k)}=\mathbf{s}_m^{(l, k)}+2 \mathrm{D}-\operatorname{Conv}\left(\mathbf{s}_{m-1}^{(l, k)}\right)\).</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>반대로 <strong>Trend에서는 coarser scales naturally highlight the overall trend</strong>이므로
+        <ul>
+          <li>2D transposed conv in residual manner로</li>
+          <li>mix the <strong>trend</strong> patterns from <strong>coarse</strong>-scale to <strong>fine</strong>-scale (top-down)
+            <ul>
+              <li>\(\text { for } m: M-1 \rightarrow 0 \text { do: } \quad \mathbf{t}_m^{(l, k)}=\mathbf{t}_m^{(l, k)}+2 \mathrm{D}-\operatorname{TransConv}\left(\mathbf{t}_{m+1}^{(l, k)}\right)\).</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>이렇게 seasonal, trend 각각을 섞고 나면
+        <ul>
+          <li>seasonal, trend는 aggregated \(\to\) reshape back to 1D</li>
+          <li>\(\mathbf{z}_m^{(l, k)}=\operatorname{Reshape}_{2 D \rightarrow 1}\left(\mathbf{s}_m^{(l, k)}+\mathbf{t}_m^{(l, k)}\right), \quad m \in\{0, \cdots, M\}\).</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Multi-resolution Mixing</strong> (MRM)
+    <ul>
+      <li>마지막으로 each scale에서 \(K\)개의 periods를 섞어줘야 함
+        <ul>
+          <li>amplitudes = importance of each period,</li>
+          <li>그러므로 \(\begin{aligned}\left\{\hat{\mathbf{A}}_{f_k}\right\}_{k=1}^K&amp;=\operatorname{Softmax}\left(\left\{\mathbf{A}_{f_k}\right\}_{k=1}^K\right), \\\mathbf{x}_m^l&amp;=\sum_{k=1}^K \hat{\mathbf{A}}_{f_k} \circ \mathbf{z}_m^{(l, k)}, \quad m \in\{0, \cdots, M\}\end{aligned}\)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="4-experiments">4. Experiments</h2>
+
+<ul>
+  <li>(1) long-termforecasting,</li>
+  <li>(2) univariate and (3) multivariate short-term forecasting,</li>
+  <li>(4) imputation, (5) classification (6) anomaly detection,</li>
+  <li>(7) few-shot and (8) zero-shot forecasting</li>
+</ul>
+
+<h3 id="41-main-results">4.1. Main Results</h3>
+
+<h3 id="411-long-term-forecasting">4.1.1. Long-Term Forecasting</h3>
+
+<p><img src="/assets/img/timeseries/TimeMixer++/table1.png" alt="그림1" /></p>
+
+<h3 id="412-univariate-short-term-forecasting">4.1.2. Univariate Short-Term Forecasting</h3>
+
+<p><img src="/assets/img/timeseries/TimeMixer++/table2.png" alt="그림1" /></p>
+
+<h3 id="413-multivariate-short-term-forecasting">4.1.3. Multivariate Short-Term Forecasting</h3>
+
+<p><img src="/assets/img/timeseries/TimeMixer++/table3.png" alt="그림1" /></p>
+
+<h3 id="414-imputation">4.1.4. Imputation</h3>
+
+<p><img src="/assets/img/timeseries/TimeMixer++/table4.png" alt="그림1" /></p>
+
+<h3 id="415-few-shot-forecasting">4.1.5. Few-shot Forecasting</h3>
+
+<p><img src="/assets/img/timeseries/TimeMixer++/table5.png" alt="그림1" /></p>
+
+<h3 id="416-zero-shot-forecasting">4.1.6. Zero-shot Forecasting</h3>
+
+<p><img src="/assets/img/timeseries/TimeMixer++/table6.png" alt="그림1" /></p>
+
+<h3 id="417-classification-and-anomaly-detection">4.1.7. Classification and Anomaly Detection</h3>
+
+<p><img src="/assets/img/timeseries/TimeMixer++/fig3.png" alt="그림1" /></p>
+
+<h3 id="42-model-analysis">4.2. Model Analysis</h3>
+
+<ul>
+  <li>Ablation Study</li>
+</ul>
+
+<p><img src="/assets/img/timeseries/TimeMixer++/table7.png" alt="그림1" /></p>
+
+<ul>
+  <li>Representation Analysis</li>
+</ul>
+
+<p><img src="/assets/img/timeseries/TimeMixer++/fig4.png" alt="그림1" /></p>
+
+<h2 id="5-conclusion">5. Conclusion</h2>
+
+<ul>
+  <li>TIMEMIXER++: novel framework designed as a universal time seriespattern machine for predictive analysis
+    <ul>
+      <li><strong>Multi-resolution imaging</strong>: constructs time images at various resolutions, enabling enhanced representation of temporal dynamics</li>
+      <li><strong>Dual-axis attention</strong>: allows for effective decomposition of these time images, disentangling seasonal and trend components within deep representations</li>
+      <li><strong>Multi-scale and Multi-resolution mixing techniques</strong>, fuses and extracts information across different hierarchical levels</li>
+    </ul>
+  </li>
+</ul>
+
+  
+</article>
+
+
+
+  <hr class="dingbat related mb6" />
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="https://via.placeholder.com/128x128"
+    srcset="/assets/img/me/me.JPG 1x,/assets/img/me/me.JPG 2x"
+    
+  
+  alt="GW Jeong"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>Bachelor’s degree in Applied Statistics. Yonsei Univ. (2018~2024) <br />
+DataScienceLab 8th 학회장 (2022~2023) <br />
+Master’s degree in Statitstics. Yonsei Univ. (2024~)</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/lpppj" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:wjdrjsdn39@yonsei.ac.kr" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+  
+
+  
+    
+
+
+  
+
+  
+  
+
+  
+    
+
+  
+
+
+  
+<footer class="content" role="contentinfo">
+  <hr/>
+  
+    <p><small class="copyright">© Geonwoo Jeong.
+</small></p>
+  
+  
+    <p><small>Powered by <a class="external" href="https://hydejack.com/">Hydejack</a> v<span id="_version">9.1.6</span></small></p>
+  <hr class="sr-only"/>
+</footer>
+
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+<div class="sidebar-bg sidebar-overlay" style="background-color:rgb(230, 217, 195);background-image:url(/assets/img/me/sidebar.jpg)"></div>
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/me/logo.jpg" class="avatar" alt="LpppJ" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">LpppJ</h2></a>
+    
+    
+      <p class="">
+        DataScience and AI
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="sr-only">Navigation:</span>
+<ul>
+  
+    
+      
+      <li>
+        <a
+          id="_drawer--opened"
+          href="/timeseries/"
+          class="sidebar-nav-item "
+          
+        >
+          TimeSeries
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/mamba/"
+          class="sidebar-nav-item "
+          
+        >
+          Mamba
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/llm/"
+          class="sidebar-nav-item "
+          
+        >
+          LLM
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/pytorch/"
+          class="sidebar-nav-item "
+          
+        >
+          Pytorch
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/stat/"
+          class="sidebar-nav-item "
+          
+        >
+          Statistics
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/project/"
+          class="sidebar-nav-item "
+          
+        >
+          Project
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/presentation/"
+          class="sidebar-nav-item "
+          
+        >
+          Presentation
+        </a>
+      </li>
+    
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/lpppj" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:wjdrjsdn39@yonsei.ac.kr" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>!function(){var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())}();
+</script>
+  <script src="/assets/js/hydejack-9.1.6.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.1.6.js" nomodule defer></script>
+  
+
+  
+
+<!--<![endif]-->
+  <!-- <script>
+  document.querySelector('hy-push-state').setAttribute('prefetch', '');
+
+  document.querySelectorAll('.sidebar a[href^="/"]').forEach(function (el) { 
+    el.addEventListener('click', function (e) {
+      if (el.pathname === window.location.pathname) {
+        e.preventDefault();
+        e.stopPropagation();
+        document.querySelector('hy-drawer').close();
+      }
+    });
+  });
+</script> -->
+
+<!--
+Code for integrating CloudFlare's email protection with Hydejack's single page app loading.
+-->
+<script>
+  document.getElementById('_pushState').addEventListener('hy-push-state-after', function (e) {
+    function e(e){
+      (console.error?console.error:console.log).call(console,e)
+    }
+
+    function t(e){
+      return l.innerHTML='<a href="'+e.replace(/"/g,"&quot;")+'"></a>',l.childNodes[0].getAttribute("href")
+    }
+
+    function r(e,t){
+      var r=e.substr(t,2);return parseInt(r,16)
+    }
+
+    function n(e,n){
+      for(var o="",c=r(e,n),a=n+2;a<e.length;a+=2){
+        var l=r(e,a)^c;
+        o+=String.fromCharCode(l)
+      }
+      return t(o)
+    }
+
+    var o="/cdn-cgi/l/email-protection#",
+        c=".__cf_email__",
+        a="data-cfemail",
+        l=document.createElement("div");
+
+    !function(){
+      for(var t=document.getElementsByTagName("a"),r=0;r<t.length;r++)
+        try{
+          var c=t[r],a=c.href.indexOf(o);
+          a>-1&&(c.href="mailto:"+n(c.href,a+o.length))
+        }catch(t){
+          e(t)
+        }
+    }(),
+    function(){
+      for(var t=document.querySelectorAll(c),r=0;r<t.length;r++)
+        try{
+          var o=t[r],l=n(o.getAttribute(a),0),i=document.createTextNode(l);
+          o.parentNode.replaceChild(i,o)
+        }catch(t){
+          e(t)
+        }
+    }()
+  });
+</script>
+
+
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+</div>
+
+
+</body>
+</html>
