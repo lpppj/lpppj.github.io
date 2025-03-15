@@ -25,7 +25,9 @@ permalink: /project/
 [깃블로그 만들기 3 : Hydejack 테마 사용법]{:.heading.flip-title} \
 [깃블로그 만들기 4 : 새로운 게시글 작성하기]{:.heading.flip-title} \
 [깃블로그 만들기 5 : 블로그 테마 색 변경하기]{:.heading.flip-title} \
-[깃블로그 만들기 6 : 흔히 발생할 수 있는 에러]{:.heading.flip-title}
+[깃블로그 만들기 6 : 흔히 발생할 수 있는 에러]{:.heading.flip-title}\
+[깃블로그 만들기 6 : 흔히 발생할 수 있는 에러 (2)]{:.heading.flip-title}
+
 
 
 [깃블로그 만들기 1 : jekyll로 홈페이지 만들기]: /project/2024-02-07-gitblog1
@@ -34,3 +36,4 @@ permalink: /project/
 [깃블로그 만들기 4 : 새로운 게시글 작성하기]: /project/2024-02-12-gitblog4
 [깃블로그 만들기 5 : 블로그 테마 색 변경하기]: /project/2024-02-12-gitblog5
 [깃블로그 만들기 6 : 흔히 발생할 수 있는 에러]: /project/2024-02-15-gitblog6
+[깃블로그 만들기 6 : 흔히 발생할 수 있는 에러 (2)]: /project/2025-03-15-gitblog7
