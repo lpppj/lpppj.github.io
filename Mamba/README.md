@@ -32,7 +32,9 @@ permalink: /mamba/
 \
 [SST: Multi-Scale Hybrid Mamba-Transformer Experts for Long-Short Range Time Series Forecasting (Arxiv 2024)]{:.heading.flip-title}\
 \
-[Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025)]{:.heading.flip-title}
+[Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025)]{:.heading.flip-title}\
+\
+[S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv2025)]{:.heading.flip-title}
 
 [Mamba-360: Survey of State Space Models as Transformer Alternative for Long Sequence Modelling: Methods, Applications, and Challenges (Arxiv 2024)]:\mamba/2024-10-03-Mamba360
 [Mamba: Linear-Time Sequence Modeling with Selective State Spaces (Arxiv 2023)]:\mamba/2024-10-28-mamba
@@ -45,3 +47,4 @@ permalink: /mamba/
 [DTMamba : Dual Twin Mamba for Time Series Forecasting (Arxiv 2024)]:\mamba/2025-01-06-DTMamba
 [MAT: Integration of Mamba and Transformer for Long-Short Range TSF (Arxiv 2024)]:\mamba/2025-01-08-MAT
 [SST: Multi-Scale Hybrid Mamba-Transformer Experts for Long-Short Range Time Series Forecasting (Arxiv 2024)]:\mamba/2025-01-13-SST
+[S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv2025)]:\mamba/2025-03-01-S2TX
