@@ -62,7 +62,7 @@ hide_last_modified: true
 
 ### 3.1. Structure Overview
 
-- (1 ) **Input Projection**
+- (1) **Input Projection**
   - 기존 TimeMixer에서는 channel-independence strategy
   - TimeMixer++에서는 Channel mixing $$\to$$ Embedding
     - **Channel mixing** to capture cross-variable interactions
