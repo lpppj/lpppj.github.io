@@ -1,5 +1,392 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-03-15T20:22:18+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LpppJ</title><subtitle>This is blog about machine learning, deep learning, artificial intelligence.
-</subtitle><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><entry><title type="html">TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)</title><link href="http://localhost:4000/timeseries/2025-03-15-TimeMixer++/" rel="alternate" type="text/html" title="TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)" /><published>2025-03-15T00:00:00+09:00</published><updated>2025-03-15T18:54:55+09:00</updated><id>http://localhost:4000/timeseries/TimeMixer++</id><content type="html" xml:base="http://localhost:4000/timeseries/2025-03-15-TimeMixer++/"><![CDATA[<h2 id="abstract">Abstract</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-03-25T15:18:03+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LpppJ</title><subtitle>This is blog about machine learning, deep learning, artificial intelligence.
+</subtitle><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><entry><title type="html">BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models (Arxiv 2023)</title><link href="http://localhost:4000/llm/2025-03-25-BLIP2/" rel="alternate" type="text/html" title="BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models (Arxiv 2023)" /><published>2025-03-25T00:00:00+09:00</published><updated>2025-03-25T15:17:27+09:00</updated><id>http://localhost:4000/llm/BLIP2</id><content type="html" xml:base="http://localhost:4000/llm/2025-03-25-BLIP2/"><![CDATA[<h2 id="abstract">Abstract</h2>
+
+<ul>
+  <li>Vision-and-language pre-training은 end-toendtraining of large-scale models 때문에 어려웠음</li>
+  <li>BLIP-2: pretraining strategy that bootstraps vision-language pre-training
+    <ul>
+      <li>from off-the-shelf <strong>frozen pre-trained image encoders</strong> and <strong>frozen large language models.</strong></li>
+      <li>bridges the <strong>modality gap</strong> with a lightweight Querying Transformer, which is pre-trainedin two stages
+        <ul>
+          <li>first stage bootstraps <strong>vision-language representation</strong> learning from a <strong>frozen image encoder</strong></li>
+          <li>second stage bootstraps <strong>vision-to-language generative</strong> learning from a <strong>frozen language model</strong></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p><img src="/assets/img/llm/BLIP2/fig1.png" alt="그림1" /></p>
+
+<ul>
+  <li>지금까지는 end-to-end training using large-scale models 했기 때문에 오래 걸림</li>
+  <li>BLIP-2는 pre-trained <strong>vision</strong> models and <strong>language</strong> models을 bootstrapping
+    <ul>
+      <li>Pre-trained <strong>vision</strong> models offer high-quality visual representation.</li>
+      <li>Pre-trained <strong>language</strong> models(LLM) offer strong <strong>language generation</strong> and <strong>zero-shot transfer</strong> abilities</li>
+      <li>둘다 frozen during the pre-training !</li>
+    </ul>
+  </li>
+  <li>결국 중요한 건 cross-modal alignment인데
+    <ul>
+      <li>Frozen, Flamingo는 modality gap 채우기엔 부족</li>
+    </ul>
+  </li>
+  <li>그래서 Querying Transformer (QFormer) 사용:
+    <ul>
+      <li>pre-trained with a new two-stage pre-training strategy.
+        <ul>
+          <li>first pre-training stage: vision-language <strong>representation learning</strong> which enforces the Q-Former to <strong>learn visual representation most relevant to the text</strong></li>
+          <li>second pre-training stage: vision-to-language <strong>generative learning</strong> by <strong>connecting the output of the Q-Former to a frozen LLM</strong></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-related-work">2. Related Work</h2>
+
+<h3 id="21-end-to-end-vision-language-pre-training">2.1. End-to-end Vision-Language Pre-training</h3>
+
+<ul>
+  <li>모델 아키텍처
+    <ul>
+      <li>Dual-encoder: 이미지와 텍스트를 <strong>서로 다른 인코더</strong>로 처리하고, 그 <strong>출력(embedding)</strong>만 비교 (CLIP, …)
+        <ul>
+          <li>장점: efficiency(병렬 인코딩) - 대규모 학습이나 Retrieval에 적합</li>
+          <li>단점: 상호작용이 제한적이라서 복잡한 추론 못할수도</li>
+          <li>언제 씀 ? 이미지-텍스트 검색 (Image-Text Retrieval), zero-shot 분류 (Zero-shot classification)</li>
+        </ul>
+      </li>
+      <li>Fusion-encoder: 이미지와 텍스트를 <strong>같은 인코더</strong>로 넣고, <strong>서로 attend</strong>하며 처리 (ViLBERT, UNITER, …)
+        <ul>
+          <li>장점: 문맥에 맞는, 깊은 cross-modal interaction 가능</li>
+          <li>단점: pairs가 있어야 하고 uni-modal input에는 비효율적, 계산도 복잡</li>
+          <li>언제 씀 ? VQA (Visual Question Answering), 이미지-텍스트 매칭</li>
+        </ul>
+      </li>
+      <li>Encoder-decoder: 이미지를 인코딩하고, 텍스트를 <strong>생성(output)</strong>하는 구조 (Flamingo, SimVLM, …)
+        <ul>
+          <li>장점: 자연스러운 텍스트 생성</li>
+          <li>단점: 텍스트 생성은 비용이 큼</li>
+          <li>언제 씀 ? 이미지 캡셔닝 (Image Captioning), 멀티턴 VQA (대화형 응답)</li>
+        </ul>
+      </li>
+      <li>Unified transformer: 하나의 트랜스포머가 모든 모달리티를 처리 \(\to\) 통합적 처리 (OFA, Unified-IO, …)
+        <ul>
+          <li>장점: 다양한 태스크를 단일 구조로 처리</li>
+          <li>단점: 구현 복잡도 높고, pretraining에 많은 자원이 필요</li>
+          <li>언제 씀 ? 멀티태스크 멀티모달 학습, 종합 reasoning</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Pre-training objectives
+    <ul>
+      <li>Image-text contrastive learning: 이미지와 텍스트가 서로 잘 맞는지를 구별 (CLIP 방식)</li>
+      <li>Image-text matching (ITM): 주어진 이미지-텍스트 쌍이 짝이 맞는지를 분류</li>
+      <li>(Masked) Language Modeling: 텍스트 일부를 가려두고 예측 (BERT 스타일 학습)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="22-modular-vision-language-pre-training">2.2. Modular Vision-Language Pre-training</h3>
+
+<ul>
+  <li>VLP(Vision-Language Pretraining)에서 pre-trained model(이미지 인코더나 LLM 등)을 frozen하고 활용하는 건 원래 있긴 했음
+    <ul>
+      <li>Frozen Image Encoder, 이를 통해 추출한 feature만 활용</li>
+      <li>Frozen Language Model, 이미지를 LLM에 맞게 입력</li>
+      <li>결국에는 modality 사이에서 align이 잘 안되는 것이 문제</li>
+    </ul>
+  </li>
+  <li>그래서 BLIP-2는 <strong>이미지 인코더와 LLM을 둘 다 고정</strong>한 채로 Q-former로 align</li>
+</ul>
+
+<h2 id="3-method">3. Method</h2>
+
+<ul>
+  <li>Querying Transformer (Q-Former) pre-trained in two stages:
+    <ul>
+      <li>(1) vision-language <strong>representation</strong> learning stage with a <strong>frozen image encoder</strong></li>
+      <li>(2) vision-to-language <strong>generative</strong> learning stage with a <strong>frozen LLM.</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="31-model-architecture">3.1. Model Architecture</h3>
+
+<p><img src="/assets/img/llm/BLIP2/fig2.png" alt="그림1" /></p>
+
+<ul>
+  <li>Q-former: bridge thegap between a frozen image encoder and a frozen LLM
+    <ul>
+      <li>(1) an <strong>image transformer</strong> that interacts with the <strong>frozen image encoder</strong> for visual feature extraction</li>
+      <li>(2) a <strong>text transformer</strong> that can function as both a text encoder and a text decoder</li>
+    </ul>
+  </li>
+  <li>먼저 <strong>learnable query embeddings</strong> as input to the image transformer
+    <ul>
+      <li>interact with <strong>each other</strong> through self-attention layers</li>
+      <li>interact with <strong>frozen image features</strong> through cross-attention layers</li>
+      <li>interact with the <strong>text</strong> through the same self-attention layers</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="32-bootstrap-vision-language-representation-learning-from-a-frozen-image-encoder">3.2. Bootstrap Vision-Language Representation Learning from a Frozen Image Encoder</h3>
+
+<ul>
+  <li>
+    <p>3.2는 representation learning 단계 (Q-former 학습)</p>
+  </li>
+  <li><strong>Image-Text Contrastive Learning (ITC)</strong>
+    <ul>
+      <li>목표: 이미지 표현과 텍스트 표현이 잘 맞게 정렬되도록 학습 (mutual information 최대화)
+        <ul>
+          <li>이미지 → Q-former → Query output Z</li>
+          <li>텍스트 → 텍스트 인코더 → [CLS] token representation t</li>
+          <li>Z와 t의 pairwise similarity를 계산하고, 최댓값을 이미지-텍스트 유사도로 사용</li>
+        </ul>
+      </li>
+      <li><strong>Unimodal self-attention Masking</strong>: 쿼리와 텍스트 서로 못 봄 (정보 누출 방지)</li>
+      <li><strong>In-batch negatives</strong> 사용: batch 내 다른 sample들을 negative로 사용</li>
+    </ul>
+  </li>
+  <li><strong>Image-grounded Text Generation (ITG)</strong>
+    <ul>
+      <li>목표: 이미지를 조건으로 텍스트 생성 (텍스트 생성 능력 강화)
+        <ul>
+          <li>Q-former가 쿼리로 이미지 정보를 뽑아내고, 이를 텍스트 생성 과정에 활용</li>
+          <li>쿼리들이 이미지 정보를 추출하고, 그걸 통해 텍스트 토큰들이 생성됨</li>
+        </ul>
+      </li>
+      <li><strong>Multimodal causal attention Masking (UniLM 스타일)</strong>
+        <ul>
+          <li>쿼리는 서로를 볼 수 있지만 <strong>텍스트 토큰은 못 봄</strong></li>
+          <li>텍스트 토큰은 <strong>쿼리 + 앞의 텍스트 토큰</strong>은 볼 수 있음</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Image-Text Matching (ITM)</strong>
+    <ul>
+      <li>목표: 이미지와 텍스트가 정확히 매칭되는지 분류 (binary classification)
+        <ul>
+          <li>Q-former output (쿼리 embedding)을 2-class 분류기에 통과시켜 logit 생성</li>
+          <li>모든 쿼리별 logit을 평균 → 최종 매칭 score</li>
+        </ul>
+      </li>
+      <li>Bi-directional self-attention Masking: 쿼리와 텍스트 <strong>모두 서로를 볼 수 있음</strong>
+        <ul>
+          <li>쿼리가 멀티모달 정보를 제대로 통합하게 함</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="33-bootstrap-vision-to-language-generative-learning-from-a-frozen-llm">3.3. Bootstrap Vision-to-Language Generative Learning from a Frozen LLM</h3>
+
+<p><img src="/assets/img/llm/BLIP2/fig3.png" alt="그림1" /></p>
+
+<ul>
+  <li>3.3은 generative learning 단계</li>
+  <li>Q-former \(+\) Frozen Image Encoder \(\to\) Visual Embedding Z
+    <ul>
+      <li>Q-former : language-informative visual representation</li>
+    </ul>
+  </li>
+  <li>Q-former의 출력 Z는 LLM의 embedding dimension과 다르기 때문에, FC layer 통해 동일한 차원으로 맞춤</li>
+  <li>Soft Visual Prompt로 사용
+    <ul>
+      <li>변환된 Z를 텍스트 입력 앞에 덧붙임 (prepend)</li>
+      <li>마치 시각 정보를 담은 “soft prompt”처럼 작동함</li>
+    </ul>
+  </li>
+  <li><strong>LLM의 기존 구조를 바꾸지 않고도 이미지 조건 하에 텍스트 생성 가능 !!</strong>
+    <ul>
+      <li>결국 Q-former는 정보 bottleneck (이미지에서 텍스트 생성에 유용한 정보만 추출)</li>
+      <li>LLM은 굳이 vision-language alignment 다시 배울 필요 X</li>
+      <li><strong>Catastrophic Forgetting</strong> (LLM이 원래 배운 지식 잃어버리는 문제)도 방지</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="34-model-pre-training">3.4. Model Pre-training</h3>
+
+<ul>
+  <li>Pre-training data:
+    <ul>
+      <li>BLIP과 동일한 데이터셋에 대해 BLIPl의 CapFilt 기법을 사용해  synthetic captions 10개 생성
+        <ul>
+          <li>CLIP으로 이미지-텍스트 유사도 기반 랭킹매겨서 상위 2개 캡션을 저장</li>
+          <li>각 step에서 1개 랜덤 샘플링</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Frozen Image Encoder는 CLIP ViT-L/14, EVA-CLIP ViT-g/14
+    <ul>
+      <li>Frozen Language Model은 Decoder-only로는 OPT 시리즈, Encoder-Decoder로는 Flan-T5 시리즈</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="4-experiment">4. Experiment</h2>
+
+<p><img src="/assets/img/llm/BLIP2/table1.png" alt="그림1" /></p>
+
+<h3 id="41-instructed-zero-shot-image-to-text-generation">4.1. Instructed Zero-shot Image-to-Text Generation</h3>
+
+<p><img src="/assets/img/llm/BLIP2/fig4.png" alt="그림1" />
+<img src="/assets/img/llm/BLIP2/fig4-2.png" alt="그림1" /></p>
+
+<ul>
+  <li>BLIP-2는 이미지 인식 능력과 텍스트 프롬프트 이해 능력을 동시에 유지해서 “지시형 이미지-텍스트 생성”을 제로샷(zero-shot)으로 수행 가능
+    <ul>
+      <li>이미지 \(\to\) Q-former <strong>→</strong> visual prompt</li>
+      <li>텍스트 지시 (예: “Describe the scene”, “Answer:”)를 visual prompt 뒤에 추가</li>
+      <li>전체를 LLM에 입력 \(\to\) 자연스러운 텍스트 출력</li>
+      <li>즉, <strong>soft visual prompt + 자연어 instruction \(\to\) 텍스트 생성</strong></li>
+    </ul>
+  </li>
+  <li><strong>Zero-shot VQA</strong></li>
+</ul>
+
+<p><img src="/assets/img/llm/BLIP2/table2.png" alt="그림1" /></p>
+
+<ul>
+  <li>a stronger image encoder or a stronger LLM both lead to better performance.
+    <ul>
+      <li>강력한 인코더나 LLM은 성능 향상에 직접적으로 기여</li>
+    </ul>
+  </li>
+  <li><strong>Effect of Vision-Language Representation Learning</strong></li>
+</ul>
+
+<p><img src="/assets/img/llm/BLIP2/fig5.png" alt="그림1" /></p>
+
+<ul>
+  <li>Vision-Language Representation Learning 반드시 필요 !</li>
+</ul>
+
+<h3 id="42-image-captioning">4.2. Image Captioning</h3>
+
+<ul>
+  <li>BLIP-2를 image captioning에 finetuning:
+    <ul>
+      <li>generate a text description for the image 하라고 함</li>
+    </ul>
+  </li>
+  <li>LLM은 frozen, Q-former랑 image encoder만 학습</li>
+</ul>
+
+<p><img src="/assets/img/llm/BLIP2/table3.png" alt="그림1" /></p>
+
+<h3 id="43-visual-question-answering">4.3. Visual Question Answering</h3>
+
+<ul>
+  <li>BLIP-2를 VQA (사진 + 질문 주고 대답하게 하는 task)로 finetuning:</li>
+  <li>LLM은 frozen, Q-former랑 image encoder만 학습
+    <ul>
+      <li>질문 텍스트 토큰을 Q-former입력으로 추가</li>
+      <li>질문과 쿼리 토큰이 self-attention으로 상호작용</li>
+      <li>쿼리가 질문과 관련 있는 이미지 부분에 집중</li>
+      <li>cross-attention에서 더 의미 있는 이미지 피처 추출 가능</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/llm/BLIP2/table4.png" alt="그림1" /></p>
+
+<h3 id="44-image-text-retrieval">4.4. Image-Text Retrieval</h3>
+
+<ul>
+  <li>Image-to-Text Retrieval: 이미지 → 관련된 설명(텍스트) 검색</li>
+  <li>Text-to-Image Retrieval: 텍스트 → 관련된 이미지 검색
+    <ul>
+      <li>텍스트 생성이 없기 때문에, LLM 없이 Q-former + Image Encoder만 사용</li>
+    </ul>
+  </li>
+  <li>1차 후보군 선택 : 이미지 - 텍스트 feature similarity 기반으로 Top 128 후보 추림
+    <ul>
+      <li>2차 정렬 (Re-ranking): 이 후보군에 대해 ITM score (Image-Text Matching 점수) 계산</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/llm/BLIP2/table5.png" alt="그림1" /></p>
+
+<p><img src="/assets/img/llm/BLIP2/table6.png" alt="그림1" /></p>
+
+<ul>
+  <li>ITC + ITM은 필수, 하지만 ITG도 성능에 도움됨
+    <ul>
+      <li>특히 ITG loss가 직접적인 유사도 학습이 아님에도 불구하고 쿼리 토큰이 텍스트와 연관된 시각 정보를 잘 뽑도록 유도해서 Vision-Language alignment 강화 \(\to\) 성능 향상에 기여</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="5-limitation">5. Limitation</h2>
+
+<ul>
+  <li>In-Context Learning이 안 됨
+    <ul>
+      <li>LLM이 여러 개의 image-text pair를 한 시퀀스에서 보고 패턴 학습하면 잘 안됨</li>
+      <li>한 시퀀스에 여러 이미지-텍스트 쌍이 있는 구조로 데이터셋을 만들어야 함</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="6-conclusion">6. Conclusion</h2>
+
+<ul>
+  <li>BLIP-2, a generic and compute-efficient method for vision-language pre-training that leverages frozen pretrained image encoders and LLMs</li>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[Arxiv 2024]()]]></summary></entry><entry><title type="html">깃블로그 만들기 7 : 흔히 발생할 수 있는 에러 (2)</title><link href="http://localhost:4000/project/2025-03-15-gitblog7/" rel="alternate" type="text/html" title="깃블로그 만들기 7 : 흔히 발생할 수 있는 에러 (2)" /><published>2025-03-15T00:00:00+09:00</published><updated>2025-03-15T17:17:40+09:00</updated><id>http://localhost:4000/project/gitblog7</id><content type="html" xml:base="http://localhost:4000/project/2025-03-15-gitblog7/"><![CDATA[<ul>
+  <li>이번에는 Hydejack 테마를 사용하면서 내가 자주 했던 실수들을 살펴보겠다. 처음에는 에러의 이유를 몰라서 gitblog repository를 몇 번이나 삭제하고 다시 만들면서 시간을 많이 썼는데, 앞으로는 그러지 않기 위해 남긴다.</li>
+</ul>
+
+<h2 id="1-rpc-failure-http-400">1. RPC failure (HTTP 400)</h2>
+
+<ul>
+  <li>평소처럼 Terminal에서 git push를 할 때에 아래와 같은 에러가 발생</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">오브젝트</span> <span class="n">나열하는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">1335</span><span class="p">,</span> <span class="n">완료</span><span class="p">.</span>
+<span class="n">오브젝트</span> <span class="n">개수</span> <span class="n">세는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">1335</span><span class="o">/</span><span class="mi">1335</span><span class="p">),</span> <span class="n">완료</span><span class="p">.</span>
+<span class="n">Delta</span> <span class="n">compression</span> <span class="n">using</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">8</span> <span class="n">threads</span>
+<span class="n">오브젝트</span> <span class="n">압축하는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">634</span><span class="o">/</span><span class="mi">634</span><span class="p">),</span> <span class="n">완료</span><span class="p">.</span>
+<span class="n">error</span><span class="p">:</span> <span class="n">RPC</span> <span class="n">failed</span><span class="p">;</span> <span class="n">HTTP</span> <span class="mi">400</span> <span class="n">curl</span> <span class="mi">22</span> <span class="n">The</span> <span class="n">requested</span> <span class="n">URL</span> <span class="n">returned</span> <span class="n">error</span><span class="p">:</span> <span class="mi">400</span>
+<span class="n">send</span><span class="o">-</span><span class="n">pack</span><span class="p">:</span> <span class="n">unexpected</span> <span class="n">disconnect</span> <span class="k">while</span> <span class="n">reading</span> <span class="n">sideband</span> <span class="n">packet</span>
+<span class="n">오브젝트</span> <span class="n">쓰는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">1095</span><span class="o">/</span><span class="mi">1095</span><span class="p">),</span> <span class="mf">10.46</span> <span class="n">MiB</span> <span class="o">|</span> <span class="mf">10.38</span> <span class="n">MiB</span><span class="o">/</span><span class="n">s</span><span class="p">,</span> <span class="n">완료</span><span class="p">.</span>
+<span class="n">Total</span> <span class="mi">1095</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">549</span><span class="p">),</span> <span class="n">reused</span> <span class="mi">0</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">0</span><span class="p">),</span> <span class="n">pack</span><span class="o">-</span><span class="n">reused</span> <span class="mi">0</span>
+<span class="n">fatal</span><span class="p">:</span> <span class="n">the</span> <span class="n">remote</span> <span class="n">end</span> <span class="n">hung</span> <span class="n">up</span> <span class="n">unexpectedly</span>
+<span class="n">Everything</span> <span class="n">up</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">date</span>
+</code></pre></div></div>
+
+<ul>
+  <li>가장 아래 메세지를 보고 문제가 없다고 생각할 수 있지만
+    <ul>
+      <li>중간에 RPC failure (HTTP 400) 에러가 발생</li>
+      <li>당연히 정상적으로 push 되지 않음</li>
+    </ul>
+  </li>
+  <li>원인
+    <ul>
+      <li>한 번에 너무 많은 양을 push 할 때에 발생할 수 있는 에러</li>
+      <li>나의 경우에는 평소보다 많은 양이 아니었음에도 발생</li>
+    </ul>
+  </li>
+  <li>해결방법
+    <ul>
+      <li>Git 전송 버퍼 크기를 늘려주면 된다</li>
+      <li>터미널에 <code class="language-plaintext highlighter-rouge">git config --global http.postBuffer 524288000</code>를 입력하고 다시 push하면 된다</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="project" /><summary type="html"><![CDATA[이번에는 Hydejack 테마를 사용하면서 내가 자주 했던 실수들을 살펴보겠다. 처음에는 에러의 이유를 몰라서 gitblog repository를 몇 번이나 삭제하고 다시 만들면서 시간을 많이 썼는데, 앞으로는 그러지 않기 위해 남긴다.]]></summary></entry><entry><title type="html">TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)</title><link href="http://localhost:4000/timeseries/2025-03-15-TimeMixer++/" rel="alternate" type="text/html" title="TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)" /><published>2025-03-15T00:00:00+09:00</published><updated>2025-03-16T16:51:07+09:00</updated><id>http://localhost:4000/timeseries/TimeMixer++</id><content type="html" xml:base="http://localhost:4000/timeseries/2025-03-15-TimeMixer++/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
   <li>TIMEMIXER++: general-purpose time series pattern machine (TSPM)
@@ -99,7 +486,7 @@
 <h3 id="31-structure-overview">3.1. Structure Overview</h3>
 
 <ul>
-  <li>(1 ) <strong>Input Projection</strong>
+  <li>(1) <strong>Input Projection</strong>
     <ul>
       <li>기존 TimeMixer에서는 channel-independence strategy</li>
       <li>TimeMixer++에서는 Channel mixing \(\to\) Embedding
@@ -225,8 +612,7 @@
       </li>
       <li>즉 seasonal, trend image는 각각
         <ul>
-          <li>
-\[\begin{aligned}\mathbf{s}_m^{(l, k)}&amp;=\text {Attention}_{\text{col }}\left(\mathbf{Q}_{\mathrm{col}}, \mathbf{K}_{\mathrm{col}}, \mathbf{V}_{\mathrm{col}}\right),\\\mathbf{t}_m^{(l, k)}&amp;=\operatorname{Attention}_{\text {row }}\left(\mathbf{Q}_{\text {row }}, \mathbf{K}_{\text {row }}, \mathbf{V}_{\text {row }}\right)\end{aligned}\]
+          <li>\(\begin{aligned}\mathbf{s}_m^{(l, k)}&amp;=\text {Attention}_{\text{col }}\left(\mathbf{Q}_{\mathrm{col}}, \mathbf{K}_{\mathrm{col}}, \mathbf{V}_{\mathrm{col}}\right),\\\mathbf{t}_m^{(l, k)}&amp;=\operatorname{Attention}_{\text {row }}\left(\mathbf{Q}_{\text {row }}, \mathbf{K}_{\text {row }}, \mathbf{V}_{\text {row }}\right)\end{aligned}\).
             <ul>
               <li>where \(\mathbf{s}_m^{(l, k)}, \mathbf{t}_m^{(l, k)} \in \mathbb{R}^{p_k \times f_{\mathrm{m}, \mathrm{k}} \times d_{\text {model }}}\)</li>
             </ul>
@@ -345,48 +731,7 @@
       <li><strong>Multi-scale and Multi-resolution mixing techniques</strong>, fuses and extracts information across different hierarchical levels</li>
     </ul>
   </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[ICLR 2025 Oral](https://openreview.net/pdf?id=1CLzLXSFNn)]]></summary></entry><entry><title type="html">깃블로그 만들기 7 : 흔히 발생할 수 있는 에러 (2)</title><link href="http://localhost:4000/project/2025-03-15-gitblog7/" rel="alternate" type="text/html" title="깃블로그 만들기 7 : 흔히 발생할 수 있는 에러 (2)" /><published>2025-03-15T00:00:00+09:00</published><updated>2025-03-15T17:17:40+09:00</updated><id>http://localhost:4000/project/gitblog7</id><content type="html" xml:base="http://localhost:4000/project/2025-03-15-gitblog7/"><![CDATA[<ul>
-  <li>이번에는 Hydejack 테마를 사용하면서 내가 자주 했던 실수들을 살펴보겠다. 처음에는 에러의 이유를 몰라서 gitblog repository를 몇 번이나 삭제하고 다시 만들면서 시간을 많이 썼는데, 앞으로는 그러지 않기 위해 남긴다.</li>
-</ul>
-
-<h2 id="1-rpc-failure-http-400">1. RPC failure (HTTP 400)</h2>
-
-<ul>
-  <li>평소처럼 Terminal에서 git push를 할 때에 아래와 같은 에러가 발생</li>
-</ul>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">오브젝트</span> <span class="n">나열하는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">1335</span><span class="p">,</span> <span class="n">완료</span><span class="p">.</span>
-<span class="n">오브젝트</span> <span class="n">개수</span> <span class="n">세는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">1335</span><span class="o">/</span><span class="mi">1335</span><span class="p">),</span> <span class="n">완료</span><span class="p">.</span>
-<span class="n">Delta</span> <span class="n">compression</span> <span class="n">using</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">8</span> <span class="n">threads</span>
-<span class="n">오브젝트</span> <span class="n">압축하는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">634</span><span class="o">/</span><span class="mi">634</span><span class="p">),</span> <span class="n">완료</span><span class="p">.</span>
-<span class="n">error</span><span class="p">:</span> <span class="n">RPC</span> <span class="n">failed</span><span class="p">;</span> <span class="n">HTTP</span> <span class="mi">400</span> <span class="n">curl</span> <span class="mi">22</span> <span class="n">The</span> <span class="n">requested</span> <span class="n">URL</span> <span class="n">returned</span> <span class="n">error</span><span class="p">:</span> <span class="mi">400</span>
-<span class="n">send</span><span class="o">-</span><span class="n">pack</span><span class="p">:</span> <span class="n">unexpected</span> <span class="n">disconnect</span> <span class="k">while</span> <span class="n">reading</span> <span class="n">sideband</span> <span class="n">packet</span>
-<span class="n">오브젝트</span> <span class="n">쓰는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">1095</span><span class="o">/</span><span class="mi">1095</span><span class="p">),</span> <span class="mf">10.46</span> <span class="n">MiB</span> <span class="o">|</span> <span class="mf">10.38</span> <span class="n">MiB</span><span class="o">/</span><span class="n">s</span><span class="p">,</span> <span class="n">완료</span><span class="p">.</span>
-<span class="n">Total</span> <span class="mi">1095</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">549</span><span class="p">),</span> <span class="n">reused</span> <span class="mi">0</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">0</span><span class="p">),</span> <span class="n">pack</span><span class="o">-</span><span class="n">reused</span> <span class="mi">0</span>
-<span class="n">fatal</span><span class="p">:</span> <span class="n">the</span> <span class="n">remote</span> <span class="n">end</span> <span class="n">hung</span> <span class="n">up</span> <span class="n">unexpectedly</span>
-<span class="n">Everything</span> <span class="n">up</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">date</span>
-</code></pre></div></div>
-
-<ul>
-  <li>가장 아래 메세지를 보고 문제가 없다고 생각할 수 있지만
-    <ul>
-      <li>중간에 RPC failure (HTTP 400) 에러가 발생</li>
-      <li>당연히 정상적으로 push 되지 않음</li>
-    </ul>
-  </li>
-  <li>원인
-    <ul>
-      <li>한 번에 너무 많은 양을 push 할 때에 발생할 수 있는 에러</li>
-      <li>나의 경우에는 평소보다 많은 양이 아니었음에도 발생</li>
-    </ul>
-  </li>
-  <li>해결방법
-    <ul>
-      <li>Git 전송 버퍼 크기를 늘려주면 된다</li>
-      <li>터미널에 <code class="language-plaintext highlighter-rouge">git config --global http.postBuffer 524288000</code>를 입력하고 다시 push하면 된다</li>
-    </ul>
-  </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="project" /><summary type="html"><![CDATA[이번에는 Hydejack 테마를 사용하면서 내가 자주 했던 실수들을 살펴보겠다. 처음에는 에러의 이유를 몰라서 gitblog repository를 몇 번이나 삭제하고 다시 만들면서 시간을 많이 썼는데, 앞으로는 그러지 않기 위해 남긴다.]]></summary></entry><entry><title type="html">S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv 2025 )</title><link href="http://localhost:4000/mamba/2025-03-01-S2TX/" rel="alternate" type="text/html" title="S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv 2025 )" /><published>2025-03-01T00:00:00+09:00</published><updated>2025-03-15T18:20:30+09:00</updated><id>http://localhost:4000/mamba/S2TX</id><content type="html" xml:base="http://localhost:4000/mamba/2025-03-01-S2TX/"><![CDATA[<h2 id="abstract">Abstract</h2>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[ICLR 2025 Oral](https://openreview.net/pdf?id=1CLzLXSFNn)]]></summary></entry><entry><title type="html">S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv 2025 )</title><link href="http://localhost:4000/mamba/2025-03-01-S2TX/" rel="alternate" type="text/html" title="S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv 2025 )" /><published>2025-03-01T00:00:00+09:00</published><updated>2025-03-17T11:37:02+09:00</updated><id>http://localhost:4000/mamba/S2TX</id><content type="html" xml:base="http://localhost:4000/mamba/2025-03-01-S2TX/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
   <li><strong>Multi-scale</strong> models for the <strong>heterogeneity</strong> btw long and short patterns
@@ -484,7 +829,7 @@
   <li>Patching: aggregates local information into patches
     <ul>
       <li>effectively enhances the receptive field</li>
-      <li>\(\mathbf{X} \in$ $\mathbb{R}^{D \times L}\) is patched into \(\tilde{\mathbf{X}} \in \mathbb{R}^{D \times P N \times P L}\).</li>
+      <li>\(\mathbf{X} \in \mathbb{R}^{D \times L}\) is patched into \(\tilde{\mathbf{X}} \in \mathbb{R}^{D \times P N \times P L}\).</li>
     </ul>
   </li>
   <li>Intuitively the <strong>longer</strong> the stride, or the <strong>longer</strong> the patch length, the more <strong>long</strong> range temporal context is stored in a patch and vice versa</li>
@@ -2249,158 +2594,4 @@
     </ul>
   </li>
   <li>with scaling linearly \(O(L)\) with time series length \(L\)</li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="mamba" /><summary type="html"><![CDATA[[Arxiv 2024](https://arxiv.org/pdf/2404.14757)]]></summary></entry><entry><title type="html">MAT: Integration of Mamba and Transformer for Long-Short Range TSF (Arxiv 2024)</title><link href="http://localhost:4000/mamba/2025-01-08-MAT/" rel="alternate" type="text/html" title="MAT: Integration of Mamba and Transformer for Long-Short Range TSF (Arxiv 2024)" /><published>2025-01-08T00:00:00+09:00</published><updated>2025-01-08T22:03:06+09:00</updated><id>http://localhost:4000/mamba/MAT</id><content type="html" xml:base="http://localhost:4000/mamba/2025-01-08-MAT/"><![CDATA[<h2 id="abstract">Abstract</h2>
-
-<ul>
-  <li>Time series는 sparse semantic features를 가짐
-    <ul>
-      <li>Transformer만으로 다루기에는 어려움이 있고</li>
-      <li>Mamba의 selective input and parallel computing 필요</li>
-    </ul>
-  </li>
-  <li>Mamba and Transformer models의 장단점을 이해하고 combined approach 제안</li>
-  <li>the long-range dependency capabilities of <strong>Mamba</strong>
-    <ul>
-      <li>and the short-range characteristics of <strong>Transformers</strong></li>
-      <li>called <strong>MAT</strong></li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="1-introduction">1. Introduction</h2>
-
-<ul>
-  <li><strong>Linear</strong> scalability를 가지는 모델들은 성능이 아쉬움
-    <ul>
-      <li>SciNet
-        <ul>
-          <li>relying solely on time points</li>
-          <li>obscure context-based choices and overlook long-range dependencies</li>
-          <li>그러므로 iTransformer처럼 entire window로 다루는 것이 맞음</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><strong>Transformer</strong>-based models는 high computational complexity
-    <ul>
-      <li>Informer, FEDformer,and Autoformer
-        <ul>
-          <li>mixed-channel approach (2d matrix defined by the <strong>number of channels and the length of histories</strong>)</li>
-          <li>beneficial when channels exhibit significant correlations,</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>SSM
-    <ul>
-      <li>handle very long sequences with linear complexity</li>
-      <li>context-aware selectivity through hidden attention mechanisms</li>
-    </ul>
-  </li>
-  <li>본 논문에서는
-    <ul>
-      <li>Mamba coupled with attentionmechanisms called Transformer
-        <ul>
-          <li>(with multi-scale contexts)</li>
-        </ul>
-      </li>
-      <li><strong>long</strong>-term forecasting capabilities and <strong>short</strong>-range dependencies in MTS data
-        <ul>
-          <li>while maintaining <strong>linear</strong> scalability and minimal memory usage</li>
-        </ul>
-      </li>
-      <li>bottom-up strategy
-        <ul>
-          <li>generating contextual cues at two distinct scales through linear mapping</li>
-          <li>At each of these levels four MAT modules</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="2-related-work">2. Related Work</h2>
-
-<p>pass</p>
-
-<h2 id="3-methodology">3. Methodology</h2>
-
-<ul>
-  <li>input sequence \(\mathbf{x}=\left[x_1, \ldots, x_L\right]\) 보고 future values \(\left[x_{L+1}, \ldots, x_{L+T}\right]\) 예측</li>
-</ul>
-
-<h3 id="ac-preliminary-transformer-mamba">A~C. Preliminary, Transformer, Mamba</h3>
-
-<p>pass</p>
-
-<h3 id="d-mat">D. MAT</h3>
-<p><img src="/assets/img/Mamba/MAT/fig3.png" alt="그림1" /></p>
-
-<ul>
-  <li>Four combined Mambas and Transformer
-    <ul>
-      <li>to extract <strong>long-short</strong> range contextual information
-        <ul>
-          <li><strong>long</strong>-term forecasting capability of <strong>Mamba</strong></li>
-          <li>and <strong>short</strong> range dependency of <strong>Transformer</strong>.</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><strong>Normalizing</strong>(RevIN)</li>
-  <li><strong>Embedding</strong> : \(\mathbf{x}^{(1)}=E M B_1\left(\mathbf{x}^{(0)}\right), \mathbf{x}^{(2)}=E M B_2\left(\mathbf{x}^{(1)}\right)\).
-    <ul>
-      <li>\(E M B_1: \mathbb{R}^{M \times L} \rightarrow \mathbb{R}^{M \times n_1}\) and \(E M B_2: \mathbb{R}^{M \times n 1} \rightarrow \mathbb{R}^{M \times n_2}\)</li>
-      <li>\(n_1\) and \(n_2\), are chosen from the set \(\{512,256,128,64,32\}\) s.t. \(n_1&gt;n_2\).</li>
-    </ul>
-  </li>
-  <li>사실 <a href="https://lpppj.github.io/mamba/2024-10-29-timemachine">TimeMachine</a>이랑 비슷한데
-    <ul>
-      <li><strong>not only</strong> the <strong>long</strong>-term prediction capability of the <strong>Mamba</strong>,</li>
-      <li><strong>but also</strong> the <strong>short</strong>-range dependency learned from the <strong>Transformer</strong></li>
-      <li>이 구조가 pivotal component in the modern LLM</li>
-    </ul>
-  </li>
-  <li><strong>Output Prediction</strong> : \(\overline{\mathbf{x}}^{(1)}=\operatorname{Proj}_1\left(\overline{\mathbf{x}}^{\left(F_1\right)}\right), \overline{\mathbf{x}}=\operatorname{Proj}_2\left(\overline{\mathbf{x}}^{(1)} \oplus \hat{\mathbf{x}}^{\left(F_2\right)}\right)\)
-    <ul>
-      <li>\(\text{Proj}_1\):  \(\mathbb{R}^{M \times n_2} \rightarrow \mathbb{R}^{M \times n_1}\) to obtained \(\overline{\mathrm{x}}^1\),</li>
-      <li>\(\mathrm{Proj}_2\):  \(\mathbb{R}^{M \times n_1} \rightarrow \mathbb{R}^{M \times T}\) to yield \(\overline{\mathbf{x}}\).</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="4-experiments">4. Experiments</h2>
-
-<ul>
-  <li>fixed \(L=96\) and \(T=\{96,192,336,720\}\)</li>
-  <li>Default parameters for all Mambas were set as follows:
-    <ul>
-      <li>Dimension factor \(D=\) 256,</li>
-      <li>local convolutional width =2,</li>
-      <li>and state expand factor \(N=\) 1,</li>
-    </ul>
-  </li>
-  <li>For the transformer module,
-    <ul>
-      <li>the multi head number is set \(H=\) 8,</li>
-      <li>the Batch Size in the training process is set as Batch =32.</li>
-    </ul>
-  </li>
-</ul>
-
-<p><img src="/assets/img/Mamba/MAT/table1.png" alt="그림1" /></p>
-
-<h2 id="5-conclusion">5. Conclusion</h2>
-
-<ul>
-  <li>Transformers struggle with long-term dependencies and sparse semantic features,
-    <ul>
-      <li>Mamba excels through selective input handling and parallel computing.</li>
-    </ul>
-  </li>
-  <li>MAT, a combined approach leveraging Mamba’s long-range capabilities
-    <ul>
-      <li>and Transformers’ short-range strengths</li>
-    </ul>
-  </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="mamba" /><summary type="html"><![CDATA[[Arxiv 2024](https://arxiv.org/pdf/2409.08530)]]></summary></entry></feed>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="mamba" /><summary type="html"><![CDATA[[Arxiv 2024](https://arxiv.org/pdf/2404.14757)]]></summary></entry></feed>

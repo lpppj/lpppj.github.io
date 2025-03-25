@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v9.1.6 <https://hydejack.com/>
+-->
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models (Arxiv 2023) | LpppJ</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models (Arxiv 2023)" />
+<meta name="author" content="GW Jeong" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Arxiv 2024" />
+<meta property="og:description" content="Arxiv 2024" />
+<link rel="canonical" href="http://localhost:4000/llm/2025-03-25-BLIP2/" />
+<meta property="og:url" content="http://localhost:4000/llm/2025-03-25-BLIP2/" />
+<meta property="og:site_name" content="LpppJ" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-03-25T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models (Arxiv 2023)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"GW Jeong"},"dateModified":"2025-03-25T15:17:27+09:00","datePublished":"2025-03-25T00:00:00+09:00","description":"Arxiv 2024","headline":"BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models (Arxiv 2023)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/llm/2025-03-25-BLIP2/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/img/me/logo.jpg"},"name":"GW Jeong"},"url":"http://localhost:4000/llm/2025-03-25-BLIP2/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+
+
+  <meta name="theme-color" content="rgb(230, 217, 195)">
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="LpppJ">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="LpppJ">
+
+<meta name="generator" content="Hydejack v9.1.6" />
+
+
+<link rel="alternate" href="http://localhost:4000/llm/2025-03-25-BLIP2/" hreflang="en">
+
+<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LpppJ" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+
+
+
+
+
+<script>!function(r,c){"use strict";function a(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=c.createElement("script"),e=(n.src=e,t&&a(n,"load",t,{once:!0}),c.scripts[0]);return e.parentNode.insertBefore(n,e),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=c.createElement("script");function o(){r._loaded=!0,t&&a(n,"load",t,{once:!0});var e=c.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():a(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){a(c.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}}(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = false;
+  w._noDrawer = false;
+  w._noNavbar = false;
+  w._noToc = false;
+  w._noSearch = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2025-03-25T15:18:03+09:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+<script async src="/assets/bower_components/MathJax/es5/tex-mml-chtml.js" id="_MathJax"></script>
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.1.6.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5);--accent-color-highlight: rgba(94, 97, 94, 0.1);--accent-color-darkened: #4b4e4b;--theme-color: rgb(230, 217, 195)}
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+</head>
+
+<body class="no-break-layout">
+  
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/llm/">llm</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          <span>2025-03-25-BLIP2</span>
+        
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-llm-BLIP2" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models (Arxiv 2023)
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-03-25T00:00:00+09:00">25 Mar 2025</time> in <span>Llm</span> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  
+    <p class="note-sm" >
+      <a href="">Arxiv 2024</a>
+
+    </p>
+  
+
+
+  </header>
+
+  
+    <h2 id="abstract">Abstract</h2>
+
+<ul>
+  <li>Vision-and-language pre-training은 end-toendtraining of large-scale models 때문에 어려웠음</li>
+  <li>BLIP-2: pretraining strategy that bootstraps vision-language pre-training
+    <ul>
+      <li>from off-the-shelf <strong>frozen pre-trained image encoders</strong> and <strong>frozen large language models.</strong></li>
+      <li>bridges the <strong>modality gap</strong> with a lightweight Querying Transformer, which is pre-trainedin two stages
+        <ul>
+          <li>first stage bootstraps <strong>vision-language representation</strong> learning from a <strong>frozen image encoder</strong></li>
+          <li>second stage bootstraps <strong>vision-to-language generative</strong> learning from a <strong>frozen language model</strong></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p><img src="/assets/img/llm/BLIP2/fig1.png" alt="그림1" /></p>
+
+<ul>
+  <li>지금까지는 end-to-end training using large-scale models 했기 때문에 오래 걸림</li>
+  <li>BLIP-2는 pre-trained <strong>vision</strong> models and <strong>language</strong> models을 bootstrapping
+    <ul>
+      <li>Pre-trained <strong>vision</strong> models offer high-quality visual representation.</li>
+      <li>Pre-trained <strong>language</strong> models(LLM) offer strong <strong>language generation</strong> and <strong>zero-shot transfer</strong> abilities</li>
+      <li>둘다 frozen during the pre-training !</li>
+    </ul>
+  </li>
+  <li>결국 중요한 건 cross-modal alignment인데
+    <ul>
+      <li>Frozen, Flamingo는 modality gap 채우기엔 부족</li>
+    </ul>
+  </li>
+  <li>그래서 Querying Transformer (QFormer) 사용:
+    <ul>
+      <li>pre-trained with a new two-stage pre-training strategy.
+        <ul>
+          <li>first pre-training stage: vision-language <strong>representation learning</strong> which enforces the Q-Former to <strong>learn visual representation most relevant to the text</strong></li>
+          <li>second pre-training stage: vision-to-language <strong>generative learning</strong> by <strong>connecting the output of the Q-Former to a frozen LLM</strong></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-related-work">2. Related Work</h2>
+
+<h3 id="21-end-to-end-vision-language-pre-training">2.1. End-to-end Vision-Language Pre-training</h3>
+
+<ul>
+  <li>모델 아키텍처
+    <ul>
+      <li>Dual-encoder: 이미지와 텍스트를 <strong>서로 다른 인코더</strong>로 처리하고, 그 <strong>출력(embedding)</strong>만 비교 (CLIP, …)
+        <ul>
+          <li>장점: efficiency(병렬 인코딩) - 대규모 학습이나 Retrieval에 적합</li>
+          <li>단점: 상호작용이 제한적이라서 복잡한 추론 못할수도</li>
+          <li>언제 씀 ? 이미지-텍스트 검색 (Image-Text Retrieval), zero-shot 분류 (Zero-shot classification)</li>
+        </ul>
+      </li>
+      <li>Fusion-encoder: 이미지와 텍스트를 <strong>같은 인코더</strong>로 넣고, <strong>서로 attend</strong>하며 처리 (ViLBERT, UNITER, …)
+        <ul>
+          <li>장점: 문맥에 맞는, 깊은 cross-modal interaction 가능</li>
+          <li>단점: pairs가 있어야 하고 uni-modal input에는 비효율적, 계산도 복잡</li>
+          <li>언제 씀 ? VQA (Visual Question Answering), 이미지-텍스트 매칭</li>
+        </ul>
+      </li>
+      <li>Encoder-decoder: 이미지를 인코딩하고, 텍스트를 <strong>생성(output)</strong>하는 구조 (Flamingo, SimVLM, …)
+        <ul>
+          <li>장점: 자연스러운 텍스트 생성</li>
+          <li>단점: 텍스트 생성은 비용이 큼</li>
+          <li>언제 씀 ? 이미지 캡셔닝 (Image Captioning), 멀티턴 VQA (대화형 응답)</li>
+        </ul>
+      </li>
+      <li>Unified transformer: 하나의 트랜스포머가 모든 모달리티를 처리 \(\to\) 통합적 처리 (OFA, Unified-IO, …)
+        <ul>
+          <li>장점: 다양한 태스크를 단일 구조로 처리</li>
+          <li>단점: 구현 복잡도 높고, pretraining에 많은 자원이 필요</li>
+          <li>언제 씀 ? 멀티태스크 멀티모달 학습, 종합 reasoning</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Pre-training objectives
+    <ul>
+      <li>Image-text contrastive learning: 이미지와 텍스트가 서로 잘 맞는지를 구별 (CLIP 방식)</li>
+      <li>Image-text matching (ITM): 주어진 이미지-텍스트 쌍이 짝이 맞는지를 분류</li>
+      <li>(Masked) Language Modeling: 텍스트 일부를 가려두고 예측 (BERT 스타일 학습)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="22-modular-vision-language-pre-training">2.2. Modular Vision-Language Pre-training</h3>
+
+<ul>
+  <li>VLP(Vision-Language Pretraining)에서 pre-trained model(이미지 인코더나 LLM 등)을 frozen하고 활용하는 건 원래 있긴 했음
+    <ul>
+      <li>Frozen Image Encoder, 이를 통해 추출한 feature만 활용</li>
+      <li>Frozen Language Model, 이미지를 LLM에 맞게 입력</li>
+      <li>결국에는 modality 사이에서 align이 잘 안되는 것이 문제</li>
+    </ul>
+  </li>
+  <li>그래서 BLIP-2는 <strong>이미지 인코더와 LLM을 둘 다 고정</strong>한 채로 Q-former로 align</li>
+</ul>
+
+<h2 id="3-method">3. Method</h2>
+
+<ul>
+  <li>Querying Transformer (Q-Former) pre-trained in two stages:
+    <ul>
+      <li>(1) vision-language <strong>representation</strong> learning stage with a <strong>frozen image encoder</strong></li>
+      <li>(2) vision-to-language <strong>generative</strong> learning stage with a <strong>frozen LLM.</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="31-model-architecture">3.1. Model Architecture</h3>
+
+<p><img src="/assets/img/llm/BLIP2/fig2.png" alt="그림1" /></p>
+
+<ul>
+  <li>Q-former: bridge thegap between a frozen image encoder and a frozen LLM
+    <ul>
+      <li>(1) an <strong>image transformer</strong> that interacts with the <strong>frozen image encoder</strong> for visual feature extraction</li>
+      <li>(2) a <strong>text transformer</strong> that can function as both a text encoder and a text decoder</li>
+    </ul>
+  </li>
+  <li>먼저 <strong>learnable query embeddings</strong> as input to the image transformer
+    <ul>
+      <li>interact with <strong>each other</strong> through self-attention layers</li>
+      <li>interact with <strong>frozen image features</strong> through cross-attention layers</li>
+      <li>interact with the <strong>text</strong> through the same self-attention layers</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="32-bootstrap-vision-language-representation-learning-from-a-frozen-image-encoder">3.2. Bootstrap Vision-Language Representation Learning from a Frozen Image Encoder</h3>
+
+<ul>
+  <li>
+    <p>3.2는 representation learning 단계 (Q-former 학습)</p>
+  </li>
+  <li><strong>Image-Text Contrastive Learning (ITC)</strong>
+    <ul>
+      <li>목표: 이미지 표현과 텍스트 표현이 잘 맞게 정렬되도록 학습 (mutual information 최대화)
+        <ul>
+          <li>이미지 → Q-former → Query output Z</li>
+          <li>텍스트 → 텍스트 인코더 → [CLS] token representation t</li>
+          <li>Z와 t의 pairwise similarity를 계산하고, 최댓값을 이미지-텍스트 유사도로 사용</li>
+        </ul>
+      </li>
+      <li><strong>Unimodal self-attention Masking</strong>: 쿼리와 텍스트 서로 못 봄 (정보 누출 방지)</li>
+      <li><strong>In-batch negatives</strong> 사용: batch 내 다른 sample들을 negative로 사용</li>
+    </ul>
+  </li>
+  <li><strong>Image-grounded Text Generation (ITG)</strong>
+    <ul>
+      <li>목표: 이미지를 조건으로 텍스트 생성 (텍스트 생성 능력 강화)
+        <ul>
+          <li>Q-former가 쿼리로 이미지 정보를 뽑아내고, 이를 텍스트 생성 과정에 활용</li>
+          <li>쿼리들이 이미지 정보를 추출하고, 그걸 통해 텍스트 토큰들이 생성됨</li>
+        </ul>
+      </li>
+      <li><strong>Multimodal causal attention Masking (UniLM 스타일)</strong>
+        <ul>
+          <li>쿼리는 서로를 볼 수 있지만 <strong>텍스트 토큰은 못 봄</strong></li>
+          <li>텍스트 토큰은 <strong>쿼리 + 앞의 텍스트 토큰</strong>은 볼 수 있음</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Image-Text Matching (ITM)</strong>
+    <ul>
+      <li>목표: 이미지와 텍스트가 정확히 매칭되는지 분류 (binary classification)
+        <ul>
+          <li>Q-former output (쿼리 embedding)을 2-class 분류기에 통과시켜 logit 생성</li>
+          <li>모든 쿼리별 logit을 평균 → 최종 매칭 score</li>
+        </ul>
+      </li>
+      <li>Bi-directional self-attention Masking: 쿼리와 텍스트 <strong>모두 서로를 볼 수 있음</strong>
+        <ul>
+          <li>쿼리가 멀티모달 정보를 제대로 통합하게 함</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="33-bootstrap-vision-to-language-generative-learning-from-a-frozen-llm">3.3. Bootstrap Vision-to-Language Generative Learning from a Frozen LLM</h3>
+
+<p><img src="/assets/img/llm/BLIP2/fig3.png" alt="그림1" /></p>
+
+<ul>
+  <li>3.3은 generative learning 단계</li>
+  <li>Q-former \(+\) Frozen Image Encoder \(\to\) Visual Embedding Z
+    <ul>
+      <li>Q-former : language-informative visual representation</li>
+    </ul>
+  </li>
+  <li>Q-former의 출력 Z는 LLM의 embedding dimension과 다르기 때문에, FC layer 통해 동일한 차원으로 맞춤</li>
+  <li>Soft Visual Prompt로 사용
+    <ul>
+      <li>변환된 Z를 텍스트 입력 앞에 덧붙임 (prepend)</li>
+      <li>마치 시각 정보를 담은 “soft prompt”처럼 작동함</li>
+    </ul>
+  </li>
+  <li><strong>LLM의 기존 구조를 바꾸지 않고도 이미지 조건 하에 텍스트 생성 가능 !!</strong>
+    <ul>
+      <li>결국 Q-former는 정보 bottleneck (이미지에서 텍스트 생성에 유용한 정보만 추출)</li>
+      <li>LLM은 굳이 vision-language alignment 다시 배울 필요 X</li>
+      <li><strong>Catastrophic Forgetting</strong> (LLM이 원래 배운 지식 잃어버리는 문제)도 방지</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="34-model-pre-training">3.4. Model Pre-training</h3>
+
+<ul>
+  <li>Pre-training data:
+    <ul>
+      <li>BLIP과 동일한 데이터셋에 대해 BLIPl의 CapFilt 기법을 사용해  synthetic captions 10개 생성
+        <ul>
+          <li>CLIP으로 이미지-텍스트 유사도 기반 랭킹매겨서 상위 2개 캡션을 저장</li>
+          <li>각 step에서 1개 랜덤 샘플링</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Frozen Image Encoder는 CLIP ViT-L/14, EVA-CLIP ViT-g/14
+    <ul>
+      <li>Frozen Language Model은 Decoder-only로는 OPT 시리즈, Encoder-Decoder로는 Flan-T5 시리즈</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="4-experiment">4. Experiment</h2>
+
+<p><img src="/assets/img/llm/BLIP2/table1.png" alt="그림1" /></p>
+
+<h3 id="41-instructed-zero-shot-image-to-text-generation">4.1. Instructed Zero-shot Image-to-Text Generation</h3>
+
+<p><img src="/assets/img/llm/BLIP2/fig4.png" alt="그림1" />
+<img src="/assets/img/llm/BLIP2/fig4-2.png" alt="그림1" /></p>
+
+<ul>
+  <li>BLIP-2는 이미지 인식 능력과 텍스트 프롬프트 이해 능력을 동시에 유지해서 “지시형 이미지-텍스트 생성”을 제로샷(zero-shot)으로 수행 가능
+    <ul>
+      <li>이미지 \(\to\) Q-former <strong>→</strong> visual prompt</li>
+      <li>텍스트 지시 (예: “Describe the scene”, “Answer:”)를 visual prompt 뒤에 추가</li>
+      <li>전체를 LLM에 입력 \(\to\) 자연스러운 텍스트 출력</li>
+      <li>즉, <strong>soft visual prompt + 자연어 instruction \(\to\) 텍스트 생성</strong></li>
+    </ul>
+  </li>
+  <li><strong>Zero-shot VQA</strong></li>
+</ul>
+
+<p><img src="/assets/img/llm/BLIP2/table2.png" alt="그림1" /></p>
+
+<ul>
+  <li>a stronger image encoder or a stronger LLM both lead to better performance.
+    <ul>
+      <li>강력한 인코더나 LLM은 성능 향상에 직접적으로 기여</li>
+    </ul>
+  </li>
+  <li><strong>Effect of Vision-Language Representation Learning</strong></li>
+</ul>
+
+<p><img src="/assets/img/llm/BLIP2/fig5.png" alt="그림1" /></p>
+
+<ul>
+  <li>Vision-Language Representation Learning 반드시 필요 !</li>
+</ul>
+
+<h3 id="42-image-captioning">4.2. Image Captioning</h3>
+
+<ul>
+  <li>BLIP-2를 image captioning에 finetuning:
+    <ul>
+      <li>generate a text description for the image 하라고 함</li>
+    </ul>
+  </li>
+  <li>LLM은 frozen, Q-former랑 image encoder만 학습</li>
+</ul>
+
+<p><img src="/assets/img/llm/BLIP2/table3.png" alt="그림1" /></p>
+
+<h3 id="43-visual-question-answering">4.3. Visual Question Answering</h3>
+
+<ul>
+  <li>BLIP-2를 VQA (사진 + 질문 주고 대답하게 하는 task)로 finetuning:</li>
+  <li>LLM은 frozen, Q-former랑 image encoder만 학습
+    <ul>
+      <li>질문 텍스트 토큰을 Q-former입력으로 추가</li>
+      <li>질문과 쿼리 토큰이 self-attention으로 상호작용</li>
+      <li>쿼리가 질문과 관련 있는 이미지 부분에 집중</li>
+      <li>cross-attention에서 더 의미 있는 이미지 피처 추출 가능</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/llm/BLIP2/table4.png" alt="그림1" /></p>
+
+<h3 id="44-image-text-retrieval">4.4. Image-Text Retrieval</h3>
+
+<ul>
+  <li>Image-to-Text Retrieval: 이미지 → 관련된 설명(텍스트) 검색</li>
+  <li>Text-to-Image Retrieval: 텍스트 → 관련된 이미지 검색
+    <ul>
+      <li>텍스트 생성이 없기 때문에, LLM 없이 Q-former + Image Encoder만 사용</li>
+    </ul>
+  </li>
+  <li>1차 후보군 선택 : 이미지 - 텍스트 feature similarity 기반으로 Top 128 후보 추림
+    <ul>
+      <li>2차 정렬 (Re-ranking): 이 후보군에 대해 ITM score (Image-Text Matching 점수) 계산</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/llm/BLIP2/table5.png" alt="그림1" /></p>
+
+<p><img src="/assets/img/llm/BLIP2/table6.png" alt="그림1" /></p>
+
+<ul>
+  <li>ITC + ITM은 필수, 하지만 ITG도 성능에 도움됨
+    <ul>
+      <li>특히 ITG loss가 직접적인 유사도 학습이 아님에도 불구하고 쿼리 토큰이 텍스트와 연관된 시각 정보를 잘 뽑도록 유도해서 Vision-Language alignment 강화 \(\to\) 성능 향상에 기여</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="5-limitation">5. Limitation</h2>
+
+<ul>
+  <li>In-Context Learning이 안 됨
+    <ul>
+      <li>LLM이 여러 개의 image-text pair를 한 시퀀스에서 보고 패턴 학습하면 잘 안됨</li>
+      <li>한 시퀀스에 여러 이미지-텍스트 쌍이 있는 구조로 데이터셋을 만들어야 함</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="6-conclusion">6. Conclusion</h2>
+
+<ul>
+  <li>BLIP-2, a generic and compute-efficient method for vision-language pre-training that leverages frozen pretrained image encoders and LLMs</li>
+</ul>
+
+  
+</article>
+
+
+
+  <hr class="dingbat related mb6" />
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="https://via.placeholder.com/128x128"
+    srcset="/assets/img/me/me.JPG 1x,/assets/img/me/me.JPG 2x"
+    
+  
+  alt="GW Jeong"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>Bachelor’s degree in Applied Statistics. Yonsei Univ. (2018~2024) <br />
+DataScienceLab 8th 학회장 (2022~2023) <br />
+Master’s degree in Statitstics. Yonsei Univ. (2024~)</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/lpppj" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:wjdrjsdn39@yonsei.ac.kr" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+  
+
+  
+    
+
+
+  
+
+  
+  
+
+  
+    
+
+  
+
+
+  
+<footer class="content" role="contentinfo">
+  <hr/>
+  
+    <p><small class="copyright">© Geonwoo Jeong.
+</small></p>
+  
+  
+    <p><small>Powered by <a class="external" href="https://hydejack.com/">Hydejack</a> v<span id="_version">9.1.6</span></small></p>
+  <hr class="sr-only"/>
+</footer>
+
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+<div class="sidebar-bg sidebar-overlay" style="background-color:rgb(230, 217, 195);background-image:url(/assets/img/me/sidebar.jpg)"></div>
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/me/logo.jpg" class="avatar" alt="LpppJ" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">LpppJ</h2></a>
+    
+    
+      <p class="">
+        DataScience and AI
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="sr-only">Navigation:</span>
+<ul>
+  
+    
+      
+      <li>
+        <a
+          id="_drawer--opened"
+          href="/timeseries/"
+          class="sidebar-nav-item "
+          
+        >
+          TimeSeries
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/mamba/"
+          class="sidebar-nav-item "
+          
+        >
+          Mamba
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/llm/"
+          class="sidebar-nav-item "
+          
+        >
+          LLM
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/pytorch/"
+          class="sidebar-nav-item "
+          
+        >
+          Pytorch
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/stat/"
+          class="sidebar-nav-item "
+          
+        >
+          Statistics
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/project/"
+          class="sidebar-nav-item "
+          
+        >
+          Project
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/presentation/"
+          class="sidebar-nav-item "
+          
+        >
+          Presentation
+        </a>
+      </li>
+    
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/lpppj" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:wjdrjsdn39@yonsei.ac.kr" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>!function(){var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())}();
+</script>
+  <script src="/assets/js/hydejack-9.1.6.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.1.6.js" nomodule defer></script>
+  
+
+  
+
+<!--<![endif]-->
+  <!-- <script>
+  document.querySelector('hy-push-state').setAttribute('prefetch', '');
+
+  document.querySelectorAll('.sidebar a[href^="/"]').forEach(function (el) { 
+    el.addEventListener('click', function (e) {
+      if (el.pathname === window.location.pathname) {
+        e.preventDefault();
+        e.stopPropagation();
+        document.querySelector('hy-drawer').close();
+      }
+    });
+  });
+</script> -->
+
+<!--
+Code for integrating CloudFlare's email protection with Hydejack's single page app loading.
+-->
+<script>
+  document.getElementById('_pushState').addEventListener('hy-push-state-after', function (e) {
+    function e(e){
+      (console.error?console.error:console.log).call(console,e)
+    }
+
+    function t(e){
+      return l.innerHTML='<a href="'+e.replace(/"/g,"&quot;")+'"></a>',l.childNodes[0].getAttribute("href")
+    }
+
+    function r(e,t){
+      var r=e.substr(t,2);return parseInt(r,16)
+    }
+
+    function n(e,n){
+      for(var o="",c=r(e,n),a=n+2;a<e.length;a+=2){
+        var l=r(e,a)^c;
+        o+=String.fromCharCode(l)
+      }
+      return t(o)
+    }
+
+    var o="/cdn-cgi/l/email-protection#",
+        c=".__cf_email__",
+        a="data-cfemail",
+        l=document.createElement("div");
+
+    !function(){
+      for(var t=document.getElementsByTagName("a"),r=0;r<t.length;r++)
+        try{
+          var c=t[r],a=c.href.indexOf(o);
+          a>-1&&(c.href="mailto:"+n(c.href,a+o.length))
+        }catch(t){
+          e(t)
+        }
+    }(),
+    function(){
+      for(var t=document.querySelectorAll(c),r=0;r<t.length;r++)
+        try{
+          var o=t[r],l=n(o.getAttribute(a),0),i=document.createTextNode(l);
+          o.parentNode.replaceChild(i,o)
+        }catch(t){
+          e(t)
+        }
+    }()
+  });
+</script>
+
+
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+</div>
+
+
+</body>
+</html>

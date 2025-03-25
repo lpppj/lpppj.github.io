@@ -30,7 +30,7 @@ Powered by Hydejack v9.1.6 <https://hydejack.com/>
   
     
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Page 5 of 9 for Blog | LpppJ</title>
+<title>Page 5 of 10 for Blog | LpppJ</title>
 <meta name="generator" content="Jekyll v4.3.3" />
 <meta property="og:title" content="Blog" />
 <meta name="author" content="GW Jeong" />
@@ -109,7 +109,7 @@ Powered by Hydejack v9.1.6 <https://hydejack.com/>
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2025-03-15T20:22:18+09:00',
+    INDEX_KEY: 'index--2025-03-25T15:18:03+09:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -384,6 +384,71 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
 
 
   
+
+  
+
+
+
+
+
+<article id="post-pytorch-corrformer2" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      <a href="/pytorch/2024-05-04-corrformer2/" class="flip-title">
+        (Corrformer, NMI 2023) Code Review 2 - Data Embedding
+      </a>
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2024-05-04T00:00:00+09:00">04 May 2024</time> in <span>Pytorch</span> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  
+    <p class="note-sm" >
+      <a href="https://github.com/thuml/Corrformer">Corrformer github</a>
+
+    </p>
+  
+
+
+  </header>
+
+  
+    <ul>
+  <li>step 0. Initialization and Normalizaiton</li>
+  <li>step 1. Data Embedding Instance</li>
+  <li>step 2. Encoder Instance</li>
+  <li>step 3. Decoder Instance</li>
+  <li>step 0 ~ 3는 embedding, encoder, decoder를 정의한 것이고, forward에서 실행된다.
+    <ul>
+      <li>forward에서 각 step을 지날 때에 step 0 ~ 3을 자세히 보도록 한다.</li>
+    </ul>
+  </li>
+</ul>
+
+
+    
+    
+    <footer>
+      <p class="read-more">
+        Continue reading <a class="heading flip-title" href="/pytorch/2024-05-04-corrformer2/">(Corrformer, NMI 2023) Code Review 2 - Data Embedding</a>
+
+      </p>
+    </footer>
+  
+</article>
+
 
   
 
@@ -876,61 +941,6 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
     <footer>
       <p class="read-more">
         Continue reading <a class="heading flip-title" href="/stat/2024-04-14-lawtotal/">The Law of Total Probability / Total Expectation / Total Variance (Gumbel-Max trick, …)</a>
-
-      </p>
-    </footer>
-  
-</article>
-
-
-  
-
-
-
-
-
-<article id="post-stat-dTV" class="page post mb6" role="article">
-  <header>
-    <h1 class="post-title flip-project-title">
-      <a href="/stat/2024-04-14-dTV/" class="flip-title">
-        Total variation distance and Convergence in distribution
-      </a>
-    </h1>
-
-    <div class="post-date">
-      
-      <span class="ellipsis mr1">
-        <time datetime="2024-04-14T00:00:00+09:00">14 Apr 2024</time> in <span>Stat</span> 
-      </span>
-      
-    </div>
-
-    
-    
-
-    
-
-
-
-  <div class="hr pb0"></div>
-
-
-  </header>
-
-  
-    <ul>
-  <li>통계학에서 Convergence in distribution은 중요한 성질이다. 우리는 Sample size n이 커질수록 확률변수 또는 estimator가 어떤 분포에 가까워지는지 궁금하기 때문이다.</li>
-  <li>그러므로 Convergence in distribution을 imply하는 성질도 중요하다. Convergence in distribution을 보일 수 있는 방법들 중 하나가 되기 때문이다.</li>
-  <li>Total variation distance는 두 분포 사이의 distance metric 중 하나이다. Total variation distance가 작으면 두 분포가 가깝다는 의미이다.</li>
-  <li>본 게시글에서는 Total variation distance에 대해서 알아보고 <strong>Total variation distance가 0으로 수렴</strong>하면 한 분포가 다른 분포로 근사한다, 즉 Convergence in distribution한다는 것을 보인다.</li>
-</ul>
-
-
-    
-    
-    <footer>
-      <p class="read-more">
-        Continue reading <a class="heading flip-title" href="/stat/2024-04-14-dTV/">Total variation distance and Convergence in distribution</a>
 
       </p>
     </footer>

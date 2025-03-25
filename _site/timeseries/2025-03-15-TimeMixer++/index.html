@@ -45,7 +45,7 @@ Powered by Hydejack v9.1.6 <https://hydejack.com/>
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"GW Jeong"},"dateModified":"2025-03-15T18:54:55+09:00","datePublished":"2025-03-15T00:00:00+09:00","description":"ICLR 2025 Oral","headline":"TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/timeseries/2025-03-15-TimeMixer++/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/img/me/logo.jpg"},"name":"GW Jeong"},"url":"http://localhost:4000/timeseries/2025-03-15-TimeMixer++/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"GW Jeong"},"dateModified":"2025-03-16T16:51:07+09:00","datePublished":"2025-03-15T00:00:00+09:00","description":"ICLR 2025 Oral","headline":"TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/timeseries/2025-03-15-TimeMixer++/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/img/me/logo.jpg"},"name":"GW Jeong"},"url":"http://localhost:4000/timeseries/2025-03-15-TimeMixer++/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -108,7 +108,7 @@ Powered by Hydejack v9.1.6 <https://hydejack.com/>
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2025-03-15T20:22:18+09:00',
+    INDEX_KEY: 'index--2025-03-25T15:18:03+09:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -344,7 +344,7 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
 <h3 id="31-structure-overview">3.1. Structure Overview</h3>
 
 <ul>
-  <li>(1 ) <strong>Input Projection</strong>
+  <li>(1) <strong>Input Projection</strong>
     <ul>
       <li>기존 TimeMixer에서는 channel-independence strategy</li>
       <li>TimeMixer++에서는 Channel mixing \(\to\) Embedding
@@ -470,8 +470,7 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
       </li>
       <li>즉 seasonal, trend image는 각각
         <ul>
-          <li>
-\[\begin{aligned}\mathbf{s}_m^{(l, k)}&amp;=\text {Attention}_{\text{col }}\left(\mathbf{Q}_{\mathrm{col}}, \mathbf{K}_{\mathrm{col}}, \mathbf{V}_{\mathrm{col}}\right),\\\mathbf{t}_m^{(l, k)}&amp;=\operatorname{Attention}_{\text {row }}\left(\mathbf{Q}_{\text {row }}, \mathbf{K}_{\text {row }}, \mathbf{V}_{\text {row }}\right)\end{aligned}\]
+          <li>\(\begin{aligned}\mathbf{s}_m^{(l, k)}&amp;=\text {Attention}_{\text{col }}\left(\mathbf{Q}_{\mathrm{col}}, \mathbf{K}_{\mathrm{col}}, \mathbf{V}_{\mathrm{col}}\right),\\\mathbf{t}_m^{(l, k)}&amp;=\operatorname{Attention}_{\text {row }}\left(\mathbf{Q}_{\text {row }}, \mathbf{K}_{\text {row }}, \mathbf{V}_{\text {row }}\right)\end{aligned}\).
             <ul>
               <li>where \(\mathbf{s}_m^{(l, k)}, \mathbf{t}_m^{(l, k)} \in \mathbb{R}^{p_k \times f_{\mathrm{m}, \mathrm{k}} \times d_{\text {model }}}\)</li>
             </ul>
