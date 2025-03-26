@@ -1,5 +1,304 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-03-25T15:18:03+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LpppJ</title><subtitle>This is blog about machine learning, deep learning, artificial intelligence.
-</subtitle><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><entry><title type="html">BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models (Arxiv 2023)</title><link href="http://localhost:4000/llm/2025-03-25-BLIP2/" rel="alternate" type="text/html" title="BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models (Arxiv 2023)" /><published>2025-03-25T00:00:00+09:00</published><updated>2025-03-25T15:17:27+09:00</updated><id>http://localhost:4000/llm/BLIP2</id><content type="html" xml:base="http://localhost:4000/llm/2025-03-25-BLIP2/"><![CDATA[<h2 id="abstract">Abstract</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-03-26T15:10:13+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LpppJ</title><subtitle>This is blog about machine learning, deep learning, artificial intelligence.
+</subtitle><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><entry><title type="html">HDMixer: Hierarchical Dependency with Extendable Patch for Multivariate Time Series Forecasting (AAAI 2024)</title><link href="http://localhost:4000/timeseries/2025-03-26-HDMixer/" rel="alternate" type="text/html" title="HDMixer: Hierarchical Dependency with Extendable Patch for Multivariate Time Series Forecasting (AAAI 2024)" /><published>2025-03-26T00:00:00+09:00</published><updated>2025-03-26T15:10:13+09:00</updated><id>http://localhost:4000/timeseries/HDMixer</id><content type="html" xml:base="http://localhost:4000/timeseries/2025-03-26-HDMixer/"><![CDATA[<h2 id="abstract">Abstract</h2>
+
+<ul>
+  <li>Patching to enhance <strong>local semantic</strong>s and improve model <strong>performance</strong>
+    <ul>
+      <li>문제점 1. <strong>length-fixed</strong> patch are prone to losing <strong>temporal boundary information</strong></li>
+      <li>문제점 2. long-term dependencies across patches에만 집중
+        <ul>
+          <li>short-term dependencies <strong>within patches</strong> 또는</li>
+          <li>complex interactions among <strong>cross-variable</strong> patches에는 관심 부족</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>MLP-based <strong>HDMixer</strong>를 제안:
+    <ul>
+      <li>patches with richer <strong>semantic information</strong> and efficiently modeling <strong>hierarchical interactions</strong>.</li>
+      <li>Length-Extendable Patcher (<strong>LEP</strong>) tailored to MTS :
+        <ul>
+          <li>enriches the <strong>boundary information</strong> of patches</li>
+          <li><strong>patch entropy loss</strong> for guidance to ensure that the patch divisionby LEP</li>
+        </ul>
+      </li>
+      <li>HierarchicalDependency Explorer (<strong>HDE</strong>):
+        <ul>
+          <li>short-term dependencies within patches,</li>
+          <li>long-term dependencies across patches,</li>
+          <li>and complex interactions among variables</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p><img src="/assets/img/timeseries/HDMixer/fig1.png" alt="그림1" /></p>
+
+<ul>
+  <li>Length-fixed patch는 intuitive assumption that a fixed partitioning of time series applies universally
+    <ul>
+      <li>But (1) <strong>Loss of boundary informationin patch</strong>, (2) <strong>Semantic incoherence in sequence</strong></li>
+      <li>즉 long-term interactions만 고려하지 (a) short-term interactions and (b) cross-variable interactions는 고려하지 못하고 있음
+        <ul>
+          <li>(a) short-term interactions는 local patterns에 대한 중요한 정보이고</li>
+          <li>(b) cross-variable interactions는 latent causal connections hidden in data variations에 대한 중요한 정보</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Length-Extendable Patcher (LEP)</strong>
+    <ul>
+      <li>enrich the boundary semanticsof time series patches</li>
+      <li>using Patch Entropy Loss</li>
+    </ul>
+  </li>
+  <li><strong>Hierarchical Dependency Explorer (HDE)</strong>
+    <ul>
+      <li>short-term dependencies within patches,</li>
+      <li>long-term inter-patch dependencies,</li>
+      <li>and intricate cross-variable relationships</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-related-work">2. Related Work</h2>
+
+<ul>
+  <li><a href="https://lpppj.github.io/timeseries/2024-03-19-crossformer">Crossformer</a>에서는 sequence가 길어지면 computational cost 높아짐</li>
+  <li><a href="https://lpppj.github.io/timeseries/2024-02-18-PatchTST">PatchTST</a>에서는 변수간 관계 간과, 패치내 관계도 간과</li>
+</ul>
+
+<h2 id="3-methodology">3. Methodology</h2>
+
+<ul>
+  <li>\(X_{\text {input }}=\left[X^1, X^2, \ldots, X^M\right] \in \mathbb{R}^{M \times L}\) 보고 \(\hat{X}=\left[\hat{X}^1, \hat{X}^2, \ldots, \hat{X}^M\right] \in \mathbb{R}^{M \times T}\) 예측</li>
+</ul>
+
+<h3 id="31-overall-structure">3.1. Overall Structure</h3>
+
+<p><img src="/assets/img/timeseries/HDMixer/fig2.png" alt="그림1" /></p>
+
+<ul>
+  <li>\(X_{\text {patch }}=\operatorname{LEP}\left(X_{\text {input }}\right) \in \mathbb{R}^{M \times N \times D}\).
+    <ul>
+      <li>N represents the number of patches and</li>
+      <li>D denotes <strong>the number of sampled</strong> time series values within each patch</li>
+    </ul>
+  </li>
+  <li>\(Z^K=\operatorname{HDE}\left(X_{\text {patch }}\right)\in \mathbb{R}^{M \times N \times D}\).
+    <ul>
+      <li>where \(\mathrm{HDE}(\cdot) \text { is the stack of } K \text { HDMixer blocks }\)</li>
+    </ul>
+  </li>
+  <li>\(\hat{X}=\operatorname{Pred}\left(\operatorname{Flatten}\left(Z^K\right)\right) \in \mathbb R^{M\times T}\).
+    <ul>
+      <li>\(\operatorname{Flatten}\left(Z^K\right) \in \mathbb{R}^{M \times(D \times N)}\).</li>
+    </ul>
+  </li>
+  <li>이제 LEF, HDE를 각각 자세히 알아보자</li>
+</ul>
+
+<h3 id="32-length-extendable-patcher">3.2. Length-Extendable Patcher</h3>
+
+<p><img src="/assets/img/timeseries/HDMixer/fig3.png" alt="그림1" /></p>
+
+<ul>
+  <li>
+    <p><strong>bi-linear interpolation</strong> to uniformly sample a fixed number of time steps within each patch D</p>
+  </li>
+  <li>
+    <p><strong>기존 Length-fixed patch</strong>는 어떤 변수의 i번째 patch \(p_i\)를 \(\left(c_i, D\right)\)로 표현</p>
+
+    <ul>
+      <li>\(c_i\) is the central point coordinate of the \(i\)-th patch box</li>
+      <li>\(D\) represents the number of sampling points</li>
+    </ul>
+  </li>
+  <li>
+    <p>그러면 patch의 시작(left)과 마지막(right)는</p>
+
+    <ul>
+      <li>\(\text { left }_i=c_i-l\) and \(\text { right }_i=c_i+l,\) where \(l=\frac{D-1}{2}\)</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>새로운 Length-Extendable Patcher</strong>에서는 \(p_i\)를 \(\left(c_i, D, \delta c_i, \delta l e f t_i, \delta r i g h t_i\right)\)로 표현</p>
+
+    <ul>
+      <li>\(c_i\) denotes the central point coordinate of the \(i\)-th patch</li>
+      <li>\(D\) is the number of sampling points</li>
+      <li>\(\delta c_i\) represents the central point offset,</li>
+      <li>\(\delta l e f t_i\) represents the left part expansion of the central point,</li>
+      <li>\(\delta_{r i g h t}^i\) represents the right part expansion of the central point.</li>
+      <li>\(\delta c_i\), \(\delta l e f t_i\), \(\delta_{r i g h t}^i\) 모두 다 learnable</li>
+    </ul>
+  </li>
+  <li>
+    <p>\(\begin{aligned}
+\text { left }_i &amp; =\left(c_i+\delta c_i\right)-\left(l+\delta \text { left }_i\right) \\
+\text { right }_i &amp; =\left(c_i+\delta c_i\right)+\left(l+\delta \text { right }_i\right)
+\end{aligned}\).</p>
+
+    <ul>
+      <li>즉 조정된 center에서 - 왼쪽 끝까지의 길이도 조정되고, 오른쪽 끝까지의 길이도 조정됨</li>
+    </ul>
+  </li>
+  <li>
+    <p>패치에서 D개의 값율 균등하게 뿝아야 하므로, 샘풀링 간격은: \(\frac{2 l+\delta \text { left }_i+\delta r i g h t_i}{D-1}\)</p>
+  </li>
+  <li>
+    <p>중심점 offset: \(\delta C=\frac{D}{a} \cdot \tanh \left(W_{\text {offet }} \cdot f\left(X_{\text {input }}\right)\right)\)</p>
+
+    <p>좌우 경계 확장: \(\delta L, \delta R=\frac{D}{b} \cdot \operatorname{ReLU}\left(\tanh \left(W_{\text {extend }} \cdot f\left(X_{\text {input }}\right)\right)\right)\)</p>
+
+    <ul>
+      <li>\(f(\cdot)\) : feature extractor</li>
+      <li>\(W_{\text {offset }} \in \mathbb{R}^{T \times N}, W_{\text {extend }} \in \mathbb{R}^{T \times 2 N}\) : learnable parameters</li>
+      <li>tanh: 중심 offset 간을 \([-1,1]\) 볌위로 졔한</li>
+      <li>ReLU: 확장 길이는 옴수가 되지 앏도록</li>
+      <li>\(\frac{D}{a}, \frac{D}{b}\) : 조절 계수, 확장 범위 제한</li>
+    </ul>
+  </li>
+  <li>LEP에서는 패치 길이랑 위치가 유동적이어서 sampling 지점이 정수가 아닌 소수(ex. 4.2)
+    <ul>
+      <li><strong>Bilinear Interpolation</strong>으로 해결 !
+        <ul>
+          <li>\(X_i=\sum_j G(i ; j) \cdot X_j\), where \(G\left(i ; j\right)=\max \left(0,1-\mid i-j\mid\right)\)</li>
+          <li>예를 들어 \(i=4.2\) 일 때, \(G(4.2 ; 4)=0.8\), \(G(4.2 ; 5)=0.2\), 나머지 \(j\) 는 모두 0
+            <ul>
+              <li>\(\rightarrow\) 따라서, \(X_{4.2}=0.8 \cdot X_4+0.2 \cdot X_5\)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>모든 변수마다, 모든 패치마다, 각 패치 내 D개의 포인트를 추출, 최종적으로 \(X_{\text {patch }} \in \mathbb{R}^{M \times N \times D}\)</li>
+</ul>
+
+<h3 id="33-patch-entropy-loss">3.3. Patch Entropy Loss</h3>
+
+<ul>
+  <li>
+    <p><strong>기존 Length-fixed patch</strong>는 시계열 $X \in \mathbb{R}^L$ 에 대해, 길이 D 의 고정 패치 N 개를 추출:</p>
+
+    <ul>
+      <li>
+        <p>\(X^{L F}=\left[\left[x_1^{L F}, \ldots, x_D^{L F}\right], \ldots,\left[x_{L-D+1}^{L F}, \ldots, x_L^{L F}\right]\right] \in R^{N \times D}\).</p>
+      </li>
+      <li>
+        <p>서로 다른 두 서브패턴 \(X^{L F}(n), X^{L F}(m)\) 의 거리 측정</p>
+
+        <ul>
+          <li>
+            <p>: \(d\left(X^{L F}(n), X^{L F}(m)\right)=\max \mid X^{L F}(n)-X^{L F}(m)\mid\)</p>
+          </li>
+          <li>
+            <p>거리 $d&lt;r$ 인 유사한 서브패턴 개수 비율 계산</p>
+            <ul>
+              <li>: \(C_m^{L F}\left(X^{L F} \mid r\right)=\frac{1}{N} \operatorname{num}\left\{d\left(X^{L F}(n), X^{L F}(m)\right)&lt;r\right\}\)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>전체 평균 복잡도(엔트로피)</p>
+        <ul>
+          <li>: \(\Phi^{L F}\left(X^{L F} \mid r\right)=\frac{1}{N} \sum_{n=1}^N \ln C_n^{L F}\left(X^{L F} \mid r\right)\)
+            <ul>
+              <li>similarity of different subpatternsafter length-fixed patching</li>
+              <li><strong>낮을수록</strong> patching 후 <strong>distinctness</strong> of semantic information among patches 강함</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>새로운 Length-Extendable Patcher</strong>에서도 비슷하게 the similarity of sub-patterns:
+    <ul>
+      <li>\(\begin{gathered}
+C_m^{L E}\left(X^{L E} \mid r\right)=\frac{1}{N} \operatorname{num}\left\{d\left(X^{L E}(n), X^{L E}(m)\right)&lt;r\right\} \\
+\Phi^{L E}\left(X^{L E} \mid r\right)=\frac{1}{N} \sum_{n=1}^N \ln C_n^{L E}\left(X^{L F} \mid r\right)
+\end{gathered}\).</li>
+      <li><strong>The patch entropy</strong> of a sequence:
+        <ul>
+          <li>\(\begin{aligned}
+&amp; \operatorname{PaEn}\left(X^{L E} \mid r, N\right) \\
+&amp; =\lim _{L \rightarrow \infty}\left[\Phi^{L F}\left(X^{L F} \mid r\right)-\Phi^{L E}\left(X^{L E} \mid r\right)\right] \\
+&amp; =\lim _{L \rightarrow \infty} \frac{1}{N}\left[\sum_{i=1}^N \ln C_i^{L F}\left(X^{L F} \mid r\right)-\sum_{i=1}^N \ln C_i^{L E}\left(X^{L E} \mid r\right)\right] \\
+&amp; =\lim _{L \rightarrow \infty} 1 N \sum_{i=1}^N \ln \frac{C_i^{L F}\left(X^{L F} \mid r\right)}{C_i^{L E}\left(X^{L E} \mid r\right)}
+\end{aligned}\).</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>최종 손실 함수: Patch Entropy Loss</p>
+
+    <ul>
+      <li>
+        <p>:\(L_p=-\left(\Phi^{L E}\left(X^{L E} \mid r\right)-\Phi^{L F}\left(X^{L F} \mid r\right)\right)\)</p>
+      </li>
+      <li>
+        <p>LE 패치가 고정 패치보다 정보량이 많아지도록 학습을 유도</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="34-hierarchical-dependency-explorer">3.4. Hierarchical Dependency Explorer</h3>
+
+<p><img src="/assets/img/timeseries/HDMixer/fig4.png" alt="그림1" /></p>
+
+<ul>
+  <li>입력은 \(X_{\text {patch }} \in \mathbb{R}^{M \times N \times D}\)이고, 각 HDMixer block은 <strong>Short-term dependency</strong> (patch 내부 시간축), <strong>Long-term dependency</strong> (패치 간), <strong>Variable interaction</strong> (변수 간) 모두 고려함</li>
+  <li>Short-term (patch 내부)
+    <ul>
+      <li>: \(U_{*, *, d}^k=Z_{*, *, d}^k+W_{s t 2} \cdot \operatorname{GELU}\left(W_{s t 1} \cdot \operatorname{LN}\left(Z^k\right)_{*, *, d}\right)\)</li>
+    </ul>
+  </li>
+  <li>Long-term (패치 간)
+    <ul>
+      <li>: \(V_{*, n, *}^k=Z_{*, n, *}^k+W_{l t 2} \cdot \operatorname{GELU}\left(W_{l t 1} \cdot \operatorname{LN}\left(U^k\right)_{*, n, *}\right)\)</li>
+    </ul>
+  </li>
+  <li>Cross-variable (변수 간)
+    <ul>
+      <li>: \(Y_{m, *, *}^k=Z_{m, *, *}^k+W_{v 2} \cdot \operatorname{GELU}\left(W_{v 1} \cdot \operatorname{LN}\left(V^k\right)_{m, *, *}\right)\)</li>
+    </ul>
+  </li>
+  <li>마지막 출력 : \(Z^{k+1}=Y^k\)</li>
+  <li>Block 통과해도 shape이 같으니 residual connection
+    <ul>
+      <li>: \(Z^{k+1}=\operatorname{HDMixer}^k\left(Z^k\right)+Z^k\)</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="4-experiment">4. Experiment</h2>
+
+<ul>
+  <li>Main results</li>
+</ul>
+
+<p><img src="/assets/img/timeseries/HDMixer/table1.png" alt="그림1" /></p>
+
+<ul>
+  <li>Ablation study</li>
+</ul>
+
+<p><img src="/assets/img/timeseries/HDMixer/table2.png" alt="그림1" /></p>
+
+<p><img src="/assets/img/timeseries/HDMixer/table3.png" alt="그림1" /></p>
+
+<ul>
+  <li>Efficient Analysis</li>
+</ul>
+
+<p><img src="/assets/img/timeseries/HDMixer/fig5.png" alt="그림1" /></p>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[AAAI 2024](https://ojs.aaai.org/index.php/AAAI/article/view/29155)]]></summary></entry><entry><title type="html">BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models (Arxiv 2023)</title><link href="http://localhost:4000/llm/2025-03-25-BLIP2/" rel="alternate" type="text/html" title="BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models (Arxiv 2023)" /><published>2025-03-25T00:00:00+09:00</published><updated>2025-03-25T15:18:36+09:00</updated><id>http://localhost:4000/llm/BLIP2</id><content type="html" xml:base="http://localhost:4000/llm/2025-03-25-BLIP2/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
   <li>Vision-and-language pre-training은 end-toendtraining of large-scale models 때문에 어려웠음</li>
@@ -345,48 +644,7 @@
 
 <ul>
   <li>BLIP-2, a generic and compute-efficient method for vision-language pre-training that leverages frozen pretrained image encoders and LLMs</li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[Arxiv 2024]()]]></summary></entry><entry><title type="html">깃블로그 만들기 7 : 흔히 발생할 수 있는 에러 (2)</title><link href="http://localhost:4000/project/2025-03-15-gitblog7/" rel="alternate" type="text/html" title="깃블로그 만들기 7 : 흔히 발생할 수 있는 에러 (2)" /><published>2025-03-15T00:00:00+09:00</published><updated>2025-03-15T17:17:40+09:00</updated><id>http://localhost:4000/project/gitblog7</id><content type="html" xml:base="http://localhost:4000/project/2025-03-15-gitblog7/"><![CDATA[<ul>
-  <li>이번에는 Hydejack 테마를 사용하면서 내가 자주 했던 실수들을 살펴보겠다. 처음에는 에러의 이유를 몰라서 gitblog repository를 몇 번이나 삭제하고 다시 만들면서 시간을 많이 썼는데, 앞으로는 그러지 않기 위해 남긴다.</li>
-</ul>
-
-<h2 id="1-rpc-failure-http-400">1. RPC failure (HTTP 400)</h2>
-
-<ul>
-  <li>평소처럼 Terminal에서 git push를 할 때에 아래와 같은 에러가 발생</li>
-</ul>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">오브젝트</span> <span class="n">나열하는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">1335</span><span class="p">,</span> <span class="n">완료</span><span class="p">.</span>
-<span class="n">오브젝트</span> <span class="n">개수</span> <span class="n">세는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">1335</span><span class="o">/</span><span class="mi">1335</span><span class="p">),</span> <span class="n">완료</span><span class="p">.</span>
-<span class="n">Delta</span> <span class="n">compression</span> <span class="n">using</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">8</span> <span class="n">threads</span>
-<span class="n">오브젝트</span> <span class="n">압축하는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">634</span><span class="o">/</span><span class="mi">634</span><span class="p">),</span> <span class="n">완료</span><span class="p">.</span>
-<span class="n">error</span><span class="p">:</span> <span class="n">RPC</span> <span class="n">failed</span><span class="p">;</span> <span class="n">HTTP</span> <span class="mi">400</span> <span class="n">curl</span> <span class="mi">22</span> <span class="n">The</span> <span class="n">requested</span> <span class="n">URL</span> <span class="n">returned</span> <span class="n">error</span><span class="p">:</span> <span class="mi">400</span>
-<span class="n">send</span><span class="o">-</span><span class="n">pack</span><span class="p">:</span> <span class="n">unexpected</span> <span class="n">disconnect</span> <span class="k">while</span> <span class="n">reading</span> <span class="n">sideband</span> <span class="n">packet</span>
-<span class="n">오브젝트</span> <span class="n">쓰는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">1095</span><span class="o">/</span><span class="mi">1095</span><span class="p">),</span> <span class="mf">10.46</span> <span class="n">MiB</span> <span class="o">|</span> <span class="mf">10.38</span> <span class="n">MiB</span><span class="o">/</span><span class="n">s</span><span class="p">,</span> <span class="n">완료</span><span class="p">.</span>
-<span class="n">Total</span> <span class="mi">1095</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">549</span><span class="p">),</span> <span class="n">reused</span> <span class="mi">0</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">0</span><span class="p">),</span> <span class="n">pack</span><span class="o">-</span><span class="n">reused</span> <span class="mi">0</span>
-<span class="n">fatal</span><span class="p">:</span> <span class="n">the</span> <span class="n">remote</span> <span class="n">end</span> <span class="n">hung</span> <span class="n">up</span> <span class="n">unexpectedly</span>
-<span class="n">Everything</span> <span class="n">up</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">date</span>
-</code></pre></div></div>
-
-<ul>
-  <li>가장 아래 메세지를 보고 문제가 없다고 생각할 수 있지만
-    <ul>
-      <li>중간에 RPC failure (HTTP 400) 에러가 발생</li>
-      <li>당연히 정상적으로 push 되지 않음</li>
-    </ul>
-  </li>
-  <li>원인
-    <ul>
-      <li>한 번에 너무 많은 양을 push 할 때에 발생할 수 있는 에러</li>
-      <li>나의 경우에는 평소보다 많은 양이 아니었음에도 발생</li>
-    </ul>
-  </li>
-  <li>해결방법
-    <ul>
-      <li>Git 전송 버퍼 크기를 늘려주면 된다</li>
-      <li>터미널에 <code class="language-plaintext highlighter-rouge">git config --global http.postBuffer 524288000</code>를 입력하고 다시 push하면 된다</li>
-    </ul>
-  </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="project" /><summary type="html"><![CDATA[이번에는 Hydejack 테마를 사용하면서 내가 자주 했던 실수들을 살펴보겠다. 처음에는 에러의 이유를 몰라서 gitblog repository를 몇 번이나 삭제하고 다시 만들면서 시간을 많이 썼는데, 앞으로는 그러지 않기 위해 남긴다.]]></summary></entry><entry><title type="html">TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)</title><link href="http://localhost:4000/timeseries/2025-03-15-TimeMixer++/" rel="alternate" type="text/html" title="TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)" /><published>2025-03-15T00:00:00+09:00</published><updated>2025-03-16T16:51:07+09:00</updated><id>http://localhost:4000/timeseries/TimeMixer++</id><content type="html" xml:base="http://localhost:4000/timeseries/2025-03-15-TimeMixer++/"><![CDATA[<h2 id="abstract">Abstract</h2>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[Arxiv 2024]()]]></summary></entry><entry><title type="html">TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)</title><link href="http://localhost:4000/timeseries/2025-03-15-TimeMixer++/" rel="alternate" type="text/html" title="TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)" /><published>2025-03-15T00:00:00+09:00</published><updated>2025-03-16T16:51:07+09:00</updated><id>http://localhost:4000/timeseries/TimeMixer++</id><content type="html" xml:base="http://localhost:4000/timeseries/2025-03-15-TimeMixer++/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
   <li>TIMEMIXER++: general-purpose time series pattern machine (TSPM)
@@ -731,7 +989,48 @@
       <li><strong>Multi-scale and Multi-resolution mixing techniques</strong>, fuses and extracts information across different hierarchical levels</li>
     </ul>
   </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[ICLR 2025 Oral](https://openreview.net/pdf?id=1CLzLXSFNn)]]></summary></entry><entry><title type="html">S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv 2025 )</title><link href="http://localhost:4000/mamba/2025-03-01-S2TX/" rel="alternate" type="text/html" title="S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv 2025 )" /><published>2025-03-01T00:00:00+09:00</published><updated>2025-03-17T11:37:02+09:00</updated><id>http://localhost:4000/mamba/S2TX</id><content type="html" xml:base="http://localhost:4000/mamba/2025-03-01-S2TX/"><![CDATA[<h2 id="abstract">Abstract</h2>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[ICLR 2025 Oral](https://openreview.net/pdf?id=1CLzLXSFNn)]]></summary></entry><entry><title type="html">깃블로그 만들기 7 : 흔히 발생할 수 있는 에러 (2)</title><link href="http://localhost:4000/project/2025-03-15-gitblog7/" rel="alternate" type="text/html" title="깃블로그 만들기 7 : 흔히 발생할 수 있는 에러 (2)" /><published>2025-03-15T00:00:00+09:00</published><updated>2025-03-15T17:17:40+09:00</updated><id>http://localhost:4000/project/gitblog7</id><content type="html" xml:base="http://localhost:4000/project/2025-03-15-gitblog7/"><![CDATA[<ul>
+  <li>이번에는 Hydejack 테마를 사용하면서 내가 자주 했던 실수들을 살펴보겠다. 처음에는 에러의 이유를 몰라서 gitblog repository를 몇 번이나 삭제하고 다시 만들면서 시간을 많이 썼는데, 앞으로는 그러지 않기 위해 남긴다.</li>
+</ul>
+
+<h2 id="1-rpc-failure-http-400">1. RPC failure (HTTP 400)</h2>
+
+<ul>
+  <li>평소처럼 Terminal에서 git push를 할 때에 아래와 같은 에러가 발생</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">오브젝트</span> <span class="n">나열하는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">1335</span><span class="p">,</span> <span class="n">완료</span><span class="p">.</span>
+<span class="n">오브젝트</span> <span class="n">개수</span> <span class="n">세는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">1335</span><span class="o">/</span><span class="mi">1335</span><span class="p">),</span> <span class="n">완료</span><span class="p">.</span>
+<span class="n">Delta</span> <span class="n">compression</span> <span class="n">using</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">8</span> <span class="n">threads</span>
+<span class="n">오브젝트</span> <span class="n">압축하는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">634</span><span class="o">/</span><span class="mi">634</span><span class="p">),</span> <span class="n">완료</span><span class="p">.</span>
+<span class="n">error</span><span class="p">:</span> <span class="n">RPC</span> <span class="n">failed</span><span class="p">;</span> <span class="n">HTTP</span> <span class="mi">400</span> <span class="n">curl</span> <span class="mi">22</span> <span class="n">The</span> <span class="n">requested</span> <span class="n">URL</span> <span class="n">returned</span> <span class="n">error</span><span class="p">:</span> <span class="mi">400</span>
+<span class="n">send</span><span class="o">-</span><span class="n">pack</span><span class="p">:</span> <span class="n">unexpected</span> <span class="n">disconnect</span> <span class="k">while</span> <span class="n">reading</span> <span class="n">sideband</span> <span class="n">packet</span>
+<span class="n">오브젝트</span> <span class="n">쓰는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">1095</span><span class="o">/</span><span class="mi">1095</span><span class="p">),</span> <span class="mf">10.46</span> <span class="n">MiB</span> <span class="o">|</span> <span class="mf">10.38</span> <span class="n">MiB</span><span class="o">/</span><span class="n">s</span><span class="p">,</span> <span class="n">완료</span><span class="p">.</span>
+<span class="n">Total</span> <span class="mi">1095</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">549</span><span class="p">),</span> <span class="n">reused</span> <span class="mi">0</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">0</span><span class="p">),</span> <span class="n">pack</span><span class="o">-</span><span class="n">reused</span> <span class="mi">0</span>
+<span class="n">fatal</span><span class="p">:</span> <span class="n">the</span> <span class="n">remote</span> <span class="n">end</span> <span class="n">hung</span> <span class="n">up</span> <span class="n">unexpectedly</span>
+<span class="n">Everything</span> <span class="n">up</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">date</span>
+</code></pre></div></div>
+
+<ul>
+  <li>가장 아래 메세지를 보고 문제가 없다고 생각할 수 있지만
+    <ul>
+      <li>중간에 RPC failure (HTTP 400) 에러가 발생</li>
+      <li>당연히 정상적으로 push 되지 않음</li>
+    </ul>
+  </li>
+  <li>원인
+    <ul>
+      <li>한 번에 너무 많은 양을 push 할 때에 발생할 수 있는 에러</li>
+      <li>나의 경우에는 평소보다 많은 양이 아니었음에도 발생</li>
+    </ul>
+  </li>
+  <li>해결방법
+    <ul>
+      <li>Git 전송 버퍼 크기를 늘려주면 된다</li>
+      <li>터미널에 <code class="language-plaintext highlighter-rouge">git config --global http.postBuffer 524288000</code>를 입력하고 다시 push하면 된다</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="project" /><summary type="html"><![CDATA[이번에는 Hydejack 테마를 사용하면서 내가 자주 했던 실수들을 살펴보겠다. 처음에는 에러의 이유를 몰라서 gitblog repository를 몇 번이나 삭제하고 다시 만들면서 시간을 많이 썼는데, 앞으로는 그러지 않기 위해 남긴다.]]></summary></entry><entry><title type="html">S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv 2025 )</title><link href="http://localhost:4000/mamba/2025-03-01-S2TX/" rel="alternate" type="text/html" title="S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv 2025 )" /><published>2025-03-01T00:00:00+09:00</published><updated>2025-03-17T11:37:02+09:00</updated><id>http://localhost:4000/mamba/S2TX</id><content type="html" xml:base="http://localhost:4000/mamba/2025-03-01-S2TX/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
   <li><strong>Multi-scale</strong> models for the <strong>heterogeneity</strong> btw long and short patterns
@@ -1194,63 +1493,7 @@
       <li>scalable and unified architecture for time series foundation models that leverages a sparse design with mixture-of-experts to enhance computational efficiency without compromising model capacity</li>
     </ul>
   </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[ICLR 2025 Spotlight](https://arxiv.org/pdf/2409.16040)]]></summary></entry><entry><title type="html">(Pytorch Issue) .sh file와 Data loader가 상관이 있을까</title><link href="http://localhost:4000/pytorch/2025-02-26-sh_batch/" rel="alternate" type="text/html" title="(Pytorch Issue) .sh file와 Data loader가 상관이 있을까" /><published>2025-02-26T00:00:00+09:00</published><updated>2025-03-15T17:06:15+09:00</updated><id>http://localhost:4000/pytorch/sh_batch</id><content type="html" xml:base="http://localhost:4000/pytorch/2025-02-26-sh_batch/"><![CDATA[<p><img src="/assets/img/pytorch/sh_batch/fig1.png" alt="그림1" /></p>
-
-<ul>
-  <li>상황은 다음과 같다.
-    <ul>
-      <li>terminal에서 .sh 파일을 실행: .sh 파일에 있는 model hyperparameters가 run.py로 전달</li>
-      <li>run.py에서 취합된 paramters가 exp_main.py으로 전달: exp_main.py에서는 model과 data loader를 불러옴</li>
-      <li>exp_main.py에서는 data loader에서 불러온 데이터가 모델에 들어감</li>
-      <li>Pathformer.py에 정의된 모델이 input 데이터를 처리하기 시작 (여기서 model hyperparameters 사용됨)</li>
-      <li>Pathformer.py에서는 input 데이터가 AMS.py에 정의된 layer를 반복적으로 통과</li>
-    </ul>
-  </li>
-  <li>문제는 다음과 같다.
-    <ul>
-      <li>Model hyperparamters는 patch size 와 같이 <strong>이미 불러온 데이터</strong>를 모델이 다루는 방법을 정의하는데</li>
-      <li>.sh 파일에서 model hyperparamters를 바꾸었더니 data loader가 불러오는 batch의 순서가 바뀌어버림</li>
-      <li>아래 두 사진은 모두 <strong>첫 번째 배치</strong>를 시각화한 것인데, patch size를 다르게 설정한 것이 유일한 차이</li>
-      <li>patch size는 <strong>이미 불러온 데이터</strong>를 patching하는 방법을 결정하는 곳에만 쓰이는데 애초에 불러온 첫번째 배치가 다름</li>
-    </ul>
-  </li>
-</ul>
-
-<p><img src="/assets/img/pytorch/sh_batch/fig2.png" alt="그림1" />
-<img src="/assets/img/pytorch/sh_batch/fig3.png" alt="그림1" /></p>
-
-<ul>
-  <li>
-    <p>.sh 파일에 정의된 model hyperparameters가 data loader에서 쓰이지 않음에도 위와 같은 현상 발생</p>
-  </li>
-  <li>
-    <p>연구실 선배와 Chat GPT의 도움을 통해 유추한 원인은 다음과 같음</p>
-  </li>
-</ul>
-
-<p><img src="/assets/img/pytorch/sh_batch/fig4.png" alt="그림1" /></p>
-
-<ul>
-  <li>첫째, __init__을 제외한 모든 함수의 실행보다 __init__함수가 먼저 실행됨
-    <ul>
-      <li>즉 exp_main.py안 에서 Pathformer.py를 실행하고, 그 안에서 AMS.py가 실행된다고 하더라도</li>
-      <li>exp_main.py와 Pathformer.py의 다른 함수들보다도 AMS.py의 __init__함수가 먼저 실행됨</li>
-    </ul>
-  </li>
-  <li>둘째, __init__함수에서 메모리를 사용한다면(ex. nn.Linear) 메모리 전체의 모양이 달라질 수 있음
-    <ul>
-      <li>즉 __init__함수에서 layer를 정의한다고 하면 layer를 저장하기 위한 메모리만 바뀌는 것이 아니라</li>
-      <li>이외의 메모리들도 다르게 할당될 수 있음 (Out of Memory를 회피하기 위해)</li>
-    </ul>
-  </li>
-  <li>그러므로 만약 모델의 마지막 부분이라 하더라도 __init__함수에서 다양한 patch size를 처리하기 위해,
-    <ul>
-      <li>patch size를 hyperparamter로 사용하는 layer를 정의했다면</li>
-      <li>그 __init__함수까지 다 실행되면서 메모리가 바뀐 채로 data loader 함수가 실행되기 때문에</li>
-      <li>GPU 텐서 배치 역시 영향을 받으면서 불러오는 첫 번째 batch가 달라질 수 있음</li>
-    </ul>
-  </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="pytorch" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation (PMLR 2022)</title><link href="http://localhost:4000/llm/2025-02-26-BLIP/" rel="alternate" type="text/html" title="BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation (PMLR 2022)" /><published>2025-02-26T00:00:00+09:00</published><updated>2025-02-26T13:41:17+09:00</updated><id>http://localhost:4000/llm/BLIP</id><content type="html" xml:base="http://localhost:4000/llm/2025-02-26-BLIP/"><![CDATA[<h2 id="abstract">Abstract</h2>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[ICLR 2025 Spotlight](https://arxiv.org/pdf/2409.16040)]]></summary></entry><entry><title type="html">BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation (PMLR 2022)</title><link href="http://localhost:4000/llm/2025-02-26-BLIP/" rel="alternate" type="text/html" title="BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation (PMLR 2022)" /><published>2025-02-26T00:00:00+09:00</published><updated>2025-02-26T13:41:17+09:00</updated><id>http://localhost:4000/llm/BLIP</id><content type="html" xml:base="http://localhost:4000/llm/2025-02-26-BLIP/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
   <li>대부분의 Vision-Language Pre-training (VLP)는
@@ -1610,7 +1853,63 @@
       <li>Model ensemble by training multiple different captioners and filter and combining their forces in CapFilt</li>
     </ul>
   </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[Arxiv 2024]()]]></summary></entry><entry><title type="html">Byte Latent Transformer: Patches Scale Better Than Tokens (Arxiv 2024)</title><link href="http://localhost:4000/llm/2025-02-22-BLT/" rel="alternate" type="text/html" title="Byte Latent Transformer: Patches Scale Better Than Tokens (Arxiv 2024)" /><published>2025-02-22T00:00:00+09:00</published><updated>2025-02-24T02:08:15+09:00</updated><id>http://localhost:4000/llm/BLT</id><content type="html" xml:base="http://localhost:4000/llm/2025-02-22-BLT/"><![CDATA[<h2 id="abstract">Abstract</h2>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[Arxiv 2024]()]]></summary></entry><entry><title type="html">(Pytorch Issue) .sh file와 Data loader가 상관이 있을까</title><link href="http://localhost:4000/pytorch/2025-02-26-sh_batch/" rel="alternate" type="text/html" title="(Pytorch Issue) .sh file와 Data loader가 상관이 있을까" /><published>2025-02-26T00:00:00+09:00</published><updated>2025-03-15T17:06:15+09:00</updated><id>http://localhost:4000/pytorch/sh_batch</id><content type="html" xml:base="http://localhost:4000/pytorch/2025-02-26-sh_batch/"><![CDATA[<p><img src="/assets/img/pytorch/sh_batch/fig1.png" alt="그림1" /></p>
+
+<ul>
+  <li>상황은 다음과 같다.
+    <ul>
+      <li>terminal에서 .sh 파일을 실행: .sh 파일에 있는 model hyperparameters가 run.py로 전달</li>
+      <li>run.py에서 취합된 paramters가 exp_main.py으로 전달: exp_main.py에서는 model과 data loader를 불러옴</li>
+      <li>exp_main.py에서는 data loader에서 불러온 데이터가 모델에 들어감</li>
+      <li>Pathformer.py에 정의된 모델이 input 데이터를 처리하기 시작 (여기서 model hyperparameters 사용됨)</li>
+      <li>Pathformer.py에서는 input 데이터가 AMS.py에 정의된 layer를 반복적으로 통과</li>
+    </ul>
+  </li>
+  <li>문제는 다음과 같다.
+    <ul>
+      <li>Model hyperparamters는 patch size 와 같이 <strong>이미 불러온 데이터</strong>를 모델이 다루는 방법을 정의하는데</li>
+      <li>.sh 파일에서 model hyperparamters를 바꾸었더니 data loader가 불러오는 batch의 순서가 바뀌어버림</li>
+      <li>아래 두 사진은 모두 <strong>첫 번째 배치</strong>를 시각화한 것인데, patch size를 다르게 설정한 것이 유일한 차이</li>
+      <li>patch size는 <strong>이미 불러온 데이터</strong>를 patching하는 방법을 결정하는 곳에만 쓰이는데 애초에 불러온 첫번째 배치가 다름</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/pytorch/sh_batch/fig2.png" alt="그림1" />
+<img src="/assets/img/pytorch/sh_batch/fig3.png" alt="그림1" /></p>
+
+<ul>
+  <li>
+    <p>.sh 파일에 정의된 model hyperparameters가 data loader에서 쓰이지 않음에도 위와 같은 현상 발생</p>
+  </li>
+  <li>
+    <p>연구실 선배와 Chat GPT의 도움을 통해 유추한 원인은 다음과 같음</p>
+  </li>
+</ul>
+
+<p><img src="/assets/img/pytorch/sh_batch/fig4.png" alt="그림1" /></p>
+
+<ul>
+  <li>첫째, __init__을 제외한 모든 함수의 실행보다 __init__함수가 먼저 실행됨
+    <ul>
+      <li>즉 exp_main.py안 에서 Pathformer.py를 실행하고, 그 안에서 AMS.py가 실행된다고 하더라도</li>
+      <li>exp_main.py와 Pathformer.py의 다른 함수들보다도 AMS.py의 __init__함수가 먼저 실행됨</li>
+    </ul>
+  </li>
+  <li>둘째, __init__함수에서 메모리를 사용한다면(ex. nn.Linear) 메모리 전체의 모양이 달라질 수 있음
+    <ul>
+      <li>즉 __init__함수에서 layer를 정의한다고 하면 layer를 저장하기 위한 메모리만 바뀌는 것이 아니라</li>
+      <li>이외의 메모리들도 다르게 할당될 수 있음 (Out of Memory를 회피하기 위해)</li>
+    </ul>
+  </li>
+  <li>그러므로 만약 모델의 마지막 부분이라 하더라도 __init__함수에서 다양한 patch size를 처리하기 위해,
+    <ul>
+      <li>patch size를 hyperparamter로 사용하는 layer를 정의했다면</li>
+      <li>그 __init__함수까지 다 실행되면서 메모리가 바뀐 채로 data loader 함수가 실행되기 때문에</li>
+      <li>GPU 텐서 배치 역시 영향을 받으면서 불러오는 첫 번째 batch가 달라질 수 있음</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="pytorch" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Byte Latent Transformer: Patches Scale Better Than Tokens (Arxiv 2024)</title><link href="http://localhost:4000/llm/2025-02-22-BLT/" rel="alternate" type="text/html" title="Byte Latent Transformer: Patches Scale Better Than Tokens (Arxiv 2024)" /><published>2025-02-22T00:00:00+09:00</published><updated>2025-02-24T02:08:15+09:00</updated><id>http://localhost:4000/llm/BLT</id><content type="html" xml:base="http://localhost:4000/llm/2025-02-22-BLT/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
   <li>Byte Latent Transformer (BLT)
@@ -2386,212 +2685,4 @@
     </ul>
   </li>
   <li>(especially in autoregressive setups, where it mitigates the issue of error accumulation.)</li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[ICML 2025](https://openreview.net/pdf?id=bRa4JLPzii)]]></summary></entry><entry><title type="html">SST: Multi-Scale Hybrid Mamba-Transformer Experts for Long-Short Range Time Series Forecasting (Arxiv 2024)</title><link href="http://localhost:4000/mamba/2025-01-13-SST/" rel="alternate" type="text/html" title="SST: Multi-Scale Hybrid Mamba-Transformer Experts for Long-Short Range Time Series Forecasting (Arxiv 2024)" /><published>2025-01-13T00:00:00+09:00</published><updated>2025-01-13T16:49:49+09:00</updated><id>http://localhost:4000/mamba/SST</id><content type="html" xml:base="http://localhost:4000/mamba/2025-01-13-SST/"><![CDATA[<h2 id="abstract">Abstract</h2>
-
-<ul>
-  <li>Time series forecasting에서 <strong>heterogeneity</strong> between long-range and short-range time series를 간과하면 안됨
-    <ul>
-      <li>distinct objectives tailored to different ranges 필요</li>
-      <li>(time series can be decomposed into global patterns and local variations)</li>
-    </ul>
-  </li>
-  <li>본 논문에서 multi-scale hybrid Mamba-Transformer experts model STATE SPACE TRANSFORMER(SST) 제안
-    <ul>
-      <li><strong>Mamba</strong> as an expert to extract <strong>global patterns</strong> in <strong>coarse</strong>-grained long-range time series
-        <ul>
-          <li>selectively retain long-term patterns and filter out fluctuation</li>
-        </ul>
-      </li>
-      <li><strong>Local Window Transformer (LWT)</strong>, the other expert to focus on capturing <strong>local</strong> variations in <strong>fine</strong>-grained short-range time series
-        <ul>
-          <li>locality-awareness capability</li>
-        </ul>
-      </li>
-      <li>각각을 합치는 건 long-short router
-        <ul>
-          <li>dynamically adjusts contributions of the two experts</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<p><img src="/assets/img/Mamba/SST/fig1.png" alt="그림1" /></p>
-
-<h2 id="1-introduciton">1. Introduciton</h2>
-
-<ul>
-  <li>the lack of distinction btw <strong>long</strong>-range and <strong>short</strong>-range time series
-    <ul>
-      <li>때문에 예측 성능이 방해</li>
-      <li><strong>long</strong>-range time series는 global patterns이 중요
-        <ul>
-          <li>local deviations는 negatively impact forecasting accuracy</li>
-        </ul>
-      </li>
-      <li>반대로 short-range는 local variations가 중요
-        <ul>
-          <li>global patterns는 less evident within limited time frames</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><strong>long</strong>-range vs. <strong>short</strong>-range 구분 자체가 애매모호함 (intertwine)
-    <ul>
-      <li>New metric to measure the difference 필요</li>
-      <li>둘을 integrating하는 것이 non-trivial task.
-        <ul>
-          <li>relative importance between patterns and variations 잘해야 함</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>이를 위해 <strong>multi-resolution</strong> framework 필요
-    <ul>
-      <li><strong>larger patches</strong> and <strong>longer stride</strong> for <strong>long</strong>-range to obtain <strong>low-resolution</strong></li>
-      <li><strong>smaller patches</strong> and <strong>shorter stride</strong> for <strong>short</strong> range lead to <strong>high-resolution</strong></li>
-      <li>지금까지의 Mixture-of-Experts (MoEs)는 experts의 역할이 애매했음 !</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="2-related-work">2. Related Work</h2>
-
-<p>pass</p>
-
-<h2 id="3-preliminaries">3. Preliminaries</h2>
-
-<ul>
-  <li>Look-back window \(\mathcal{L}=\left(\mathrm{x}_1, \mathrm{x}_2, . ., \mathrm{x}_L\right) \in \mathbb{R}^{L \times M}\)
-    <ul>
-      <li>Long-range time series \(\mathcal{L}\) denotes the full range of look-back window \(\mathcal{L}[:]\)</li>
-      <li>shortrange time series \(\mathcal{S} \in \mathbb{R}^{S \times M}\) denotes the partial latest range \(\mathcal{L}[-S:], S&lt;L\).</li>
-    </ul>
-  </li>
-</ul>
-
-<p><img src="/assets/img/Mamba/SST/fig3.png" alt="그림1" /></p>
-
-<ul>
-  <li>Mamba : retain repeated upand-down patterns in long range</li>
-  <li>Transformer : the missing local inductive bias hinders its ability to further capture local variations</li>
-</ul>
-
-<h2 id="4-methodology">4. Methodology</h2>
-
-<p><img src="/assets/img/Mamba/SST/fig4.png" alt="그림1" /></p>
-
-<ul>
-  <li>4 modules: <strong>multi-scale patcher</strong>, <strong>global patterns expert</strong>, <strong>local variations expert</strong>, and long-short router
-    <ul>
-      <li><strong>Multi-scale patcher</strong>: <strong>transforms input time series (TS) into different resolutions</strong> according to ranges</li>
-      <li><strong>Global pattern expert</strong>: is dedicated to finding <strong>long</strong>-term patterns in a <strong>low</strong>-resolution TS</li>
-      <li><strong>Local variations expert</strong>: aims to capture <strong>short</strong>-term variations in a <strong>high</strong>-resolutionTS</li>
-      <li><strong>Long-short router</strong>: dynamically learns <strong>contributions</strong> of the two experts.</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="multi-scale-resolutions">Multi-Scale Resolutions</h3>
-
-<p><img src="/assets/img/Mamba/SST/fig2.png" alt="그림1" /></p>
-
-<ul>
-  <li><strong>Global patterns</strong> emerge when viewed at a <strong>broader</strong>-scale granularity</li>
-  <li><strong>Local variations</strong> become clearer when examined at a <strong>finer</strong>-scale granularity</li>
-  <li>\(\to\) <strong>low</strong> resolution for <strong>long</strong>-rangeTS and <strong>high</strong> resolution for short-<strong>range</strong> TS</li>
-</ul>
-
-<h3 id="resolution">Resolution</h3>
-
-<ul>
-  <li>\(R_{P T S}=N \sqrt{P}=\left(\left\lfloor\frac{L-P}{S t r}\right\rfloor+1\right) \sqrt{P} \approx \frac{\sqrt{P}}{S t r}\).</li>
-</ul>
-
-<h3 id="hybrid-mamba-transformer-experts">Hybrid Mamba-Transformer Experts</h3>
-
-<ul>
-  <li>Inspired by Mixture-of-Experts (MoEs)</li>
-  <li>기존 MoEs와 다르게, assign global patterns and local variations roles to two experts.
-    <ul>
-      <li>extract long-term patterns and filter out small variations in long-range TS</li>
-    </ul>
-  </li>
-</ul>
-
-<p><img src="/assets/img/Mamba/SST/fig8.png" alt="그림1" /></p>
-
-<ul>
-  <li><strong>Global Patterns Expert</strong>
-    <ul>
-      <li>먼저 encodes long-range PTS \(\mathbf{x}_{p L}^{(i)} \in \mathbb{R}^{N_L \times P_L}\) into high-dimension space \(\mathbf{x}_L^{(i)} \in \mathbb{R}^{N_L \times D}\) in the encoding layer</li>
-      <li>다음으로 Mamba block이 select input-dependent patterns and filter out irrelevant variations</li>
-    </ul>
-  </li>
-  <li><strong>Local Variations Expert</strong>
-    <ul>
-      <li>Transformer는 lack of locality inductive bias and quadratic complexity</li>
-      <li>따라서 local window Transformer(LWT)로 사용</li>
-    </ul>
-  </li>
-  <li><strong>Mixture of Experts</strong>
-    <ul>
-      <li>Long-Short Router
-        <ul>
-          <li>learning the <strong>relative contributions</strong> of the two specialized experts</li>
-        </ul>
-      </li>
-      <li>Formally, the router projects input TS \(\mathcal{L} \in R^{L×M}\) into the D-dim</li>
-      <li>그 다음 transformed by a flatten layer into a vector \(z_R\)</li>
-      <li>그 다음 A linear layer (with a softmax) to output two values \(p_T, p_S \in(0.1)\)</li>
-    </ul>
-  </li>
-  <li><strong>Forecasting Module</strong>
-    <ul>
-      <li>long range embedding \(\mathbf{z}_L^{(i)}\)과short-range embedding \(\mathbf{z}_S^{(i)}\)를 flatten
-        <ul>
-          <li>into a single-row vector</li>
-          <li>and concatenates them with respective weights $p_L$ and $p_S$.</li>
-        </ul>
-      </li>
-      <li>Long-short range fusion representation : \(\mathbf{z}_{L S}^i \in \mathbb{R}^{\left(N_S+N_L\right) L D}\)</li>
-      <li>마지막으로 이걸 linear head에 넣어서 \(\hat{\mathbf{x}}^{(i)}=\left\{\hat{x}_{L+1}, \hat{x}_{L+2}, \ldots, \hat{x}_{L+F}\right\} \in \mathbb{R}^{F \times 1}\) (for individual variate \(i\))를 얻음</li>
-    </ul>
-  </li>
-  <li><strong>Linear Complexity Analysis</strong>
-    <ul>
-      <li>the total complexity of SST is \(O\left(\frac{L}{N_L}+\frac{w S}{N_S}\right)\)</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="5-experiments">5. Experiments</h2>
-
-<ul>
-  <li>Time Series Forecasting Results</li>
-</ul>
-
-<p><img src="/assets/img/Mamba/SST/table1.png" alt="그림1" /></p>
-
-<ul>
-  <li>Ablation Studies</li>
-</ul>
-
-<p><img src="/assets/img/Mamba/SST/fig6.png" alt="그림1" /></p>
-
-<h2 id="6-conclusion-and-future-work">6. Conclusion and Future Work</h2>
-
-<ul>
-  <li>Global patterns should be extracted from longrange,
-    <ul>
-      <li>while local variations are more effectively captured inshort range.</li>
-    </ul>
-  </li>
-  <li>A multi-scale hybrid Mamba-Transformer framework SST를 제안
-    <ul>
-      <li><strong>Mamba</strong>, serving as a <strong>global</strong> patterns expert, focuses on extracting <strong>long</strong>-term patterns in <strong>low</strong> resolution</li>
-      <li><strong>LWT</strong>, as a <strong>local</strong> variations expert, addresses subtle nuances in <strong>short</strong>-range time series in <strong>high</strong> resolution</li>
-    </ul>
-  </li>
-  <li>with scaling linearly \(O(L)\) with time series length \(L\)</li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="mamba" /><summary type="html"><![CDATA[[Arxiv 2024](https://arxiv.org/pdf/2404.14757)]]></summary></entry></feed>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[ICML 2025](https://openreview.net/pdf?id=bRa4JLPzii)]]></summary></entry></feed>

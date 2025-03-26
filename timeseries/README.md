@@ -78,7 +78,9 @@ permalink: /timeseries/
 \
 [Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025)]{:.heading.flip-title}\
 \
-[TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)]{:.heading.flip-title}
+[TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)]{:.heading.flip-title}\
+\
+[HDMixer: Hierarchical Dependency with Extendable Patch for Multivariate Time Series Forecasting (AAAI 2024)]{:.heading.flip-title}
 
 
 
@@ -118,3 +120,4 @@ permalink: /timeseries/
 [ComRes: Semi-Supervised Time Series Forecasting Utilizing Consensus Promotion of Multi-Resolution (ICLR 2025)]: /timeseries/2025-02-17-ComRes
 [Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025)]: /timeseries/2025-02-28-TimeMoE
 [TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)]: /timeseries/2025-03-15-TimeMixer++
+[HDMixer: Hierarchical Dependency with Extendable Patch for Multivariate Time Series Forecasting (AAAI 2024)]: /timeseries/2025-03-26-HDMixer

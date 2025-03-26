@@ -109,7 +109,7 @@ Powered by Hydejack v9.1.6 <https://hydejack.com/>
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2025-03-25T15:18:03+09:00',
+    INDEX_KEY: 'index--2025-03-26T15:10:13+09:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -384,6 +384,65 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
 
 
   
+
+  
+
+
+
+
+
+<article id="post-stat-lawtotal" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      <a href="/stat/2024-04-14-lawtotal/" class="flip-title">
+        The Law of Total Probability / Total Expectation / Total Variance (Gumbel-Max trick, …)
+      </a>
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2024-04-14T00:00:00+09:00">14 Apr 2024</time> in <span>Stat</span> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <ul>
+  <li>The Law of Total Probability
+\(P(A)=\sum P\left(A \mid B_n\right) P\left(B_n\right)\)</li>
+  <li>The Law of Total Expectation
+\(\mathrm{E}(X)=\mathrm{E}(\mathrm{E}(X \mid Y))\)</li>
+  <li>The Law of Total Variance
+\(\operatorname{Var}(Y)=\mathrm{E}[\operatorname{Var}(Y \mid X)]+\operatorname{Var}(\mathrm{E}[Y \mid X])\)</li>
+  <li>The Law of Total Covariance
+\(\operatorname{cov}(X, Y)=\mathrm{E}(\operatorname{cov}(X, Y \mid Z))+\operatorname{cov}(\mathrm{E}(X \mid Z), \mathrm{E}(Y \mid Z))\)</li>
+</ul>
+
+
+    
+    
+    <footer>
+      <p class="read-more">
+        Continue reading <a class="heading flip-title" href="/stat/2024-04-14-lawtotal/">The Law of Total Probability / Total Expectation / Total Variance (Gumbel-Max trick, …)</a>
+
+      </p>
+    </footer>
+  
+</article>
+
 
   
 
@@ -889,70 +948,6 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
     <footer>
       <p class="read-more">
         Continue reading <a class="heading flip-title" href="/timeseries/2024-03-19-TFinTSsurvey/">(Survey paper) Transformers in Time Series: A Survey (IJCAI 2023)</a>
-
-      </p>
-    </footer>
-  
-</article>
-
-
-  
-
-
-
-
-
-<article id="post-timeseries-softCLT" class="page post mb6" role="article">
-  <header>
-    <h1 class="post-title flip-project-title">
-      <a href="/timeseries/2024-03-13-softCLT/" class="flip-title">
-        SoftCLT: Soft Contrastive Learning for Time Series (ICLR 2024)
-      </a>
-    </h1>
-
-    <div class="post-date">
-      
-      <span class="ellipsis mr1">
-        <time datetime="2024-03-13T00:00:00+09:00">13 Mar 2024</time> in <span>Timeseries</span> 
-      </span>
-      
-    </div>
-
-    
-    
-
-    
-
-
-
-  
-    <p class="note-sm" >
-      <a href="https://arxiv.org/abs/2312.16424">ICLR 2024</a>
-
-    </p>
-  
-
-
-  </header>
-
-  
-    <h2 id="abstract">Abstract</h2>
-<ul>
-  <li>TS instance만으로 contrasting하거나, 하나의 TS의 adjacent timestamps만으로 contrasting하면 TS의 inherent correlation을 제대로 반영하지 못한다.</li>
-  <li><strong>SoftCLT</strong> : instance-wise &amp; temporal Contrastive loss를 사용하여, 0 또는 1이 아닌 0 ~ 1 사이의 값으로 assign
-    <ul>
-      <li>Instance-wise contrastive loss : Data space에서 두 시계열의 distance</li>
-      <li>Temporal contrastive loss : 서로 다른 시점에 대한 loss</li>
-    </ul>
-  </li>
-</ul>
-
-
-    
-    
-    <footer>
-      <p class="read-more">
-        Continue reading <a class="heading flip-title" href="/timeseries/2024-03-13-softCLT/">SoftCLT: Soft Contrastive Learning for Time Series (ICLR 2024)</a>
 
       </p>
     </footer>
