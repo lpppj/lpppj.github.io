@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v9.1.6 <https://hydejack.com/>
+-->
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>LoTLIP: Improving Language-Image Pre-training for Long Text Understanding (NeurIPS 2024) | LpppJ</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="LoTLIP: Improving Language-Image Pre-training for Long Text Understanding (NeurIPS 2024)" />
+<meta name="author" content="GW Jeong" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="NeurIPS 2024" />
+<meta property="og:description" content="NeurIPS 2024" />
+<link rel="canonical" href="http://localhost:4000/llm/2025-03-31-LoTLIP/" />
+<meta property="og:url" content="http://localhost:4000/llm/2025-03-31-LoTLIP/" />
+<meta property="og:site_name" content="LpppJ" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-03-31T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="LoTLIP: Improving Language-Image Pre-training for Long Text Understanding (NeurIPS 2024)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"GW Jeong"},"dateModified":"2025-04-01T16:29:32+09:00","datePublished":"2025-03-31T00:00:00+09:00","description":"NeurIPS 2024","headline":"LoTLIP: Improving Language-Image Pre-training for Long Text Understanding (NeurIPS 2024)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/llm/2025-03-31-LoTLIP/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/img/me/logo.jpg"},"name":"GW Jeong"},"url":"http://localhost:4000/llm/2025-03-31-LoTLIP/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+
+
+  <meta name="theme-color" content="rgb(230, 217, 195)">
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="LpppJ">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="LpppJ">
+
+<meta name="generator" content="Hydejack v9.1.6" />
+
+
+<link rel="alternate" href="http://localhost:4000/llm/2025-03-31-LoTLIP/" hreflang="en">
+
+<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LpppJ" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+
+
+
+
+
+<script>!function(r,c){"use strict";function a(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=c.createElement("script"),e=(n.src=e,t&&a(n,"load",t,{once:!0}),c.scripts[0]);return e.parentNode.insertBefore(n,e),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=c.createElement("script");function o(){r._loaded=!0,t&&a(n,"load",t,{once:!0});var e=c.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():a(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){a(c.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}}(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = false;
+  w._noDrawer = false;
+  w._noNavbar = false;
+  w._noToc = false;
+  w._noSearch = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2025-04-01T16:29:32+09:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+<script async src="/assets/bower_components/MathJax/es5/tex-mml-chtml.js" id="_MathJax"></script>
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.1.6.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5);--accent-color-highlight: rgba(94, 97, 94, 0.1);--accent-color-darkened: #4b4e4b;--theme-color: rgb(230, 217, 195)}
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+</head>
+
+<body class="no-break-layout">
+  
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/llm/">llm</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          <span>2025-03-31-LoTLIP</span>
+        
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-llm-LoTLIP" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        LoTLIP: Improving Language-Image Pre-training for Long Text Understanding (NeurIPS 2024)
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-03-31T00:00:00+09:00">31 Mar 2025</time> in <span>Llm</span> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  
+    <p class="note-sm" >
+      <a href="https://papers.nips.cc/paper_files/paper/2024/file/77828623211df05497ce3658300dafd9-Paper-Conference.pdf">NeurIPS 2024</a>
+
+    </p>
+  
+
+
+  </header>
+
+  
+    <h2 id="abstract">Abstract</h2>
+
+<ul>
+  <li>기존 LIP(Language-Image Pre-training) 모델들은
+    <ul>
+      <li>training images are usually paired with <strong>short</strong> captions</li>
+      <li>\(\to\) certain tokens easily overshadowed by salient tokens</li>
+      <li>\(\to\) understanding long text 잘 못함</li>
+    </ul>
+  </li>
+  <li>처음에는 relabel the data with long captions
+    <ul>
+      <li>하지만 degradation in understanding short text</li>
+    </ul>
+  </li>
+  <li>그래서 본 논문에서는 (1) incorporating <strong>corner tokens</strong> to aggregate diverse textual information
+    <ul>
+      <li>short / long text understanding 둘 다 잘하도록</li>
+    </ul>
+  </li>
+  <li>그리고 (2) clear trade-off between the performance and the efficiency</li>
+  <li>마지막으로 (3) self-constructed large-scale dataset</li>
+</ul>
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<ul>
+  <li>Understanding long texts 하기 위한 기존 text-to-image generation works
+    <ul>
+      <li>(e.g., DALLE-3 [1] and Pixel-art) employ pre-trained captioners (e.g., LLaVA)</li>
+    </ul>
+  </li>
+  <li>하지만 CLIP 대신 pure NLP encoders (e.g., T5) 사용
+    <ul>
+      <li>왜냐하면 기존 language-image pretraining task에는 긴 텍스트를 이미지와 align representation하는 연구가 거의 없었기 때문</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/llm/LoTLIP/fig1.png" alt="그림1" /></p>
+
+<ul>
+  <li>Long text understanding에서 Two primary challenges:
+    <ul>
+      <li>먼저 (1) the lack of large-scale <strong>long-caption</strong> image-text paired datasets
+        <ul>
+          <li>\(\to\) salient tokens에 의해서 간과되는 tokens 발생</li>
+        </ul>
+      </li>
+      <li>둘째로 (2) the token length limitation of the text encoder가 문제
+        <ul>
+          <li>단순하게 directly increasing the token number limitation 한다고 long captions understanding 잘하는 건 아님</li>
+          <li>결국 중요한 건 model’s inability to effectively interpret long texts</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>그래서 처음에는 re-caption 100 million datawith long captions 했음
+    <ul>
+      <li>\(\to\) 짧은 captions로 이루어진 pairs로 학습을 한 것이 문제임을 파악</li>
+      <li>(salient tokens에 의해서 간과되는 tokens 발생하니까)</li>
+    </ul>
+  </li>
+  <li>그래서 그 다음에 integrating <strong>corner tokens</strong> to aggregate diverse textual information !
+    <ul>
+      <li>\(\to\) Long, short captions 둘 다 잘 이해함</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-related-work">2. Related Work</h2>
+
+<h3 id="21-language-image-pre-training">2.1. Language-Image Pre-training</h3>
+
+<ul>
+  <li>CLIP and ALIGN: <strong>contrastive pre-trained models</strong>이 large-scale image-text pairs로부터 rich visual-language knowledge를 잘 학습 \(\to\) zero-shot predictions 잘 함
+    <ul>
+      <li>이후에 image-text alignment를 개선하는 다양한 연구
+        <ul>
+          <li>FILIP: fine-grained를 개선 by modifying the <strong>training loss</strong></li>
+          <li>LiT: contrastive-tuning to the pre-trained models with <strong>locked image encoder and unlocked text encoder</strong></li>
+          <li>SigLIP: replace the softmax normalization among the standard contrastive loss with the <strong>sigmoid loss</strong> to scale up training batch size</li>
+          <li>LaCLIP, RLEG: <strong>multi-modality generative models to improve data quality</strong> for enhancing pre-training</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="22-long-text-understanding">2.2. Long-text Understanding</h3>
+
+<ul>
+  <li><strong>Text generation</strong>에서는transformer structures have the ability to interpret <strong>long</strong> texts</li>
+  <li><strong>language-image pre-training</strong>에서는 long-text descriptions으로 multimodal representations 강화하는 것이 드물다
+    <ul>
+      <li><strong>DreamLIP</strong>: re-caption해서 long captions 얻고 그걸로 language-image pre-training
+        <ul>
+          <li>하지만 여전히 randomly extracts sub-captions (모든 정보 활용X)</li>
+          <li>왜 ? text encoder CLIP의 token number limit (≤ 77)</li>
+        </ul>
+      </li>
+      <li><strong>Long-CLIP</strong>: pre-trained on <strong>short</strong>-text-image datasets 모델을 <strong>long</strong> captions로 finetune
+        <ul>
+          <li>하지만 long texts 잘해지지만 short texts는 다시 잘 하지 못하게 됨</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>본 논문에서 제시하는 모델은 short texts 성능 유지하면서 long texts를 잘함</strong></li>
+</ul>
+
+<h2 id="3-preliminary-of-language-image-pre-training">3. Preliminary of Language-Image Pre-training</h2>
+
+<ul>
+  <li>Language-image pre-training models (CLIP and LiT)는 <strong>image-encoder and a text encoder</strong>로 구성됨
+    <ul>
+      <li>Pre-training 할 때에는 imgae-text pairs를 받아서 두 encoders가 각각 embedding
+        <ul>
+          <li>i-번째 image \(I_i\)에서 \(\mathbf{v}^{i}\)가 나오고, j-번째 text \(T_j\)에서 \(\mathbf{t}^{j}\)가 나옴</li>
+        </ul>
+      </li>
+      <li>그 다음 contrastive objectives - paired는 가깝게, 아니면 멀게
+        <ul>
+          <li>Contrastive loss \(\mathcal{L}=\mathcal{L}^{i 2 t}+\mathcal{L}^{t 2 i}\)</li>
+          <li>where \(\begin{gathered}
+\mathcal{L}^{i 2 t}=-\sum_{i=1}^N \log \frac{\exp \left(\cos \left\langle\mathbf{v}^i, \mathbf{t}^i\right\rangle / \tau\right)}{\sum_{j=1}^N \exp \left(\cos \left\langle\mathbf{v}^i, \mathbf{t}^j\right\rangle / \tau\right)}, \\
+\mathcal{L}^{t 2 i}=-\sum_{i=1}^N \log \frac{\exp \left(\cos \left\langle\mathbf{t}^i, \mathbf{v}^i\right\rangle / \tau\right)}{\sum_{j=1}^N \exp \left(\cos \left\langle\mathbf{t}^i, \mathbf{v}^j\right\rangle / \tau\right)}
+\end{gathered}\)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="4-long-texts-in-language-image-pre-training">4. Long Texts in Language-Image Pre-training</h2>
+
+<ul>
+  <li>현재 사용 가능한 image-text pair dataset: CC12M (short texts, 평균 18개 토큰)
+    <ul>
+      <li>그러다보니 struggle to comprehend long texts for text-image alignment</li>
+      <li>그래서 re-captioned 100M images with long texts !</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="41-long-text-image-pair-dataset">4.1. Long Text-Image Pair Dataset</h3>
+
+<ul>
+  <li><strong>Training Dataset</strong>
+    <ul>
+      <li>CC3M,CC12M, YFCC15M, LAION, and COYO dataset을
+        <ul>
+          <li>InstructBLIP, LLaVA, and ShareGPT4V모델로 long captioning</li>
+          <li>각 image는 원래 text (평균 18 토큰)와 3개의 long texts (평균 136 토큰)로 구성</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Evaluation Dataset</strong>
+    <ul>
+      <li>DCI, IIW, and ShareGPT4V dataset에서 long text-image pairs 수집</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/llm/LoTLIP/table1.png" alt="그림1" /></p>
+
+<h3 id="42-exploring-the-influence-of-text-length">4.2. Exploring the Influence of Text Length</h3>
+
+<ul>
+  <li>Long-CLIP: fine-tuning CLIP model with <strong>long</strong> text-image pairs
+    <ul>
+      <li>하지만 장/단점 아직 모름</li>
+    </ul>
+  </li>
+  <li>그래서 sub-captions로 <strong>change the length</strong> of long texts !
+    <ul>
+      <li>sub-captions가 하나만 있어도 성능이 향상됨</li>
+      <li>sub-captions가 길어질수록 <strong>long</strong>-text-image retrieval task 잘함</li>
+      <li>하지만 sub-captions가 너무 길어지면 <strong>short</strong>-text-image retrieval and image classification 성능은 안좋아짐</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/llm/LoTLIP/fig2.png" alt="그림1" /></p>
+
+<h3 id="43-method">4.3. Method</h3>
+
+<ul>
+  <li>pre-trained model이 long, short texts를 균형있게 잘하게 하기 위해서
+    <ul>
+      <li><strong>corner tokens</strong>(extra text tokens for text encoders) which can aggregate diverse text features을 추가</li>
+      <li>extracting more representative features for long and short text</li>
+    </ul>
+  </li>
+  <li><strong>Corner Tokens</strong>
+    <ul>
+      <li>Long text: \(\left[CLS\right],...,\left[SEP\right],...,\left[SEP\right]\)로 표현됨
+        <ul>
+          <li>첫 번째 token은 항상 \(\left[CLS\right]\)로 시작하고, sub-captions는 \(\left[SEP\right]\)로 구분됨</li>
+          <li>즉 \(...\)에 sub-caption을 tokenizing한 결과가 들어감</li>
+        </ul>
+      </li>
+      <li>여기에 learnable corner tokens \(\mathcal C=\left[\text{Cor } 1\right], ..., \left[\text{Cor } m\right]\)을 삽입
+        <ul>
+          <li>그러면 이제 \(\left[CLS\right],\left[\text{Cor } 1\right],...,\left[\text{Cor } m\right],\left[SEP\right],...,\left[SEP\right]\)으로 표현됨</li>
+        </ul>
+      </li>
+      <li>그리고 corner tokens가 다양한 features를 반영하도록 text encoder에 attention
+        <ul>
+          <li>corner token와 \(\left[CLS\right]\) 서로는 attend하지 않고 sub-captions에만 attend</li>
+          <li>즉 text tokens는 다른 text tokens와 \(\left[CLS\right]\)만 attend하게 해서 local and global information 보존</li>
+          <li>\(\mathcal{A}(q, k)= \begin{cases}0, &amp; \text { if }(k \in \mathcal{C} \text { or } q, k \in \mathcal{C} \cup\{[\mathrm{CLS}]\}) \text { and } q \neq k \\ 1, &amp; \text { otherwise }\end{cases}\).</li>
+        </ul>
+      </li>
+      <li>\(\left[CLS\right]\)가 global feature \(\mathbf{t}_{g}\)이고 corner features가 \(\mathbf{t}_{c_1}, \mathbf{t}_{c_2}, \ldots, \mathbf{t}_{c_m}\)</li>
+    </ul>
+  </li>
+  <li><strong>Optimization</strong>
+    <ul>
+      <li>long-text-image contrastive loss \(\mathcal L_{long}\)은 <strong>image global feature</strong> \(v\)와 <strong>corner features</strong> \(\mathbf{t}_{c_1}, \mathbf{t}_{c_2}, \ldots, \mathbf{t}_{c_m}\)의 관계로 정의됨</li>
+      <li>즉 \(\mathcal{L}_{\text {long }}=\mathcal{L}_{\text {long }}^{i 2 t}+\mathcal{L}_{\text {long }}^{t 2 i}\)이고</li>
+      <li>\(\begin{aligned}
+\mathcal{L}_{\text {long }}^{i 2 t} &amp; =-\sum_{i=1}^N\left(\log \frac{\exp \left(\cos \left\langle\mathbf{v}^i, \mathbf{t}_g^i\right\rangle / \tau\right)}{\sum_{j=1}^N \exp \left(\cos \left\langle\mathbf{v}^i, \mathbf{t}_g^j\right\rangle / \tau\right)}+\sum_{k=1}^m \log \frac{\exp \left(\cos \left\langle\mathbf{v}^i, \mathbf{t}_{c_k}^i\right\rangle / \tau\right)}{\sum_{j=1}^N \exp \left(\cos \left\langle\mathbf{v}^i, \mathbf{t}_{c_k}^j\right\rangle / \tau\right)}\right), \\
+\mathcal{L}_{\text {long }}^{t 2 i} &amp; =-\sum_{i=1}^N\left(\log \frac{\exp \left(\cos \left\langle\mathbf{t}_g^i, \mathbf{v}^i\right\rangle / \tau\right)}{\sum_{j=1}^N \exp \left(\cos \left\langle\mathbf{t}_g^i, \mathbf{v}^j\right\rangle / \tau\right)}+\sum_{k=1}^m \log \frac{\exp \left(\cos \left\langle\mathbf{t}_{c_k}^i, \mathbf{v}^i\right\rangle / \tau\right)}{\sum_{j=1}^N \exp \left(\cos \left\langle\mathbf{t}_{c_k}^i, \mathbf{v}^j\right\rangle / \tau\right)}\right),
+\end{aligned}\).</li>
+      <li>Total training loss: \(x_{\text {LoTLIP }}=\mathcal{L}_{\text {long }}+\mathcal{L}_{\text {short}}\)
+        <ul>
+          <li>\(\mathcal L_{short}\)는 3. Preliminary 참고</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/llm/LoTLIP/fig3.png" alt="그림1" /></p>
+
+<h2 id="5-experiments">5. Experiments</h2>
+
+<h3 id="51-implementation-details-and-datasets">5.1. Implementation Details and Datasets</h3>
+
+<ul>
+  <li>4 scales of pre-training data:
+    <ul>
+      <li>(1) 3M, including CC3M. (2) 12M, including CC12M.(3) 30M, including CC3M, CC12M, and YFCC15M. (4) 100M, including all re-captioned data</li>
+    </ul>
+  </li>
+  <li>3 downstream tasks for evaluation under the zero-shot setting
+    <ul>
+      <li>(1) long-text-image retrieval: DCI, IIW, ShareGPT4V-1k, ShareGPT4V-10k 데이터셋을 사용해 R@1(Recall@1) 성능 비교</li>
+      <li>(2) short-image-text retrieval: MSCOCO 및 Flickr30k Caption 데이터셋을 사용하며, R@1/5 지표를 사용해 성능 비교</li>
+      <li>(3) image classification:  ImageNet1k를 사용하고, 분류 정확도는 top-1 accuracy (Acc@1)로 측정</li>
+    </ul>
+  </li>
+  <li>LiT 방식을 따라,
+    <ul>
+      <li>ImageNet 21K에서 사전학습된 <strong>ViT</strong>를 image encoder로 사용, <strong>BERT</strong>를 text encoder로 사용</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="52-ablation-studies">5.2. Ablation Studies</h3>
+
+<p><img src="/assets/img/llm/LoTLIP/fig4.png" alt="그림1" /></p>
+
+<ul>
+  <li><strong>Exploring the Influence of Token Number Limitation</strong>
+    <ul>
+      <li>limitation of 77 tokens is <strong>insufficien</strong> for a model training with long texts !</li>
+      <li><strong>DCI and ShareGPT4V-10k</strong> retrieval tasks에서는 token limit <strong>192</strong>에서, <strong>IIW retrieval task</strong>에서는 <strong>256</strong>일 때 성능 가장 좋음</li>
+      <li>To balance the training efficiency and performance LoTLIP의 텍스트 인코더에서 token limit을을 <strong>128</strong>로 설정</li>
+    </ul>
+  </li>
+  <li><strong>Compare with Other Methods in Pre-training with Long Texts</strong>
+    <ul>
+      <li>LoTLIP은 Long text, short text 모두 잘하는 것이 목표</li>
+      <li>비교대상:
+        <ul>
+          <li>(1) directly using long texts in the training stage of LiT</li>
+          <li>(2) Long-CLIP</li>
+          <li>(3) LiT+Long-CLIP: primary component matching strategy and lossesproposed by Long-CLIP to LiT</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/llm/LoTLIP/table2.png" alt="그림1" /></p>
+
+<ul>
+  <li>
+    <p><strong>Implementation of Corner Tokens</strong></p>
+
+    <ul>
+      <li>
+        <p>tokenized long text 앞에 corner tokens가 learnable embeddings 형태로 삽입</p>
+      </li>
+      <li>
+        <p>corner token과 $$\left[CLS \right]$4 token 사이의 interactions 차단,</p>
+
+        <p>대신 corner token이 sub-caption tokens에만 attend</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/llm/LoTLIP/table3.png" alt="그림1" /></p>
+
+<h3 id="53-main-results">5.3. Main Results</h3>
+
+<p><img src="/assets/img/llm/LoTLIP/table4.png" alt="그림1" /></p>
+
+<p><img src="/assets/img/llm/LoTLIP/table5.png" alt="그림1" /></p>
+
+<h2 id="6-conclusion">6. Conclusion</h2>
+
+<ul>
+  <li>훈련 이미지가 일반적으로 짧은 캡션과 쌍으로 제공되기 때문에, 일부 토큰이 더 눈에 띄는(salient) 토큰에 의해 가려지는 문제가 발생</li>
+  <li>장문을 직접 학습에 사용하는 경우, 예를 들어 이미지 분류와 같이 단문 이해가 요구되는 작업에서 오히려 성능이 저하</li>
+  <li><strong>corner token</strong>을 도입하여 다양한 텍스트 정보를 집계함으로써, 모델이 단문 이해 능력을 회복하는 동시에 장문 이해 능력을 대폭 향상</li>
+</ul>
+
+  
+</article>
+
+
+
+  <hr class="dingbat related mb6" />
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="https://via.placeholder.com/128x128"
+    srcset="/assets/img/me/me.JPG 1x,/assets/img/me/me.JPG 2x"
+    
+  
+  alt="GW Jeong"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>Bachelor’s degree in Applied Statistics. Yonsei Univ. (2018~2024) <br />
+DataScienceLab 8th 학회장 (2022~2023) <br />
+Master’s degree in Statitstics. Yonsei Univ. (2024~)</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/lpppj" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:wjdrjsdn39@yonsei.ac.kr" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+  
+
+  
+    
+
+
+  
+
+  
+  
+
+  
+    
+
+  
+
+
+  
+<footer class="content" role="contentinfo">
+  <hr/>
+  
+    <p><small class="copyright">© Geonwoo Jeong.
+</small></p>
+  
+  
+    <p><small>Powered by <a class="external" href="https://hydejack.com/">Hydejack</a> v<span id="_version">9.1.6</span></small></p>
+  <hr class="sr-only"/>
+</footer>
+
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+<div class="sidebar-bg sidebar-overlay" style="background-color:rgb(230, 217, 195);background-image:url(/assets/img/me/sidebar.jpg)"></div>
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/me/logo.jpg" class="avatar" alt="LpppJ" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">LpppJ</h2></a>
+    
+    
+      <p class="">
+        DataScience and AI
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="sr-only">Navigation:</span>
+<ul>
+  
+    
+      
+      <li>
+        <a
+          id="_drawer--opened"
+          href="/timeseries/"
+          class="sidebar-nav-item "
+          
+        >
+          TimeSeries
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/mamba/"
+          class="sidebar-nav-item "
+          
+        >
+          Mamba
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/llm/"
+          class="sidebar-nav-item "
+          
+        >
+          LLM
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/pytorch/"
+          class="sidebar-nav-item "
+          
+        >
+          Pytorch
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/stat/"
+          class="sidebar-nav-item "
+          
+        >
+          Statistics
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/project/"
+          class="sidebar-nav-item "
+          
+        >
+          Project
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/presentation/"
+          class="sidebar-nav-item "
+          
+        >
+          Presentation
+        </a>
+      </li>
+    
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/lpppj" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:wjdrjsdn39@yonsei.ac.kr" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>!function(){var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())}();
+</script>
+  <script src="/assets/js/hydejack-9.1.6.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.1.6.js" nomodule defer></script>
+  
+
+  
+
+<!--<![endif]-->
+  <!-- <script>
+  document.querySelector('hy-push-state').setAttribute('prefetch', '');
+
+  document.querySelectorAll('.sidebar a[href^="/"]').forEach(function (el) { 
+    el.addEventListener('click', function (e) {
+      if (el.pathname === window.location.pathname) {
+        e.preventDefault();
+        e.stopPropagation();
+        document.querySelector('hy-drawer').close();
+      }
+    });
+  });
+</script> -->
+
+<!--
+Code for integrating CloudFlare's email protection with Hydejack's single page app loading.
+-->
+<script>
+  document.getElementById('_pushState').addEventListener('hy-push-state-after', function (e) {
+    function e(e){
+      (console.error?console.error:console.log).call(console,e)
+    }
+
+    function t(e){
+      return l.innerHTML='<a href="'+e.replace(/"/g,"&quot;")+'"></a>',l.childNodes[0].getAttribute("href")
+    }
+
+    function r(e,t){
+      var r=e.substr(t,2);return parseInt(r,16)
+    }
+
+    function n(e,n){
+      for(var o="",c=r(e,n),a=n+2;a<e.length;a+=2){
+        var l=r(e,a)^c;
+        o+=String.fromCharCode(l)
+      }
+      return t(o)
+    }
+
+    var o="/cdn-cgi/l/email-protection#",
+        c=".__cf_email__",
+        a="data-cfemail",
+        l=document.createElement("div");
+
+    !function(){
+      for(var t=document.getElementsByTagName("a"),r=0;r<t.length;r++)
+        try{
+          var c=t[r],a=c.href.indexOf(o);
+          a>-1&&(c.href="mailto:"+n(c.href,a+o.length))
+        }catch(t){
+          e(t)
+        }
+    }(),
+    function(){
+      for(var t=document.querySelectorAll(c),r=0;r<t.length;r++)
+        try{
+          var o=t[r],l=n(o.getAttribute(a),0),i=document.createTextNode(l);
+          o.parentNode.replaceChild(i,o)
+        }catch(t){
+          e(t)
+        }
+    }()
+  });
+</script>
+
+
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+</div>
+
+
+</body>
+</html>

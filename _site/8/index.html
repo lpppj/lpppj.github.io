@@ -109,7 +109,7 @@ Powered by Hydejack v9.1.6 <https://hydejack.com/>
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2025-03-26T15:10:13+09:00',
+    INDEX_KEY: 'index--2025-04-01T16:29:32+09:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -384,6 +384,86 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
 
 
   
+
+  
+
+
+
+
+
+<article id="post-project-prop2" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      <a href="/project/2024-02-21-prop2/" class="flip-title">
+        \(2\). Geometric diatance (QGIS)
+      </a>
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2024-02-21T00:00:00+09:00">21 Feb 2024</time> in <span>Project</span> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <h2 id="1-shapefile-다운로드">1. Shapefile 다운로드</h2>
+<ul>
+  <li>지도에 두 주소 또는 좌표를 입력했을 때 출력되는 geometric distance를 구하려면 패키지가 아닌 지리 API를 활용해야 한다. 여기서는 <a href="https://qgis.org/en/site/forusers/download.html">QGIS</a>를 사용한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">서울시 도로망 layer</code>, <code class="language-plaintext highlighter-rouge">(지하철역, 버스정류장, 학교) layer</code>, 그리고 <code class="language-plaintext highlighter-rouge">아파트 layer</code>를 깔고 <strong>네트워크 분석</strong>을 진행할 것이다.</li>
+  <li><code class="language-plaintext highlighter-rouge">서울시 도로망 layer</code>는 <a href="https://www.openstreetmap.org">OpenStreetMap</a>의 지도 정보를 추출해야 하는데, 3가지의 extractor가 있다.
+    <ul>
+      <li>1) <a href="https://download.geofabrik.de">Geofabrik</a>에서 sub region 지정
+        <ul>
+          <li>가장 하위 sub region이 South Korea이다. 즉 서울만 선택하는 것이 불가능하다.</li>
+        </ul>
+      </li>
+      <li>2) <a href="https://extract.bbbike.org">BBBike</a>에서 region search (특정 도시 직접 search 가능)
+        <ul>
+          <li>특정 도시를 직접 search 가능하다. shp파일이 필요하므로 Shapefile을 선택하고 extract한다.</li>
+        </ul>
+      </li>
+      <li>3) <a href="https://www.vworld.kr/v4po_main.do">국가공간정보포털(브이월드)</a>
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">공간정보 다운로드</code> \(\to\) <code class="language-plaintext highlighter-rouge">오픈마켓</code> \(\to\) <code class="language-plaintext highlighter-rouge">(도로명주소)도로구간</code>에서 지역별 도로 shp파일을 수집할 수 있다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>2) BBBike 또는 3) 국가공간정보포털을 선택하면 되는데, 2)를 선택했다.
+    <ul>
+      <li><img src="/assets/img/project/prop/prop2_1.png" alt="사진1" /></li>
+      <li>왼쪽(국가공간정보포털)은 서울시에 포함되는 정확한 Node와 Link를 제공하지만, Node와 Link가 있어도 지나갈 수 없는 길 많다. 그래서 실제로 갈 수 있는 경로임에도 경로를 찾지 못하는 경우가 많다.</li>
+      <li>오른쪽(BBBike)는 Node와 Link가 있어도 지나갈 수 없는 길이 훨씬 적지만, 실제와 다른 Link가 존재한다. (ex. 중앙에서 우측 하단으로 길게 그려진 직선)</li>
+    </ul>
+  </li>
+</ul>
+
+
+    
+    
+    <footer>
+      <p class="read-more">
+        Continue reading <a class="heading flip-title" href="/project/2024-02-21-prop2/">\(2\). Geometric diatance (QGIS)</a>
+
+      </p>
+    </footer>
+  
+</article>
+
 
   
 
@@ -898,56 +978,6 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
     <footer>
       <p class="read-more">
         Continue reading <a class="heading flip-title" href="/timeseries/2024-02-09-Raindrop/">Raindrop: Graph-guided Network for Irregularly Sampled Multivariate Time Series (ICLR 2022)</a>
-
-      </p>
-    </footer>
-  
-</article>
-
-
-  
-
-
-
-
-
-<article id="post-project-gitblog3" class="page post mb6" role="article">
-  <header>
-    <h1 class="post-title flip-project-title">
-      <a href="/project/2024-02-09-gitblog3/" class="flip-title">
-        깃 블로그 만들기 3 : Hydejack 테마 사용법
-      </a>
-    </h1>
-
-    <div class="post-date">
-      
-      <span class="ellipsis mr1">
-        <time datetime="2024-02-09T00:00:00+09:00">09 Feb 2024</time> in <span>Project</span> 
-      </span>
-      
-    </div>
-
-    
-    
-
-    
-
-
-
-  <div class="hr pb0"></div>
-
-
-  </header>
-
-  
-    <h2 id="깃-블로그-커스텀--authorsyml">깃 블로그 커스텀 : authors.yml</h2>
-
-
-    
-    
-    <footer>
-      <p class="read-more">
-        Continue reading <a class="heading flip-title" href="/project/2024-02-09-gitblog3/">깃 블로그 만들기 3 : Hydejack 테마 사용법</a>
 
       </p>
     </footer>

@@ -1,5 +1,325 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-03-26T15:10:13+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LpppJ</title><subtitle>This is blog about machine learning, deep learning, artificial intelligence.
-</subtitle><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><entry><title type="html">HDMixer: Hierarchical Dependency with Extendable Patch for Multivariate Time Series Forecasting (AAAI 2024)</title><link href="http://localhost:4000/timeseries/2025-03-26-HDMixer/" rel="alternate" type="text/html" title="HDMixer: Hierarchical Dependency with Extendable Patch for Multivariate Time Series Forecasting (AAAI 2024)" /><published>2025-03-26T00:00:00+09:00</published><updated>2025-03-26T15:10:13+09:00</updated><id>http://localhost:4000/timeseries/HDMixer</id><content type="html" xml:base="http://localhost:4000/timeseries/2025-03-26-HDMixer/"><![CDATA[<h2 id="abstract">Abstract</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-04-01T16:29:32+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LpppJ</title><subtitle>This is blog about machine learning, deep learning, artificial intelligence.
+</subtitle><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><entry><title type="html">LoTLIP: Improving Language-Image Pre-training for Long Text Understanding (NeurIPS 2024)</title><link href="http://localhost:4000/llm/2025-03-31-LoTLIP/" rel="alternate" type="text/html" title="LoTLIP: Improving Language-Image Pre-training for Long Text Understanding (NeurIPS 2024)" /><published>2025-03-31T00:00:00+09:00</published><updated>2025-04-01T16:29:32+09:00</updated><id>http://localhost:4000/llm/LoTLIP</id><content type="html" xml:base="http://localhost:4000/llm/2025-03-31-LoTLIP/"><![CDATA[<h2 id="abstract">Abstract</h2>
+
+<ul>
+  <li>기존 LIP(Language-Image Pre-training) 모델들은
+    <ul>
+      <li>training images are usually paired with <strong>short</strong> captions</li>
+      <li>\(\to\) certain tokens easily overshadowed by salient tokens</li>
+      <li>\(\to\) understanding long text 잘 못함</li>
+    </ul>
+  </li>
+  <li>처음에는 relabel the data with long captions
+    <ul>
+      <li>하지만 degradation in understanding short text</li>
+    </ul>
+  </li>
+  <li>그래서 본 논문에서는 (1) incorporating <strong>corner tokens</strong> to aggregate diverse textual information
+    <ul>
+      <li>short / long text understanding 둘 다 잘하도록</li>
+    </ul>
+  </li>
+  <li>그리고 (2) clear trade-off between the performance and the efficiency</li>
+  <li>마지막으로 (3) self-constructed large-scale dataset</li>
+</ul>
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<ul>
+  <li>Understanding long texts 하기 위한 기존 text-to-image generation works
+    <ul>
+      <li>(e.g., DALLE-3 [1] and Pixel-art) employ pre-trained captioners (e.g., LLaVA)</li>
+    </ul>
+  </li>
+  <li>하지만 CLIP 대신 pure NLP encoders (e.g., T5) 사용
+    <ul>
+      <li>왜냐하면 기존 language-image pretraining task에는 긴 텍스트를 이미지와 align representation하는 연구가 거의 없었기 때문</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/llm/LoTLIP/fig1.png" alt="그림1" /></p>
+
+<ul>
+  <li>Long text understanding에서 Two primary challenges:
+    <ul>
+      <li>먼저 (1) the lack of large-scale <strong>long-caption</strong> image-text paired datasets
+        <ul>
+          <li>\(\to\) salient tokens에 의해서 간과되는 tokens 발생</li>
+        </ul>
+      </li>
+      <li>둘째로 (2) the token length limitation of the text encoder가 문제
+        <ul>
+          <li>단순하게 directly increasing the token number limitation 한다고 long captions understanding 잘하는 건 아님</li>
+          <li>결국 중요한 건 model’s inability to effectively interpret long texts</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>그래서 처음에는 re-caption 100 million datawith long captions 했음
+    <ul>
+      <li>\(\to\) 짧은 captions로 이루어진 pairs로 학습을 한 것이 문제임을 파악</li>
+      <li>(salient tokens에 의해서 간과되는 tokens 발생하니까)</li>
+    </ul>
+  </li>
+  <li>그래서 그 다음에 integrating <strong>corner tokens</strong> to aggregate diverse textual information !
+    <ul>
+      <li>\(\to\) Long, short captions 둘 다 잘 이해함</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-related-work">2. Related Work</h2>
+
+<h3 id="21-language-image-pre-training">2.1. Language-Image Pre-training</h3>
+
+<ul>
+  <li>CLIP and ALIGN: <strong>contrastive pre-trained models</strong>이 large-scale image-text pairs로부터 rich visual-language knowledge를 잘 학습 \(\to\) zero-shot predictions 잘 함
+    <ul>
+      <li>이후에 image-text alignment를 개선하는 다양한 연구
+        <ul>
+          <li>FILIP: fine-grained를 개선 by modifying the <strong>training loss</strong></li>
+          <li>LiT: contrastive-tuning to the pre-trained models with <strong>locked image encoder and unlocked text encoder</strong></li>
+          <li>SigLIP: replace the softmax normalization among the standard contrastive loss with the <strong>sigmoid loss</strong> to scale up training batch size</li>
+          <li>LaCLIP, RLEG: <strong>multi-modality generative models to improve data quality</strong> for enhancing pre-training</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="22-long-text-understanding">2.2. Long-text Understanding</h3>
+
+<ul>
+  <li><strong>Text generation</strong>에서는transformer structures have the ability to interpret <strong>long</strong> texts</li>
+  <li><strong>language-image pre-training</strong>에서는 long-text descriptions으로 multimodal representations 강화하는 것이 드물다
+    <ul>
+      <li><strong>DreamLIP</strong>: re-caption해서 long captions 얻고 그걸로 language-image pre-training
+        <ul>
+          <li>하지만 여전히 randomly extracts sub-captions (모든 정보 활용X)</li>
+          <li>왜 ? text encoder CLIP의 token number limit (≤ 77)</li>
+        </ul>
+      </li>
+      <li><strong>Long-CLIP</strong>: pre-trained on <strong>short</strong>-text-image datasets 모델을 <strong>long</strong> captions로 finetune
+        <ul>
+          <li>하지만 long texts 잘해지지만 short texts는 다시 잘 하지 못하게 됨</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>본 논문에서 제시하는 모델은 short texts 성능 유지하면서 long texts를 잘함</strong></li>
+</ul>
+
+<h2 id="3-preliminary-of-language-image-pre-training">3. Preliminary of Language-Image Pre-training</h2>
+
+<ul>
+  <li>Language-image pre-training models (CLIP and LiT)는 <strong>image-encoder and a text encoder</strong>로 구성됨
+    <ul>
+      <li>Pre-training 할 때에는 imgae-text pairs를 받아서 두 encoders가 각각 embedding
+        <ul>
+          <li>i-번째 image \(I_i\)에서 \(\mathbf{v}^{i}\)가 나오고, j-번째 text \(T_j\)에서 \(\mathbf{t}^{j}\)가 나옴</li>
+        </ul>
+      </li>
+      <li>그 다음 contrastive objectives - paired는 가깝게, 아니면 멀게
+        <ul>
+          <li>Contrastive loss \(\mathcal{L}=\mathcal{L}^{i 2 t}+\mathcal{L}^{t 2 i}\)</li>
+          <li>where \(\begin{gathered}
+\mathcal{L}^{i 2 t}=-\sum_{i=1}^N \log \frac{\exp \left(\cos \left\langle\mathbf{v}^i, \mathbf{t}^i\right\rangle / \tau\right)}{\sum_{j=1}^N \exp \left(\cos \left\langle\mathbf{v}^i, \mathbf{t}^j\right\rangle / \tau\right)}, \\
+\mathcal{L}^{t 2 i}=-\sum_{i=1}^N \log \frac{\exp \left(\cos \left\langle\mathbf{t}^i, \mathbf{v}^i\right\rangle / \tau\right)}{\sum_{j=1}^N \exp \left(\cos \left\langle\mathbf{t}^i, \mathbf{v}^j\right\rangle / \tau\right)}
+\end{gathered}\)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="4-long-texts-in-language-image-pre-training">4. Long Texts in Language-Image Pre-training</h2>
+
+<ul>
+  <li>현재 사용 가능한 image-text pair dataset: CC12M (short texts, 평균 18개 토큰)
+    <ul>
+      <li>그러다보니 struggle to comprehend long texts for text-image alignment</li>
+      <li>그래서 re-captioned 100M images with long texts !</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="41-long-text-image-pair-dataset">4.1. Long Text-Image Pair Dataset</h3>
+
+<ul>
+  <li><strong>Training Dataset</strong>
+    <ul>
+      <li>CC3M,CC12M, YFCC15M, LAION, and COYO dataset을
+        <ul>
+          <li>InstructBLIP, LLaVA, and ShareGPT4V모델로 long captioning</li>
+          <li>각 image는 원래 text (평균 18 토큰)와 3개의 long texts (평균 136 토큰)로 구성</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Evaluation Dataset</strong>
+    <ul>
+      <li>DCI, IIW, and ShareGPT4V dataset에서 long text-image pairs 수집</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/llm/LoTLIP/table1.png" alt="그림1" /></p>
+
+<h3 id="42-exploring-the-influence-of-text-length">4.2. Exploring the Influence of Text Length</h3>
+
+<ul>
+  <li>Long-CLIP: fine-tuning CLIP model with <strong>long</strong> text-image pairs
+    <ul>
+      <li>하지만 장/단점 아직 모름</li>
+    </ul>
+  </li>
+  <li>그래서 sub-captions로 <strong>change the length</strong> of long texts !
+    <ul>
+      <li>sub-captions가 하나만 있어도 성능이 향상됨</li>
+      <li>sub-captions가 길어질수록 <strong>long</strong>-text-image retrieval task 잘함</li>
+      <li>하지만 sub-captions가 너무 길어지면 <strong>short</strong>-text-image retrieval and image classification 성능은 안좋아짐</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/llm/LoTLIP/fig2.png" alt="그림1" /></p>
+
+<h3 id="43-method">4.3. Method</h3>
+
+<ul>
+  <li>pre-trained model이 long, short texts를 균형있게 잘하게 하기 위해서
+    <ul>
+      <li><strong>corner tokens</strong>(extra text tokens for text encoders) which can aggregate diverse text features을 추가</li>
+      <li>extracting more representative features for long and short text</li>
+    </ul>
+  </li>
+  <li><strong>Corner Tokens</strong>
+    <ul>
+      <li>Long text: \(\left[CLS\right],...,\left[SEP\right],...,\left[SEP\right]\)로 표현됨
+        <ul>
+          <li>첫 번째 token은 항상 \(\left[CLS\right]\)로 시작하고, sub-captions는 \(\left[SEP\right]\)로 구분됨</li>
+          <li>즉 \(...\)에 sub-caption을 tokenizing한 결과가 들어감</li>
+        </ul>
+      </li>
+      <li>여기에 learnable corner tokens \(\mathcal C=\left[\text{Cor } 1\right], ..., \left[\text{Cor } m\right]\)을 삽입
+        <ul>
+          <li>그러면 이제 \(\left[CLS\right],\left[\text{Cor } 1\right],...,\left[\text{Cor } m\right],\left[SEP\right],...,\left[SEP\right]\)으로 표현됨</li>
+        </ul>
+      </li>
+      <li>그리고 corner tokens가 다양한 features를 반영하도록 text encoder에 attention
+        <ul>
+          <li>corner token와 \(\left[CLS\right]\) 서로는 attend하지 않고 sub-captions에만 attend</li>
+          <li>즉 text tokens는 다른 text tokens와 \(\left[CLS\right]\)만 attend하게 해서 local and global information 보존</li>
+          <li>\(\mathcal{A}(q, k)= \begin{cases}0, &amp; \text { if }(k \in \mathcal{C} \text { or } q, k \in \mathcal{C} \cup\{[\mathrm{CLS}]\}) \text { and } q \neq k \\ 1, &amp; \text { otherwise }\end{cases}\).</li>
+        </ul>
+      </li>
+      <li>\(\left[CLS\right]\)가 global feature \(\mathbf{t}_{g}\)이고 corner features가 \(\mathbf{t}_{c_1}, \mathbf{t}_{c_2}, \ldots, \mathbf{t}_{c_m}\)</li>
+    </ul>
+  </li>
+  <li><strong>Optimization</strong>
+    <ul>
+      <li>long-text-image contrastive loss \(\mathcal L_{long}\)은 <strong>image global feature</strong> \(v\)와 <strong>corner features</strong> \(\mathbf{t}_{c_1}, \mathbf{t}_{c_2}, \ldots, \mathbf{t}_{c_m}\)의 관계로 정의됨</li>
+      <li>즉 \(\mathcal{L}_{\text {long }}=\mathcal{L}_{\text {long }}^{i 2 t}+\mathcal{L}_{\text {long }}^{t 2 i}\)이고</li>
+      <li>\(\begin{aligned}
+\mathcal{L}_{\text {long }}^{i 2 t} &amp; =-\sum_{i=1}^N\left(\log \frac{\exp \left(\cos \left\langle\mathbf{v}^i, \mathbf{t}_g^i\right\rangle / \tau\right)}{\sum_{j=1}^N \exp \left(\cos \left\langle\mathbf{v}^i, \mathbf{t}_g^j\right\rangle / \tau\right)}+\sum_{k=1}^m \log \frac{\exp \left(\cos \left\langle\mathbf{v}^i, \mathbf{t}_{c_k}^i\right\rangle / \tau\right)}{\sum_{j=1}^N \exp \left(\cos \left\langle\mathbf{v}^i, \mathbf{t}_{c_k}^j\right\rangle / \tau\right)}\right), \\
+\mathcal{L}_{\text {long }}^{t 2 i} &amp; =-\sum_{i=1}^N\left(\log \frac{\exp \left(\cos \left\langle\mathbf{t}_g^i, \mathbf{v}^i\right\rangle / \tau\right)}{\sum_{j=1}^N \exp \left(\cos \left\langle\mathbf{t}_g^i, \mathbf{v}^j\right\rangle / \tau\right)}+\sum_{k=1}^m \log \frac{\exp \left(\cos \left\langle\mathbf{t}_{c_k}^i, \mathbf{v}^i\right\rangle / \tau\right)}{\sum_{j=1}^N \exp \left(\cos \left\langle\mathbf{t}_{c_k}^i, \mathbf{v}^j\right\rangle / \tau\right)}\right),
+\end{aligned}\).</li>
+      <li>Total training loss: \(x_{\text {LoTLIP }}=\mathcal{L}_{\text {long }}+\mathcal{L}_{\text {short}}\)
+        <ul>
+          <li>\(\mathcal L_{short}\)는 3. Preliminary 참고</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/llm/LoTLIP/fig3.png" alt="그림1" /></p>
+
+<h2 id="5-experiments">5. Experiments</h2>
+
+<h3 id="51-implementation-details-and-datasets">5.1. Implementation Details and Datasets</h3>
+
+<ul>
+  <li>4 scales of pre-training data:
+    <ul>
+      <li>(1) 3M, including CC3M. (2) 12M, including CC12M.(3) 30M, including CC3M, CC12M, and YFCC15M. (4) 100M, including all re-captioned data</li>
+    </ul>
+  </li>
+  <li>3 downstream tasks for evaluation under the zero-shot setting
+    <ul>
+      <li>(1) long-text-image retrieval: DCI, IIW, ShareGPT4V-1k, ShareGPT4V-10k 데이터셋을 사용해 R@1(Recall@1) 성능 비교</li>
+      <li>(2) short-image-text retrieval: MSCOCO 및 Flickr30k Caption 데이터셋을 사용하며, R@1/5 지표를 사용해 성능 비교</li>
+      <li>(3) image classification:  ImageNet1k를 사용하고, 분류 정확도는 top-1 accuracy (Acc@1)로 측정</li>
+    </ul>
+  </li>
+  <li>LiT 방식을 따라,
+    <ul>
+      <li>ImageNet 21K에서 사전학습된 <strong>ViT</strong>를 image encoder로 사용, <strong>BERT</strong>를 text encoder로 사용</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="52-ablation-studies">5.2. Ablation Studies</h3>
+
+<p><img src="/assets/img/llm/LoTLIP/fig4.png" alt="그림1" /></p>
+
+<ul>
+  <li><strong>Exploring the Influence of Token Number Limitation</strong>
+    <ul>
+      <li>limitation of 77 tokens is <strong>insufficien</strong> for a model training with long texts !</li>
+      <li><strong>DCI and ShareGPT4V-10k</strong> retrieval tasks에서는 token limit <strong>192</strong>에서, <strong>IIW retrieval task</strong>에서는 <strong>256</strong>일 때 성능 가장 좋음</li>
+      <li>To balance the training efficiency and performance LoTLIP의 텍스트 인코더에서 token limit을을 <strong>128</strong>로 설정</li>
+    </ul>
+  </li>
+  <li><strong>Compare with Other Methods in Pre-training with Long Texts</strong>
+    <ul>
+      <li>LoTLIP은 Long text, short text 모두 잘하는 것이 목표</li>
+      <li>비교대상:
+        <ul>
+          <li>(1) directly using long texts in the training stage of LiT</li>
+          <li>(2) Long-CLIP</li>
+          <li>(3) LiT+Long-CLIP: primary component matching strategy and lossesproposed by Long-CLIP to LiT</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/llm/LoTLIP/table2.png" alt="그림1" /></p>
+
+<ul>
+  <li>
+    <p><strong>Implementation of Corner Tokens</strong></p>
+
+    <ul>
+      <li>
+        <p>tokenized long text 앞에 corner tokens가 learnable embeddings 형태로 삽입</p>
+      </li>
+      <li>
+        <p>corner token과 $$\left[CLS \right]$4 token 사이의 interactions 차단,</p>
+
+        <p>대신 corner token이 sub-caption tokens에만 attend</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/llm/LoTLIP/table3.png" alt="그림1" /></p>
+
+<h3 id="53-main-results">5.3. Main Results</h3>
+
+<p><img src="/assets/img/llm/LoTLIP/table4.png" alt="그림1" /></p>
+
+<p><img src="/assets/img/llm/LoTLIP/table5.png" alt="그림1" /></p>
+
+<h2 id="6-conclusion">6. Conclusion</h2>
+
+<ul>
+  <li>훈련 이미지가 일반적으로 짧은 캡션과 쌍으로 제공되기 때문에, 일부 토큰이 더 눈에 띄는(salient) 토큰에 의해 가려지는 문제가 발생</li>
+  <li>장문을 직접 학습에 사용하는 경우, 예를 들어 이미지 분류와 같이 단문 이해가 요구되는 작업에서 오히려 성능이 저하</li>
+  <li><strong>corner token</strong>을 도입하여 다양한 텍스트 정보를 집계함으로써, 모델이 단문 이해 능력을 회복하는 동시에 장문 이해 능력을 대폭 향상</li>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[NeurIPS 2024](https://papers.nips.cc/paper_files/paper/2024/file/77828623211df05497ce3658300dafd9-Paper-Conference.pdf)]]></summary></entry><entry><title type="html">HDMixer: Hierarchical Dependency with Extendable Patch for Multivariate Time Series Forecasting (AAAI 2024)</title><link href="http://localhost:4000/timeseries/2025-03-26-HDMixer/" rel="alternate" type="text/html" title="HDMixer: Hierarchical Dependency with Extendable Patch for Multivariate Time Series Forecasting (AAAI 2024)" /><published>2025-03-26T00:00:00+09:00</published><updated>2025-03-26T15:10:21+09:00</updated><id>http://localhost:4000/timeseries/HDMixer</id><content type="html" xml:base="http://localhost:4000/timeseries/2025-03-26-HDMixer/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
   <li>Patching to enhance <strong>local semantic</strong>s and improve model <strong>performance</strong>
@@ -205,11 +525,11 @@
         </ul>
       </li>
       <li>
-        <p>전체 평균 복잡도(엔트로피)</p>
+        <p>전체적으로 봤을 때 유사한 서브패턴의 양</p>
         <ul>
           <li>: \(\Phi^{L F}\left(X^{L F} \mid r\right)=\frac{1}{N} \sum_{n=1}^N \ln C_n^{L F}\left(X^{L F} \mid r\right)\)
             <ul>
-              <li>similarity of different subpatternsafter length-fixed patching</li>
+              <li>similarity of different subpatterns after length-fixed patching</li>
               <li><strong>낮을수록</strong> patching 후 <strong>distinctness</strong> of semantic information among patches 강함</li>
             </ul>
           </li>
@@ -644,7 +964,48 @@ C_m^{L E}\left(X^{L E} \mid r\right)=\frac{1}{N} \operatorname{num}\left\{d\left
 
 <ul>
   <li>BLIP-2, a generic and compute-efficient method for vision-language pre-training that leverages frozen pretrained image encoders and LLMs</li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[Arxiv 2024]()]]></summary></entry><entry><title type="html">TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)</title><link href="http://localhost:4000/timeseries/2025-03-15-TimeMixer++/" rel="alternate" type="text/html" title="TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)" /><published>2025-03-15T00:00:00+09:00</published><updated>2025-03-16T16:51:07+09:00</updated><id>http://localhost:4000/timeseries/TimeMixer++</id><content type="html" xml:base="http://localhost:4000/timeseries/2025-03-15-TimeMixer++/"><![CDATA[<h2 id="abstract">Abstract</h2>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[Arxiv 2024]()]]></summary></entry><entry><title type="html">깃블로그 만들기 7 : 흔히 발생할 수 있는 에러 (2)</title><link href="http://localhost:4000/project/2025-03-15-gitblog7/" rel="alternate" type="text/html" title="깃블로그 만들기 7 : 흔히 발생할 수 있는 에러 (2)" /><published>2025-03-15T00:00:00+09:00</published><updated>2025-03-15T17:17:40+09:00</updated><id>http://localhost:4000/project/gitblog7</id><content type="html" xml:base="http://localhost:4000/project/2025-03-15-gitblog7/"><![CDATA[<ul>
+  <li>이번에는 Hydejack 테마를 사용하면서 내가 자주 했던 실수들을 살펴보겠다. 처음에는 에러의 이유를 몰라서 gitblog repository를 몇 번이나 삭제하고 다시 만들면서 시간을 많이 썼는데, 앞으로는 그러지 않기 위해 남긴다.</li>
+</ul>
+
+<h2 id="1-rpc-failure-http-400">1. RPC failure (HTTP 400)</h2>
+
+<ul>
+  <li>평소처럼 Terminal에서 git push를 할 때에 아래와 같은 에러가 발생</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">오브젝트</span> <span class="n">나열하는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">1335</span><span class="p">,</span> <span class="n">완료</span><span class="p">.</span>
+<span class="n">오브젝트</span> <span class="n">개수</span> <span class="n">세는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">1335</span><span class="o">/</span><span class="mi">1335</span><span class="p">),</span> <span class="n">완료</span><span class="p">.</span>
+<span class="n">Delta</span> <span class="n">compression</span> <span class="n">using</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">8</span> <span class="n">threads</span>
+<span class="n">오브젝트</span> <span class="n">압축하는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">634</span><span class="o">/</span><span class="mi">634</span><span class="p">),</span> <span class="n">완료</span><span class="p">.</span>
+<span class="n">error</span><span class="p">:</span> <span class="n">RPC</span> <span class="n">failed</span><span class="p">;</span> <span class="n">HTTP</span> <span class="mi">400</span> <span class="n">curl</span> <span class="mi">22</span> <span class="n">The</span> <span class="n">requested</span> <span class="n">URL</span> <span class="n">returned</span> <span class="n">error</span><span class="p">:</span> <span class="mi">400</span>
+<span class="n">send</span><span class="o">-</span><span class="n">pack</span><span class="p">:</span> <span class="n">unexpected</span> <span class="n">disconnect</span> <span class="k">while</span> <span class="n">reading</span> <span class="n">sideband</span> <span class="n">packet</span>
+<span class="n">오브젝트</span> <span class="n">쓰는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">1095</span><span class="o">/</span><span class="mi">1095</span><span class="p">),</span> <span class="mf">10.46</span> <span class="n">MiB</span> <span class="o">|</span> <span class="mf">10.38</span> <span class="n">MiB</span><span class="o">/</span><span class="n">s</span><span class="p">,</span> <span class="n">완료</span><span class="p">.</span>
+<span class="n">Total</span> <span class="mi">1095</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">549</span><span class="p">),</span> <span class="n">reused</span> <span class="mi">0</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">0</span><span class="p">),</span> <span class="n">pack</span><span class="o">-</span><span class="n">reused</span> <span class="mi">0</span>
+<span class="n">fatal</span><span class="p">:</span> <span class="n">the</span> <span class="n">remote</span> <span class="n">end</span> <span class="n">hung</span> <span class="n">up</span> <span class="n">unexpectedly</span>
+<span class="n">Everything</span> <span class="n">up</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">date</span>
+</code></pre></div></div>
+
+<ul>
+  <li>가장 아래 메세지를 보고 문제가 없다고 생각할 수 있지만
+    <ul>
+      <li>중간에 RPC failure (HTTP 400) 에러가 발생</li>
+      <li>당연히 정상적으로 push 되지 않음</li>
+    </ul>
+  </li>
+  <li>원인
+    <ul>
+      <li>한 번에 너무 많은 양을 push 할 때에 발생할 수 있는 에러</li>
+      <li>나의 경우에는 평소보다 많은 양이 아니었음에도 발생</li>
+    </ul>
+  </li>
+  <li>해결방법
+    <ul>
+      <li>Git 전송 버퍼 크기를 늘려주면 된다</li>
+      <li>터미널에 <code class="language-plaintext highlighter-rouge">git config --global http.postBuffer 524288000</code>를 입력하고 다시 push하면 된다</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="project" /><summary type="html"><![CDATA[이번에는 Hydejack 테마를 사용하면서 내가 자주 했던 실수들을 살펴보겠다. 처음에는 에러의 이유를 몰라서 gitblog repository를 몇 번이나 삭제하고 다시 만들면서 시간을 많이 썼는데, 앞으로는 그러지 않기 위해 남긴다.]]></summary></entry><entry><title type="html">TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)</title><link href="http://localhost:4000/timeseries/2025-03-15-TimeMixer++/" rel="alternate" type="text/html" title="TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)" /><published>2025-03-15T00:00:00+09:00</published><updated>2025-03-16T16:51:07+09:00</updated><id>http://localhost:4000/timeseries/TimeMixer++</id><content type="html" xml:base="http://localhost:4000/timeseries/2025-03-15-TimeMixer++/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
   <li>TIMEMIXER++: general-purpose time series pattern machine (TSPM)
@@ -989,48 +1350,7 @@ C_m^{L E}\left(X^{L E} \mid r\right)=\frac{1}{N} \operatorname{num}\left\{d\left
       <li><strong>Multi-scale and Multi-resolution mixing techniques</strong>, fuses and extracts information across different hierarchical levels</li>
     </ul>
   </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[ICLR 2025 Oral](https://openreview.net/pdf?id=1CLzLXSFNn)]]></summary></entry><entry><title type="html">깃블로그 만들기 7 : 흔히 발생할 수 있는 에러 (2)</title><link href="http://localhost:4000/project/2025-03-15-gitblog7/" rel="alternate" type="text/html" title="깃블로그 만들기 7 : 흔히 발생할 수 있는 에러 (2)" /><published>2025-03-15T00:00:00+09:00</published><updated>2025-03-15T17:17:40+09:00</updated><id>http://localhost:4000/project/gitblog7</id><content type="html" xml:base="http://localhost:4000/project/2025-03-15-gitblog7/"><![CDATA[<ul>
-  <li>이번에는 Hydejack 테마를 사용하면서 내가 자주 했던 실수들을 살펴보겠다. 처음에는 에러의 이유를 몰라서 gitblog repository를 몇 번이나 삭제하고 다시 만들면서 시간을 많이 썼는데, 앞으로는 그러지 않기 위해 남긴다.</li>
-</ul>
-
-<h2 id="1-rpc-failure-http-400">1. RPC failure (HTTP 400)</h2>
-
-<ul>
-  <li>평소처럼 Terminal에서 git push를 할 때에 아래와 같은 에러가 발생</li>
-</ul>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">오브젝트</span> <span class="n">나열하는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">1335</span><span class="p">,</span> <span class="n">완료</span><span class="p">.</span>
-<span class="n">오브젝트</span> <span class="n">개수</span> <span class="n">세는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">1335</span><span class="o">/</span><span class="mi">1335</span><span class="p">),</span> <span class="n">완료</span><span class="p">.</span>
-<span class="n">Delta</span> <span class="n">compression</span> <span class="n">using</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">8</span> <span class="n">threads</span>
-<span class="n">오브젝트</span> <span class="n">압축하는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">634</span><span class="o">/</span><span class="mi">634</span><span class="p">),</span> <span class="n">완료</span><span class="p">.</span>
-<span class="n">error</span><span class="p">:</span> <span class="n">RPC</span> <span class="n">failed</span><span class="p">;</span> <span class="n">HTTP</span> <span class="mi">400</span> <span class="n">curl</span> <span class="mi">22</span> <span class="n">The</span> <span class="n">requested</span> <span class="n">URL</span> <span class="n">returned</span> <span class="n">error</span><span class="p">:</span> <span class="mi">400</span>
-<span class="n">send</span><span class="o">-</span><span class="n">pack</span><span class="p">:</span> <span class="n">unexpected</span> <span class="n">disconnect</span> <span class="k">while</span> <span class="n">reading</span> <span class="n">sideband</span> <span class="n">packet</span>
-<span class="n">오브젝트</span> <span class="n">쓰는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">1095</span><span class="o">/</span><span class="mi">1095</span><span class="p">),</span> <span class="mf">10.46</span> <span class="n">MiB</span> <span class="o">|</span> <span class="mf">10.38</span> <span class="n">MiB</span><span class="o">/</span><span class="n">s</span><span class="p">,</span> <span class="n">완료</span><span class="p">.</span>
-<span class="n">Total</span> <span class="mi">1095</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">549</span><span class="p">),</span> <span class="n">reused</span> <span class="mi">0</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">0</span><span class="p">),</span> <span class="n">pack</span><span class="o">-</span><span class="n">reused</span> <span class="mi">0</span>
-<span class="n">fatal</span><span class="p">:</span> <span class="n">the</span> <span class="n">remote</span> <span class="n">end</span> <span class="n">hung</span> <span class="n">up</span> <span class="n">unexpectedly</span>
-<span class="n">Everything</span> <span class="n">up</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">date</span>
-</code></pre></div></div>
-
-<ul>
-  <li>가장 아래 메세지를 보고 문제가 없다고 생각할 수 있지만
-    <ul>
-      <li>중간에 RPC failure (HTTP 400) 에러가 발생</li>
-      <li>당연히 정상적으로 push 되지 않음</li>
-    </ul>
-  </li>
-  <li>원인
-    <ul>
-      <li>한 번에 너무 많은 양을 push 할 때에 발생할 수 있는 에러</li>
-      <li>나의 경우에는 평소보다 많은 양이 아니었음에도 발생</li>
-    </ul>
-  </li>
-  <li>해결방법
-    <ul>
-      <li>Git 전송 버퍼 크기를 늘려주면 된다</li>
-      <li>터미널에 <code class="language-plaintext highlighter-rouge">git config --global http.postBuffer 524288000</code>를 입력하고 다시 push하면 된다</li>
-    </ul>
-  </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="project" /><summary type="html"><![CDATA[이번에는 Hydejack 테마를 사용하면서 내가 자주 했던 실수들을 살펴보겠다. 처음에는 에러의 이유를 몰라서 gitblog repository를 몇 번이나 삭제하고 다시 만들면서 시간을 많이 썼는데, 앞으로는 그러지 않기 위해 남긴다.]]></summary></entry><entry><title type="html">S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv 2025 )</title><link href="http://localhost:4000/mamba/2025-03-01-S2TX/" rel="alternate" type="text/html" title="S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv 2025 )" /><published>2025-03-01T00:00:00+09:00</published><updated>2025-03-17T11:37:02+09:00</updated><id>http://localhost:4000/mamba/S2TX</id><content type="html" xml:base="http://localhost:4000/mamba/2025-03-01-S2TX/"><![CDATA[<h2 id="abstract">Abstract</h2>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[ICLR 2025 Oral](https://openreview.net/pdf?id=1CLzLXSFNn)]]></summary></entry><entry><title type="html">S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv 2025 )</title><link href="http://localhost:4000/mamba/2025-03-01-S2TX/" rel="alternate" type="text/html" title="S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv 2025 )" /><published>2025-03-01T00:00:00+09:00</published><updated>2025-03-17T11:37:02+09:00</updated><id>http://localhost:4000/mamba/S2TX</id><content type="html" xml:base="http://localhost:4000/mamba/2025-03-01-S2TX/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
   <li><strong>Multi-scale</strong> models for the <strong>heterogeneity</strong> btw long and short patterns
@@ -2387,302 +2707,4 @@ C_m^{L E}\left(X^{L E} \mid r\right)=\frac{1}{N} \operatorname{num}\left\{d\left
       <li>BLT는 동일한 inference FLOP 내에서 model size와 patch size를 동시에 확장할 수 있음</li>
     </ul>
   </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[Arxiv 2024](https://arxiv.org/pdf/2412.09871)]]></summary></entry><entry><title type="html">ComRes: Semi-Supervised Time Series Forecasting Utilizing Consensus Promotion of Multi-Resolution (ICLR 2025)</title><link href="http://localhost:4000/timeseries/2025-02-17-ComRes/" rel="alternate" type="text/html" title="ComRes: Semi-Supervised Time Series Forecasting Utilizing Consensus Promotion of Multi-Resolution (ICLR 2025)" /><published>2025-02-17T00:00:00+09:00</published><updated>2025-02-23T20:29:55+09:00</updated><id>http://localhost:4000/timeseries/ComRes</id><content type="html" xml:base="http://localhost:4000/timeseries/2025-02-17-ComRes/"><![CDATA[<h2 id="abstract">Abstract</h2>
-
-<ul>
-  <li>기존의 supervised learning approaches:
-    <ul>
-      <li>relyon cleaned and labeled data \(\to\) unseen characteristics 못잡음</li>
-    </ul>
-  </li>
-  <li>본 논문에서는 self-supervised approach 제안
-    <ul>
-      <li>Multi-view setting on augmented data</li>
-      <li>without requiring explicit future values as labels</li>
-    </ul>
-  </li>
-  <li><strong>consensus promotion framework</strong>을 통해
-    <ul>
-      <li>여러 모델이 비슷하게 예측하도록 ! (agreement among multiple single-view models)</li>
-    </ul>
-  </li>
-  <li>추가로 not only improves forecasting <strong>accuracy</strong> but also <strong>mitigates</strong> error accumulation inlong-horizon predictions</li>
-  <li>impact of autoregressive and non-autoregressive decoding schemes on error propagation
-    <ul>
-      <li>\(\to\) extending prediction horizons에 robust</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="1-introduction">1. Introduction</h2>
-
-<ul>
-  <li>Time series의 intricate temporal patterns 중에서 <strong>multi-scale</strong> dependencies !
-    <ul>
-      <li>Pathformer, Scaleformer, TimeMixer, Nhits 등 여러 시도 있었음</li>
-      <li>하지만 different scales \(\to\) increase in parameters \(\to\) overfitting risk</li>
-      <li>게다가 limited to labeled data</li>
-    </ul>
-  </li>
-  <li>그렇다고 <strong>data augmentation</strong> 하면 underlying dynamics이 바뀌어 버려서
-    <ul>
-      <li>slight shifts in trends or periodic patterns \(\to\) prediction errors</li>
-      <li>그러므로 overfitting risk 줄이고 generalization ability 늘리는 것 중요
-        <ul>
-          <li>(augmented data에 future values 붙이지 않은 채로 !)</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>그러므로 본 논문에서는 enhancing <strong>consensus</strong> among single-view models using <strong>unseen</strong> data
-    <ul>
-      <li>기존의 co-training method와 비슷하게,</li>
-      <li>maximizing <strong>agreement</strong> among multi-view models on unseen data !</li>
-    </ul>
-  </li>
-  <li>추가적으로, <strong>error accumulation in long-horizon forecasting</strong> 이슈 다룸
-    <ul>
-      <li>기존의 former들은 non-autoregressive decoding scheme</li>
-      <li>how non-autoregressive models can be employed to minimize error accumulation ?</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="2-related-work">2. Related Work</h2>
-
-<ul>
-  <li><strong>Long-term Time Series Forecasting</strong>
-    <ul>
-      <li>Transformer-based:
-        <ul>
-          <li>FEDformer(2022), Autoformer(2021): address the quadratic complexity</li>
-          <li>PatchTST(2023): patching to enhance local pattern recognition</li>
-          <li>iTransformer(2024), Crossformer(2023): attention으로 multivariate correlations</li>
-        </ul>
-      </li>
-      <li>non-Transformer-based 역시 예측 성능 뛰어난ㅁ
-        <ul>
-          <li>tiDE(2023), MICN(2023), DLinear(2023), TimeMixer(2024)</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><strong>Multi-scale Modeling for Time Series</strong>
-    <ul>
-      <li>NHITS(2023): multi-rate data sampling and hierarchical interpolation</li>
-      <li>Pyraformer(2022), Scaleformer(2023): pyramidal attention mechanisms</li>
-      <li>TimeMixer(2024): decomposable mixing strategy</li>
-      <li>Pathformer(2024): features from both different <strong>resolutions</strong> and <strong>temporal</strong> distances</li>
-      <li>대부분 ensemble of multiple predictions that rely on labeled data…
-        <ul>
-          <li>본 논문에서는 semi-supervised learning으로
-            <ul>
-              <li>challenge of reconciling diverse representations 다룸</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li><strong>Time Series Data Augmentation</strong>
-        <ul>
-          <li>classification and anomaly detection에서는
-            <ul>
-              <li>small perturbations typically do not change the data label</li>
-            </ul>
-          </li>
-          <li>하지만 forecasting에서는 even small perturbations can lead to significant changes in the observations !
-            <ul>
-              <li>the improvement relies on the quality of the augmented data</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="3-methodology">3. Methodology</h2>
-
-<ul>
-  <li>\(L:\left(x_{t-L}, \ldots, x_t\right)\)보고 \(H \text { timestamps }\left(x_{t+1}, \ldots, x_{t+H}\right)\)예측</li>
-  <li>Pathformer를 leverage unseen data하도록 확장 !</li>
-</ul>
-
-<p><img src="/assets/img/timeseries/ComRes/fig1.png" alt="그림1" /></p>
-
-<ul>
-  <li>Pathformer처럼
-    <ul>
-      <li>multi-scale patch division with various patch sizes</li>
-      <li><strong>intra-patch</strong> attention within each divided patch and
-        <ul>
-          <li><strong>inter-patch</strong> attention across different patches</li>
-          <li>그 다음 MLP</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>Pathformer와 다르게
-    <ul>
-      <li><strong>equal weighted</strong> aggregator to combine these multi-scale characteristics</li>
-    </ul>
-  </li>
-  <li>기존 supervised learning에서는 loss:
-    <ul>
-      <li>\(\mathcal{L}_s=\frac{1}{m+1}\left(\mid\widehat{x_{* t+1: t+H}}-x_{t+1: t+H}\mid^2+\sum_{i=1}^m \mid\widehat{x}_{i t+1: t+H}-x_{t+1: t+H}\mid^2\right)\).</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="31-consensus-promotion-learning">3.1. Consensus Promotion Learning</h3>
-
-<ul>
-  <li>Augmented data는 potentially noisy \(\to\)  future values 정하는 건 challenging</li>
-  <li>그래서 <strong>consistency loss</strong>: encourages mutual agreement amongthe models
-    <ul>
-      <li>\(\mathcal{L}_u=\frac{1}{m}\left(\sum_{i=1}^m\mid\widehat{x}_{i t+1: t+H}-\widehat{x_{* t+1}}{ }^2 t+H\mid^2\right)\):
-        <ul>
-          <li>individual-view models to align their predictions with the comprehensive prediction</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>최종적인 unsupervised consistency loss는 \(\mathcal{L}=\mathcal{L}_s+w_u \mathcal{L}_u\)
-    <ul>
-      <li>\(w_u\): represents the weight ot the unsupervised consistency loss</li>
-      <li>\(\mathcal L_s\): minimizes the prediction error with respect to the ground truth</li>
-      <li>\(\mathcal L_u\): aligns the individual model predictions</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="32-unseen-data-generation">3.2. Unseen Data Generation</h3>
-
-<ul>
-  <li>Consensus promotion는 leveraging information from unseen data으로 model generalization을 향상시키는 것이 목표</li>
-  <li>그러면 Data augmentation은? explores new areas of the input space이 목표
-    <ul>
-      <li><strong>time warping, interpolation,and noise injection</strong>으로 하겠다 !</li>
-      <li>Interpolation : estimating values between known data points to produce a smoother and more continuous time series.</li>
-      <li>Time Warping : DTW처럼 selects a random time range and then compresses(down-samples)</li>
-      <li>Noise Injection : selects a random time range and then compresses(down-samples)</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="33-extending-prediction-horizons-beyond-training-ranges">3.3. Extending Prediction Horizons Beyond Training Ranges</h3>
-
-<ul>
-  <li>현실적으로 autoregressive forecasting is essential !</li>
-  <li>하지만 Teacher forcing처럼 autoregressively training 없으면 error accumulation 발생</li>
-</ul>
-
-<p><img src="/assets/img/timeseries/ComRes/fig2.png" alt="그림1" /></p>
-
-<ul>
-  <li>
-    <p>consensus promotion through two approaches:</p>
-
-    <ul>
-      <li>
-        <p><strong>Block-wise autoregressive</strong>: extends the prediction horizon by utilizing the entire prediction range at once</p>
-
-        <p><strong>Fine-grained autoregressive</strong>: fine-grained autoregressive prediction involves a step-by-step process</p>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="4-experiments">4. Experiments</h2>
-
-<h3 id="41-time-series-forecasting">4.1. Time Series Forecasting</h3>
-
-<ul>
-  <li><strong>MRes (SL)</strong>: MRes trained exclusively on labeled datasets using supervised learning (SL).</li>
-  <li><strong>MRes w. augmentation</strong>: MRes trained on pseudo-labeled datasets augmented with Time Warping.</li>
-  <li><strong>MRes w. consensus</strong>: MRes trained on labeled datasets with consensus promotion but withoutdata augmentation. Predictions on labeled data are learned not only from the ground truthbut also from the comprehensive prediction.</li>
-</ul>
-
-<p><img src="/assets/img/timeseries/ComRes/table1.png" alt="그림1" /></p>
-
-<ul>
-  <li>그리고 일관되게 base-line model 보다 성능이 좋음 (아래 그림)</li>
-</ul>
-
-<p><img src="/assets/img/timeseries/ComRes/fig3.png" alt="그림1" /></p>
-
-<h3 id="42-error-accumulation-in-auto-regressive-forecasting">4.2. Error Accumulation in Auto-regressive Forecasting</h3>
-
-<p><img src="/assets/img/timeseries/ComRes/table2.png" alt="그림1" /></p>
-
-<ul>
-  <li>일단 table1보다 MSE가 커진건 inherent in autoregressive forecasting</li>
-  <li>첫째로 CoMRes가 MRes(SL)보다 일관되게 좋음</li>
-  <li>둘째로 block-wise autoregressive가 fine-grained autoregressive보다 좋음</li>
-</ul>
-
-<p><img src="/assets/img/timeseries/ComRes/fig4.png" alt="그림1" /></p>
-
-<ul>
-  <li>미래 96시점 예측하게 학습하고 forecast longer horizons 해보았음</li>
-  <li>일단 CoMRes(초록, 빨강)가 MRes(오렌지)보다 stronger capacity to reduce error accumulation</li>
-  <li>그리고 미래 720시점 예측하게 학습한 파랑, 초록과 비교해보았음</li>
-</ul>
-
-<h3 id="43-ablation-study">4.3. Ablation Study</h3>
-
-<p><img src="/assets/img/timeseries/ComRes/table3.png" alt="그림1" /></p>
-
-<ul>
-  <li><strong>Limited-Resource Scenarios</strong> (table3)
-    <ul>
-      <li>reducing the amount of <strong>labeled</strong> training data 상태로 비교</li>
-      <li>train-test 사이에서 temporal variations이 다르면 성능 안좋아짐</li>
-      <li>ETTh2 and ETTm2는 labeled data 적어도 성능 좋음</li>
-    </ul>
-  </li>
-</ul>
-
-<p><img src="/assets/img/timeseries/ComRes/table4.png" alt="그림1" /></p>
-
-<ul>
-  <li><strong>Combining Multiple Unseen Data Generation Techniques</strong> (table4)
-    <ul>
-      <li>Combining all 3 augmentation techniques (Time Warp, Interpolation, and Noise Injection)가 항상 성능 개선으로 이어지는 건 아님
-        <ul>
-          <li>ETTh1 (높은 변동성): 성능 향상이 거의 X
-            <ul>
-              <li>data의 변동성이 높을 경우, 추가적인 데이터 변형이 예측 성능에 미치는 영향이 크지 않음</li>
-            </ul>
-          </li>
-          <li>ETTm2 (명확한 주기성):  &lt;720 장기 예측에서는 급격한 성능 저하 발생
-            <ul>
-              <li>장기적인 추세 변화가 빠른 데이터에서는 augmentation이 부정적인 영향</li>
-            </ul>
-          </li>
-          <li>Weather 데이터셋 (변수 간 강한 상관관계): 성능이 향상
-            <ul>
-              <li>상관성이 높은 데이터에서는 다양한 증강 기법을 적용하는 것이 모델 학습에 도움</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="5-conclusion">5. Conclusion</h2>
-
-<ul>
-  <li>Multi-view learning strategy for long-term time series forecasting
-    <ul>
-      <li>superior prediction accuracy and robustness</li>
-    </ul>
-  </li>
-  <li>Augmented unseen data to ensure that models
-    <ul>
-      <li>not only capturemulti-resolution patterns</li>
-      <li>but also provide consistent predictions</li>
-    </ul>
-  </li>
-  <li>(especially in autoregressive setups, where it mitigates the issue of error accumulation.)</li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[ICML 2025](https://openreview.net/pdf?id=bRa4JLPzii)]]></summary></entry></feed>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[Arxiv 2024](https://arxiv.org/pdf/2412.09871)]]></summary></entry></feed>
