@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-04-01T16:29:32+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LpppJ</title><subtitle>This is blog about machine learning, deep learning, artificial intelligence.
-</subtitle><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><entry><title type="html">LoTLIP: Improving Language-Image Pre-training for Long Text Understanding (NeurIPS 2024)</title><link href="http://localhost:4000/llm/2025-03-31-LoTLIP/" rel="alternate" type="text/html" title="LoTLIP: Improving Language-Image Pre-training for Long Text Understanding (NeurIPS 2024)" /><published>2025-03-31T00:00:00+09:00</published><updated>2025-04-01T16:29:32+09:00</updated><id>http://localhost:4000/llm/LoTLIP</id><content type="html" xml:base="http://localhost:4000/llm/2025-03-31-LoTLIP/"><![CDATA[<h2 id="abstract">Abstract</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-04-05T22:58:51+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LpppJ</title><subtitle>This is blog about machine learning, deep learning, artificial intelligence.
+</subtitle><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><entry><title type="html">LoTLIP: Improving Language-Image Pre-training for Long Text Understanding (NeurIPS 2024)</title><link href="http://localhost:4000/llm/2025-03-31-LoTLIP/" rel="alternate" type="text/html" title="LoTLIP: Improving Language-Image Pre-training for Long Text Understanding (NeurIPS 2024)" /><published>2025-03-31T00:00:00+09:00</published><updated>2025-04-01T16:29:39+09:00</updated><id>http://localhost:4000/llm/LoTLIP</id><content type="html" xml:base="http://localhost:4000/llm/2025-03-31-LoTLIP/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
   <li>기존 LIP(Language-Image Pre-training) 모델들은
@@ -319,7 +319,7 @@
   <li>훈련 이미지가 일반적으로 짧은 캡션과 쌍으로 제공되기 때문에, 일부 토큰이 더 눈에 띄는(salient) 토큰에 의해 가려지는 문제가 발생</li>
   <li>장문을 직접 학습에 사용하는 경우, 예를 들어 이미지 분류와 같이 단문 이해가 요구되는 작업에서 오히려 성능이 저하</li>
   <li><strong>corner token</strong>을 도입하여 다양한 텍스트 정보를 집계함으로써, 모델이 단문 이해 능력을 회복하는 동시에 장문 이해 능력을 대폭 향상</li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[NeurIPS 2024](https://papers.nips.cc/paper_files/paper/2024/file/77828623211df05497ce3658300dafd9-Paper-Conference.pdf)]]></summary></entry><entry><title type="html">HDMixer: Hierarchical Dependency with Extendable Patch for Multivariate Time Series Forecasting (AAAI 2024)</title><link href="http://localhost:4000/timeseries/2025-03-26-HDMixer/" rel="alternate" type="text/html" title="HDMixer: Hierarchical Dependency with Extendable Patch for Multivariate Time Series Forecasting (AAAI 2024)" /><published>2025-03-26T00:00:00+09:00</published><updated>2025-03-26T15:10:21+09:00</updated><id>http://localhost:4000/timeseries/HDMixer</id><content type="html" xml:base="http://localhost:4000/timeseries/2025-03-26-HDMixer/"><![CDATA[<h2 id="abstract">Abstract</h2>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[NeurIPS 2024](https://papers.nips.cc/paper_files/paper/2024/file/77828623211df05497ce3658300dafd9-Paper-Conference.pdf)]]></summary></entry><entry><title type="html">HDMixer: Hierarchical Dependency with Extendable Patch for Multivariate Time Series Forecasting (AAAI 2024)</title><link href="http://localhost:4000/timeseries/2025-03-26-HDMixer/" rel="alternate" type="text/html" title="HDMixer: Hierarchical Dependency with Extendable Patch for Multivariate Time Series Forecasting (AAAI 2024)" /><published>2025-03-26T00:00:00+09:00</published><updated>2025-04-01T16:29:39+09:00</updated><id>http://localhost:4000/timeseries/HDMixer</id><content type="html" xml:base="http://localhost:4000/timeseries/2025-03-26-HDMixer/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
   <li>Patching to enhance <strong>local semantic</strong>s and improve model <strong>performance</strong>
@@ -1350,7 +1350,7 @@ C_m^{L E}\left(X^{L E} \mid r\right)=\frac{1}{N} \operatorname{num}\left\{d\left
       <li><strong>Multi-scale and Multi-resolution mixing techniques</strong>, fuses and extracts information across different hierarchical levels</li>
     </ul>
   </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[ICLR 2025 Oral](https://openreview.net/pdf?id=1CLzLXSFNn)]]></summary></entry><entry><title type="html">S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv 2025 )</title><link href="http://localhost:4000/mamba/2025-03-01-S2TX/" rel="alternate" type="text/html" title="S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv 2025 )" /><published>2025-03-01T00:00:00+09:00</published><updated>2025-03-17T11:37:02+09:00</updated><id>http://localhost:4000/mamba/S2TX</id><content type="html" xml:base="http://localhost:4000/mamba/2025-03-01-S2TX/"><![CDATA[<h2 id="abstract">Abstract</h2>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[ICLR 2025 Oral](https://openreview.net/pdf?id=1CLzLXSFNn)]]></summary></entry><entry><title type="html">S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv 2025)</title><link href="http://localhost:4000/mamba/2025-03-01-S2TX/" rel="alternate" type="text/html" title="S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv 2025)" /><published>2025-03-01T00:00:00+09:00</published><updated>2025-04-02T21:38:06+09:00</updated><id>http://localhost:4000/mamba/S2TX</id><content type="html" xml:base="http://localhost:4000/mamba/2025-03-01-S2TX/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
   <li><strong>Multi-scale</strong> models for the <strong>heterogeneity</strong> btw long and short patterns
@@ -2229,482 +2229,390 @@ C_m^{L E}\left(X^{L E} \mid r\right)=\frac{1}{N} \operatorname{num}\left\{d\left
       <li>GPU 텐서 배치 역시 영향을 받으면서 불러오는 첫 번째 batch가 달라질 수 있음</li>
     </ul>
   </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="pytorch" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Byte Latent Transformer: Patches Scale Better Than Tokens (Arxiv 2024)</title><link href="http://localhost:4000/llm/2025-02-22-BLT/" rel="alternate" type="text/html" title="Byte Latent Transformer: Patches Scale Better Than Tokens (Arxiv 2024)" /><published>2025-02-22T00:00:00+09:00</published><updated>2025-02-24T02:08:15+09:00</updated><id>http://localhost:4000/llm/BLT</id><content type="html" xml:base="http://localhost:4000/llm/2025-02-22-BLT/"><![CDATA[<h2 id="abstract">Abstract</h2>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="pytorch" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">CLIP: Learning Transferable Visual Models From Natural Language Supervision (Arxiv 2021)</title><link href="http://localhost:4000/llm/2025-02-25-CLIP/" rel="alternate" type="text/html" title="CLIP: Learning Transferable Visual Models From Natural Language Supervision (Arxiv 2021)" /><published>2025-02-25T00:00:00+09:00</published><updated>2025-04-05T22:57:02+09:00</updated><id>http://localhost:4000/llm/CLIP</id><content type="html" xml:base="http://localhost:4000/llm/2025-02-25-CLIP/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
-  <li>Byte Latent Transformer (BLT)
+  <li>기존에는 trained to predict a fixed set of pre-determined object categories
     <ul>
-      <li><strong>new byte-level LLM architecture</strong></li>
-      <li>tokenizer-free</li>
+      <li>\(\to\) limits their generality and usability since additional labeled data is needed</li>
     </ul>
   </li>
-  <li>BLT encodes bytes into <strong>dynamically sized patches</strong> (primary units of computation)</li>
-  <li>Patches are segmented based on the <strong>entropy of the next byte</strong>
+  <li>그 대신 learning directly from raw text about images
     <ul>
-      <li>allocating more compute and model capacity where increased data complexity demands it</li>
-    </ul>
-  </li>
-  <li>Feasibility of scaling models trained on raw bytes without a fixed vocabulary
-    <ul>
-      <li>By dynamically selecting long patches when data is predictable</li>
+      <li>즉 which caption goes with which image</li>
+      <li>\(\to\) text 가 reference learned visual concepts가 됨</li>
+      <li>enabling zero-shot transfer of the model to downstream tasks (SOTA image representations)</li>
     </ul>
   </li>
 </ul>
 
-<h2 id="1-introduciton">1. Introduciton</h2>
+<h2 id="1-introduction">1. Introduction</h2>
 
 <ul>
-  <li>기존 LLM : end-to-end train… but <strong>except for tokenization !</strong>
+  <li>Pre-training methods which learn directly from raw text:
     <ul>
-      <li>groups bytes into a <strong>static</strong> set of tokens (heuristic)</li>
-      <li>\(\to\) bias how a string is compressed</li>
-      <li>\(\to\) shortcomings such as
-        <ul>
-          <li>domain/modality sensitivity</li>
-          <li>sensitivity to input noise</li>
-          <li>a lack of orthographic knowledge</li>
-          <li>and multilingual inequity</li>
-        </ul>
-      </li>
+      <li><strong>Task-agnostic objectives</strong> such as autoregressive and maskedlanguage modeling 발전시킴</li>
+      <li>text-to-text가 standardized input-output interface 되면서</li>
+      <li>task agnostic architectures가 zero-shot transfer to downstream datasets 가능하게 함</li>
+      <li><strong>while requiring little to no dataset specific training data !</strong></li>
     </ul>
   </li>
-  <li>LLMs에서 long sequence 다루려면 Tokenization은 필수
+  <li>Pre-training methods within <strong>web-scale collections</strong> of text가 that of high-quality <strong>crowd-labeled NLP</strong> datasets보다 낫다</li>
+  <li>하지만 computer vision에서는 아직 pre-train models on crowd-labeled datasets such as ImageNet
     <ul>
-      <li>training on bytes : costly at scale</li>
-      <li>그래서 self-attention or attention-free architectures
-        <ul>
-          <li>But small models일때나 말이 됨</li>
-          <li>왜냐면 Transformer로 효율적으로 하려고 해봐야 어차피  Scale 관점에서 <strong>large FFN on every byte</strong>가 문제</li>
-        </ul>
-      </li>
+      <li><strong>방금 소개한 learn directly from web text가 CV에서도 가능?</strong></li>
+      <li>지금까지 transformer-based language modeling, masked language modeling, and contrastive objectives가 learn image representations from text 할 수 있음이 입증됨</li>
     </ul>
   </li>
-  <li>본 논문에서 dynamic, learnable method for <strong>grouping bytes into patches</strong> 제안
+  <li>텍스트로 이미지를 배우는 시도는 개념 증명 수준, 성능도 낮았음.
     <ul>
-      <li>mixes byte and patch information</li>
-      <li>tokenizaiton과 다르게 no fixed vocabulary for patches</li>
-      <li>Arbitrary groups of bytes are mapped to latent patch representations !</li>
+      <li>그렇다고 limited amount of supervised <strong>“gold-labels”</strong> 으로 학습하자니</li>
+      <li>label classes 개수가 제한적이고, NLP보다 generality 부족, static softmax classifier 쓰다보니 flexibility 부족,</li>
+      <li>\(\to\) limits their zero-shot capabilities</li>
     </ul>
   </li>
-  <li>기존 Tokenization-based LLMs allocate the <strong>same</strong> amount of compute to <strong>every</strong> token.
+  <li>그래서 CLIP: Contrastive Language-Image Pretraining에서는 <strong>scale</strong>이 답이라고 생각
     <ul>
-      <li>\(\to\) trades efficiency for performance 불가피</li>
-      <li>왜냐면 예측의 complexity랑 token이랑 not always correlated</li>
-    </ul>
-  </li>
-  <li>그러니 compute를 필요한 곳에 할당하자
-    <ul>
-      <li>ending of most words 예측은 쉬워서 large transformer 필요 X (low-entropy)</li>
-    </ul>
-  </li>
-  <li>이 생각을 반영한 BLT:
-    <ul>
-      <li>3 transformer blocks: <strong>two small byte-level local</strong> models and <strong>a large global latent transformer</strong></li>
-      <li>how to dynamically allocate compute = how to group bytes into patches</li>
-      <li>BLT segments data based on the <strong>entropy of the next-byte prediction</strong></li>
+      <li>기존에 쓰던 모델(ConVIRT)을 단순하게 바꿔서 처음부터 다시 학습</li>
+      <li>다양한 크기의 모델 8개를 만들어서 학습 연산량을 조금씩 늘리면서 실험했더니 연산량이 많을수록 성능도 꾸준히 좋아짐</li>
+      <li>label 필요없고, 다양한 task에 robust, zero-shot 잘하고, efficient</li>
+      <li>GPT가 텍스트를 바꿨듯이, CLIP은 이미지 이해 방식 자체를 바꿈</li>
     </ul>
   </li>
 </ul>
 
-<h2 id="2-patching-from-individual-bytes-to-groups-of-bytes">2. Patching: From Individual Bytes to Groups of Bytes</h2>
+<h2 id="2-approach">2. Approach</h2>
 
-<p><img src="/assets/img/llm/BLT/fig3.png" alt="그림1" /></p>
+<h3 id="21-natural-language-supervision">2.1. Natural Language Supervision</h3>
 
 <ul>
-  <li>Patching : segmenting the sequence of byte \(\boldsymbol{x}=\left\{x_i, \mid i=1, \ldots n\right\}\) into \(p=\left\{p_j \mid j=1, \ldots, m\right\}, m&lt;n\)
+  <li>CLIP 접근법의 핵심은 learning perception from supervision contained in <strong>natural language</strong></li>
+  <li>Learning from <strong>natural language</strong>의 장점:
     <ul>
-      <li>by mapping each \(x_i\) to the set \(\{0,1\}\) where 1 indicates the start of a new patch</li>
-      <li>the computational cost = the number of main Transformer execution
-        <ul>
-          <li>BLT에서는 = the number of patches !</li>
-          <li>따라서 average size of a patch, or simply patch size 매우 중요함</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>그러므로 여기서는 patching functions을 다룸
-    <ul>
-      <li>patching with a fixed number of bytes per patch</li>
-      <li>whitespace patching</li>
-      <li>dynamically patching with entropies from a small byte LM</li>
+      <li>web-text 활용하니까 crowd-sourced labeling for image classification(사람이 label 붙이는 방식)보다 쉬움</li>
+      <li>1-of-N majorityvote gold label처럼 machine learning compatible format일 필요도 없음</li>
+      <li>단순히 representation을 learn하는게 아니라, representation을 flexible zero-shot transfer 가능한 language로 connect !</li>
     </ul>
   </li>
 </ul>
 
-<h3 id="21-strided-patching-every-k-bytes">2.1. Strided Patching Every K Bytes</h3>
+<h3 id="22-creating-a-sufficiently-large-dataset">2.2. Creating a Sufficiently Large Dataset</h3>
 
 <ul>
-  <li>일반적으로는 bytes into patches of fixed size \(k\) as done in MegaByte
+  <li>MS-COCO, Visual Genome dataset은 규모가 작고</li>
+  <li>YFCC100M dataset은 크지만 영어 설명이 있는 이미지가 별로 없음</li>
+  <li>A major motivation for <strong>natural language supervision</strong> is the large quantities of data of this form available publicly on the <strong>internet</strong> !
     <ul>
-      <li>changing the average patch size 쉽고 control the FLOP cost 쉬움</li>
-      <li>But ! compute is not dynamically allocated
-        <ul>
-          <li>공백(whitespace) 예측하려고 Transformer 쓴다거나</li>
-          <li>byte가 많은 math에 compute를 안쓴다거나…</li>
-        </ul>
-      </li>
-      <li>그러다보니 inconsistent and non-contextual patching of similar byte sequences (같은 걸 다르게 split)</li>
+      <li>아까 4억개라고 했는데, 총 500,000 개의 검색어(query)를 기준으로 관련된 image-text pairs 수집, query마다 최대 20,000쌍까지 수집하여 class imbalance 완화 (GPT-2를 학습시킨 WebText와 비슷한 총 단어 수를 가짐)</li>
+      <li>이 데이터셋을 <strong>WIT(WebImageText)</strong>라고 부름 !</li>
     </ul>
   </li>
 </ul>
 
-<h3 id="22-space-patching">2.2. Space Patching</h3>
+<h3 id="23-selecting-an-efficient-pre-training-method">2.3. Selecting an Efficient Pre-Training Method</h3>
 
 <ul>
-  <li>creates new patches after any space-like bytes (= 공백 이후에 patch 시작)</li>
-  <li>natural boundaries for linguistic units in many languages (=언어의 관점에서 자연스러운 접근)</li>
-  <li>words are patched in the same way across sequences
+  <li>web data 양이 방대하다보니 Training efficiency가 매우 중요</li>
+  <li>처음에는 imgae-CNN과 text transformer 함께 학습시켜 image의 captions 예측
     <ul>
-      <li>FLOPs are allocated for hard predictions which often follow spaces (공백 바로 뒤)</li>
-      <li>ex. “Who composed the Magic Flute?”에 답하기 위해서 바로 맞추라고 하면 어렵지만 M을 주면 Mozart 맞추기 쉬워짐 !</li>
-    </ul>
-  </li>
-  <li>But ! cannot gracefully handle all languages and domains
-    <ul>
-      <li>무엇보다도 cannot vary thepatch size</li>
+      <li>\(\to\) 굳이 ? <strong>문장의 단어까지 정확히 예측하지 않고, 전체 텍스트가 어떤 이미지와 짝이 맞는지만 맞추도록 학습</strong></li>
+      <li><strong>the cosine similarity of the image and text embeddings</strong>를 높이는 방식으로 contrastive learning (N개의 image-text pairs가 있으면 N x N개의 조합)</li>
     </ul>
   </li>
 </ul>
 
-<h3 id="23-entropy-patching-using-next-byte-entropies-from-a-small-byte-lm">2.3 Entropy Patching: Using Next-Byte Entropies from a Small Byte LM</h3>
+<p><img src="/assets/img/llm/CLIP/fig1.png" alt="그림1" /></p>
 
 <ul>
-  <li>2.2 같은 rule-based heuristic such as whitespace 말고 data-driven approach 원함
+  <li>CLIP에서 pre-training dataset 크니까 over-fitting 걱정 없이 학습 간소화
     <ul>
-      <li>identify high uncertainty next-byte predictions, 즉 entropy patching</li>
-    </ul>
-  </li>
-  <li>먼저 a small byte-level auto-regressive language model 하나 학습시키고
-    <ul>
-      <li>그 다음 compute next byte entropies under the LM distribution \(p_e\)  over the byte vocabulary \(\mathcal{V} :\)</li>
-      <li>\(H\left(x_i\right)=\sum_{v \in \mathcal{V}} p_e\left(x_i=v \mid x_{&lt;i}\right) \log p_e\left(x_i=v \mid \boldsymbol{x}_{&lt;i}\right)\).</li>
-      <li>Entropy가 주어졌을 때 patch boundaries는 어떻게 찾냐
-        <ul>
-          <li>첫째, entropy가 그냥 threshold보다 높은 지점</li>
-          <li>둘째, 갑자기 entropy가 커진 지점</li>
-          <li>i.e., \(\begin{aligned}\text{Global Constraint} \quad H\left(x_t\right)&gt;\theta_g \\ \text{Approx. Monotonic Constraint} \quad H\left(x_t\right)-H\left(x_{t-1}\right)&gt;\theta_r\end{aligned}\)</li>
-        </ul>
-      </li>
+      <li><strong>without</strong> initializing the <strong>image encoder</strong> with ImageNet weights or the <strong>text encoder</strong> with pre-trained weights</li>
+      <li><strong>non-linear projection</strong> (btw the representation and the contrastive embedding space) 안쓰고 단순한 <strong>linear layer</strong></li>
+      <li><strong>text transformation function 제거</strong> (어차피 text에 한 문장이라서 randomness 필요없음)</li>
+      <li><strong>image transformation function도 제거</strong> (크기 조정 후 랜덤 자르기만 사용)</li>
+      <li><strong>temperature parameter</strong> (which controls the range of the logits in the softmax)를 learnable하게 (Not hyperparams)</li>
     </ul>
   </li>
 </ul>
 
-<h3 id="24-the-byte-pair-encoding-bpe-tokenizer-and-incremental-patching">2.4 The Byte-Pair Encoding (BPE) Tokenizer and Incremental Patching</h3>
+<p><img src="/assets/img/llm/CLIP/fig2.png" alt="그림1" /></p>
+
+<p><img src="/assets/img/llm/CLIP/fig3.png" alt="그림1" /></p>
+
+<h3 id="24-choosing-and-scaling-a-model">2.4. Choosing and Scaling a Model</h3>
 
 <ul>
-  <li>대부분의 LLMs (Llama 3 포함) use a subword tokenizer like BPE</li>
-  <li>본 논문에서는
-    <ul>
-      <li>“<strong>tokens</strong>”: byte-groups drawn from a finite vocabulary determined prior totraining</li>
-      <li>“<strong>patches</strong>”: dynamically grouped sequences without a fixed vocabulary</li>
-      <li>둘의 차이는 with tokens, the model has no direct access to theunderlying byte features</li>
-    </ul>
-  </li>
+  <li><strong>Image encoder</strong>: ResNet-50, ViT</li>
+  <li><strong>Text encoder</strong>: GPT-2 아키텍처와 비슷함</li>
+  <li><strong>Scaling</strong>: width, depth 하나만 늘리지 않고 EfficientNet처럼 width, depth, resolution 모두 확장</li>
 </ul>
 
-<p><img src="/assets/img/llm/BLT/fig4.png" alt="그림1" /></p>
+<h3 id="25-training">2.5. Training</h3>
 
 <ul>
-  <li>BLT는 the trade off between the vocabulary <strong>size</strong> and <strong>compute</strong>를 re-define함
+  <li>5개의 ResNet과 3개의 Vision Transformer(ViT) 모델을 학습
     <ul>
-      <li>원래는 vocabulary size 커짐 = larger tokens = larger final projection layer</li>
-      <li>Llama 3도 Llama 2에 비해 average token size를 3.7에서 4.4 bytes로 늘리면서 embedding table size는 4배 됨</li>
+      <li>ResNet-50, ResNet-101, 그리고 EfficientNet 방식의 스케일링을 따라 ResNet-50 대비 약 4배, 16배, 64배 계산량을 사용하는 모델 3개를 추가로 학습 (RN50x4, RN50x16, RN50x64)</li>
+      <li>Vision Transformer 계열은 ViT-B/32, ViT-B/16, ViT-L/14 세 가지를 학습</li>
     </ul>
   </li>
-  <li>BLT는 결국 byte sequence 내에서 지금이 patch boundary인가 아닌지 판단하면 되고
-    <ul>
-      <li>즉 = Latent Transformer로 more compute 할지말지 판단</li>
-      <li>이건 아직 생성 안된 rest of sequence랑 독립</li>
-      <li>즉 incremental patching \(f_p\left(x_{&lt;i}\right)=f_p(\boldsymbol{x})_{&lt;i}\)이 아님</li>
-      <li>즉 같은 prefix라도 다르게 tokenize 가능</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="3-blt-architecture">3. BLT Architecture</h2>
-
-<p><img src="/assets/img/llm/BLT/fig2.png" alt="그림1" /></p>
-
-<ul>
-  <li>BLT의 구성은:
-    <ul>
-      <li><strong>A large</strong> global autoregressive language model
-        <ul>
-          <li>that operates on patch representations,</li>
-        </ul>
-      </li>
-      <li><strong>Two</strong> smaller local models
-        <ul>
-          <li>encode sequences of bytes into patches</li>
-          <li>decode patch representations back into bytes</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="31-latent-global-transformer-model">3.1 Latent Global Transformer Model</h3>
-
-<ul>
-  <li>The Latent Global Transformer is an autoregressive transformer model \(\mathcal{G}\) with \(l_{\mathcal{G}}\) layers
-    <ul>
-      <li>sequence of latent input patch representations \(p_j\) \(\to\) sequence of output patch representations \(o_j\)로 변환</li>
-    </ul>
-  </li>
-  <li>block-causal attention mask 사용
-    <ul>
-      <li>현재 문서 내 현재 배치까지 범위에서만 attention</li>
-      <li>pre-training, inference에서 FLOP 대부분이라 언제 실행할지가 complexity 결정</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="32-local-encoder">3.2. Local Encoder</h3>
-
-<p><img src="/assets/img/llm/BLT/fig5.png" alt="그림1" /></p>
-
-<ul>
-  <li>The Local Encoder Model, denoted by \(\mathcal{E}\)
-    <ul>
-      <li>lightweight transformer-based model with layers \(l_{\mathcal E} &lt;&lt; l_{\mathcal G}\)</li>
-      <li>input bytes \(b_i\) \(\to\) patch representation \(p_j\)</li>
-      <li>Transformer랑 다른 건 cross-attention layer after each transformer layer (pool byte representations into patch representations 하는 부분) - 3.2.2에서 이해됨</li>
-      <li>input sequence of bytes, \(b_i\), are embedded using a \(\mathbb{R}^{256 \times h_{\mathcal E}}\) matrix, denoted as \(x_i\)</li>
-      <li>hash-embeddings는 optional</li>
-    </ul>
-  </li>
-  <li>즉 alternating transformer and cross-attention layers가 input bytes \(b_i\)의 representation을 \(\to\) patch representation \(p_j\)</li>
-  <li>local block causal attention mask; 사용해서 each byte attends to a fixed window of \(\mathcal w_{\mathcal{E}}\)
-    <ul>
-      <li>다른 patch 볼 수 있지만 현재 문서 내에서만 !</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="321-encoder-hash-n-gram-embeddings">3.2.1. Encoder Hash n-gram Embeddings</h3>
-
-<ul>
-  <li>결국 to incorporate information about the preceding bytes가 중요</li>
-  <li>byte \(b_i\)를 as individual로, 그리고 as part of a byte n-gram으로 둘다 봄
-    <ul>
-      <li>Byte-gram: \(g_{i, n}=\left\{b_{i-n+1}, \ldots, b_i\right\}\) (with a fixed size for each size \(n \in\{3,4,5,6,7,8\}\))</li>
-      <li>그 다음 individual embedding에 다 더함. i.e.,
-        <ul>
-          <li>\(e_i  =x_i+\sum_{n=3, \ldots, 8} E_n^{\text {hash }}\left(\operatorname{Hash}\left(g_{i, n}\right)\right)\).</li>
-          <li>where \(\operatorname{Hash}\left(g_{i, n}\right)=\operatorname{RollPolyHash}\left(g_{i, n}\right) \% \mid E_n^{\text {hash }}\mid\)</li>
-        </ul>
-      </li>
-      <li>그 다음에 normalizing !</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="322-encoder-multi-headed-cross-attention">3.2.2 Encoder Multi-Headed Cross-Attention</h3>
-
-<ul>
-  <li>이제 진짜 bytes-sequence를 patch-sequence로 바꿔보자</li>
-  <li>Perceiver의 입력 cross-attention과 비슷하지만 patch 크기가 동적 !</li>
-  <li>Patch represenation은 관련된 byte만으로 학습됨
-    <ul>
-      <li>initialization은 byte representation에 pooling</li>
-      <li>Cross-Attention을 통해 Patch represenation이 풍부한 맥락을 반영</li>
-      <li>\(\begin{aligned} P_{0, j} &amp; =\mathcal{E}_C\left(f_{\text {bytes }}\left(\left(p_j\right)\right), f \text { is a pooling function }\right. \\ P_l &amp; =P_{l-1}+W_o\left(\operatorname{softmax}\left(\frac{Q K^T}{\sqrt{d_k}}\right) V\right) \\ \text { where } Q_j &amp; =W_q\left(P_{l-1, j}\right), K_i=W_k\left(h_{l-1, i}\right), V_i=W_v\left(h_{l-1, i}\right) \\ h_l &amp; =\text { Encoder-Transformer-Layer }\left(h_{l-1}\right)\end{aligned}\).</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="33-local-decoder">3.3. Local Decoder</h3>
-
-<ul>
-  <li>Local encoder와 비슷하게 lightweight transformer-based model with \(l_{\mathcal D} &lt;&lt; l_{\mathcal G}\)</li>
-  <li>patch representation \(o_j\) \(\to\) raw bytes \(y_i\)</li>
-  <li>이번에는 Cross-Attention으로 byte representation으로 변환
-    <ul>
-      <li>\(\begin{aligned}
-&amp; D_0=h_{l_{\varepsilon}} \\
-&amp; B_l=D_{l-1}+W_o\left(\operatorname{softmax}\left(\frac{Q K^T}{\sqrt{d_k}}\right) V\right) \text {, } \\
-&amp; \text { where } Q_i=W_q\left(d_{l-1, i}\right), K_i=W_k\left(\mathcal{D}_C\left(o_j\right)\right), V_i=W_v\left(\mathcal{D}_C\left(o_j\right)\right) \\
-&amp; D_l=\text { Decoder-Transformer-layer }{ }_l\left(B_l\right)
-\end{aligned}\).</li>
-      <li>Encoder는 byte가 K/V, patch가 Q / Decoder는 patch가 K/V, byte가 Q</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="4-experimental-setup">4. Experimental Setup</h2>
-
-<h3 id="41-pre-training-datasets">4.1. Pre-training Datasets</h3>
-
-<ul>
-  <li>LLaMA 2 (Touvron et al., 2023)으로 BLT model scaling law experiments</li>
-  <li>BLT-1Tdㅡ로 Llama3와 비교</li>
-</ul>
-
-<h3 id="42-entropy-model">4.2. Entropy Model</h3>
-
-<ul>
-  <li>BLT의 Entropy-Based Patching을 위한 language model
-    <ul>
-      <li>Byte-level auto-regressive transformer 사용</li>
-      <li>trained on the same training distribution as the full BLT model</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="43-entropy-threshold-and-equalizing-context-length">4.3. Entropy Threshold and Equalizing Context Length</h3>
-
-<ul>
-  <li>공정한 비교를 위해 patch size가 동적으로 변하더라도 same average context length i.e.,
-    <ul>
-      <li>the number of bytes ineach <strong>batch</strong> remains constant <strong>in expectation</strong></li>
-      <li>모든 배치가 동일한 패치 개수를 가지도록 하여 large patch size로 인한 memory spikes 방지</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="44-entropy-model-context">4.4. Entropy Model Context</h3>
-
-<p><img src="/assets/img/llm/BLT/fig9.png" alt="그림1" /></p>
-
-<ul>
-  <li>entropy patching yields progressively <strong>larger patches</strong> in structured content like multiple choice tasks</li>
-  <li>반복되다보니 entropy가 낮아지는 것 (lower entropy on the repeated content)</li>
-  <li>따라서 <em>new lines</em>에서 entropy context 리셋하고 앞서 설명한 approximate monontonicity constraint 적용</li>
-</ul>
-
-<h3 id="45-flops-estimation">4.5. FLOPs Estimation</h3>
-
-<ul>
-  <li>주로 FLOPs가 발생하는 곳 3:
-    <ul>
-      <li>FFN, Self-attention, Output projection !</li>
-      <li>\(\begin{aligned} \mathrm{FL}_{\mathrm{BLT}} &amp; =\operatorname{Transf.} \mathrm{FL}\left(h_{\mathcal{G}}, l_{\mathcal{G}}, m=n_{c t x} / n_p, V=0\right) / n_p \\ &amp; +\operatorname{Transf.} \mathrm{FL}\left(h_{\mathcal{E}}, l_{\mathcal{E}}, m=w_{\mathcal{E}}, V=0\right) \\ &amp; +\operatorname{Transf.} \mathrm{FL}\left(h_{\mathcal{D}}, l_{\mathcal{D}}, m=w_{\mathcal{D}}, V=256\right) \\ &amp; +\operatorname{Cross} \operatorname{Attn} . \mathrm{FL}\left(h_{\mathcal{E}}, l_{\mathcal{E}}, m=n_p, r=n_p / k\right) \times k / n_p \\ &amp; + \text { Cross Attn. FL }\left(h_{\mathcal{D}}, l_{\mathcal{D}}, m=k, r=k / n_p\right)\end{aligned}\).</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="46-bits-per-byte-estimation">4.6. Bits-Per-Byte Estimation</h3>
-
-<ul>
-  <li>Perplexity per <strong>token</strong>는 비교가 어렵기 때문에, <strong>Byte</strong>-Level에서 평가하는 Bits-Per-Byte(<strong>BPB</strong>) 사용
-    <ul>
-      <li>\(\operatorname{BPB}(x)=\frac{\mathcal{L}_{C E}(\boldsymbol{x})}{\ln (2) \cdot n_{\text {bytes }}}\).</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="47-transformer-architecture-hyperparameters">4.7. Transformer Architecture Hyperparameters</h3>
-
-<ul>
-  <li>Llama 3와 동일한 hyperparameters setting
-    <ul>
-      <li>Activation: SwiGLU</li>
-      <li>Positional embedding: RoPE</li>
-      <li>Normalization: RMSNorm</li>
-      <li>Attention optimization: Flash Attention</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="48-blt-specific-hyperparameters">4.8. BLT-Specific Hyperparameters</h3>
-
-<ul>
-  <li>N-gram Hash Embeddings : 3~8</li>
 </ul>
 
 <p>pass</p>
 
-<h2 id="5-scaling-trends">5. Scaling Trends</h2>
+<h2 id="3-experiments">3. Experiments</h2>
 
-<h3 id="51-parameter-matched-compute-optimal-scaling-trends">5.1. Parameter Matched Compute Optimal Scaling Trends</h3>
+<h3 id="31-zero-shot-transfer">3.1. Zero-Shot Transfer</h3>
+
+<h3 id="311-motivation">3.1.1. Motivation</h3>
 
 <ul>
-  <li>compute-optimal scaling of BLT
+  <li>기존 비지도 학습에서는 representation learning capabilities에 집중
     <ul>
-      <li>compared in terms of training <strong>FLOPs</strong> and language modeling <strong>performance</strong></li>
+      <li>zero-shot transfer로 task learning capabilities 측정</li>
     </ul>
   </li>
-  <li>Larger patch sizes in BLT (6 or 8 bytes) <strong>reduce inference FLOPs by up to 50%</strong> while maintaining comparable performance to BPE models.</li>
-</ul>
-
-<h3 id="52-beyond-compute-optimal-task-evaluations">5.2. Beyond Compute Optimal Task Evaluations</h3>
-
-<p><img src="/assets/img/llm/BLT/table1.png" alt="그림1" /></p>
-
-<ul>
-  <li>Evaluations include :<strong>common sense reasoning, world knowledge, and code generation</strong> tasks</li>
-  <li>Llama 3 보다 뛰어난 이유는
+  <li>zero-shot transfer는 CLIP의 robustness to <strong>distribution shift</strong> and <strong>domain generalization</strong>를 측정 rather than task generalization
     <ul>
-      <li>Better use of compute through dynamic patching !</li>
-      <li>Direct modeling of byte-level information rather than tokens</li>
-      <li>Larger patch size로 inference FLOPs reduction !</li>
+      <li>특정 분포만 외우는 모델인지, 진짜 “과제를 푸는 능력”을 갖췄는지를 평가하자 !</li>
+      <li><strong>task learning</strong>: 직접 task를 학습시키지 않았지만, 과제를 수행할 수 있어야 한다 !</li>
     </ul>
   </li>
 </ul>
 
-<h3 id="53-patches-scale-better-than-tokens">5.3. Patches Scale Better Than Tokens</h3>
-
-<p><img src="/assets/img/llm/BLT/table2.png" alt="그림1" /></p>
+<h3 id="312-using-clip-for-zero-shot-transfer">3.1.2. Using CLIP for Zero-Shot Transfer</h3>
 
 <ul>
-  <li>모델 크기와 패치 크기를 동시에 증가시키면서도 동일한 학습 및 추론 FLOP 예산을 유지</li>
+  <li>class를 class text로 변환 (text encoder에 넣기 좋은 형식)
+    <ul>
+      <li>예시: “cat”을 “a photo of a cat”으로</li>
+    </ul>
+  </li>
+  <li>모든 class text/Image를 text/image encoder로 embedding</li>
+  <li>Cosine similarity 계산 (class text vs. image embeddings)</li>
+  <li>temperature parameter 로 스케일링 후 softmax 적용</li>
+  <li>확률 분포 중 확률이 가장 높은 텍스트가 image class가 됨</li>
+  <li><strong>CLIP은 본래 “image와 text가 positive pair인가?”를 예측하도록 학습되었는데, 이걸 활용해서 “이미지의 클래스가 무엇인가?”도 알아낼 수 있다 !</strong></li>
+  <li><strong>Text encoder가 classifier처럼 작동하는 것이고 text encoder는 하나만 써서 모든 images에 사용</strong>
+    <ul>
+      <li>이 문장을 이해해야 함 !!</li>
+    </ul>
+  </li>
 </ul>
 
-<h2 id="6-byte-modeling-improves-robustness">6. Byte Modeling Improves Robustness</h2>
+<h3 id="313-initial-comparison-to-visual-n-grams">3.1.3. Initial Comparison to Visual N-Grams</h3>
 
-<h3 id="61-character-level-tasks">6.1. Character-Level Tasks</h3>
-
-<p><img src="/assets/img/llm/BLT/fig7.png" alt="그림1" /></p>
+<p><img src="/assets/img/llm/CLIP/table1.png" alt="그림1" /></p>
 
 <ul>
-  <li>Byte-level models are inherently more robust to <strong>input noise</strong> and better at handling <strong>character-level variations.</strong></li>
+  <li>학습된 class만 잘 맞추는 게 아니라, 학습 안 한 새로운 task/dataset에서도 높은 정확도</li>
+  <li><strong>Multi-modal contrastive learning</strong>으로 이미지와 언어 사이 의미적 연결을 학습하기 때문 (image와 text를 같은 embedding space에 mapping)</li>
 </ul>
 
-<p><img src="/assets/img/llm/BLT/table3.png" alt="그림1" /></p>
-
-<h3 id="62-training-blt-from-llama-3">6.2. Training BLT from Llama 3</h3>
+<h3 id="314-prompt-engineering-and-ensembling">3.1.4. Prompt Engineering and Ensembling</h3>
 
 <ul>
-  <li>Pre-traind tokenizer-based model을 leverage해서 더 빠르게 수렴할 수 있는가</li>
-  <li>BLT from Llama 3.1이 from Llama 3보다 좋음 !</li>
+  <li><strong>Prompt Engineering</strong>: 클래스 이름이 중의적이면(CLIP은 문맥 없이 처리하므로) 문제 발생
+    <ul>
+      <li>예시: ImageNet에서 “crane” → 기중기 or 새</li>
+      <li>그래서 “<strong>A photo of a {label}.</strong>” 형태의 프롬프트를 사용</li>
+      <li>이것만으로 ImageNet 정확도 1.3% 증가</li>
+    </ul>
+  </li>
+  <li><strong>Ensembling</strong>: 여러 zero-shot 분류기를 합치는 방식
+    <ul>
+      <li>여러 프롬프트 사용:
+        <ul>
+          <li>“A photo of a big {label}”</li>
+          <li>“A photo of a small {label}”</li>
+        </ul>
+      </li>
+      <li>각 prompt에 대해 text embedding 계산, 평균내서 하나의 classifier처럼 사용</li>
+      <li>이것만으로 ImageNet 정확도 3.5% 증가</li>
+    </ul>
+  </li>
 </ul>
 
-<p><img src="/assets/img/llm/BLT/table5.png" alt="그림1" /></p>
+<p><img src="/assets/img/llm/CLIP/fig4.png" alt="그림1" /></p>
 
-<h2 id="7-ablations-and-discussion">7. Ablations and Discussion</h2>
+<h3 id="315-analysis-of-zero-shot-clip-performance">3.1.5. Analysis of Zero-Shot CLIP Performance</h3>
 
-<p><img src="/assets/img/llm/BLT/fig8.png" alt="그림1" /></p>
+<p><img src="/assets/img/llm/CLIP/fig5.png" alt="그림1" /></p>
 
-<p><img src="/assets/img/llm/BLT/table6.png" alt="그림1" /></p>
+<ul>
+  <li>CLIP의 zero-shot classifier는 단순한 Linear Probe classifier보다 더 좋은 성능 (dataset별로)</li>
+  <li>특히 video action 인식에서 우수 (자연어가 동사를 표현할 수 있으니)</li>
+  <li>반면 위성 이미지, 종양, 물체 수 세기, 교통 표지판, 거리 인식 약함</li>
+</ul>
 
-<p><img src="/assets/img/llm/BLT/table78.png" alt="그림1" /></p>
+<p><img src="/assets/img/llm/CLIP/fig6.png" alt="그림1" /></p>
 
-<p><img src="/assets/img/llm/BLT/table9.png" alt="그림1" /></p>
+<ul>
+  <li>CLIP의 zero-shot 성능은 4-shot Linear Probe와 비슷
+    <ul>
+      <li>CLIP은 visual concepts를 직접적으로 받고 few-shot은 간접적으로 추론하니까 말이 됨</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/llm/CLIP/fig7.png" alt="그림1" /></p>
+
+<ul>
+  <li>few-shot 모델이 CLIP zero-shot 성능 도달하려면 class마다 평균 20.8개 필요</li>
+  <li>ImageNet에서는 16-shot 모델과 CLIP zero-shot 성능 비슷</li>
+</ul>
+
+<p><img src="/assets/img/llm/CLIP/fig8.png" alt="그림1" /></p>
+
+<ul>
+  <li>전체적으로 fully supervised 모델과 CLIP zero-shot 성능 간 상관관계는 0.82 (p &lt; 1e-6).</li>
+  <li>fully supervised 모델 성능 높을수록 CLIP zero-shot도 성능 높음</li>
+  <li>CLIP zero-shot을 few-shot classifier의 initialization으로 활용 가능</li>
+</ul>
+
+<p><img src="/assets/img/llm/CLIP/fig9.png" alt="그림1" /></p>
+
+<ul>
+  <li>학습량 늘어나면서 zero-shot 성능 꾸준히 향상</li>
+</ul>
+
+<h3 id="32-representation-learning">3.2. Representation Learning</h3>
+
+<ul>
+  <li>3.1.에서 task-learning capabilitiesof CLIP through zero-shot transfer 했고
+    <ul>
+      <li>이번에는 representationlearning capabilities 분석</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/llm/CLIP/fig10.png" alt="그림1" /></p>
+
+<ul>
+  <li>Ideal representation: “<strong>모델에서 추출한 표현</strong>을 기반으로 선형 분류기를 학습시키고 다양한 데이터셋에서 높은 성능”으로 정의. 왜냐면:
+    <ul>
+      <li>CLIP은 일반적인 task 및 dataset에 구애받지 않는 pre-training 방식을 지향하고 있기 때문</li>
+      <li>fine tuning은 각 데이터셋에 맞춰 표현을 조정하므로, pre-training에서의 representation 실패를 가릴 수 있음</li>
+      <li>Linear classifier는 유연성이 낮기 때문에 representation 실패를 명확히 드러내며 개발 과정에서 유용한 피드백을 제공</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/llm/CLIP/fig11.png" alt="그림1" /></p>
+
+<ul>
+  <li>CLIP: 기존 모든 시스템 대비 연산 효율이 높음 (동일 성능을 더 적은 계산으로 달성)</li>
+</ul>
+
+<h3 id="33-robustness-to-natural-distribution-shift">3.3. Robustness to Natural Distribution Shift</h3>
+
+<p><img src="/assets/img/llm/CLIP/fig12.png" alt="그림1" /></p>
+
+<ul>
+  <li>기존 models: train data<strong>만</strong> 잘 학습 (ImageNet이 아니면 성능 하락)</li>
+</ul>
+
+<p><img src="/assets/img/llm/CLIP/fig13.png" alt="그림1" /></p>
+
+<ul>
+  <li>CLIP은 ImageNet에서 직접 훈련되지 않고, 광범위한 자연어 기반 데이터로 학습 - 일반화에 더 뛰어남</li>
+</ul>
+
+<p><img src="/assets/img/llm/CLIP/fig14.png" alt="그림1" /></p>
+
+<ul>
+  <li>ImageNet에 adapt하면 (빨간색) <strong>ImageNet 정확도는 상승하지만</strong>, y축 값(분포 이동된 상황에서의 정확도)은 <strong>거의 향상되지 않거나 오히려 감소</strong>하는 경향을 보임.</li>
+  <li>반면 <strong>zero-shot CLIP</strong> (보라색)은 ImageNet에서 약간 낮은 성능을 가지지만, <strong>분포 이동된 환경에서는 훨씬 높은 robustness 보여줌</strong>.</li>
+</ul>
+
+<p><img src="/assets/img/llm/CLIP/fig15.png" alt="그림1" /></p>
+
+<h2 id="4-comparison-to-human-performance">4. Comparison to Human Performance</h2>
+
+<p><img src="/assets/img/llm/CLIP/fig16.png" alt="그림1" /></p>
+
+<ul>
+  <li>인간: 한 장의 예시만으로도 빠르게 학습 가능. 한 번 보면 대부분 기억
+    <ul>
+      <li>Zero-shot: 평균 정확도 54%</li>
+      <li>One-shot: 평균 정확도 76% → +22% 향상</li>
+      <li>Two-shot: 성능 거의 동일 (추가 이득은 미미)</li>
+      <li>인간이 prior knowledge를 잘 활용하니까</li>
+    </ul>
+  </li>
+  <li>현재 CLIP의 few-shot 평가 방법은 prior knowledge를 활용하지 않음 (인간처럼 “이전에 본 적 있는” 정보와 “문맥”을 연결하는 방식이 부족)</li>
+</ul>
+
+<h2 id="5-data-overlap-analysis">5. Data Overlap Analysis</h2>
+
+<p><img src="/assets/img/llm/CLIP/fig17.png" alt="그림1" /></p>
+
+<ul>
+  <li>CLIP은 인터넷에서 수집한 대규모 데이터로 학습되었는데, 이때 우연히 테스트용 평가 데이터셋과 일부 이미지가 겹칠 수 있음
+    <ul>
+      <li>미리 알 수 없으므로 후처리로 중복된 데이터 제거</li>
+    </ul>
+  </li>
+  <li>대부분의 경우, CLIP의 평가 성능은 데이터 중복의 영향이 거의 없음</li>
+  <li><strong>CLIP의 제로샷 성능이 데이터 중복 때문에 과장된 게 아니다 !!</strong></li>
+</ul>
+
+<h2 id="6-limitation">6. Limitation</h2>
+
+<ul>
+  <li>성능적 한계:
+    <ul>
+      <li>일부 데이터셋에서는 linear baseline보다 성능 낮음</li>
+      <li>zero-shot으로 SoTA 달성하려면 1000배 compute 증가 필요 (현재 하드웨어로는 비현실적)</li>
+    </ul>
+  </li>
+  <li>과제별 약점:
+    <ul>
+      <li>fine-grained classification (꽃, 차량 등) 약함</li>
+      <li>counting, 거리 측정 등 추론 기반 과제에 매우 약함</li>
+      <li>novel task에 대해 거의 random 성능**</li>
+    </ul>
+  </li>
+  <li>일반화 한계
+    <ul>
+      <li>자연 이미지에는 잘 generalize하지만 진짜 out-of-distribution에는 약함</li>
+      <li>예: MNIST 손글씨는 CLIP이 88%밖에 못함, logistic regression보다도 낮음</li>
+    </ul>
+  </li>
+  <li>표현 방식 한계:
+    <ul>
+      <li>zero-shot은 concept list가 고정됨 (새로운 개념 생성 불가)</li>
+      <li>캡션처럼 유연한 표현 불가</li>
+    </ul>
+  </li>
+  <li>학습 비효율성:
+    <ul>
+      <li>데이터 효율성 낮음 (수십억 이미지 필요)</li>
+      <li>self-supervision 또는 self-training과 결합 제안</li>
+    </ul>
+  </li>
+  <li>벤치마킹 이슈:
+    <ul>
+      <li>validation set으로 모델 튜닝 → 진정한 zero-shot 평가 어려움</li>
+      <li>평가 데이터셋 선정이 CLIP에 유리할 수 있음</li>
+    </ul>
+  </li>
+  <li>편향 문제:
+    <ul>
+      <li>웹 이미지+텍스트로 학습 → social bias 학습 위험 존재</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="7-broader-impacts">7. Broader Impacts</h2>
 
 <h2 id="8-related-work">8. Related Work</h2>
 
-<p>Pass</p>
+<p>pass</p>
 
-<h2 id="9-limitations-and-futurework">9. Limitations and FutureWork</h2>
-
-<ul>
-  <li>Scaling laws were calculated for BPE-level transformers and may lead to suboptimal (data, parameter sizes) ratios in the case of BLT</li>
-  <li>실험들이 &lt;1B parameters에서 진행. &gt;8B parameters에서는 확장 가능성만 제시했을 뿐</li>
-  <li>Entropy model을 별도로 훈련해서 patching하지만 이것까지도 end-to-end 하고자 함</li>
-</ul>
-
-<h2 id="10-conclusion">10. Conclusion</h2>
+<h2 id="9-conclusion">9. Conclusion</h2>
 
 <ul>
-  <li>Fixed-vocabulary tokenization에 의존하지 않는 Byte Latent Transformer (BLT)
-    <ul>
-      <li>Byte를 learnable, dynamic하게 patching</li>
-      <li>소폭의 성능 손실을 감수하는 대신, 추론 시 FLOP 연산량을 최대 50%까지 줄일 수 있음</li>
-    </ul>
-  </li>
-  <li>기존 LLM은 fixed context에서 model size만 증가
-    <ul>
-      <li>BLT는 동일한 inference FLOP 내에서 model size와 patch size를 동시에 확장할 수 있음</li>
-    </ul>
-  </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[Arxiv 2024](https://arxiv.org/pdf/2412.09871)]]></summary></entry></feed>
+  <li>whether it is possible to transfer the success of task-agnostic web-scale pre-training in NLP to another domain !</li>
+  <li>CLIP models learn to perform a wide variety of tasks during pretraining</li>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[Arxiv 2021](https://arxiv.org/pdf/2103.00020)]]></summary></entry></feed>

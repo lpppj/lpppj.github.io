@@ -148,6 +148,22 @@
     </url>
     
     <url>
+        <loc>http://localhost:4000/llm/2025-02-25-CLIP/</loc>
+        
+        <lastmod>2025-02-25T00:00:00+09:00</lastmod>
+        
+
+        
+        <changefreq>daily</changefreq>
+        
+
+        
+        <priority>1.0</priority>
+        
+
+    </url>
+    
+    <url>
         <loc>http://localhost:4000/llm/2025-02-22-BLT/</loc>
         
         <lastmod>2025-02-22T00:00:00+09:00</lastmod>
