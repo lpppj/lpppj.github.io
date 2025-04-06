@@ -17,7 +17,9 @@ permalink: /pytorch/
 \
 [(Code Review, ICLR 2022) Raindrop]{:.heading.flip-title}\
 \
-[(Pytorch Issue) .sh file와 Data loader가 상관이 있을까]{:.heading.flip-title}
+[(Pytorch Issue) .sh file와 Data loader가 상관이 있을까]{:.heading.flip-title}\
+\
+[동시에 실험(훈련)하는 방법 (BackgroundRun)]{:.heading.flip-title}
 
 <!-- [(Corrformer, NMI 2023) Code Review 0 - Code Structure]: /pytorch/2024-04-29-corrformer0
 [(Corrformer, NMI 2023) Code Review 1 - Overall Framework]: /pytorch/2024-04-29-corrformer1
@@ -26,3 +28,4 @@ permalink: /pytorch/
 [(Code Review, ICLR 2024) Pathformer]: /pytorch/2024-09-09-pathformer
 [(Code Review, ICLR 2022) Raindrop]: /pytorch/2024-09-24-raindrop
 [(Pytorch Issue) .sh file와 Data loader가 상관이 있을까]: /pytorch/2025-02-26-sh_batch
+[동시에 실험(훈련)하는 방법 (BackgroundRun)]: /pytorch/2025-04-06-BackgroundRun
