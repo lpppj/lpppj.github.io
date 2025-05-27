@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v9.1.6 <https://hydejack.com/>
+-->
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>동시에 실험(훈련)하는 방법 (BackgroundRun) | LpppJ</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="동시에 실험(훈련)하는 방법 (BackgroundRun)" />
+<meta name="author" content="GW Jeong" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="This is blog about machine learning, deep learning, artificial intelligence." />
+<meta property="og:description" content="This is blog about machine learning, deep learning, artificial intelligence." />
+<link rel="canonical" href="http://localhost:4000/pytorch/2025-04-06-BackgroundRun/" />
+<meta property="og:url" content="http://localhost:4000/pytorch/2025-04-06-BackgroundRun/" />
+<meta property="og:site_name" content="LpppJ" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-04-06T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="동시에 실험(훈련)하는 방법 (BackgroundRun)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"GW Jeong"},"dateModified":"2025-04-06T19:14:03+09:00","datePublished":"2025-04-06T00:00:00+09:00","description":"This is blog about machine learning, deep learning, artificial intelligence.","headline":"동시에 실험(훈련)하는 방법 (BackgroundRun)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/pytorch/2025-04-06-BackgroundRun/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/img/me/logo.jpg"},"name":"GW Jeong"},"url":"http://localhost:4000/pytorch/2025-04-06-BackgroundRun/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+
+
+  <meta name="theme-color" content="rgb(230, 217, 195)">
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="LpppJ">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="LpppJ">
+
+<meta name="generator" content="Hydejack v9.1.6" />
+
+
+<link rel="alternate" href="http://localhost:4000/pytorch/2025-04-06-BackgroundRun/" hreflang="en">
+
+<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LpppJ" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+
+
+
+
+
+<script>!function(r,c){"use strict";function a(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=c.createElement("script"),e=(n.src=e,t&&a(n,"load",t,{once:!0}),c.scripts[0]);return e.parentNode.insertBefore(n,e),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=c.createElement("script");function o(){r._loaded=!0,t&&a(n,"load",t,{once:!0});var e=c.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():a(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){a(c.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}}(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = false;
+  w._noDrawer = false;
+  w._noNavbar = false;
+  w._noToc = false;
+  w._noSearch = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2025-05-27T15:37:26+09:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+<script async src="/assets/bower_components/MathJax/es5/tex-mml-chtml.js" id="_MathJax"></script>
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.1.6.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5);--accent-color-highlight: rgba(94, 97, 94, 0.1);--accent-color-darkened: #4b4e4b;--theme-color: rgb(230, 217, 195)}
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+</head>
+
+<body class="no-break-layout">
+  
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/pytorch/">pytorch</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          <span>2025-04-06-BackgroundRun</span>
+        
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-pytorch-BackgroundRun" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        동시에 실험(훈련)하는 방법 (BackgroundRun)
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-04-06T00:00:00+09:00">06 Apr 2025</time> in <span>Pytorch</span> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  
+    <p class="note-sm" >
+      <a href=""></a>
+
+    </p>
+  
+
+
+  </header>
+
+  
+    <p><img src="/assets/img/pytorch/BackgroundRun/results.png" alt="그림1" /></p>
+
+<ul>
+  <li>Time series forecasting 실험을 할 때 위 사진처럼 예측할 기간을 96, 192, 336, 720로 설정한다.</li>
+  <li>각각 연달아서 하면 시간이 오래 걸리기 때문에, resource가 허락한다면 <strong>script 파일을 수정</strong>해서 동시에 돌릴 수 있다.</li>
+</ul>
+
+<p><img src="/assets/img/pytorch/BackgroundRun/before1.png" alt="그림1" /></p>
+
+<ul>
+  <li>PatchTST의 ETT data에 대한 script이다.</li>
+  <li>1-7번째 줄에서는 실험 결과가 기록될 log 파일이 저장될 공간을 만들어주고 있다. (필요하다면)</li>
+  <li>8번째 줄에서는 과거 336시점을 보도록 설정하고 있고</li>
+  <li>9번째 줄에서는 PatchTST 모델을 사용할 것임을 설정한다.</li>
+  <li>11-14번째 줄에서 데이터셋을 지정해준다.</li>
+</ul>
+
+<p><img src="/assets/img/pytorch/BackgroundRun/before2.png" alt="그림1" /></p>
+
+<ul>
+  <li>16번째 줄에서 random seed를 설정하고</li>
+  <li>17번째 줄에서 for loop를 실행한다. 각각은 예측할 기간을 96, 192, 336, 720으로 실험을 한다.</li>
+  <li>19-42번째 줄에서는 hyperparameters를 정해주고, 실험 결과를 기록할 위치를 43번째 줄에서 정한다.</li>
+  <li>하지만 이대로 하면 96시점이 끝나야 192 시점을 시작, …, 336시점이 끝나야 720시점이 시작된다.</li>
+  <li>96, 192, 336, 720 실험들을 동시에 하기 위해서는 script를 아래와 같이 수정할 수 있다.</li>
+</ul>
+
+<p><img src="/assets/img/pytorch/BackgroundRun/after1.png" alt="그림1" /></p>
+
+<ul>
+  <li>일단 첫 부분은 동일하다</li>
+  <li>terminal에서 명령어를 실행할 때 bash를 사용하기 위해 1번째 줄과 같이 적어주었다.</li>
+</ul>
+
+<p><img src="/assets/img/pytorch/BackgroundRun/after2.png" alt="그림1" /></p>
+
+<ul>
+  <li>21-22번째 줄에서 각 실험들(예측하고자 하는 미래 시점들)을 몇 번째 gpu에 할당할 것인지를 표시해준다.</li>
+  <li>지금의 경우에는 96과 192는 0번째 gpu, 336과 720은 1번째 gpu를 사용한다는 의미이다.</li>
+  <li>33번째 줄의 <code class="language-plaintext highlighter-rouge">echo</code>는
+    <ul>
+      <li>실험 결과나 모델이 출력하는 모든 출력들을 <code class="language-plaintext highlighter-rouge">.log</code> 파일에 기록할 때에도</li>
+      <li><code class="language-plaintext highlighter-rouge">echo</code>에 있는 문장은 terminal에 출력된다.</li>
+    </ul>
+  </li>
+  <li>35번째 줄의 <code class="language-plaintext highlighter-rouge">CUDA_VISIBLE_DEVICES</code>에서 현재 사용할 gpu를 설정하는데,
+    <ul>
+      <li>사전에 정해둔 gpu의 순서에 따라 indexing해서 정해준다.</li>
+    </ul>
+  </li>
+  <li>59번째 줄에서 마지막에 <code class="language-plaintext highlighter-rouge">&amp;</code>를 넣어주어야 for loop가 동시에 실행된다.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">&amp;</code>가 없으면 96시점이 끝나야 192 시점을 시작, …, 336시점이 끝나야 720시점이 시작된다.</li>
+    </ul>
+  </li>
+  <li>61번째 줄의 <code class="language-plaintext highlighter-rouge">wait</code>는
+    <ul>
+      <li>만약 96 시점을 예측하는 실험이 720 시점을 예측하는 실험보다 먼저 끝나더라도 기다리라는 의미이다.</li>
+      <li>그러므로 96, 192, 336, 720 시점을 예측하는 실험들이 모두 끝나야 for loop가 종료된다.</li>
+    </ul>
+  </li>
+</ul>
+
+  
+</article>
+
+
+
+  <hr class="dingbat related mb6" />
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="https://via.placeholder.com/128x128"
+    srcset="/assets/img/me/me.JPG 1x,/assets/img/me/me.JPG 2x"
+    
+  
+  alt="GW Jeong"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>Bachelor’s degree in Applied Statistics. Yonsei Univ. (2018~2024) <br />
+DataScienceLab 8th 학회장 (2022~2023) <br />
+Master’s degree in Statitstics. Yonsei Univ. (2024~)</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/lpppj" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:wjdrjsdn39@yonsei.ac.kr" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+  
+
+  
+    
+
+
+  
+
+  
+  
+
+  
+    
+
+  
+
+
+  
+<footer class="content" role="contentinfo">
+  <hr/>
+  
+    <p><small class="copyright">© Geonwoo Jeong.
+</small></p>
+  
+  
+    <p><small>Powered by <a class="external" href="https://hydejack.com/">Hydejack</a> v<span id="_version">9.1.6</span></small></p>
+  <hr class="sr-only"/>
+</footer>
+
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+<div class="sidebar-bg sidebar-overlay" style="background-color:rgb(230, 217, 195);background-image:url(/assets/img/me/sidebar.jpg)"></div>
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/me/logo.jpg" class="avatar" alt="LpppJ" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">LpppJ</h2></a>
+    
+    
+      <p class="">
+        DataScience and AI
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="sr-only">Navigation:</span>
+<ul>
+  
+    
+      
+      <li>
+        <a
+          id="_drawer--opened"
+          href="/timeseries/"
+          class="sidebar-nav-item "
+          
+        >
+          TimeSeries
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/mamba/"
+          class="sidebar-nav-item "
+          
+        >
+          Mamba
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/llm/"
+          class="sidebar-nav-item "
+          
+        >
+          LLM
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/pytorch/"
+          class="sidebar-nav-item "
+          
+        >
+          Pytorch
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/stat/"
+          class="sidebar-nav-item "
+          
+        >
+          Statistics
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/project/"
+          class="sidebar-nav-item "
+          
+        >
+          Project
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/presentation/"
+          class="sidebar-nav-item "
+          
+        >
+          Presentation
+        </a>
+      </li>
+    
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/lpppj" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:wjdrjsdn39@yonsei.ac.kr" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>!function(){var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())}();
+</script>
+  <script src="/assets/js/hydejack-9.1.6.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.1.6.js" nomodule defer></script>
+  
+
+  
+
+<!--<![endif]-->
+  <!-- <script>
+  document.querySelector('hy-push-state').setAttribute('prefetch', '');
+
+  document.querySelectorAll('.sidebar a[href^="/"]').forEach(function (el) { 
+    el.addEventListener('click', function (e) {
+      if (el.pathname === window.location.pathname) {
+        e.preventDefault();
+        e.stopPropagation();
+        document.querySelector('hy-drawer').close();
+      }
+    });
+  });
+</script> -->
+
+<!--
+Code for integrating CloudFlare's email protection with Hydejack's single page app loading.
+-->
+<script>
+  document.getElementById('_pushState').addEventListener('hy-push-state-after', function (e) {
+    function e(e){
+      (console.error?console.error:console.log).call(console,e)
+    }
+
+    function t(e){
+      return l.innerHTML='<a href="'+e.replace(/"/g,"&quot;")+'"></a>',l.childNodes[0].getAttribute("href")
+    }
+
+    function r(e,t){
+      var r=e.substr(t,2);return parseInt(r,16)
+    }
+
+    function n(e,n){
+      for(var o="",c=r(e,n),a=n+2;a<e.length;a+=2){
+        var l=r(e,a)^c;
+        o+=String.fromCharCode(l)
+      }
+      return t(o)
+    }
+
+    var o="/cdn-cgi/l/email-protection#",
+        c=".__cf_email__",
+        a="data-cfemail",
+        l=document.createElement("div");
+
+    !function(){
+      for(var t=document.getElementsByTagName("a"),r=0;r<t.length;r++)
+        try{
+          var c=t[r],a=c.href.indexOf(o);
+          a>-1&&(c.href="mailto:"+n(c.href,a+o.length))
+        }catch(t){
+          e(t)
+        }
+    }(),
+    function(){
+      for(var t=document.querySelectorAll(c),r=0;r<t.length;r++)
+        try{
+          var o=t[r],l=n(o.getAttribute(a),0),i=document.createTextNode(l);
+          o.parentNode.replaceChild(i,o)
+        }catch(t){
+          e(t)
+        }
+    }()
+  });
+</script>
+
+
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+</div>
+
+
+</body>
+</html>

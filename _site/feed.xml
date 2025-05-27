@@ -1,5 +1,344 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-04-05T22:58:51+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LpppJ</title><subtitle>This is blog about machine learning, deep learning, artificial intelligence.
-</subtitle><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><entry><title type="html">LoTLIP: Improving Language-Image Pre-training for Long Text Understanding (NeurIPS 2024)</title><link href="http://localhost:4000/llm/2025-03-31-LoTLIP/" rel="alternate" type="text/html" title="LoTLIP: Improving Language-Image Pre-training for Long Text Understanding (NeurIPS 2024)" /><published>2025-03-31T00:00:00+09:00</published><updated>2025-04-01T16:29:39+09:00</updated><id>http://localhost:4000/llm/LoTLIP</id><content type="html" xml:base="http://localhost:4000/llm/2025-03-31-LoTLIP/"><![CDATA[<h2 id="abstract">Abstract</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-05-27T15:37:26+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LpppJ</title><subtitle>This is blog about machine learning, deep learning, artificial intelligence.
+</subtitle><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><entry><title type="html">Simple Feedfoward Neural Networks are Almost All You Need for Time Series Forecasting (NeurIPs 2025)</title><link href="http://localhost:4000/timeseries/2025-05-27-SFNN/" rel="alternate" type="text/html" title="Simple Feedfoward Neural Networks are Almost All You Need for Time Series Forecasting (NeurIPs 2025)" /><published>2025-05-27T00:00:00+09:00</published><updated>2025-05-27T15:30:31+09:00</updated><id>http://localhost:4000/timeseries/SFNN</id><content type="html" xml:base="http://localhost:4000/timeseries/2025-05-27-SFNN/"><![CDATA[<h2 id="abstract">Abstract</h2>
+
+<ul>
+  <li>Simple <strong>feed forward neural networks (SFNNs)</strong>만으로 SOTA performance</li>
+  <li>변수 사이의 관계가 강하더라도 (inter-series) 상관없음</li>
+</ul>
+
+<h2 id="1-introduciton">1. Introduciton</h2>
+
+<ul>
+  <li>Transformer가 뜨면서 시계열 예측에서도 former 계열 논문들이 나옴</li>
+  <li>DLinear에서 transformer에 대한 의문을 던지긴 했지만
+    <ul>
+      <li>그 이후 다시 transformer-based가 성능이 잘나오면서 일단락됨</li>
+    </ul>
+  </li>
+  <li>Linear model은 inherent non-linearity는 못 잡는 것 맞지만
+    <ul>
+      <li>overly complex solutions은 overfitting 유발함</li>
+      <li>변수 사이의 관계가 강하더라도, series-wise mapping로 충분함</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-preliminaries">2. Preliminaries</h2>
+
+<h3 id="21-definitions">2.1. Definitions</h3>
+
+<ul>
+  <li>\(\mathbf{X}=\left\{\mathbf{X}_1, \ldots, \mathbf{X}_t, \ldots, \mathbf{X}_T\right\} \in \mathbb{R}^{T \times N}\)보고 \(\left\{\mathbf{X}_{t+1}, \ldots, \mathbf{X}_{t+H}\right\}\)를 예측</li>
+</ul>
+
+<h3 id="22-problem-statement">2.2. Problem Statement</h3>
+
+<ul>
+  <li>\(\mathrm{MSE}=\sum_t \sum_{h=1}^H\left\|\mathbf{X}_{t+h}-\hat{\mathbf{X}}_{t+h}\right\|_2^2\)를 최소화</li>
+</ul>
+
+<h3 id="23-common-practices">2.3. Common Practices</h3>
+
+<ul>
+  <li>일반적으로 train, validation, test 데이터셋을 나눌 때,
+    <ul>
+      <li>시간 순서대로 70%(train) / 10%(validation) / 20%(test) 이렇게 자름</li>
+    </ul>
+  </li>
+  <li>하지만 엄격하게 따지자면 out-of-sample (OOS) K-fold cross-validation 해야 함
+    <ul>
+      <li>하지만 실제로 지금 보면 train의 마지막 부분이라고 할 수 있는 validation에 대해서 한 번만 실행해놓고 모델 선택함</li>
+    </ul>
+  </li>
+  <li>만약 2021년(test)에 사용할 모델을 선택하기 위해서
+    <ul>
+      <li>2010년부터 2019년까지 데이터로 학습하고(train)</li>
+      <li>2020년 데이터로 검증한다면(validation) 적절하지 않음</li>
+      <li>왜냐하면 2020년은 팬데믹으로 비정상적인 데이터가 기록된 해였기 때문</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="3-simple-feedforward-neural-networks-sfnns">3. Simple Feedforward Neural Networks (SFNNs)</h2>
+
+<p><img src="/assets/img/timeseries/SFFN/fig1.png" alt="그림1" /></p>
+
+<ul>
+  <li>그림 1에 있는 base version만으로 성능이 좋긴 하지만, 다음 3가지 optional modules:
+    <ul>
+      <li>input mean centering</li>
+      <li>series-wise non-linear mapping</li>
+      <li>layer normalization</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="31-input-mean-centering">3.1. Input mean centering</h3>
+
+<ul>
+  <li>\(\hat{\mathbf{X}}_{\mathrm{out}}=f\left(\mathbf{X}_{\mathrm{in}} ; \theta\right)\) 대신 \(\hat{\mathbf{X}}_{\mathrm{out}}=f\left(\mathbf{X}_{\mathrm{in}}-\overline{\mathbf{X}}_{\mathrm{in}} ; \theta\right)+\overline{\mathbf{X}}_{\mathrm{in}}\)</li>
+  <li>다른 연구에서 trend 성분을 뽑기도 하지만, 추세 분해 필요 없음</li>
+</ul>
+
+<h3 id="32-series-wise-non-linear-mapping">3.2. Series-wise non-linear mapping</h3>
+
+<ul>
+  <li>각 시점(time step)을 독립적인 단변량 시계열로 간주하여
+    <ul>
+      <li>\(N×N\) 행렬로 나타내는 선형 변환 후 활성화 함수</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="33-layer-normalization">3.3. Layer Normalization</h3>
+
+<ul>
+  <li>Layer Normalization는 시퀀스 모델링 과제에서 학습을 안정화하는 데 핵심적인 역할
+    <ul>
+      <li>특히 Transformer 구조와 결합될 때 효과가 좋음</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="4-experimental-results">4. Experimental Results</h2>
+
+<h3 id="41-results-following-common-practices">4.1. Results following common practices</h3>
+
+<p><img src="/assets/img/timeseries/SFFN/table1.png" alt="그림1" /></p>
+
+<p><img src="/assets/img/timeseries/SFFN/table2.png" alt="그림1" /></p>
+
+<ul>
+  <li>Test 데이터셋 엿보고 결정한 가장 적절한 lookback length와 성능
+    <ul>
+      <li>(앞서 적절하지 못하다고 지적한 방법)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="411-model-sizes-and-run-times">4.1.1. Model sizes and run times</h3>
+
+<p><img src="/assets/img/timeseries/SFFN/fig2.png" alt="그림1" /></p>
+
+<ul>
+  <li>본 논문에서 제시하는 SFNNs과 비교한 DUET, iTransformer
+    <ul>
+      <li>DUET는 모델은 조금 더 무겁지만 성능은 비슷함</li>
+      <li>iTransformer는 모델은 조금 더 가벼운 것 같지만 성능이 안좋음</li>
+      <li>그러므로 SFNNs는 effective balance between model size, computational efficiency, and forecasting performance</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="42-ablation-study">4.2. Ablation Study</h3>
+
+<h3 id="421-input-mean-centering">4.2.1. Input mean centering</h3>
+
+<p><img src="/assets/img/timeseries/SFFN/fig3.png" alt="그림1" /></p>
+
+<ul>
+  <li>데이터의 trend가 강한 경우에는 mean-centering이 도움이 됨</li>
+</ul>
+
+<h3 id="422-series-wise-non-linear-mapping">4.2.2. Series-wise non-linear mapping</h3>
+
+<p><img src="/assets/img/timeseries/SFFN/fig4.png" alt="그림1" /></p>
+
+<ul>
+  <li>
+    <p>시계열 간의 의존성을 포착하는 건 어려우며,</p>
+
+    <ul>
+      <li>특히 NN을 쓸 경우 과적합 위험</li>
+      <li><strong>시계열 수가 많을수록</strong>(Solar Energy, Traffic, Electricity 순) 과적합 현상이 심해짐</li>
+      <li>특히 <strong>look-back 길이</strong>가 길어질수록 문제가 더 커짐.</li>
+      <li>반면, 시계열 수가 적은 데이터셋(N&lt;30)에서는 이러한 과적합 현상 덜함</li>
+    </ul>
+  </li>
+  <li>
+    <p>Solar Energy 데이터셋에서는 series-wise mapping이 매우 효과적</p>
+
+    <ul>
+      <li>look-back 길이가 200일 때 성능이 20% 향상</li>
+      <li>이유는 Solar Energy 시계열들은 <strong>강한 장기 공적분 관계</strong>를 가짐.</li>
+      <li>데이터가 <strong>한 주(Alabama)의 태양</strong></li>
+    </ul>
+  </li>
+  <li>
+    <p>반면에 다른 데이터셋들(Traffic, Electricity 등)은:</p>
+
+    <ul>
+      <li>
+        <p>공적분 관계가 약하며, 짧은 lag에서도 긴 시간 범위의 관계가 약함.</p>
+      </li>
+      <li>
+        <p>따라서 이런 경우에는 시계열 간 비선형 매핑이 오히려 성능을 저해</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/timeseries/SFFN/fig5.png" alt="그림1" /></p>
+
+<h3 id="423-layer-normalization">4.2.3. Layer normalization</h3>
+
+<p><img src="/assets/img/timeseries/SFFN/fig6.png" alt="그림1" /></p>
+
+<ul>
+  <li>
+    <p>SFNN의 가중치는 모든 시계열에 공유되니, scale이 큰 시계열은 모델에 더 큰 영향을 미침.</p>
+  </li>
+  <li>
+    <p>\(\text { Average }\left\{\operatorname{Std}\left\{\overline{\mathbf{X}}_{t, \mathrm{in}}\right\}\right\}, \forall t \in \operatorname{training} \text { set },\)를 계산했을 때</p>
+    <ul>
+      <li>0.5 이상이면, 레이어 정규화의 이점이 명확히 나타남</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="43-critiques-of-current-benchmarking-practices">4.3. Critiques of current benchmarking practices</h3>
+
+<ul>
+  <li>기존 연구에 대한 고찰</li>
+</ul>
+
+<h3 id="431-issues-with-the-iliweather-and-exchange-rate-datasets">4.3.1. Issues with the ILI,Weather, and Exchange rate datasets</h3>
+
+<ul>
+  <li>ILI dataset
+    <ul>
+      <li>총 1,000개 이하의 타임스텝과 7개의 시계열로 구성되어 <strong>데이터 크기가 매우 작음</strong>.</li>
+      <li>학습/테스트 간에 <strong>분포 드리프트가 심각</strong>하게 존재.</li>
+      <li>COVID-19로 인해 테스트 단계 마지막 20스텝에서 갑작스러운 변화 발생 → 예측 어려움.</li>
+    </ul>
+  </li>
+  <li>Weather 및 Exchange Rate 데이터셋
+    <ul>
+      <li>각 시계열에 대해 별도의 모델(N개의 선형 모델)을 학습하는 것이 가장 좋은 성능</li>
+      <li>이는 해당 데이터셋들이 다변량(CD) 모델보다는 단변량(CI) 모델에 가깝게 작동함</li>
+      <li>다변량(CD) 모델은 과적합(overfitting)되기 쉬워 부적절</li>
+      <li>특히 Weather 데이터셋은 그 특성이 두드러짐</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="432-affects-of-look-back-length-and-randomness">4.3.2. Affects of look-back length and randomness</h3>
+
+<p><img src="/assets/img/timeseries/SFFN/fig7.png" alt="그림1" /></p>
+
+<ul>
+  <li>최근에는 look-back 길이 자체가 매우 중요한 하이퍼파라미터라는 점이 강조됨
+    <ul>
+      <li>모델마다 최적의 look-back 길이가 다르므로 각 모델이 최적의 look-back을 선택하도록 허용하는 것이 더 합리적임.</li>
+    </ul>
+  </li>
+  <li>초기화, 배치 셔플링, 드롭아웃 등으로 인한 학습 중 무작위성 또한 성능에 영향을 줌.
+    <ul>
+      <li>특히 시계열 데이터셋은 작고 분포 드리프트가 있어 결과가 민감함.</li>
+      <li>하지만 대부분의 기존 연구들은 단일 실험 결과만 보고함
+        <ul>
+          <li>통계적으로 유의미하지 않음.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="433-reduce-the-effect-of-peeking">4.3.3. Reduce the effect of “peeking”</h3>
+
+<ul>
+  <li>이론적으로는 OOS K-fold 교차검증이 가장 엄격한 방법이지만 (Section 2.3),
+    <ul>
+      <li>복잡하고 계산 비용이 높아 현실적으로 널리 사용되기 어려움.</li>
+    </ul>
+  </li>
+  <li>valiadation set 사용해 최적의 look-back 선택</li>
+</ul>
+
+<p><img src="/assets/img/timeseries/SFFN/table4.png" alt="그림1" /></p>
+
+<h2 id="5-conclusion">5. Conclusion</h2>
+
+<ul>
+  <li>단순한 구조의 <strong>Feedforward Neural Networks (SFNNs)</strong>
+    <ul>
+      <li>복잡한 모델에 비해 구조는 단순하지만, 동등하거나 더 나은 성능을 일관되게 보임.</li>
+    </ul>
+  </li>
+  <li>통계적 ablation 실험을 통해, 다음 구성 요소들이 성능에 중요한 역할을 한다는 점을 확인:
+    <ul>
+      <li><strong>입력 평균 중심화 (Input Mean Centering)</strong></li>
+      <li><strong>시계열별 매핑 (Series-wise Mapping)</strong></li>
+      <li><strong>레이어 정규화 (Layer Normalization)</strong></li>
+    </ul>
+  </li>
+  <li>단순히 성능을 비교하는 것을 넘어, 기존 벤치마크 방식의 문제점을 비판적으로 고찰하고 더 공정한 평가 절차를 제안함.
+    <ul>
+      <li>각 모델이 최적의 look-back 길이를 검증셋을 사용해 선택하도록</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[Arxiv 2024]()]]></summary></entry><entry><title type="html">동시에 실험(훈련)하는 방법 (BackgroundRun)</title><link href="http://localhost:4000/pytorch/2025-04-06-BackgroundRun/" rel="alternate" type="text/html" title="동시에 실험(훈련)하는 방법 (BackgroundRun)" /><published>2025-04-06T00:00:00+09:00</published><updated>2025-04-06T19:14:03+09:00</updated><id>http://localhost:4000/pytorch/BackgroundRun</id><content type="html" xml:base="http://localhost:4000/pytorch/2025-04-06-BackgroundRun/"><![CDATA[<p><img src="/assets/img/pytorch/BackgroundRun/results.png" alt="그림1" /></p>
+
+<ul>
+  <li>Time series forecasting 실험을 할 때 위 사진처럼 예측할 기간을 96, 192, 336, 720로 설정한다.</li>
+  <li>각각 연달아서 하면 시간이 오래 걸리기 때문에, resource가 허락한다면 <strong>script 파일을 수정</strong>해서 동시에 돌릴 수 있다.</li>
+</ul>
+
+<p><img src="/assets/img/pytorch/BackgroundRun/before1.png" alt="그림1" /></p>
+
+<ul>
+  <li>PatchTST의 ETT data에 대한 script이다.</li>
+  <li>1-7번째 줄에서는 실험 결과가 기록될 log 파일이 저장될 공간을 만들어주고 있다. (필요하다면)</li>
+  <li>8번째 줄에서는 과거 336시점을 보도록 설정하고 있고</li>
+  <li>9번째 줄에서는 PatchTST 모델을 사용할 것임을 설정한다.</li>
+  <li>11-14번째 줄에서 데이터셋을 지정해준다.</li>
+</ul>
+
+<p><img src="/assets/img/pytorch/BackgroundRun/before2.png" alt="그림1" /></p>
+
+<ul>
+  <li>16번째 줄에서 random seed를 설정하고</li>
+  <li>17번째 줄에서 for loop를 실행한다. 각각은 예측할 기간을 96, 192, 336, 720으로 실험을 한다.</li>
+  <li>19-42번째 줄에서는 hyperparameters를 정해주고, 실험 결과를 기록할 위치를 43번째 줄에서 정한다.</li>
+  <li>하지만 이대로 하면 96시점이 끝나야 192 시점을 시작, …, 336시점이 끝나야 720시점이 시작된다.</li>
+  <li>96, 192, 336, 720 실험들을 동시에 하기 위해서는 script를 아래와 같이 수정할 수 있다.</li>
+</ul>
+
+<p><img src="/assets/img/pytorch/BackgroundRun/after1.png" alt="그림1" /></p>
+
+<ul>
+  <li>일단 첫 부분은 동일하다</li>
+  <li>terminal에서 명령어를 실행할 때 bash를 사용하기 위해 1번째 줄과 같이 적어주었다.</li>
+</ul>
+
+<p><img src="/assets/img/pytorch/BackgroundRun/after2.png" alt="그림1" /></p>
+
+<ul>
+  <li>21-22번째 줄에서 각 실험들(예측하고자 하는 미래 시점들)을 몇 번째 gpu에 할당할 것인지를 표시해준다.</li>
+  <li>지금의 경우에는 96과 192는 0번째 gpu, 336과 720은 1번째 gpu를 사용한다는 의미이다.</li>
+  <li>33번째 줄의 <code class="language-plaintext highlighter-rouge">echo</code>는
+    <ul>
+      <li>실험 결과나 모델이 출력하는 모든 출력들을 <code class="language-plaintext highlighter-rouge">.log</code> 파일에 기록할 때에도</li>
+      <li><code class="language-plaintext highlighter-rouge">echo</code>에 있는 문장은 terminal에 출력된다.</li>
+    </ul>
+  </li>
+  <li>35번째 줄의 <code class="language-plaintext highlighter-rouge">CUDA_VISIBLE_DEVICES</code>에서 현재 사용할 gpu를 설정하는데,
+    <ul>
+      <li>사전에 정해둔 gpu의 순서에 따라 indexing해서 정해준다.</li>
+    </ul>
+  </li>
+  <li>59번째 줄에서 마지막에 <code class="language-plaintext highlighter-rouge">&amp;</code>를 넣어주어야 for loop가 동시에 실행된다.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">&amp;</code>가 없으면 96시점이 끝나야 192 시점을 시작, …, 336시점이 끝나야 720시점이 시작된다.</li>
+    </ul>
+  </li>
+  <li>61번째 줄의 <code class="language-plaintext highlighter-rouge">wait</code>는
+    <ul>
+      <li>만약 96 시점을 예측하는 실험이 720 시점을 예측하는 실험보다 먼저 끝나더라도 기다리라는 의미이다.</li>
+      <li>그러므로 96, 192, 336, 720 시점을 예측하는 실험들이 모두 끝나야 for loop가 종료된다.</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="pytorch" /><summary type="html"><![CDATA[[]()]]></summary></entry><entry><title type="html">LoTLIP: Improving Language-Image Pre-training for Long Text Understanding (NeurIPS 2024)</title><link href="http://localhost:4000/llm/2025-03-31-LoTLIP/" rel="alternate" type="text/html" title="LoTLIP: Improving Language-Image Pre-training for Long Text Understanding (NeurIPS 2024)" /><published>2025-03-31T00:00:00+09:00</published><updated>2025-04-01T16:29:39+09:00</updated><id>http://localhost:4000/llm/LoTLIP</id><content type="html" xml:base="http://localhost:4000/llm/2025-03-31-LoTLIP/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
   <li>기존 LIP(Language-Image Pre-training) 모델들은
@@ -964,48 +1303,7 @@ C_m^{L E}\left(X^{L E} \mid r\right)=\frac{1}{N} \operatorname{num}\left\{d\left
 
 <ul>
   <li>BLIP-2, a generic and compute-efficient method for vision-language pre-training that leverages frozen pretrained image encoders and LLMs</li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[Arxiv 2024]()]]></summary></entry><entry><title type="html">깃블로그 만들기 7 : 흔히 발생할 수 있는 에러 (2)</title><link href="http://localhost:4000/project/2025-03-15-gitblog7/" rel="alternate" type="text/html" title="깃블로그 만들기 7 : 흔히 발생할 수 있는 에러 (2)" /><published>2025-03-15T00:00:00+09:00</published><updated>2025-03-15T17:17:40+09:00</updated><id>http://localhost:4000/project/gitblog7</id><content type="html" xml:base="http://localhost:4000/project/2025-03-15-gitblog7/"><![CDATA[<ul>
-  <li>이번에는 Hydejack 테마를 사용하면서 내가 자주 했던 실수들을 살펴보겠다. 처음에는 에러의 이유를 몰라서 gitblog repository를 몇 번이나 삭제하고 다시 만들면서 시간을 많이 썼는데, 앞으로는 그러지 않기 위해 남긴다.</li>
-</ul>
-
-<h2 id="1-rpc-failure-http-400">1. RPC failure (HTTP 400)</h2>
-
-<ul>
-  <li>평소처럼 Terminal에서 git push를 할 때에 아래와 같은 에러가 발생</li>
-</ul>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">오브젝트</span> <span class="n">나열하는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">1335</span><span class="p">,</span> <span class="n">완료</span><span class="p">.</span>
-<span class="n">오브젝트</span> <span class="n">개수</span> <span class="n">세는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">1335</span><span class="o">/</span><span class="mi">1335</span><span class="p">),</span> <span class="n">완료</span><span class="p">.</span>
-<span class="n">Delta</span> <span class="n">compression</span> <span class="n">using</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">8</span> <span class="n">threads</span>
-<span class="n">오브젝트</span> <span class="n">압축하는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">634</span><span class="o">/</span><span class="mi">634</span><span class="p">),</span> <span class="n">완료</span><span class="p">.</span>
-<span class="n">error</span><span class="p">:</span> <span class="n">RPC</span> <span class="n">failed</span><span class="p">;</span> <span class="n">HTTP</span> <span class="mi">400</span> <span class="n">curl</span> <span class="mi">22</span> <span class="n">The</span> <span class="n">requested</span> <span class="n">URL</span> <span class="n">returned</span> <span class="n">error</span><span class="p">:</span> <span class="mi">400</span>
-<span class="n">send</span><span class="o">-</span><span class="n">pack</span><span class="p">:</span> <span class="n">unexpected</span> <span class="n">disconnect</span> <span class="k">while</span> <span class="n">reading</span> <span class="n">sideband</span> <span class="n">packet</span>
-<span class="n">오브젝트</span> <span class="n">쓰는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">1095</span><span class="o">/</span><span class="mi">1095</span><span class="p">),</span> <span class="mf">10.46</span> <span class="n">MiB</span> <span class="o">|</span> <span class="mf">10.38</span> <span class="n">MiB</span><span class="o">/</span><span class="n">s</span><span class="p">,</span> <span class="n">완료</span><span class="p">.</span>
-<span class="n">Total</span> <span class="mi">1095</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">549</span><span class="p">),</span> <span class="n">reused</span> <span class="mi">0</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">0</span><span class="p">),</span> <span class="n">pack</span><span class="o">-</span><span class="n">reused</span> <span class="mi">0</span>
-<span class="n">fatal</span><span class="p">:</span> <span class="n">the</span> <span class="n">remote</span> <span class="n">end</span> <span class="n">hung</span> <span class="n">up</span> <span class="n">unexpectedly</span>
-<span class="n">Everything</span> <span class="n">up</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">date</span>
-</code></pre></div></div>
-
-<ul>
-  <li>가장 아래 메세지를 보고 문제가 없다고 생각할 수 있지만
-    <ul>
-      <li>중간에 RPC failure (HTTP 400) 에러가 발생</li>
-      <li>당연히 정상적으로 push 되지 않음</li>
-    </ul>
-  </li>
-  <li>원인
-    <ul>
-      <li>한 번에 너무 많은 양을 push 할 때에 발생할 수 있는 에러</li>
-      <li>나의 경우에는 평소보다 많은 양이 아니었음에도 발생</li>
-    </ul>
-  </li>
-  <li>해결방법
-    <ul>
-      <li>Git 전송 버퍼 크기를 늘려주면 된다</li>
-      <li>터미널에 <code class="language-plaintext highlighter-rouge">git config --global http.postBuffer 524288000</code>를 입력하고 다시 push하면 된다</li>
-    </ul>
-  </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="project" /><summary type="html"><![CDATA[이번에는 Hydejack 테마를 사용하면서 내가 자주 했던 실수들을 살펴보겠다. 처음에는 에러의 이유를 몰라서 gitblog repository를 몇 번이나 삭제하고 다시 만들면서 시간을 많이 썼는데, 앞으로는 그러지 않기 위해 남긴다.]]></summary></entry><entry><title type="html">TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)</title><link href="http://localhost:4000/timeseries/2025-03-15-TimeMixer++/" rel="alternate" type="text/html" title="TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)" /><published>2025-03-15T00:00:00+09:00</published><updated>2025-03-16T16:51:07+09:00</updated><id>http://localhost:4000/timeseries/TimeMixer++</id><content type="html" xml:base="http://localhost:4000/timeseries/2025-03-15-TimeMixer++/"><![CDATA[<h2 id="abstract">Abstract</h2>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[Arxiv 2024]()]]></summary></entry><entry><title type="html">TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)</title><link href="http://localhost:4000/timeseries/2025-03-15-TimeMixer++/" rel="alternate" type="text/html" title="TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)" /><published>2025-03-15T00:00:00+09:00</published><updated>2025-03-16T16:51:07+09:00</updated><id>http://localhost:4000/timeseries/TimeMixer++</id><content type="html" xml:base="http://localhost:4000/timeseries/2025-03-15-TimeMixer++/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
   <li>TIMEMIXER++: general-purpose time series pattern machine (TSPM)
@@ -1350,7 +1648,48 @@ C_m^{L E}\left(X^{L E} \mid r\right)=\frac{1}{N} \operatorname{num}\left\{d\left
       <li><strong>Multi-scale and Multi-resolution mixing techniques</strong>, fuses and extracts information across different hierarchical levels</li>
     </ul>
   </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[ICLR 2025 Oral](https://openreview.net/pdf?id=1CLzLXSFNn)]]></summary></entry><entry><title type="html">S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv 2025)</title><link href="http://localhost:4000/mamba/2025-03-01-S2TX/" rel="alternate" type="text/html" title="S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv 2025)" /><published>2025-03-01T00:00:00+09:00</published><updated>2025-04-02T21:38:06+09:00</updated><id>http://localhost:4000/mamba/S2TX</id><content type="html" xml:base="http://localhost:4000/mamba/2025-03-01-S2TX/"><![CDATA[<h2 id="abstract">Abstract</h2>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[ICLR 2025 Oral](https://openreview.net/pdf?id=1CLzLXSFNn)]]></summary></entry><entry><title type="html">깃블로그 만들기 7 : 흔히 발생할 수 있는 에러 (2)</title><link href="http://localhost:4000/project/2025-03-15-gitblog7/" rel="alternate" type="text/html" title="깃블로그 만들기 7 : 흔히 발생할 수 있는 에러 (2)" /><published>2025-03-15T00:00:00+09:00</published><updated>2025-03-15T17:17:40+09:00</updated><id>http://localhost:4000/project/gitblog7</id><content type="html" xml:base="http://localhost:4000/project/2025-03-15-gitblog7/"><![CDATA[<ul>
+  <li>이번에는 Hydejack 테마를 사용하면서 내가 자주 했던 실수들을 살펴보겠다. 처음에는 에러의 이유를 몰라서 gitblog repository를 몇 번이나 삭제하고 다시 만들면서 시간을 많이 썼는데, 앞으로는 그러지 않기 위해 남긴다.</li>
+</ul>
+
+<h2 id="1-rpc-failure-http-400">1. RPC failure (HTTP 400)</h2>
+
+<ul>
+  <li>평소처럼 Terminal에서 git push를 할 때에 아래와 같은 에러가 발생</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">오브젝트</span> <span class="n">나열하는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">1335</span><span class="p">,</span> <span class="n">완료</span><span class="p">.</span>
+<span class="n">오브젝트</span> <span class="n">개수</span> <span class="n">세는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">1335</span><span class="o">/</span><span class="mi">1335</span><span class="p">),</span> <span class="n">완료</span><span class="p">.</span>
+<span class="n">Delta</span> <span class="n">compression</span> <span class="n">using</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">8</span> <span class="n">threads</span>
+<span class="n">오브젝트</span> <span class="n">압축하는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">634</span><span class="o">/</span><span class="mi">634</span><span class="p">),</span> <span class="n">완료</span><span class="p">.</span>
+<span class="n">error</span><span class="p">:</span> <span class="n">RPC</span> <span class="n">failed</span><span class="p">;</span> <span class="n">HTTP</span> <span class="mi">400</span> <span class="n">curl</span> <span class="mi">22</span> <span class="n">The</span> <span class="n">requested</span> <span class="n">URL</span> <span class="n">returned</span> <span class="n">error</span><span class="p">:</span> <span class="mi">400</span>
+<span class="n">send</span><span class="o">-</span><span class="n">pack</span><span class="p">:</span> <span class="n">unexpected</span> <span class="n">disconnect</span> <span class="k">while</span> <span class="n">reading</span> <span class="n">sideband</span> <span class="n">packet</span>
+<span class="n">오브젝트</span> <span class="n">쓰는</span> <span class="n">중</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">1095</span><span class="o">/</span><span class="mi">1095</span><span class="p">),</span> <span class="mf">10.46</span> <span class="n">MiB</span> <span class="o">|</span> <span class="mf">10.38</span> <span class="n">MiB</span><span class="o">/</span><span class="n">s</span><span class="p">,</span> <span class="n">완료</span><span class="p">.</span>
+<span class="n">Total</span> <span class="mi">1095</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">549</span><span class="p">),</span> <span class="n">reused</span> <span class="mi">0</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">0</span><span class="p">),</span> <span class="n">pack</span><span class="o">-</span><span class="n">reused</span> <span class="mi">0</span>
+<span class="n">fatal</span><span class="p">:</span> <span class="n">the</span> <span class="n">remote</span> <span class="n">end</span> <span class="n">hung</span> <span class="n">up</span> <span class="n">unexpectedly</span>
+<span class="n">Everything</span> <span class="n">up</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">date</span>
+</code></pre></div></div>
+
+<ul>
+  <li>가장 아래 메세지를 보고 문제가 없다고 생각할 수 있지만
+    <ul>
+      <li>중간에 RPC failure (HTTP 400) 에러가 발생</li>
+      <li>당연히 정상적으로 push 되지 않음</li>
+    </ul>
+  </li>
+  <li>원인
+    <ul>
+      <li>한 번에 너무 많은 양을 push 할 때에 발생할 수 있는 에러</li>
+      <li>나의 경우에는 평소보다 많은 양이 아니었음에도 발생</li>
+    </ul>
+  </li>
+  <li>해결방법
+    <ul>
+      <li>Git 전송 버퍼 크기를 늘려주면 된다</li>
+      <li>터미널에 <code class="language-plaintext highlighter-rouge">git config --global http.postBuffer 524288000</code>를 입력하고 다시 push하면 된다</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="project" /><summary type="html"><![CDATA[이번에는 Hydejack 테마를 사용하면서 내가 자주 했던 실수들을 살펴보겠다. 처음에는 에러의 이유를 몰라서 gitblog repository를 몇 번이나 삭제하고 다시 만들면서 시간을 많이 썼는데, 앞으로는 그러지 않기 위해 남긴다.]]></summary></entry><entry><title type="html">S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv 2025)</title><link href="http://localhost:4000/mamba/2025-03-01-S2TX/" rel="alternate" type="text/html" title="S2TX: Cross-Attention Multi-Scale State-Space Transformer for Time Series Forecasting (Arxiv 2025)" /><published>2025-03-01T00:00:00+09:00</published><updated>2025-04-02T21:38:06+09:00</updated><id>http://localhost:4000/mamba/S2TX</id><content type="html" xml:base="http://localhost:4000/mamba/2025-03-01-S2TX/"><![CDATA[<h2 id="abstract">Abstract</h2>
 
 <ul>
   <li><strong>Multi-scale</strong> models for the <strong>heterogeneity</strong> btw long and short patterns
@@ -1813,367 +2152,7 @@ C_m^{L E}\left(X^{L E} \mid r\right)=\frac{1}{N} \operatorname{num}\left\{d\left
       <li>scalable and unified architecture for time series foundation models that leverages a sparse design with mixture-of-experts to enhance computational efficiency without compromising model capacity</li>
     </ul>
   </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[ICLR 2025 Spotlight](https://arxiv.org/pdf/2409.16040)]]></summary></entry><entry><title type="html">BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation (PMLR 2022)</title><link href="http://localhost:4000/llm/2025-02-26-BLIP/" rel="alternate" type="text/html" title="BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation (PMLR 2022)" /><published>2025-02-26T00:00:00+09:00</published><updated>2025-02-26T13:41:17+09:00</updated><id>http://localhost:4000/llm/BLIP</id><content type="html" xml:base="http://localhost:4000/llm/2025-02-26-BLIP/"><![CDATA[<h2 id="abstract">Abstract</h2>
-
-<ul>
-  <li>대부분의 Vision-Language Pre-training (VLP)는
-    <ul>
-      <li>either <strong>understanding-based</strong> tasks or generation-based tasks</li>
-      <li>scaling up the dataset with <strong>noisy</strong> image-textpairs collected from the web (sub-optimal)</li>
-    </ul>
-  </li>
-  <li>본 논문에서는 BLIP 제안
-    <ul>
-      <li>transfers flexibly to both vision-language <strong>understanding</strong> and <strong>generation</strong> tasks</li>
-      <li>the noisy web data 활용 by bootstrapping the captions
-        <ul>
-          <li>generates syntheticcaptions and a filter removes the noisy ones.</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="1-introduction">1. Introduction</h2>
-
-<ul>
-  <li>Existing methods have 2 major <strong>limitations</strong>:
-    <ul>
-      <li><strong>Model</strong> perspective:
-        <ul>
-          <li>encoder-based models는 less straightforward to directly transfer to text generation tasks</li>
-          <li>encoder-decoder models는 have not beensuccess fully adopted for image-text retrieval tasks</li>
-        </ul>
-      </li>
-      <li><strong>Data</strong> perspective:
-        <ul>
-          <li>SOTA(CLIP, ALBEF, SimVLM) 다 noisy web text 쓰다보니 suboptimal</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>본 논문에서 제시하는 BLIP의 2 <strong>contribution</strong>:
-    <ul>
-      <li>Multimodal mixture of Encoder-Decoder (<strong>MED</strong>):
-        <ul>
-          <li>unimodal encoder도 되고 image-grounded text encoder/decoder 다 됨</li>
-          <li>jointly pre-train
-            <ul>
-              <li><strong>image-text contrastive learning</strong>,</li>
-              <li><strong>image-text matching</strong>,</li>
-              <li><strong>image-conditioned language modeling</strong></li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li>Captioning and Filtering (<strong>CapFilt</strong>):
-        <ul>
-          <li>a <strong>captioner</strong>: to produce synthetic captions given web images</li>
-          <li>a <strong>filter</strong>: to remove noisy captions from both the original web texts and the synthetic texts</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<p><img src="/assets/img/llm/BLIP/fig1.png" alt="그림1" /></p>
-
-<h2 id="2-related-work">2. Related Work</h2>
-
-<h3 id="21-vision-language-pre-training">2.1. Vision-language Pre-training</h3>
-
-<ul>
-  <li>Vision-language pre-training (VLP)들은 data crawled from the web 쓰다보니 suboptimal
-    <ul>
-      <li>그러므로 web datasets를 잘 활용하는 <strong>CapFilt</strong>를 제안하겠음</li>
-    </ul>
-  </li>
-  <li>문제는 <strong>understanding-based</strong> tasks (e.g. image-text retrieval)and generation-based tasks (e.g. image captioning) 둘다 잘해야 한다는 건데
-    <ul>
-      <li>기존 encoder-based, encoder-decoder 다 잘 못해서</li>
-      <li>본 논문에서 <strong>multimodal mixture ofencoder-decoder model</strong>을 제안하겠음</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="22-knowledge-distillation">2.2. Knowledge Distillation</h3>
-
-<ul>
-  <li>Self-distillation: teacher and student have <strong>equal sizes</strong></li>
-  <li>기존 KD: simply enforce the student to have the <strong>same</strong> class predictions as the teacher,</li>
-  <li>CapFilt: the <strong>captioner</strong> distills its knowledge through semantically-rich synthetic captions
-    <ul>
-      <li>the <strong>filter</strong> distills its knowledge by removing noisy captions</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="23-data-augmentation">2.3. Data Augmentation</h3>
-
-<ul>
-  <li>synthesize examples for various NLP tasks
-    <ul>
-      <li>기존: the low-resourcelanguage-only tasks</li>
-      <li>BLIP: the advantage of synthetic captions in large-scale vision-language pre-training</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="3-method">3. Method</h2>
-
-<ul>
-  <li>기본적으로 noisy image-text pairs에서 학습. MED와 CapFilt를 알아보자</li>
-</ul>
-
-<p><img src="/assets/img/llm/BLIP/fig2.png" alt="그림1" /></p>
-
-<h3 id="31-model-architecture">3.1. Model Architecture</h3>
-
-<ul>
-  <li>Multimodal mixture of encoder-decoder (MED)는 다음 3가지 가능한 multi-task model
-    <ul>
-      <li>(1) <strong>Unimodal Encoder</strong>: separately encodes imageand text (ViT, BERT)</li>
-      <li>(2) <strong>Image-grounded text encoder</strong>: text encoder인데 visual 정보 삽입
-        <ul>
-          <li>how? Self-attention과 FFN 사이에 cross-attention 하나 추가</li>
-        </ul>
-      </li>
-      <li>(3) <strong>Image-grounded text decoder</strong>: (2)에서 bi-directional self-attention을 causal self-attention으로 대체</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="32-pre-training-objectives">3.2. Pre-training Objectives</h3>
-
-<ul>
-  <li>2 <strong>understanding</strong>-based objectives &amp; 1 <strong>generation</strong>-based objective</li>
-  <li>Each image-text pair는 <strong>one</strong> forward pass <strong>visual</strong> transformer &amp; <strong>three</strong> forward passes <strong>text</strong> transformer</li>
-</ul>
-
-<h3 id="image-text-contrastive-loss-itc">Image-Text Contrastive Loss (ITC)</h3>
-
-<ul>
-  <li>unimodal encoder를 activate
-    <ul>
-      <li><strong>visual</strong> transformer and the <strong>text</strong> transformer의 feature space를 align</li>
-      <li><strong>positive</strong> image-text pairs가 similar representations 갖도록 (negative는 반대)
-        <ul>
-          <li>momentum encoder가 features와 soft labels만들고 pairs로 학습</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="image-text-matching-loss-itm">Image-Text Matching Loss (ITM)</h3>
-
-<ul>
-  <li>image grounded text encoder를 activate</li>
-  <li>image-text multi-modal representation을 통해 vision-language align
-    <ul>
-      <li>predict whether an image-text pair is positive, given their multi-modal feature</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="language-modeling-loss-lm">Language Modeling Loss (LM)</h3>
-
-<ul>
-  <li>image grounded text decoder를 activate</li>
-  <li>generate textual descriptions given an image
-    <ul>
-      <li>optimizes a cross entropy loss, to maximize the likelihood of the text, in an autoregressive manner.</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="33-capfilt">3.3. CapFilt</h3>
-
-<p><img src="/assets/img/llm/BLIP/fig3.png" alt="그림1" /></p>
-
-<ul>
-  <li><strong>captioner</strong>: to generate captions given web images
-    <ul>
-      <li>image-grounded text <strong>de</strong>coder</li>
-      <li>finetuned with the LM objective to <strong>decode texts given images</strong></li>
-      <li>web images \(I_w\)보고 synthetic captions \(T_s\) 생성</li>
-    </ul>
-  </li>
-  <li><strong>filter</strong>: to remove noisy image-text pairs
-    <ul>
-      <li>image-grounded text <strong>en</strong>coder</li>
-      <li>finetune with the ITC and ITM objectives to learn <strong>whether a text matches an image</strong></li>
-      <li>removes noisy texts in both the original web texts \(T_w\) and the synthetic texts \(T_s\)</li>
-    </ul>
-  </li>
-  <li>both are initialized from the same pre-trained MED, finetuned individually on the COCO dataset</li>
-</ul>
-
-<h2 id="4-experiments-and-discussions">4. Experiments and Discussions</h2>
-
-<h3 id="41-pre-training-details">4.1. Pre-training Details</h3>
-
-<ul>
-  <li>image transformer is initialized from ViT pre-trained on ImageNet</li>
-  <li>the text transformer is initialized from BERT-base</li>
-</ul>
-
-<h3 id="42-effect-of-capfilt">4.2. Effect of CapFilt</h3>
-
-<p><img src="/assets/img/llm/BLIP/table1.png" alt="그림1" /></p>
-
-<ul>
-  <li>captioner와 filter 둘 중 하나만 써도 성능 개선, 둘 다 쓰면 더더욱 개선</li>
-</ul>
-
-<p><img src="/assets/img/llm/BLIP/fig4.png" alt="그림1" /></p>
-
-<ul>
-  <li>example captions and their corresponding images
-    <ul>
-      <li>the captioner to generate new textual descriptions</li>
-      <li>the filter to remove noisy captions from both the originalweb texts and the synthetic texts</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="43-diversity-is-key-for-synthetic-captions">4.3. Diversity is Key for Synthetic Captions</h3>
-
-<p><img src="/assets/img/llm/BLIP/table2.png" alt="그림1" /></p>
-
-<ul>
-  <li>Nucleus sampling is astochastic decoding method
-    <ul>
-      <li>each token is sampled from a set of tokens whose cumulative probability mass exceeds a threshold \(p\) (\(p=0.9\))</li>
-      <li>beam search, a deterministic decoding method와 비교했을 때 더 뛰어남</li>
-    </ul>
-  </li>
-  <li>nucleus sampling generates more <strong>diverse</strong> and surprising captions</li>
-  <li>beam search tends to generate <strong>safe</strong> captions that are common inthe dataset</li>
-</ul>
-
-<h3 id="44-parameter-sharing-and-decoupling">4.4. Parameter Sharing and Decoupling</h3>
-
-<p><img src="/assets/img/llm/BLIP/table3.png" alt="그림1" /></p>
-
-<ul>
-  <li>Pre-training에서 the text encoder and decoder share all parameters</li>
-  <li>except for the SA(self-attention) layers</li>
-  <li>만약 SA layer도 공유했으면 encoding과 decoding이 충돌해서 성능 안좋아짐</li>
-</ul>
-
-<p><img src="/assets/img/llm/BLIP/table4.png" alt="그림1" /></p>
-
-<ul>
-  <li>if the captioner and filter share parameters in the same way as pre-training,
-    <ul>
-      <li><strong>confirmatio-bias</strong>: parameter sharing 때문에 captioner가 만든 noisy captions가 filter out이 잘 안됨</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="5-comparison-with-state-of-the-arts">5. Comparison with State-of-the-arts</h2>
-
-<h3 id="51-image-text-retrieval">5.1. Image-Text Retrieval</h3>
-
-<ul>
-  <li>image-to-text retrieval (TR) &amp; text-to-image retrieval (IR)
-    <ul>
-      <li>finetune the pre-trained modelusing ITC and ITM losses</li>
-    </ul>
-  </li>
-</ul>
-
-<p><img src="/assets/img/llm/BLIP/table5.png" alt="그림1" /></p>
-
-<h3 id="52-image-captioning">5.2. Image Captioning</h3>
-
-<p><img src="/assets/img/llm/BLIP/table7.png" alt="그림1" /></p>
-
-<ul>
-  <li>14M 데이터로 pre-train 해도 성능이 준수하고 129M로 pre-train하면 LEMON의 200M 만큼의 성능</li>
-</ul>
-
-<h3 id="53-visual-question-answering-vqa">5.3. Visual Question Answering (VQA)</h3>
-
-<p><img src="/assets/img/llm/BLIP/fig5.png" alt="그림1" /></p>
-
-<ul>
-  <li>During finetuning, pre-trained model을 re-arrange (그림 5 (a))
-    <ul>
-      <li>image-question is first encoded into multi modal embeddings</li>
-      <li>그 다음 given to an answer decoder</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="54-natural-language-visual-reasoning-nlvr">5.4. Natural Language Visual Reasoning (NLVR)</h3>
-
-<ul>
-  <li>NLVR: 한 문장이 두 그림 중 어떤 걸 설명하는지 맞추는 것</li>
-  <li>사진이 2장이다보니 two cross-attention layers가 있고 (그림 5 (b))
-    <ul>
-      <li>2 CA layers are intialized from the same pre-trained weights</li>
-      <li>각각의 outputs는 merged &amp; fed to the FFN</li>
-    </ul>
-  </li>
-</ul>
-
-<p><img src="/assets/img/llm/BLIP/table8.png" alt="그림1" /></p>
-
-<h3 id="55-visual-dialog-visdial">5.5. Visual Dialog (VisDial)</h3>
-
-<ul>
-  <li>VisDial: VQA의 확장. image-question pair뿐만 아니라 대화 기록, captions보고 예측</li>
-  <li>concatenate image and caption embeddings해서 cross-attention 통해 dialog encoder에게 전달</li>
-  <li>그러면 ITM loss로 학습된 dialog encoder가 discriminate whether the answer is true or false for a question</li>
-</ul>
-
-<h3 id="56-zero-shot-transfer-to-video-language-tasks">5.6. Zero-shot Transfer to Video-Language Tasks</h3>
-
-<ul>
-  <li>Strong generalization abilityto video-language tasks
-    <ul>
-      <li>zero-shot transfer to text-to-video retrieval and video question answering</li>
-    </ul>
-  </li>
-</ul>
-
-<p><img src="/assets/img/llm/BLIP/table10.png" alt="그림1" /></p>
-
-<p><img src="/assets/img/llm/BLIP/table11.png" alt="그림1" /></p>
-
-<h2 id="6-additional-ablation-study">6. Additional Ablation Study</h2>
-
-<p><img src="/assets/img/llm/BLIP/table12.png" alt="그림1" /></p>
-
-<ul>
-  <li>Improvement with CapFilt is not due to longer training</li>
-</ul>
-
-<p><img src="/assets/img/llm/BLIP/table13.png" alt="그림1" /></p>
-
-<ul>
-  <li>A new model should be trained on the bootstrapped dataset</li>
-</ul>
-
-<h2 id="7-conclusion">7. Conclusion</h2>
-
-<ul>
-  <li>BLIP pre-trains a multimodal mixture of encoder-decoder model
-    <ul>
-      <li>using a dataset bootstrapped from large-scale noisy image-text pairs</li>
-      <li>by injecting diversesynthetic captions and removing noisy captions</li>
-    </ul>
-  </li>
-  <li>Potential directions that can further enhancethe performance of BLIP:
-    <ul>
-      <li>Multiple rounds of dataset bootstrapping</li>
-      <li>Generate multiple synthetic captions per image to further enlarge the pre-training corpus</li>
-      <li>Model ensemble by training multiple different captioners and filter and combining their forces in CapFilt</li>
-    </ul>
-  </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[Arxiv 2024]()]]></summary></entry><entry><title type="html">(Pytorch Issue) .sh file와 Data loader가 상관이 있을까</title><link href="http://localhost:4000/pytorch/2025-02-26-sh_batch/" rel="alternate" type="text/html" title="(Pytorch Issue) .sh file와 Data loader가 상관이 있을까" /><published>2025-02-26T00:00:00+09:00</published><updated>2025-03-15T17:06:15+09:00</updated><id>http://localhost:4000/pytorch/sh_batch</id><content type="html" xml:base="http://localhost:4000/pytorch/2025-02-26-sh_batch/"><![CDATA[<p><img src="/assets/img/pytorch/sh_batch/fig1.png" alt="그림1" /></p>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="timeseries" /><summary type="html"><![CDATA[[ICLR 2025 Spotlight](https://arxiv.org/pdf/2409.16040)]]></summary></entry><entry><title type="html">(Pytorch Issue) .sh file와 Data loader가 상관이 있을까</title><link href="http://localhost:4000/pytorch/2025-02-26-sh_batch/" rel="alternate" type="text/html" title="(Pytorch Issue) .sh file와 Data loader가 상관이 있을까" /><published>2025-02-26T00:00:00+09:00</published><updated>2025-03-15T17:06:15+09:00</updated><id>http://localhost:4000/pytorch/sh_batch</id><content type="html" xml:base="http://localhost:4000/pytorch/2025-02-26-sh_batch/"><![CDATA[<p><img src="/assets/img/pytorch/sh_batch/fig1.png" alt="그림1" /></p>
 
 <ul>
   <li>상황은 다음과 같다.
@@ -2229,390 +2208,4 @@ C_m^{L E}\left(X^{L E} \mid r\right)=\frac{1}{N} \operatorname{num}\left\{d\left
       <li>GPU 텐서 배치 역시 영향을 받으면서 불러오는 첫 번째 batch가 달라질 수 있음</li>
     </ul>
   </li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="pytorch" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">CLIP: Learning Transferable Visual Models From Natural Language Supervision (Arxiv 2021)</title><link href="http://localhost:4000/llm/2025-02-25-CLIP/" rel="alternate" type="text/html" title="CLIP: Learning Transferable Visual Models From Natural Language Supervision (Arxiv 2021)" /><published>2025-02-25T00:00:00+09:00</published><updated>2025-04-05T22:57:02+09:00</updated><id>http://localhost:4000/llm/CLIP</id><content type="html" xml:base="http://localhost:4000/llm/2025-02-25-CLIP/"><![CDATA[<h2 id="abstract">Abstract</h2>
-
-<ul>
-  <li>기존에는 trained to predict a fixed set of pre-determined object categories
-    <ul>
-      <li>\(\to\) limits their generality and usability since additional labeled data is needed</li>
-    </ul>
-  </li>
-  <li>그 대신 learning directly from raw text about images
-    <ul>
-      <li>즉 which caption goes with which image</li>
-      <li>\(\to\) text 가 reference learned visual concepts가 됨</li>
-      <li>enabling zero-shot transfer of the model to downstream tasks (SOTA image representations)</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="1-introduction">1. Introduction</h2>
-
-<ul>
-  <li>Pre-training methods which learn directly from raw text:
-    <ul>
-      <li><strong>Task-agnostic objectives</strong> such as autoregressive and maskedlanguage modeling 발전시킴</li>
-      <li>text-to-text가 standardized input-output interface 되면서</li>
-      <li>task agnostic architectures가 zero-shot transfer to downstream datasets 가능하게 함</li>
-      <li><strong>while requiring little to no dataset specific training data !</strong></li>
-    </ul>
-  </li>
-  <li>Pre-training methods within <strong>web-scale collections</strong> of text가 that of high-quality <strong>crowd-labeled NLP</strong> datasets보다 낫다</li>
-  <li>하지만 computer vision에서는 아직 pre-train models on crowd-labeled datasets such as ImageNet
-    <ul>
-      <li><strong>방금 소개한 learn directly from web text가 CV에서도 가능?</strong></li>
-      <li>지금까지 transformer-based language modeling, masked language modeling, and contrastive objectives가 learn image representations from text 할 수 있음이 입증됨</li>
-    </ul>
-  </li>
-  <li>텍스트로 이미지를 배우는 시도는 개념 증명 수준, 성능도 낮았음.
-    <ul>
-      <li>그렇다고 limited amount of supervised <strong>“gold-labels”</strong> 으로 학습하자니</li>
-      <li>label classes 개수가 제한적이고, NLP보다 generality 부족, static softmax classifier 쓰다보니 flexibility 부족,</li>
-      <li>\(\to\) limits their zero-shot capabilities</li>
-    </ul>
-  </li>
-  <li>그래서 CLIP: Contrastive Language-Image Pretraining에서는 <strong>scale</strong>이 답이라고 생각
-    <ul>
-      <li>기존에 쓰던 모델(ConVIRT)을 단순하게 바꿔서 처음부터 다시 학습</li>
-      <li>다양한 크기의 모델 8개를 만들어서 학습 연산량을 조금씩 늘리면서 실험했더니 연산량이 많을수록 성능도 꾸준히 좋아짐</li>
-      <li>label 필요없고, 다양한 task에 robust, zero-shot 잘하고, efficient</li>
-      <li>GPT가 텍스트를 바꿨듯이, CLIP은 이미지 이해 방식 자체를 바꿈</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="2-approach">2. Approach</h2>
-
-<h3 id="21-natural-language-supervision">2.1. Natural Language Supervision</h3>
-
-<ul>
-  <li>CLIP 접근법의 핵심은 learning perception from supervision contained in <strong>natural language</strong></li>
-  <li>Learning from <strong>natural language</strong>의 장점:
-    <ul>
-      <li>web-text 활용하니까 crowd-sourced labeling for image classification(사람이 label 붙이는 방식)보다 쉬움</li>
-      <li>1-of-N majorityvote gold label처럼 machine learning compatible format일 필요도 없음</li>
-      <li>단순히 representation을 learn하는게 아니라, representation을 flexible zero-shot transfer 가능한 language로 connect !</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="22-creating-a-sufficiently-large-dataset">2.2. Creating a Sufficiently Large Dataset</h3>
-
-<ul>
-  <li>MS-COCO, Visual Genome dataset은 규모가 작고</li>
-  <li>YFCC100M dataset은 크지만 영어 설명이 있는 이미지가 별로 없음</li>
-  <li>A major motivation for <strong>natural language supervision</strong> is the large quantities of data of this form available publicly on the <strong>internet</strong> !
-    <ul>
-      <li>아까 4억개라고 했는데, 총 500,000 개의 검색어(query)를 기준으로 관련된 image-text pairs 수집, query마다 최대 20,000쌍까지 수집하여 class imbalance 완화 (GPT-2를 학습시킨 WebText와 비슷한 총 단어 수를 가짐)</li>
-      <li>이 데이터셋을 <strong>WIT(WebImageText)</strong>라고 부름 !</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="23-selecting-an-efficient-pre-training-method">2.3. Selecting an Efficient Pre-Training Method</h3>
-
-<ul>
-  <li>web data 양이 방대하다보니 Training efficiency가 매우 중요</li>
-  <li>처음에는 imgae-CNN과 text transformer 함께 학습시켜 image의 captions 예측
-    <ul>
-      <li>\(\to\) 굳이 ? <strong>문장의 단어까지 정확히 예측하지 않고, 전체 텍스트가 어떤 이미지와 짝이 맞는지만 맞추도록 학습</strong></li>
-      <li><strong>the cosine similarity of the image and text embeddings</strong>를 높이는 방식으로 contrastive learning (N개의 image-text pairs가 있으면 N x N개의 조합)</li>
-    </ul>
-  </li>
-</ul>
-
-<p><img src="/assets/img/llm/CLIP/fig1.png" alt="그림1" /></p>
-
-<ul>
-  <li>CLIP에서 pre-training dataset 크니까 over-fitting 걱정 없이 학습 간소화
-    <ul>
-      <li><strong>without</strong> initializing the <strong>image encoder</strong> with ImageNet weights or the <strong>text encoder</strong> with pre-trained weights</li>
-      <li><strong>non-linear projection</strong> (btw the representation and the contrastive embedding space) 안쓰고 단순한 <strong>linear layer</strong></li>
-      <li><strong>text transformation function 제거</strong> (어차피 text에 한 문장이라서 randomness 필요없음)</li>
-      <li><strong>image transformation function도 제거</strong> (크기 조정 후 랜덤 자르기만 사용)</li>
-      <li><strong>temperature parameter</strong> (which controls the range of the logits in the softmax)를 learnable하게 (Not hyperparams)</li>
-    </ul>
-  </li>
-</ul>
-
-<p><img src="/assets/img/llm/CLIP/fig2.png" alt="그림1" /></p>
-
-<p><img src="/assets/img/llm/CLIP/fig3.png" alt="그림1" /></p>
-
-<h3 id="24-choosing-and-scaling-a-model">2.4. Choosing and Scaling a Model</h3>
-
-<ul>
-  <li><strong>Image encoder</strong>: ResNet-50, ViT</li>
-  <li><strong>Text encoder</strong>: GPT-2 아키텍처와 비슷함</li>
-  <li><strong>Scaling</strong>: width, depth 하나만 늘리지 않고 EfficientNet처럼 width, depth, resolution 모두 확장</li>
-</ul>
-
-<h3 id="25-training">2.5. Training</h3>
-
-<ul>
-  <li>5개의 ResNet과 3개의 Vision Transformer(ViT) 모델을 학습
-    <ul>
-      <li>ResNet-50, ResNet-101, 그리고 EfficientNet 방식의 스케일링을 따라 ResNet-50 대비 약 4배, 16배, 64배 계산량을 사용하는 모델 3개를 추가로 학습 (RN50x4, RN50x16, RN50x64)</li>
-      <li>Vision Transformer 계열은 ViT-B/32, ViT-B/16, ViT-L/14 세 가지를 학습</li>
-    </ul>
-  </li>
-</ul>
-
-<p>pass</p>
-
-<h2 id="3-experiments">3. Experiments</h2>
-
-<h3 id="31-zero-shot-transfer">3.1. Zero-Shot Transfer</h3>
-
-<h3 id="311-motivation">3.1.1. Motivation</h3>
-
-<ul>
-  <li>기존 비지도 학습에서는 representation learning capabilities에 집중
-    <ul>
-      <li>zero-shot transfer로 task learning capabilities 측정</li>
-    </ul>
-  </li>
-  <li>zero-shot transfer는 CLIP의 robustness to <strong>distribution shift</strong> and <strong>domain generalization</strong>를 측정 rather than task generalization
-    <ul>
-      <li>특정 분포만 외우는 모델인지, 진짜 “과제를 푸는 능력”을 갖췄는지를 평가하자 !</li>
-      <li><strong>task learning</strong>: 직접 task를 학습시키지 않았지만, 과제를 수행할 수 있어야 한다 !</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="312-using-clip-for-zero-shot-transfer">3.1.2. Using CLIP for Zero-Shot Transfer</h3>
-
-<ul>
-  <li>class를 class text로 변환 (text encoder에 넣기 좋은 형식)
-    <ul>
-      <li>예시: “cat”을 “a photo of a cat”으로</li>
-    </ul>
-  </li>
-  <li>모든 class text/Image를 text/image encoder로 embedding</li>
-  <li>Cosine similarity 계산 (class text vs. image embeddings)</li>
-  <li>temperature parameter 로 스케일링 후 softmax 적용</li>
-  <li>확률 분포 중 확률이 가장 높은 텍스트가 image class가 됨</li>
-  <li><strong>CLIP은 본래 “image와 text가 positive pair인가?”를 예측하도록 학습되었는데, 이걸 활용해서 “이미지의 클래스가 무엇인가?”도 알아낼 수 있다 !</strong></li>
-  <li><strong>Text encoder가 classifier처럼 작동하는 것이고 text encoder는 하나만 써서 모든 images에 사용</strong>
-    <ul>
-      <li>이 문장을 이해해야 함 !!</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="313-initial-comparison-to-visual-n-grams">3.1.3. Initial Comparison to Visual N-Grams</h3>
-
-<p><img src="/assets/img/llm/CLIP/table1.png" alt="그림1" /></p>
-
-<ul>
-  <li>학습된 class만 잘 맞추는 게 아니라, 학습 안 한 새로운 task/dataset에서도 높은 정확도</li>
-  <li><strong>Multi-modal contrastive learning</strong>으로 이미지와 언어 사이 의미적 연결을 학습하기 때문 (image와 text를 같은 embedding space에 mapping)</li>
-</ul>
-
-<h3 id="314-prompt-engineering-and-ensembling">3.1.4. Prompt Engineering and Ensembling</h3>
-
-<ul>
-  <li><strong>Prompt Engineering</strong>: 클래스 이름이 중의적이면(CLIP은 문맥 없이 처리하므로) 문제 발생
-    <ul>
-      <li>예시: ImageNet에서 “crane” → 기중기 or 새</li>
-      <li>그래서 “<strong>A photo of a {label}.</strong>” 형태의 프롬프트를 사용</li>
-      <li>이것만으로 ImageNet 정확도 1.3% 증가</li>
-    </ul>
-  </li>
-  <li><strong>Ensembling</strong>: 여러 zero-shot 분류기를 합치는 방식
-    <ul>
-      <li>여러 프롬프트 사용:
-        <ul>
-          <li>“A photo of a big {label}”</li>
-          <li>“A photo of a small {label}”</li>
-        </ul>
-      </li>
-      <li>각 prompt에 대해 text embedding 계산, 평균내서 하나의 classifier처럼 사용</li>
-      <li>이것만으로 ImageNet 정확도 3.5% 증가</li>
-    </ul>
-  </li>
-</ul>
-
-<p><img src="/assets/img/llm/CLIP/fig4.png" alt="그림1" /></p>
-
-<h3 id="315-analysis-of-zero-shot-clip-performance">3.1.5. Analysis of Zero-Shot CLIP Performance</h3>
-
-<p><img src="/assets/img/llm/CLIP/fig5.png" alt="그림1" /></p>
-
-<ul>
-  <li>CLIP의 zero-shot classifier는 단순한 Linear Probe classifier보다 더 좋은 성능 (dataset별로)</li>
-  <li>특히 video action 인식에서 우수 (자연어가 동사를 표현할 수 있으니)</li>
-  <li>반면 위성 이미지, 종양, 물체 수 세기, 교통 표지판, 거리 인식 약함</li>
-</ul>
-
-<p><img src="/assets/img/llm/CLIP/fig6.png" alt="그림1" /></p>
-
-<ul>
-  <li>CLIP의 zero-shot 성능은 4-shot Linear Probe와 비슷
-    <ul>
-      <li>CLIP은 visual concepts를 직접적으로 받고 few-shot은 간접적으로 추론하니까 말이 됨</li>
-    </ul>
-  </li>
-</ul>
-
-<p><img src="/assets/img/llm/CLIP/fig7.png" alt="그림1" /></p>
-
-<ul>
-  <li>few-shot 모델이 CLIP zero-shot 성능 도달하려면 class마다 평균 20.8개 필요</li>
-  <li>ImageNet에서는 16-shot 모델과 CLIP zero-shot 성능 비슷</li>
-</ul>
-
-<p><img src="/assets/img/llm/CLIP/fig8.png" alt="그림1" /></p>
-
-<ul>
-  <li>전체적으로 fully supervised 모델과 CLIP zero-shot 성능 간 상관관계는 0.82 (p &lt; 1e-6).</li>
-  <li>fully supervised 모델 성능 높을수록 CLIP zero-shot도 성능 높음</li>
-  <li>CLIP zero-shot을 few-shot classifier의 initialization으로 활용 가능</li>
-</ul>
-
-<p><img src="/assets/img/llm/CLIP/fig9.png" alt="그림1" /></p>
-
-<ul>
-  <li>학습량 늘어나면서 zero-shot 성능 꾸준히 향상</li>
-</ul>
-
-<h3 id="32-representation-learning">3.2. Representation Learning</h3>
-
-<ul>
-  <li>3.1.에서 task-learning capabilitiesof CLIP through zero-shot transfer 했고
-    <ul>
-      <li>이번에는 representationlearning capabilities 분석</li>
-    </ul>
-  </li>
-</ul>
-
-<p><img src="/assets/img/llm/CLIP/fig10.png" alt="그림1" /></p>
-
-<ul>
-  <li>Ideal representation: “<strong>모델에서 추출한 표현</strong>을 기반으로 선형 분류기를 학습시키고 다양한 데이터셋에서 높은 성능”으로 정의. 왜냐면:
-    <ul>
-      <li>CLIP은 일반적인 task 및 dataset에 구애받지 않는 pre-training 방식을 지향하고 있기 때문</li>
-      <li>fine tuning은 각 데이터셋에 맞춰 표현을 조정하므로, pre-training에서의 representation 실패를 가릴 수 있음</li>
-      <li>Linear classifier는 유연성이 낮기 때문에 representation 실패를 명확히 드러내며 개발 과정에서 유용한 피드백을 제공</li>
-    </ul>
-  </li>
-</ul>
-
-<p><img src="/assets/img/llm/CLIP/fig11.png" alt="그림1" /></p>
-
-<ul>
-  <li>CLIP: 기존 모든 시스템 대비 연산 효율이 높음 (동일 성능을 더 적은 계산으로 달성)</li>
-</ul>
-
-<h3 id="33-robustness-to-natural-distribution-shift">3.3. Robustness to Natural Distribution Shift</h3>
-
-<p><img src="/assets/img/llm/CLIP/fig12.png" alt="그림1" /></p>
-
-<ul>
-  <li>기존 models: train data<strong>만</strong> 잘 학습 (ImageNet이 아니면 성능 하락)</li>
-</ul>
-
-<p><img src="/assets/img/llm/CLIP/fig13.png" alt="그림1" /></p>
-
-<ul>
-  <li>CLIP은 ImageNet에서 직접 훈련되지 않고, 광범위한 자연어 기반 데이터로 학습 - 일반화에 더 뛰어남</li>
-</ul>
-
-<p><img src="/assets/img/llm/CLIP/fig14.png" alt="그림1" /></p>
-
-<ul>
-  <li>ImageNet에 adapt하면 (빨간색) <strong>ImageNet 정확도는 상승하지만</strong>, y축 값(분포 이동된 상황에서의 정확도)은 <strong>거의 향상되지 않거나 오히려 감소</strong>하는 경향을 보임.</li>
-  <li>반면 <strong>zero-shot CLIP</strong> (보라색)은 ImageNet에서 약간 낮은 성능을 가지지만, <strong>분포 이동된 환경에서는 훨씬 높은 robustness 보여줌</strong>.</li>
-</ul>
-
-<p><img src="/assets/img/llm/CLIP/fig15.png" alt="그림1" /></p>
-
-<h2 id="4-comparison-to-human-performance">4. Comparison to Human Performance</h2>
-
-<p><img src="/assets/img/llm/CLIP/fig16.png" alt="그림1" /></p>
-
-<ul>
-  <li>인간: 한 장의 예시만으로도 빠르게 학습 가능. 한 번 보면 대부분 기억
-    <ul>
-      <li>Zero-shot: 평균 정확도 54%</li>
-      <li>One-shot: 평균 정확도 76% → +22% 향상</li>
-      <li>Two-shot: 성능 거의 동일 (추가 이득은 미미)</li>
-      <li>인간이 prior knowledge를 잘 활용하니까</li>
-    </ul>
-  </li>
-  <li>현재 CLIP의 few-shot 평가 방법은 prior knowledge를 활용하지 않음 (인간처럼 “이전에 본 적 있는” 정보와 “문맥”을 연결하는 방식이 부족)</li>
-</ul>
-
-<h2 id="5-data-overlap-analysis">5. Data Overlap Analysis</h2>
-
-<p><img src="/assets/img/llm/CLIP/fig17.png" alt="그림1" /></p>
-
-<ul>
-  <li>CLIP은 인터넷에서 수집한 대규모 데이터로 학습되었는데, 이때 우연히 테스트용 평가 데이터셋과 일부 이미지가 겹칠 수 있음
-    <ul>
-      <li>미리 알 수 없으므로 후처리로 중복된 데이터 제거</li>
-    </ul>
-  </li>
-  <li>대부분의 경우, CLIP의 평가 성능은 데이터 중복의 영향이 거의 없음</li>
-  <li><strong>CLIP의 제로샷 성능이 데이터 중복 때문에 과장된 게 아니다 !!</strong></li>
-</ul>
-
-<h2 id="6-limitation">6. Limitation</h2>
-
-<ul>
-  <li>성능적 한계:
-    <ul>
-      <li>일부 데이터셋에서는 linear baseline보다 성능 낮음</li>
-      <li>zero-shot으로 SoTA 달성하려면 1000배 compute 증가 필요 (현재 하드웨어로는 비현실적)</li>
-    </ul>
-  </li>
-  <li>과제별 약점:
-    <ul>
-      <li>fine-grained classification (꽃, 차량 등) 약함</li>
-      <li>counting, 거리 측정 등 추론 기반 과제에 매우 약함</li>
-      <li>novel task에 대해 거의 random 성능**</li>
-    </ul>
-  </li>
-  <li>일반화 한계
-    <ul>
-      <li>자연 이미지에는 잘 generalize하지만 진짜 out-of-distribution에는 약함</li>
-      <li>예: MNIST 손글씨는 CLIP이 88%밖에 못함, logistic regression보다도 낮음</li>
-    </ul>
-  </li>
-  <li>표현 방식 한계:
-    <ul>
-      <li>zero-shot은 concept list가 고정됨 (새로운 개념 생성 불가)</li>
-      <li>캡션처럼 유연한 표현 불가</li>
-    </ul>
-  </li>
-  <li>학습 비효율성:
-    <ul>
-      <li>데이터 효율성 낮음 (수십억 이미지 필요)</li>
-      <li>self-supervision 또는 self-training과 결합 제안</li>
-    </ul>
-  </li>
-  <li>벤치마킹 이슈:
-    <ul>
-      <li>validation set으로 모델 튜닝 → 진정한 zero-shot 평가 어려움</li>
-      <li>평가 데이터셋 선정이 CLIP에 유리할 수 있음</li>
-    </ul>
-  </li>
-  <li>편향 문제:
-    <ul>
-      <li>웹 이미지+텍스트로 학습 → social bias 학습 위험 존재</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="7-broader-impacts">7. Broader Impacts</h2>
-
-<h2 id="8-related-work">8. Related Work</h2>
-
-<p>pass</p>
-
-<h2 id="9-conclusion">9. Conclusion</h2>
-
-<ul>
-  <li>whether it is possible to transfer the success of task-agnostic web-scale pre-training in NLP to another domain !</li>
-  <li>CLIP models learn to perform a wide variety of tasks during pretraining</li>
-</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="llm" /><summary type="html"><![CDATA[[Arxiv 2021](https://arxiv.org/pdf/2103.00020)]]></summary></entry></feed>
+</ul>]]></content><author><name>GW Jeong</name><email>wjdrjsdn39@yonsei.ac.kr</email></author><category term="pytorch" /><summary type="html"><![CDATA[]]></summary></entry></feed>

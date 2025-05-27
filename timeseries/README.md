@@ -80,9 +80,9 @@ permalink: /timeseries/
 \
 [TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)]{:.heading.flip-title}\
 \
-[HDMixer: Hierarchical Dependency with Extendable Patch for Multivariate Time Series Forecasting (AAAI 2024)]{:.heading.flip-title}
-
-
+[HDMixer: Hierarchical Dependency with Extendable Patch for Multivariate Time Series Forecasting (AAAI 2024)]{:.heading.flip-title}\
+\
+[Simple Feedfoward Neural Networks are Almost All You Need for Time Series Forecasting (NeurIPs 2025)]{:.heading.flip-title}
 
 
 [Raindrop: Graph-guided Network for Irregularly Sampled Multivariate Time Series (ICLR 2022)]: /timeseries/2024-02-09-Raindrop
@@ -121,3 +121,4 @@ permalink: /timeseries/
 [Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts (ICLR 2025)]: /timeseries/2025-02-28-TimeMoE
 [TimeMixer++: A General Time Series Pattern Machine for Universal Predictive Analysis (ICLR 2025)]: /timeseries/2025-03-15-TimeMixer++
 [HDMixer: Hierarchical Dependency with Extendable Patch for Multivariate Time Series Forecasting (AAAI 2024)]: /timeseries/2025-03-26-HDMixer
+[Simple Feedfoward Neural Networks are Almost All You Need for Time Series Forecasting (NeurIPs 2025)]: /timeseries/2025-05-27-SFNN

@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v9.1.6 <https://hydejack.com/>
+-->
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Simple Feedfoward Neural Networks are Almost All You Need for Time Series Forecasting (NeurIPs 2025) | LpppJ</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Simple Feedfoward Neural Networks are Almost All You Need for Time Series Forecasting (NeurIPs 2025)" />
+<meta name="author" content="GW Jeong" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Arxiv 2024" />
+<meta property="og:description" content="Arxiv 2024" />
+<link rel="canonical" href="http://localhost:4000/timeseries/2025-05-27-SFNN/" />
+<meta property="og:url" content="http://localhost:4000/timeseries/2025-05-27-SFNN/" />
+<meta property="og:site_name" content="LpppJ" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-05-27T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Simple Feedfoward Neural Networks are Almost All You Need for Time Series Forecasting (NeurIPs 2025)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"GW Jeong"},"dateModified":"2025-05-27T15:30:31+09:00","datePublished":"2025-05-27T00:00:00+09:00","description":"Arxiv 2024","headline":"Simple Feedfoward Neural Networks are Almost All You Need for Time Series Forecasting (NeurIPs 2025)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/timeseries/2025-05-27-SFNN/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/img/me/logo.jpg"},"name":"GW Jeong"},"url":"http://localhost:4000/timeseries/2025-05-27-SFNN/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+
+
+  <meta name="theme-color" content="rgb(230, 217, 195)">
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="LpppJ">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="LpppJ">
+
+<meta name="generator" content="Hydejack v9.1.6" />
+
+
+<link rel="alternate" href="http://localhost:4000/timeseries/2025-05-27-SFNN/" hreflang="en">
+
+<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LpppJ" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+
+
+
+
+
+<script>!function(r,c){"use strict";function a(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=c.createElement("script"),e=(n.src=e,t&&a(n,"load",t,{once:!0}),c.scripts[0]);return e.parentNode.insertBefore(n,e),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=c.createElement("script");function o(){r._loaded=!0,t&&a(n,"load",t,{once:!0});var e=c.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():a(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){a(c.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}}(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = false;
+  w._noDrawer = false;
+  w._noNavbar = false;
+  w._noToc = false;
+  w._noSearch = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2025-05-27T15:37:26+09:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+<script async src="/assets/bower_components/MathJax/es5/tex-mml-chtml.js" id="_MathJax"></script>
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.1.6.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5);--accent-color-highlight: rgba(94, 97, 94, 0.1);--accent-color-darkened: #4b4e4b;--theme-color: rgb(230, 217, 195)}
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+</head>
+
+<body class="no-break-layout">
+  
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/timeseries/">timeseries</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          <span>2025-05-27-SFNN</span>
+        
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-timeseries-SFNN" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        Simple Feedfoward Neural Networks are Almost All You Need for Time Series Forecasting (NeurIPs 2025)
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-05-27T00:00:00+09:00">27 May 2025</time> in <span>Timeseries</span> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  
+    <p class="note-sm" >
+      <a href="">Arxiv 2024</a>
+
+    </p>
+  
+
+
+  </header>
+
+  
+    <h2 id="abstract">Abstract</h2>
+
+<ul>
+  <li>Simple <strong>feed forward neural networks (SFNNs)</strong>만으로 SOTA performance</li>
+  <li>변수 사이의 관계가 강하더라도 (inter-series) 상관없음</li>
+</ul>
+
+<h2 id="1-introduciton">1. Introduciton</h2>
+
+<ul>
+  <li>Transformer가 뜨면서 시계열 예측에서도 former 계열 논문들이 나옴</li>
+  <li>DLinear에서 transformer에 대한 의문을 던지긴 했지만
+    <ul>
+      <li>그 이후 다시 transformer-based가 성능이 잘나오면서 일단락됨</li>
+    </ul>
+  </li>
+  <li>Linear model은 inherent non-linearity는 못 잡는 것 맞지만
+    <ul>
+      <li>overly complex solutions은 overfitting 유발함</li>
+      <li>변수 사이의 관계가 강하더라도, series-wise mapping로 충분함</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-preliminaries">2. Preliminaries</h2>
+
+<h3 id="21-definitions">2.1. Definitions</h3>
+
+<ul>
+  <li>\(\mathbf{X}=\left\{\mathbf{X}_1, \ldots, \mathbf{X}_t, \ldots, \mathbf{X}_T\right\} \in \mathbb{R}^{T \times N}\)보고 \(\left\{\mathbf{X}_{t+1}, \ldots, \mathbf{X}_{t+H}\right\}\)를 예측</li>
+</ul>
+
+<h3 id="22-problem-statement">2.2. Problem Statement</h3>
+
+<ul>
+  <li>\(\mathrm{MSE}=\sum_t \sum_{h=1}^H\left\|\mathbf{X}_{t+h}-\hat{\mathbf{X}}_{t+h}\right\|_2^2\)를 최소화</li>
+</ul>
+
+<h3 id="23-common-practices">2.3. Common Practices</h3>
+
+<ul>
+  <li>일반적으로 train, validation, test 데이터셋을 나눌 때,
+    <ul>
+      <li>시간 순서대로 70%(train) / 10%(validation) / 20%(test) 이렇게 자름</li>
+    </ul>
+  </li>
+  <li>하지만 엄격하게 따지자면 out-of-sample (OOS) K-fold cross-validation 해야 함
+    <ul>
+      <li>하지만 실제로 지금 보면 train의 마지막 부분이라고 할 수 있는 validation에 대해서 한 번만 실행해놓고 모델 선택함</li>
+    </ul>
+  </li>
+  <li>만약 2021년(test)에 사용할 모델을 선택하기 위해서
+    <ul>
+      <li>2010년부터 2019년까지 데이터로 학습하고(train)</li>
+      <li>2020년 데이터로 검증한다면(validation) 적절하지 않음</li>
+      <li>왜냐하면 2020년은 팬데믹으로 비정상적인 데이터가 기록된 해였기 때문</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="3-simple-feedforward-neural-networks-sfnns">3. Simple Feedforward Neural Networks (SFNNs)</h2>
+
+<p><img src="/assets/img/timeseries/SFFN/fig1.png" alt="그림1" /></p>
+
+<ul>
+  <li>그림 1에 있는 base version만으로 성능이 좋긴 하지만, 다음 3가지 optional modules:
+    <ul>
+      <li>input mean centering</li>
+      <li>series-wise non-linear mapping</li>
+      <li>layer normalization</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="31-input-mean-centering">3.1. Input mean centering</h3>
+
+<ul>
+  <li>\(\hat{\mathbf{X}}_{\mathrm{out}}=f\left(\mathbf{X}_{\mathrm{in}} ; \theta\right)\) 대신 \(\hat{\mathbf{X}}_{\mathrm{out}}=f\left(\mathbf{X}_{\mathrm{in}}-\overline{\mathbf{X}}_{\mathrm{in}} ; \theta\right)+\overline{\mathbf{X}}_{\mathrm{in}}\)</li>
+  <li>다른 연구에서 trend 성분을 뽑기도 하지만, 추세 분해 필요 없음</li>
+</ul>
+
+<h3 id="32-series-wise-non-linear-mapping">3.2. Series-wise non-linear mapping</h3>
+
+<ul>
+  <li>각 시점(time step)을 독립적인 단변량 시계열로 간주하여
+    <ul>
+      <li>\(N×N\) 행렬로 나타내는 선형 변환 후 활성화 함수</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="33-layer-normalization">3.3. Layer Normalization</h3>
+
+<ul>
+  <li>Layer Normalization는 시퀀스 모델링 과제에서 학습을 안정화하는 데 핵심적인 역할
+    <ul>
+      <li>특히 Transformer 구조와 결합될 때 효과가 좋음</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="4-experimental-results">4. Experimental Results</h2>
+
+<h3 id="41-results-following-common-practices">4.1. Results following common practices</h3>
+
+<p><img src="/assets/img/timeseries/SFFN/table1.png" alt="그림1" /></p>
+
+<p><img src="/assets/img/timeseries/SFFN/table2.png" alt="그림1" /></p>
+
+<ul>
+  <li>Test 데이터셋 엿보고 결정한 가장 적절한 lookback length와 성능
+    <ul>
+      <li>(앞서 적절하지 못하다고 지적한 방법)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="411-model-sizes-and-run-times">4.1.1. Model sizes and run times</h3>
+
+<p><img src="/assets/img/timeseries/SFFN/fig2.png" alt="그림1" /></p>
+
+<ul>
+  <li>본 논문에서 제시하는 SFNNs과 비교한 DUET, iTransformer
+    <ul>
+      <li>DUET는 모델은 조금 더 무겁지만 성능은 비슷함</li>
+      <li>iTransformer는 모델은 조금 더 가벼운 것 같지만 성능이 안좋음</li>
+      <li>그러므로 SFNNs는 effective balance between model size, computational efficiency, and forecasting performance</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="42-ablation-study">4.2. Ablation Study</h3>
+
+<h3 id="421-input-mean-centering">4.2.1. Input mean centering</h3>
+
+<p><img src="/assets/img/timeseries/SFFN/fig3.png" alt="그림1" /></p>
+
+<ul>
+  <li>데이터의 trend가 강한 경우에는 mean-centering이 도움이 됨</li>
+</ul>
+
+<h3 id="422-series-wise-non-linear-mapping">4.2.2. Series-wise non-linear mapping</h3>
+
+<p><img src="/assets/img/timeseries/SFFN/fig4.png" alt="그림1" /></p>
+
+<ul>
+  <li>
+    <p>시계열 간의 의존성을 포착하는 건 어려우며,</p>
+
+    <ul>
+      <li>특히 NN을 쓸 경우 과적합 위험</li>
+      <li><strong>시계열 수가 많을수록</strong>(Solar Energy, Traffic, Electricity 순) 과적합 현상이 심해짐</li>
+      <li>특히 <strong>look-back 길이</strong>가 길어질수록 문제가 더 커짐.</li>
+      <li>반면, 시계열 수가 적은 데이터셋(N&lt;30)에서는 이러한 과적합 현상 덜함</li>
+    </ul>
+  </li>
+  <li>
+    <p>Solar Energy 데이터셋에서는 series-wise mapping이 매우 효과적</p>
+
+    <ul>
+      <li>look-back 길이가 200일 때 성능이 20% 향상</li>
+      <li>이유는 Solar Energy 시계열들은 <strong>강한 장기 공적분 관계</strong>를 가짐.</li>
+      <li>데이터가 <strong>한 주(Alabama)의 태양</strong></li>
+    </ul>
+  </li>
+  <li>
+    <p>반면에 다른 데이터셋들(Traffic, Electricity 등)은:</p>
+
+    <ul>
+      <li>
+        <p>공적분 관계가 약하며, 짧은 lag에서도 긴 시간 범위의 관계가 약함.</p>
+      </li>
+      <li>
+        <p>따라서 이런 경우에는 시계열 간 비선형 매핑이 오히려 성능을 저해</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/timeseries/SFFN/fig5.png" alt="그림1" /></p>
+
+<h3 id="423-layer-normalization">4.2.3. Layer normalization</h3>
+
+<p><img src="/assets/img/timeseries/SFFN/fig6.png" alt="그림1" /></p>
+
+<ul>
+  <li>
+    <p>SFNN의 가중치는 모든 시계열에 공유되니, scale이 큰 시계열은 모델에 더 큰 영향을 미침.</p>
+  </li>
+  <li>
+    <p>\(\text { Average }\left\{\operatorname{Std}\left\{\overline{\mathbf{X}}_{t, \mathrm{in}}\right\}\right\}, \forall t \in \operatorname{training} \text { set },\)를 계산했을 때</p>
+    <ul>
+      <li>0.5 이상이면, 레이어 정규화의 이점이 명확히 나타남</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="43-critiques-of-current-benchmarking-practices">4.3. Critiques of current benchmarking practices</h3>
+
+<ul>
+  <li>기존 연구에 대한 고찰</li>
+</ul>
+
+<h3 id="431-issues-with-the-iliweather-and-exchange-rate-datasets">4.3.1. Issues with the ILI,Weather, and Exchange rate datasets</h3>
+
+<ul>
+  <li>ILI dataset
+    <ul>
+      <li>총 1,000개 이하의 타임스텝과 7개의 시계열로 구성되어 <strong>데이터 크기가 매우 작음</strong>.</li>
+      <li>학습/테스트 간에 <strong>분포 드리프트가 심각</strong>하게 존재.</li>
+      <li>COVID-19로 인해 테스트 단계 마지막 20스텝에서 갑작스러운 변화 발생 → 예측 어려움.</li>
+    </ul>
+  </li>
+  <li>Weather 및 Exchange Rate 데이터셋
+    <ul>
+      <li>각 시계열에 대해 별도의 모델(N개의 선형 모델)을 학습하는 것이 가장 좋은 성능</li>
+      <li>이는 해당 데이터셋들이 다변량(CD) 모델보다는 단변량(CI) 모델에 가깝게 작동함</li>
+      <li>다변량(CD) 모델은 과적합(overfitting)되기 쉬워 부적절</li>
+      <li>특히 Weather 데이터셋은 그 특성이 두드러짐</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="432-affects-of-look-back-length-and-randomness">4.3.2. Affects of look-back length and randomness</h3>
+
+<p><img src="/assets/img/timeseries/SFFN/fig7.png" alt="그림1" /></p>
+
+<ul>
+  <li>최근에는 look-back 길이 자체가 매우 중요한 하이퍼파라미터라는 점이 강조됨
+    <ul>
+      <li>모델마다 최적의 look-back 길이가 다르므로 각 모델이 최적의 look-back을 선택하도록 허용하는 것이 더 합리적임.</li>
+    </ul>
+  </li>
+  <li>초기화, 배치 셔플링, 드롭아웃 등으로 인한 학습 중 무작위성 또한 성능에 영향을 줌.
+    <ul>
+      <li>특히 시계열 데이터셋은 작고 분포 드리프트가 있어 결과가 민감함.</li>
+      <li>하지만 대부분의 기존 연구들은 단일 실험 결과만 보고함
+        <ul>
+          <li>통계적으로 유의미하지 않음.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="433-reduce-the-effect-of-peeking">4.3.3. Reduce the effect of “peeking”</h3>
+
+<ul>
+  <li>이론적으로는 OOS K-fold 교차검증이 가장 엄격한 방법이지만 (Section 2.3),
+    <ul>
+      <li>복잡하고 계산 비용이 높아 현실적으로 널리 사용되기 어려움.</li>
+    </ul>
+  </li>
+  <li>valiadation set 사용해 최적의 look-back 선택</li>
+</ul>
+
+<p><img src="/assets/img/timeseries/SFFN/table4.png" alt="그림1" /></p>
+
+<h2 id="5-conclusion">5. Conclusion</h2>
+
+<ul>
+  <li>단순한 구조의 <strong>Feedforward Neural Networks (SFNNs)</strong>
+    <ul>
+      <li>복잡한 모델에 비해 구조는 단순하지만, 동등하거나 더 나은 성능을 일관되게 보임.</li>
+    </ul>
+  </li>
+  <li>통계적 ablation 실험을 통해, 다음 구성 요소들이 성능에 중요한 역할을 한다는 점을 확인:
+    <ul>
+      <li><strong>입력 평균 중심화 (Input Mean Centering)</strong></li>
+      <li><strong>시계열별 매핑 (Series-wise Mapping)</strong></li>
+      <li><strong>레이어 정규화 (Layer Normalization)</strong></li>
+    </ul>
+  </li>
+  <li>단순히 성능을 비교하는 것을 넘어, 기존 벤치마크 방식의 문제점을 비판적으로 고찰하고 더 공정한 평가 절차를 제안함.
+    <ul>
+      <li>각 모델이 최적의 look-back 길이를 검증셋을 사용해 선택하도록</li>
+    </ul>
+  </li>
+</ul>
+
+  
+</article>
+
+
+
+  <hr class="dingbat related mb6" />
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="https://via.placeholder.com/128x128"
+    srcset="/assets/img/me/me.JPG 1x,/assets/img/me/me.JPG 2x"
+    
+  
+  alt="GW Jeong"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>Bachelor’s degree in Applied Statistics. Yonsei Univ. (2018~2024) <br />
+DataScienceLab 8th 학회장 (2022~2023) <br />
+Master’s degree in Statitstics. Yonsei Univ. (2024~)</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/lpppj" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:wjdrjsdn39@yonsei.ac.kr" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+  
+
+  
+    
+
+
+  
+
+  
+  
+
+  
+    
+
+  
+
+
+  
+<footer class="content" role="contentinfo">
+  <hr/>
+  
+    <p><small class="copyright">© Geonwoo Jeong.
+</small></p>
+  
+  
+    <p><small>Powered by <a class="external" href="https://hydejack.com/">Hydejack</a> v<span id="_version">9.1.6</span></small></p>
+  <hr class="sr-only"/>
+</footer>
+
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+<div class="sidebar-bg sidebar-overlay" style="background-color:rgb(230, 217, 195);background-image:url(/assets/img/me/sidebar.jpg)"></div>
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/me/logo.jpg" class="avatar" alt="LpppJ" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">LpppJ</h2></a>
+    
+    
+      <p class="">
+        DataScience and AI
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="sr-only">Navigation:</span>
+<ul>
+  
+    
+      
+      <li>
+        <a
+          id="_drawer--opened"
+          href="/timeseries/"
+          class="sidebar-nav-item "
+          
+        >
+          TimeSeries
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/mamba/"
+          class="sidebar-nav-item "
+          
+        >
+          Mamba
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/llm/"
+          class="sidebar-nav-item "
+          
+        >
+          LLM
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/pytorch/"
+          class="sidebar-nav-item "
+          
+        >
+          Pytorch
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/stat/"
+          class="sidebar-nav-item "
+          
+        >
+          Statistics
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/project/"
+          class="sidebar-nav-item "
+          
+        >
+          Project
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/presentation/"
+          class="sidebar-nav-item "
+          
+        >
+          Presentation
+        </a>
+      </li>
+    
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/lpppj" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:wjdrjsdn39@yonsei.ac.kr" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>!function(){var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())}();
+</script>
+  <script src="/assets/js/hydejack-9.1.6.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.1.6.js" nomodule defer></script>
+  
+
+  
+
+<!--<![endif]-->
+  <!-- <script>
+  document.querySelector('hy-push-state').setAttribute('prefetch', '');
+
+  document.querySelectorAll('.sidebar a[href^="/"]').forEach(function (el) { 
+    el.addEventListener('click', function (e) {
+      if (el.pathname === window.location.pathname) {
+        e.preventDefault();
+        e.stopPropagation();
+        document.querySelector('hy-drawer').close();
+      }
+    });
+  });
+</script> -->
+
+<!--
+Code for integrating CloudFlare's email protection with Hydejack's single page app loading.
+-->
+<script>
+  document.getElementById('_pushState').addEventListener('hy-push-state-after', function (e) {
+    function e(e){
+      (console.error?console.error:console.log).call(console,e)
+    }
+
+    function t(e){
+      return l.innerHTML='<a href="'+e.replace(/"/g,"&quot;")+'"></a>',l.childNodes[0].getAttribute("href")
+    }
+
+    function r(e,t){
+      var r=e.substr(t,2);return parseInt(r,16)
+    }
+
+    function n(e,n){
+      for(var o="",c=r(e,n),a=n+2;a<e.length;a+=2){
+        var l=r(e,a)^c;
+        o+=String.fromCharCode(l)
+      }
+      return t(o)
+    }
+
+    var o="/cdn-cgi/l/email-protection#",
+        c=".__cf_email__",
+        a="data-cfemail",
+        l=document.createElement("div");
+
+    !function(){
+      for(var t=document.getElementsByTagName("a"),r=0;r<t.length;r++)
+        try{
+          var c=t[r],a=c.href.indexOf(o);
+          a>-1&&(c.href="mailto:"+n(c.href,a+o.length))
+        }catch(t){
+          e(t)
+        }
+    }(),
+    function(){
+      for(var t=document.querySelectorAll(c),r=0;r<t.length;r++)
+        try{
+          var o=t[r],l=n(o.getAttribute(a),0),i=document.createTextNode(l);
+          o.parentNode.replaceChild(i,o)
+        }catch(t){
+          e(t)
+        }
+    }()
+  });
+</script>
+
+
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+</div>
+
+
+</body>
+</html>

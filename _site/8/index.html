@@ -30,7 +30,7 @@ Powered by Hydejack v9.1.6 <https://hydejack.com/>
   
     
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Page 8 of 10 for Blog | LpppJ</title>
+<title>Page 8 of 9 for Blog | LpppJ</title>
 <meta name="generator" content="Jekyll v4.3.3" />
 <meta property="og:title" content="Blog" />
 <meta name="author" content="GW Jeong" />
@@ -109,7 +109,7 @@ Powered by Hydejack v9.1.6 <https://hydejack.com/>
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2025-04-05T22:58:51+09:00',
+    INDEX_KEY: 'index--2025-05-27T15:37:26+09:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -391,271 +391,6 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
 
 
 
-<article id="post-timeseries-FITS" class="page post mb6" role="article">
-  <header>
-    <h1 class="post-title flip-project-title">
-      <a href="/timeseries/2024-02-22-FITS/" class="flip-title">
-        FITS: Modeling Time Series with 10k Parameters (ICLR 2023)
-      </a>
-    </h1>
-
-    <div class="post-date">
-      
-      <span class="ellipsis mr1">
-        <time datetime="2024-02-22T00:00:00+09:00">22 Feb 2024</time> in <span>Timeseries</span> 
-      </span>
-      
-    </div>
-
-    
-    
-
-    
-
-
-
-  
-    <p class="note-sm" >
-      <a href="https://arxiv.org/abs/2307.03756">ICLR 2023</a>
-
-    </p>
-  
-
-
-  </header>
-
-  
-    <h2 id="abstract">Abstract</h2>
-
-
-    
-    
-    <footer>
-      <p class="read-more">
-        Continue reading <a class="heading flip-title" href="/timeseries/2024-02-22-FITS/">FITS: Modeling Time Series with 10k Parameters (ICLR 2023)</a>
-
-      </p>
-    </footer>
-  
-</article>
-
-
-  
-
-
-
-
-
-<article id="post-project-prop2" class="page post mb6" role="article">
-  <header>
-    <h1 class="post-title flip-project-title">
-      <a href="/project/2024-02-21-prop2/" class="flip-title">
-        \(2\). Geometric diatance (QGIS)
-      </a>
-    </h1>
-
-    <div class="post-date">
-      
-      <span class="ellipsis mr1">
-        <time datetime="2024-02-21T00:00:00+09:00">21 Feb 2024</time> in <span>Project</span> 
-      </span>
-      
-    </div>
-
-    
-    
-
-    
-
-
-
-  <div class="hr pb0"></div>
-
-
-  </header>
-
-  
-    <h2 id="1-shapefile-다운로드">1. Shapefile 다운로드</h2>
-<ul>
-  <li>지도에 두 주소 또는 좌표를 입력했을 때 출력되는 geometric distance를 구하려면 패키지가 아닌 지리 API를 활용해야 한다. 여기서는 <a href="https://qgis.org/en/site/forusers/download.html">QGIS</a>를 사용한다.</li>
-  <li><code class="language-plaintext highlighter-rouge">서울시 도로망 layer</code>, <code class="language-plaintext highlighter-rouge">(지하철역, 버스정류장, 학교) layer</code>, 그리고 <code class="language-plaintext highlighter-rouge">아파트 layer</code>를 깔고 <strong>네트워크 분석</strong>을 진행할 것이다.</li>
-  <li><code class="language-plaintext highlighter-rouge">서울시 도로망 layer</code>는 <a href="https://www.openstreetmap.org">OpenStreetMap</a>의 지도 정보를 추출해야 하는데, 3가지의 extractor가 있다.
-    <ul>
-      <li>1) <a href="https://download.geofabrik.de">Geofabrik</a>에서 sub region 지정
-        <ul>
-          <li>가장 하위 sub region이 South Korea이다. 즉 서울만 선택하는 것이 불가능하다.</li>
-        </ul>
-      </li>
-      <li>2) <a href="https://extract.bbbike.org">BBBike</a>에서 region search (특정 도시 직접 search 가능)
-        <ul>
-          <li>특정 도시를 직접 search 가능하다. shp파일이 필요하므로 Shapefile을 선택하고 extract한다.</li>
-        </ul>
-      </li>
-      <li>3) <a href="https://www.vworld.kr/v4po_main.do">국가공간정보포털(브이월드)</a>
-        <ul>
-          <li><code class="language-plaintext highlighter-rouge">공간정보 다운로드</code> \(\to\) <code class="language-plaintext highlighter-rouge">오픈마켓</code> \(\to\) <code class="language-plaintext highlighter-rouge">(도로명주소)도로구간</code>에서 지역별 도로 shp파일을 수집할 수 있다.</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>2) BBBike 또는 3) 국가공간정보포털을 선택하면 되는데, 2)를 선택했다.
-    <ul>
-      <li><img src="/assets/img/project/prop/prop2_1.png" alt="사진1" /></li>
-      <li>왼쪽(국가공간정보포털)은 서울시에 포함되는 정확한 Node와 Link를 제공하지만, Node와 Link가 있어도 지나갈 수 없는 길 많다. 그래서 실제로 갈 수 있는 경로임에도 경로를 찾지 못하는 경우가 많다.</li>
-      <li>오른쪽(BBBike)는 Node와 Link가 있어도 지나갈 수 없는 길이 훨씬 적지만, 실제와 다른 Link가 존재한다. (ex. 중앙에서 우측 하단으로 길게 그려진 직선)</li>
-    </ul>
-  </li>
-</ul>
-
-
-    
-    
-    <footer>
-      <p class="read-more">
-        Continue reading <a class="heading flip-title" href="/project/2024-02-21-prop2/">\(2\). Geometric diatance (QGIS)</a>
-
-      </p>
-    </footer>
-  
-</article>
-
-
-  
-
-
-
-
-
-<article id="post-project-prop1" class="page post mb6" role="article">
-  <header>
-    <h1 class="post-title flip-project-title">
-      <a href="/project/2024-02-20-prop1/" class="flip-title">
-        \(1\). 데이터 수집 및 전처리
-      </a>
-    </h1>
-
-    <div class="post-date">
-      
-      <span class="ellipsis mr1">
-        <time datetime="2024-02-20T00:00:00+09:00">20 Feb 2024</time> in <span>Project</span> 
-      </span>
-      
-    </div>
-
-    
-    
-
-    
-
-
-
-  <div class="hr pb0"></div>
-
-
-  </header>
-
-  
-    <h2 id="11-데이터-수집">1.1. 데이터 수집</h2>
-<p><img src="/assets/img/project/prop/prop1_1.png" alt="사진1" /></p>
-<ul>
-  <li>아파트 매매 데이터는 <a href="https://rt.molit.go.kr/pt/xls/xls.do?mobileAt=">국토교통부 실거래가 공개시스템</a>에서 다운로드하였다.</li>
-</ul>
-
-<p><img src="/assets/img/project/prop/prop1_2.png" alt="사진2" /></p>
-<ul>
-  <li>아파트의 위치, 면적, 층, 매매가격 정도를 알 수가 있다. 부동산 분석을 위해서는 주변 정보도 수집할 필요가 있는데, 1.3.에서 포스팅한다.</li>
-</ul>
-
-
-    
-    
-    <footer>
-      <p class="read-more">
-        Continue reading <a class="heading flip-title" href="/project/2024-02-20-prop1/">\(1\). 데이터 수집 및 전처리</a>
-
-      </p>
-    </footer>
-  
-</article>
-
-
-  
-
-
-
-
-
-<article id="post-timeseries-PatchTST" class="page post mb6" role="article">
-  <header>
-    <h1 class="post-title flip-project-title">
-      <a href="/timeseries/2024-02-18-PatchTST/" class="flip-title">
-        PatchTST: A Time Series is Worth 64 Words: Long-Term Forecasting With Transformers (ICLR 2023)
-      </a>
-    </h1>
-
-    <div class="post-date">
-      
-      <span class="ellipsis mr1">
-        <time datetime="2024-02-18T00:00:00+09:00">18 Feb 2024</time> in <span>Timeseries</span> 
-      </span>
-      
-    </div>
-
-    
-    
-
-    
-
-
-
-  
-    <p class="note-sm" >
-      <a href="https://arxiv.org/abs/2211.14730">ICLR 2023</a>
-
-    </p>
-  
-
-
-  </header>
-
-  
-    <h2 id="abstract">Abstract</h2>
-<ul>
-  <li>논문에서 요약을 잘 해놔서 굳이 번역하지 않고 그대로 가져왔다.</li>
-  <li>2개의 Key components
-    <ul>
-      <li>Segmentation of time series into <strong>subseries-level patches</strong> which are served as input tokens to Transformer</li>
-      <li><strong>Channel-independence</strong> where each channel contains a single univariate time series that shares the same embedding and Transformer weights across all the series.</li>
-    </ul>
-  </li>
-  <li>Patching design의 장점 3가지
-    <ul>
-      <li><strong>local semantic information</strong> is retained in the embedding</li>
-      <li><strong>computation and memory usage</strong> of the attention maps are quadratically reduced</li>
-      <li>the model can attend <strong>longer history</strong></li>
-    </ul>
-  </li>
-</ul>
-
-
-    
-    
-    <footer>
-      <p class="read-more">
-        Continue reading <a class="heading flip-title" href="/timeseries/2024-02-18-PatchTST/">PatchTST: A Time Series is Worth 64 Words: Long-Term Forecasting With Transformers (ICLR 2023)</a>
-
-      </p>
-    </footer>
-  
-</article>
-
-
-  
-
-
-
-
-
 <article id="post-timeseries-DLinear" class="page post mb6" role="article">
   <header>
     <h1 class="post-title flip-project-title">
@@ -755,66 +490,6 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
     <footer>
       <p class="read-more">
         Continue reading <a class="heading flip-title" href="/project/2024-02-15-gitblog6/">깃블로그 만들기 6 : 흔히 발생할 수 있는 에러</a>
-
-      </p>
-    </footer>
-  
-</article>
-
-
-  
-
-
-
-
-
-<article id="post-timeseries-ModernTCN" class="page post mb6" role="article">
-  <header>
-    <h1 class="post-title flip-project-title">
-      <a href="/timeseries/2024-02-14-ModernTCN/" class="flip-title">
-        ModernTCN: A Modern Pure Convolution Structure for General Time Series Analysis (ICLR 2024)
-      </a>
-    </h1>
-
-    <div class="post-date">
-      
-      <span class="ellipsis mr1">
-        <time datetime="2024-02-14T00:00:00+09:00">14 Feb 2024</time> in <span>Timeseries</span> 
-      </span>
-      
-    </div>
-
-    
-    
-
-    
-
-
-
-  
-    <p class="note-sm" >
-      <a href="https://openreview.net/forum?id=vpJMJerXHU">ICLR 2024</a>
-
-    </p>
-  
-
-
-  </header>
-
-  
-    <h2 id="abstract">Abstract</h2>
-<ul>
-  <li>최근 Transformer-based 모델과 MLP-based 모델이 time series에서 우위에 있지만, 본 논문에서는 convolution을 time series에서 사용하는 모델 ModernTCN을 제안한다.</li>
-  <li>Time series의 5개 mainstream task (long-term and short-term forecasting, imputation, classification and anomaly detection)에서 SOTA</li>
-  <li>Convolution의 sharing params로 효율적이면서도 넓은 receptive fields를 가진다.</li>
-</ul>
-
-
-    
-    
-    <footer>
-      <p class="read-more">
-        Continue reading <a class="heading flip-title" href="/timeseries/2024-02-14-ModernTCN/">ModernTCN: A Modern Pure Convolution Structure for General Time Series Analysis (ICLR 2024)</a>
 
       </p>
     </footer>
@@ -978,6 +653,260 @@ html{--accent-color: rgb(94, 97, 94);--accent-color-faded: rgba(94, 97, 94, 0.5)
     <footer>
       <p class="read-more">
         Continue reading <a class="heading flip-title" href="/project/2024-02-12-gitblog4/">깃 블로그 만들기 4 : 새로운 게시글 작성하기</a>
+
+      </p>
+    </footer>
+  
+</article>
+
+
+  
+
+
+
+
+
+<article id="post-project-gitblog3" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      <a href="/project/2024-02-09-gitblog3/" class="flip-title">
+        깃 블로그 만들기 3 : Hydejack 테마 사용법
+      </a>
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2024-02-09T00:00:00+09:00">09 Feb 2024</time> in <span>Project</span> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <h2 id="깃-블로그-커스텀--authorsyml">깃 블로그 커스텀 : authors.yml</h2>
+
+
+    
+    
+    <footer>
+      <p class="read-more">
+        Continue reading <a class="heading flip-title" href="/project/2024-02-09-gitblog3/">깃 블로그 만들기 3 : Hydejack 테마 사용법</a>
+
+      </p>
+    </footer>
+  
+</article>
+
+
+  
+
+
+
+
+
+<article id="post-project-gitblog2" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      <a href="/project/2024-02-08-gitblog2/" class="flip-title">
+        깃 블로그 만들기 2 : 테마 적용하기
+      </a>
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2024-02-08T00:00:00+09:00">08 Feb 2024</time> in <span>Project</span> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <h2 id="7-테마-다운받기">7. 테마 다운받기</h2>
+
+
+    
+    
+    <footer>
+      <p class="read-more">
+        Continue reading <a class="heading flip-title" href="/project/2024-02-08-gitblog2/">깃 블로그 만들기 2 : 테마 적용하기</a>
+
+      </p>
+    </footer>
+  
+</article>
+
+
+  
+
+
+
+
+
+<article id="post-project-gitblog1" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      <a href="/project/2024-02-07-gitblog1/" class="flip-title">
+        깃 블로그 만들기 1 : jekyll로 홈페이지 만들기
+      </a>
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2024-02-07T00:00:00+09:00">07 Feb 2024</time> in <span>Project</span> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <h2 id="1-새로운-repository-만들기">1. 새로운 Repository 만들기</h2>
+
+
+    
+    
+    <footer>
+      <p class="read-more">
+        Continue reading <a class="heading flip-title" href="/project/2024-02-07-gitblog1/">깃 블로그 만들기 1 : jekyll로 홈페이지 만들기</a>
+
+      </p>
+    </footer>
+  
+</article>
+
+
+  
+
+
+
+
+
+<article id="post-presentation-MLyonsei6" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      <a href="/presentation/2023-08-11-MLyonsei6/" class="flip-title">
+        \(6\). EM algorithm : K-Means and Gaussian Mixture model
+      </a>
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2023-08-11T00:00:00+09:00">11 Aug 2023</time> in <span>Presentation</span> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <blockquote>
+  <p>연세대학교 STA3142 통계적머신러닝 강의안의 일부를 바탕으로 만들어졌습니다.</p>
+</blockquote>
+
+
+    
+    
+    <footer>
+      <p class="read-more">
+        Continue reading <a class="heading flip-title" href="/presentation/2023-08-11-MLyonsei6/">\(6\). EM algorithm : K-Means and Gaussian Mixture model</a>
+
+      </p>
+    </footer>
+  
+</article>
+
+
+  
+
+
+
+
+
+<article id="post-presentation-MLyonsei5" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      <a href="/presentation/2023-08-04-MLyonsei5/" class="flip-title">
+        \(5\). Support Vector Machine
+      </a>
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2023-08-04T00:00:00+09:00">04 Aug 2023</time> in <span>Presentation</span> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <blockquote>
+  <p>연세대학교 STA3142 통계적머신러닝 강의안의 일부를 바탕으로 만들어졌습니다.</p>
+</blockquote>
+
+
+    
+    
+    <footer>
+      <p class="read-more">
+        Continue reading <a class="heading flip-title" href="/presentation/2023-08-04-MLyonsei5/">\(5\). Support Vector Machine</a>
 
       </p>
     </footer>
