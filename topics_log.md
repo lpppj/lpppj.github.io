@@ -5,4 +5,4 @@
 
 | 날짜 | 카테고리 | 주제 | 파일 |
 |---|---|---|---|
-| 2026-08-07 | 규제/감독 동향 | 부동산 PF 사업성평가체계 개편과 기업신용평가모형(CSS) 시사점 | [reports/2026-08-07-부동산PF-사업성평가체계개편과-CSS-시사점.pdf](reports/2026-08-07-부동산PF-사업성평가체계개편과-CSS-시사점.pdf) |
+| 2026-08-07 | 규제/감독 동향 | 부동산 PF 사업성평가체계 개편과 기업신용평가모형(CSS) 시사점 | [reports/2026-08-07-realestate-pf-viability-assessment-css.pdf](reports/2026-08-07-realestate-pf-viability-assessment-css.pdf) |
