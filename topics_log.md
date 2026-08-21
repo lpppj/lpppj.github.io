@@ -4,4 +4,4 @@
 
 | 날짜 | 카테고리 | 세부 주제 | 자료 |
 |---|---|---|---|
-| 2026-08-21 | 규제/감독 동향 | 바젤III 최종안 Output Floor·F-IRB 전환이 기업신용평가모형(CSS)에 미치는 영향 | [PDF](reports/2026-08-21-basel3-output-floor-firb.pdf) |
+| 2026-08-21 | 규제/감독 동향 | 바젤III 최종안 Output Floor·F-IRB 전환이 기업신용평가모형(CSS)에 미치는 영향 | [PDF](reports/2026-08-21-basel3.pdf) |
